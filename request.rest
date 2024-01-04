@@ -1,2 +1,26 @@
 GET http://localhost:3000/api/users
 
+###
+POST http://localhost:3000/api/users/new
+Content-Type: application/json
+
+{
+    "username": "User_demo",
+    "firstname": "Demo first",
+    "lastname": "Demo last",
+    "email": "demo@gmail.com",
+    "password": "0987654321",
+    "avatarUrl": "/clark.jpg",
+    "roles": ["User"],
+    "active": true
+    
+}
+
+###
+DELETE http://localhost:3000/api/users/delete
+Content-Type: application/json
+
+{
+    "id": "6596f26919d838a15cb7bc87"
+
+}
