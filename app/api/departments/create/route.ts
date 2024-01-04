@@ -16,7 +16,7 @@ export const POST = async (request: Request) => {
   // Connecting to the database
   await connectDB();
 
-  //   Check if the 'head of deparment to be' is a user
+  // Check if the 'head of deparment to be' is a user
   const findUser = await UserModel.findOne({
     username: head_of_department,
   }).exec();

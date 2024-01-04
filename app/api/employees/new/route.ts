@@ -23,7 +23,7 @@ export const POST = async (request: Request) => {
   // Connecting to the database
   await connectDB();
 
-  // Check if the 'to be employee' has signed up as a user
+  // Check if the 'employee to be' has signed up as a user
   const findUser = await UserModel.findOne({ username }).exec();
 
   if (!findUser) return new Response("Sign up first", { status: 400 });
