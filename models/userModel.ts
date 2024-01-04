@@ -8,6 +8,7 @@ interface UserInterface {
   lastname: string;
   email: string;
   password: string;
+  avatarUrl: string;
   roles: string[];
   active: boolean;
 }
@@ -19,6 +20,7 @@ const userShema = new Schema<UserInterface>(
     lastname: { type: String, required: true, minlength: 3 },
     email: { type: String, required: true },
     password: { type: String, required: true },
+    avatarUrl: { type: String, required: false },
     roles: { type: [String], default: ["User"] },
     active: { type: Boolean, default: true },
   },
