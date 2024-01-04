@@ -23,7 +23,7 @@ export const POST = async (request: Request) => {
   const hashedPassword = await bcrypt.hash(password, 10);
 
   const userObj =
-    !Array.isArray(roles) || !roles.length || avatarUrl
+    !Array.isArray(roles) || !roles.length || !avatarUrl
       ? { username, firstname, lastname, email, password: hashedPassword }
       : {
           username,
