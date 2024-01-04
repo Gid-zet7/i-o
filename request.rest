@@ -1,3 +1,6 @@
+GET http://localhost:3000/api/users/6596f42219d838a15cb7bc8e
+
+###
 GET http://localhost:3000/api/users
 
 ###
