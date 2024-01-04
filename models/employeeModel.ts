@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const employeeSchema = new Schema<Employee>(
   {
     user: { type: Schema.Types.ObjectId, ref: "user" },
-    department: { type: String, require: true },
+    department: { type: Schema.Types.ObjectId, ref: "deparment" },
     position: { type: String, require: true },
     skills: [String],
     performance: [{ type: Schema.Types.ObjectId, ref: "performance" }],
