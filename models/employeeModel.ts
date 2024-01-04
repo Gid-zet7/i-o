@@ -2,17 +2,7 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-interface EmployeeInterface {
-  user: mongoose.Types.ObjectId | null | undefined;
-  department: string;
-  position: string;
-  skills: string[];
-  performance: mongoose.Types.ObjectId[];
-  startDate: Date;
-  endDate?: Date;
-}
-
-const employeeSchema = new Schema(
+const employeeSchema = new Schema<Employee>(
   {
     user: { type: Schema.Types.ObjectId, ref: "user" },
     department: { type: String, require: true },
@@ -20,13 +10,13 @@ const employeeSchema = new Schema(
     skills: [String],
     performance: [{ type: Schema.Types.ObjectId, ref: "performance" }],
     startDate: { type: Date, require: true },
-    endDate: { type: String, require: false },
+    endDate: { type: Date, require: false },
   },
   { timestamps: true }
 );
 
 const Employee =
   mongoose.models.employee ||
-  mongoose.model<EmployeeInterface>("employee", employeeSchema);
+  mongoose.model<Employee>("employee", employeeSchema);
 
 export default Employee;
