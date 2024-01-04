@@ -2,14 +2,7 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-interface ManagerInterface {
-  employee: mongoose.Types.ObjectId | null | undefined;
-  team: mongoose.Types.ObjectId[];
-  projects: string[];
-  meetings: mongoose.Types.ObjectId[];
-}
-
-const managerSchema = new Schema(
+const managerSchema = new Schema<Manager>(
   {
     employee: { type: Schema.Types.ObjectId, ref: "employee" },
     team: [{ type: Schema.Types.ObjectId, ref: "employee" }],
@@ -20,7 +13,6 @@ const managerSchema = new Schema(
 );
 
 const Manager =
-  mongoose.models.manager ||
-  mongoose.model<ManagerInterface>("manager", managerSchema);
+  mongoose.models.manager || mongoose.model<Manager>("manager", managerSchema);
 
 export default Manager;
