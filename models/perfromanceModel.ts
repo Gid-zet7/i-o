@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-interface PerformanceInter {
+interface PerformanceInterface {
   employee: mongoose.Types.ObjectId | null | undefined;
   date: Date;
   feedback: string;
@@ -21,6 +21,6 @@ const performanceSchema = new Schema(
 
 const Performance =
   mongoose.models.performance ||
-  mongoose.model<PerformanceInter>("performance", performanceSchema);
+  mongoose.model<PerformanceInterface>("performance", performanceSchema);
 
 export default Performance;
