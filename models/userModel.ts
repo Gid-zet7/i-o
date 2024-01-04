@@ -2,18 +2,7 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-interface UserInterface {
-  username: string;
-  firstname: string;
-  lastname: string;
-  email: string;
-  password: string;
-  avatarUrl: string;
-  roles: string[];
-  active: boolean;
-}
-
-const userShema = new Schema<UserInterface>(
+const userShema = new Schema<User>(
   {
     username: { type: String, required: true, minlength: 3 },
     firstname: { type: String, required: true, minlength: 3 },
@@ -28,6 +17,6 @@ const userShema = new Schema<UserInterface>(
 );
 
 const UserModel =
-  mongoose.models.user || mongoose.model<UserInterface>("user", userShema);
+  mongoose.models.user || mongoose.model<User>("user", userShema);
 
 export default UserModel;
