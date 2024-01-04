@@ -2,16 +2,7 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-interface MeetingInterface {
-  title: string;
-  date: Date;
-  startTime: string;
-  endTime: string;
-  participants: mongoose.Types.ObjectId[];
-  agenda: string;
-}
-
-const meetingSchema = new Schema(
+const meetingSchema = new Schema<Meeting>(
   {
     title: { type: String, required: true },
     date: { type: Date, required: true },
@@ -24,7 +15,6 @@ const meetingSchema = new Schema(
 );
 
 const Meeting =
-  mongoose.models.meeting ||
-  mongoose.model<MeetingInterface>("meeting", meetingSchema);
+  mongoose.models.meeting || mongoose.model<Meeting>("meeting", meetingSchema);
 
 export default Meeting;
