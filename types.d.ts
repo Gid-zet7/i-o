@@ -44,6 +44,7 @@ type Manager = {
 type Department = {
   name: string;
   head_of_department: Manager;
+  description: string;
   createdAt: Date;
   updatedAt: Date;
   __v: number;
