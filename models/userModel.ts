@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-interface UserInter {
+interface UserInterface {
   username: string;
   firstname: string;
   lastname: string;
@@ -12,7 +12,7 @@ interface UserInter {
   active: boolean;
 }
 
-const userShema = new Schema<UserInter>(
+const userShema = new Schema<UserInterface>(
   {
     username: { type: String, required: true, minlength: 3 },
     firstname: { type: String, required: true, minlength: 3 },
@@ -26,6 +26,6 @@ const userShema = new Schema<UserInter>(
 );
 
 const UserModel =
-  mongoose.models.user || mongoose.model<UserInter>("user", userShema);
+  mongoose.models.user || mongoose.model<UserInterface>("user", userShema);
 
 export default UserModel;
