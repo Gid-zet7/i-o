@@ -15,32 +15,11 @@ type User = {
 
 type Employee = {
   _id: string;
-  user: {
-    _id: string;
-    username: string;
-    firstname: string;
-    lastname: string;
-    email: string;
-    avatarUrl?: string;
-    roles: string[];
-    active: boolean;
-    createdAt: Date;
-    updatedAt: Date;
-    __v: number;
-  };
-  department: string;
+  user: User;
+  department: Department;
   position: string;
   skills: string[];
-  performance: {
-    _id: string;
-    employee: string;
-    date: Date;
-    feedback: string;
-    rating: number;
-    createdAt: Date;
-    updatedAt: Date;
-    __v: number;
-  }[];
+  performance: Performance[];
   startDate: Date;
   endDate?: Date;
   createdAt: Date;
@@ -50,74 +29,10 @@ type Employee = {
 
 type Manager = {
   _id: string;
-  employee: {
-    _id: string;
-    user: string;
-    department: string;
-    position: string;
-    skills: string[];
-    performace: {
-      _id: string;
-      employee: string;
-      date: Date;
-      feedback: string;
-      rating: number;
-      createdAt: Date;
-      updatedAt: Date;
-      __v: number;
-    }[];
-    startDate: Date;
-    createdAt: Date;
-    updatedAt: Date;
-    __v: number;
-  };
-  team: {
-    _id: string;
-    user: string;
-    department: string;
-    position: string;
-    skills: string[];
-    performace: {
-      _id: string;
-      employee: string;
-      date: Date;
-      feedback: string;
-      rating: number;
-      createdAt: Date;
-      updatedAt: Date;
-      __v: number;
-    }[];
-    startDate: Date;
-    createdAt: Date;
-    updatedAt: Date;
-    __v: number;
-  }[];
+  employee: Employee;
+  team: Employee[];
   projects: string[];
-  meetings: {
-    _id: string;
-    title: string;
-    startTime: Date;
-    endTime: Date;
-    participants: {
-      _id: string;
-      user: string;
-      department: string;
-      position: string;
-      skills: string[];
-      performace: {
-        _id: string;
-        employee: string;
-        date: Date;
-        feedback: string;
-        rating: number;
-        createdAt: Date;
-        updatedAt: Date;
-        __v: number;
-      }[];
-    }[];
-    agenda: string;
-    __v: number;
-  };
+  meetings: Meeting;
   createdAt: Date;
   updatedAt: Date;
   __v: number;
@@ -126,69 +41,34 @@ type Manager = {
   lastname: string;
 };
 
+type Department = {
+  name: string;
+  head_of_department: Manager;
+  createdAt: Date;
+  updatedAt: Date;
+  __v: number;
+};
+
 type Meeting = {
   title: string;
   date: Date;
   startTime: string;
   endTime: string;
-  participants: {
-    _id: string;
-    user: string;
-    department: string;
-    position: string;
-    skills: string[];
-    performace: {
-      _id: string;
-      employee: string;
-      date: Date;
-      feedback: string;
-      rating: number;
-      createdAt: Date;
-      updatedAt: Date;
-      __v: number;
-    }[];
-  }[];
+  participants: Employee[];
   agenda: string;
+  createdAt: Date;
+  updatedAt: Date;
+  __v: number;
 };
 
 type Performance = {
-  employee: {
-    _id: string;
-    user: {
-      _id: string;
-      username: string;
-      firstname: string;
-      lastname: string;
-      email: string;
-      avatarUrl?: string;
-      roles: string[];
-      active: boolean;
-      createdAt: Date;
-      updatedAt: Date;
-      __v: number;
-    };
-    department: string;
-    position: string;
-    skills: string[];
-    performance: {
-      _id: string;
-      employee: string;
-      date: Date;
-      feedback: string;
-      rating: number;
-      createdAt: Date;
-      updatedAt: Date;
-      __v: number;
-    }[];
-    startDate: Date;
-    endDate?: Date;
-    createdAt: Date;
-    updatedAt: Date;
-    __v: number;
-  };
+  employee: Employee;
   date: Date;
   feedback: string;
   ratings: number;
+  createdAt: Date;
+  updatedAt: Date;
+  __v: number;
 };
 
 type Forms = {
@@ -200,4 +80,7 @@ type Forms = {
     options: { opyionText: string }[];
     open: boolean;
   }[];
+  createdAt: Date;
+  updatedAt: Date;
+  __v: number;
 };
