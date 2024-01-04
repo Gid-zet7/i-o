@@ -50,3 +50,28 @@ Content-Type: application/json
 # ------------------Employees routes---------------------
 ###
 GET http://localhost:3000/api/employees
+
+###
+POST http://localhost:3000/api/employees/new
+Content-Type: application/json
+
+{
+    "username": "User_demo",
+    "department": "Engineering department",
+    "position": "Sales Executive",
+    "skills": ["Communication", "Accounting", "Time Management"],
+    "startDate": "12-29-2023"
+}
+
+###
+GET http://localhost:3000/api/departments
+
+###
+POST http://localhost:3000/api/departments/create
+Content-Type: application/json
+
+{
+    "name": "IT department",
+    "head_of_department": "Gidzet",
+    "description": "IT was established in the year 1997"
+}
