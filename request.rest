@@ -87,7 +87,26 @@ POST http://localhost:3000/api/departments/create
 Content-Type: application/json
 
 {
+    "name": "Del department",
+    "head_of_department": "Demo_user",
+    "description": "Del department was established in the year 2000"
+}
+
+###
+PATCH http://localhost:3000/api/departments/update
+Content-Type: application/json
+
+{
+    "id": "65979ad3224d1a66fe975c82",
     "name": "IT department",
     "head_of_department": "Demo_user",
-    "description": "IT department was established in the year 2000"
+    "description": "IT department was established in the year 2016"
+}
+
+###
+DELETE http://localhost:3000/api/departments/delete
+Content-Type: application/json
+
+{
+    "id": "6597a34b224d1a66fe975cad"
 }
