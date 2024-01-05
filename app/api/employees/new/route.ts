@@ -28,7 +28,7 @@ export const POST = async (request: Request) => {
 
   if (!findUser) return new Response("Sign up first", { status: 400 });
 
-  const findDepartment = await Department.findOne({ department }).exec();
+  const findDepartment = await Department.findOne({ name: department }).exec();
 
   if (!findDepartment)
     return new Response("Invalid department", { status: 400 });
