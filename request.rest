@@ -1,6 +1,6 @@
 
 # ------------------Users routes---------------------
-GET http://localhost:3000/api/users/6596f42219d838a15cb7bc8e
+GET http://localhost:3000/api/users/659732c919d838a15cb7bcd7
 
 ###
 GET http://localhost:3000/api/users
@@ -26,8 +26,8 @@ PATCH http://localhost:3000/api/users/update
 Content-Type: application/json
 
 {
-    "id": "6596f42219d838a15cb7bc8e",
-    "username": "User_demo",
+    "id": "659732c919d838a15cb7bcd7",
+    "username": "Demo_user",
     "firstname": "Demo first",
     "lastname": "Demo last",
     "email": "demo77@gmail.com",
@@ -43,7 +43,7 @@ DELETE http://localhost:3000/api/users/delete
 Content-Type: application/json
 
 {
-    "id": "6596f26919d838a15cb7bc87"
+    "id": "6597327619d838a15cb7bcd1"
 
 }
 
@@ -57,10 +57,22 @@ Content-Type: application/json
 
 {
     "username": "User_demo",
-    "department": "Engineering department",
+    "department": "Sales department",
     "position": "Sales Executive",
     "skills": ["Communication", "Accounting", "Time Management"],
     "startDate": "12-29-2023"
+}
+
+###
+PATCH http://localhost:3000/api/employees/update
+Content-Type: application/json
+
+{
+    "id": "6590df46551acf2cc698c836",
+    "department": "IT department",
+    "position": "Senior Developer",
+    "skills": ["Communication", "Accounting", "Time Management"],
+    "startDate": "1-1-2024"
 }
 
 ###
@@ -71,7 +83,7 @@ POST http://localhost:3000/api/departments/create
 Content-Type: application/json
 
 {
-    "name": "IT department",
-    "head_of_department": "Gidzet",
-    "description": "IT was established in the year 1997"
+    "name": "Sales department",
+    "head_of_department": "User_demo",
+    "description": "Sales was established in the year 1997"
 }
