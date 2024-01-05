@@ -5,7 +5,10 @@ export const GET = async () => {
   try {
     await connectDB();
 
-    const employees = await Employee.find().populate("user").lean();
+    const employees = await Employee.find()
+      .populate("user")
+      .populate("department")
+      .lean();
 
     if (!employees?.length)
       return new Response("No employees found", { status: 400 });
