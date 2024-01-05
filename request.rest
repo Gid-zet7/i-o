@@ -79,6 +79,9 @@ Content-Type: application/json
     "startDate": "12-29-2023"
 }
 
+#--------------------Department routes-------------------------------
+###
+GET http://localhost:3000/api/departments/659794ee9ab447fc8050bc9d
 ###
 GET http://localhost:3000/api/departments
 
