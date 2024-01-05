@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const departmentSchema = new Schema<Department>(
   {
     name: { type: String, required: true },
-    head_of_department: [{ type: Schema.Types.ObjectId, ref: "manager" }],
+    head_of_department: { type: String, required: true },
     description: { type: String, required: true },
   },
   { timestamps: true }
