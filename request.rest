@@ -10,10 +10,10 @@ POST http://localhost:3000/api/users/new
 Content-Type: application/json
 
 {
-    "username": "User_demo",
+    "username": "User_demo4",
     "firstname": "Demo first",
     "lastname": "Demo last",
-    "email": "demo@gmail.com",
+    "email": "demo4@gmail.com",
     "password": "0987654321",
     "avatarUrl": "/clark.jpg",
     "roles": ["User"],
@@ -60,11 +60,11 @@ POST http://localhost:3000/api/employees/new
 Content-Type: application/json
 
 {
-    "username": "Demo_user",
-    "department": "IT department",
-    "position": "Senior Developer",
-    "skills": ["Html", "Css", "React", "Javascript"],
-    "startDate": "12-29-2023"
+    "username": "User_demo4",
+    "department": "Sales department",
+    "position": "Junior Developer",
+    "skills": ["Html", "Css", "Javascript"],
+    "startDate": "1-28-2024"
 }
 
 ###
@@ -72,10 +72,14 @@ PATCH http://localhost:3000/api/employees/update
 Content-Type: application/json
 
 {
-    "id": "65979ae6224d1a66fe975c87",
-    "department": "IT department",
-    "position": "Senior Developer",
-    "skills": ["Html", "Css", "React", "Javascript", "Python"],
+    "id": "659794fe9ab447fc8050bca2",
+    "department": "Sales department",
+    "position": "Sales Manager",
+    "skills": [
+      "Communication",
+      "Accounting",
+      "Time Management"
+    ],
     "startDate": "12-29-2023"
 }
 
@@ -100,10 +104,10 @@ PATCH http://localhost:3000/api/departments/update
 Content-Type: application/json
 
 {
-    "id": "65979ad3224d1a66fe975c82",
-    "name": "IT department",
-    "head_of_department": "Demo_user",
-    "description": "IT department was established in the year 2016"
+    "id": "659794ee9ab447fc8050bc9d",
+    "name": "Sales department",
+    "head_of_department": "User_demo",
+    "description": "Sales department was established in the year 1997"
 }
 
 ###
@@ -112,4 +116,43 @@ Content-Type: application/json
 
 {
     "id": "6597a34b224d1a66fe975cad"
+}
+
+
+#--------------------Manager routes-------------------------------
+###
+GET http://localhost:3000/api/managers/65986734224d1a66fe975d4e
+
+###
+GET http://localhost:3000/api/managers
+
+###
+POST http://localhost:3000/api/managers/new
+Content-Type: application/json
+
+{
+    "employee": "User_demo",
+    "team": ["User_demo2", "User_demo3"],
+    "projects": ["Project A"]
+    
+}
+
+###
+PATCH http://localhost:3000/api/managers/update
+Content-Type: application/json
+
+{
+    "id": "65987c92224d1a66fe975d9b",
+    "employee": "User_demo",
+    "team": ["User_demo2", "User_demo3"],
+    "projects": ["Project C"]
+    
+}
+
+###
+DELETE  http://localhost:3000/api/managers/demote
+Content-Type: application/json
+
+{
+    "id": "65987c92224d1a66fe975d9b"
 }
