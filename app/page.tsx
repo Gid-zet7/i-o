@@ -75,7 +75,7 @@ export default function Home() {
 
       <section
         id="i-o_descSection"
-        className="widescreen:section-min-height tallscreen:section-min-height my-12 scroll-mt-20 p-6 flex flex-col sm:flex-row items-center gap-20 "
+        className="widescreen:section-min-height tallscreen:section-min-height my-12 scroll-mt-20 p-6 flex flex-col sm:flex-row items-center gap-20 border-2 rounded-xl border-amber-200 "
       >
         <div className="flex-1">
           <div className="flex">
