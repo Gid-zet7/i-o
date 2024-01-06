@@ -2,26 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+@property --num {
+  syntax: "<integer>";
+  initial-value: 0;
+  inherits: false;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+@keyframes counter {
+  from {
+    --num: 0;
+  }
+  to {
+    --num: 60;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@keyframes counter2 {
+  from {
+    --num: 0;
+  }
+  to {
+    --num: 40;
+  }
+}
+
+@keyframes counter3 {
+  from {
+    --num: 0;
+  }
+  to {
+    --num: 10;
+  }
+}
+
+.blue_gradient {
+  @apply bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent;
+}
+
+.hero_header {
+  @apply mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-8xl;
+}
+
+.desc {
+  @apply mt-8 text-lg text-gray-600 sm:text-xl max-w-2xl;
 }
