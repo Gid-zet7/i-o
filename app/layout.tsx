@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import "./globals.css";
+import Subfields from "@/components/Subfields";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default function RootLayout({
         className={`${inter.className} min-h-screen bg-slate-50 dark:bg-slate-950 dark:text-white`}
       >
         <Navbar />
+        <Subfields />
         <main className="mx-auto max-w-5xl p-3">{children}</main>
       </body>
     </html>
