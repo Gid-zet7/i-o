@@ -144,7 +144,7 @@ export default async function NewEmployeeForm() {
         </form>
       </div>
       <Image
-        src="undraw_add_user_re_5oib.svg"
+        src="/undraw_add_user_re_5oib.svg"
         width={330}
         height={80}
         className=""
