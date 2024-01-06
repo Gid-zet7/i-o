@@ -9,7 +9,7 @@ export default function Home() {
             <div className="main">
               <div className=" dark:gradient" />
             </div>
-            <h1 className="mt-5 text-5xl font-extrabold md:text-8xl">
+            <h1 className="mt-5 text-6xl font-extrabold md:text-8xl">
               Applying <span className="blue_gradient">psychology</span> to work
             </h1>
             <p className="text-center mt-8 text-lg text-gray-600 dark:text-gray-400 sm:text-xl max-w-2xl">
