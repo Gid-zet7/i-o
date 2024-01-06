@@ -4,7 +4,7 @@
 
 @layer utilities {
   .section-min-height {
-    min-height: calc(100vh - 340px);
+    min-height: calc(100vh - 240px);
   }
 }
 
