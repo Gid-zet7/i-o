@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .section-min-height {
+    min-height: calc(100vh - 340px);
+  }
+}
+
 @property --num {
   syntax: "<integer>";
   initial-value: 0;
