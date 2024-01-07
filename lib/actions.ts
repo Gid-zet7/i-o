@@ -79,7 +79,7 @@ export const getAllDepartments = async () => {
   return departments.json();
 };
 
-export const getAllDepartment = async (departmentId: string) => {
+export const getDepartment = async (departmentId: string) => {
   const department = await fetch(
     `http://localhost:3000/api/departments/${departmentId}`,
     {
