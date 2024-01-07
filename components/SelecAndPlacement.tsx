@@ -105,27 +105,26 @@ export default function SelecAndPlacement() {
               commitment to objectivity, fairness, and efficiency in the
               decision-making process.
             </p>
+
+            <h1
+              className={`${salsa.className} text-2xl mb-3 text-amber-400 dark:text-amber-200`}
+            >
+              {" "}
+              (b) Personnel Selection Systems:
+            </h1>
             <p>
-              <h1
-                className={`${salsa.className} text-2xl mb-3 text-amber-400 dark:text-amber-200`}
-              >
-                {" "}
-                (b) Personnel Selection Systems:
-              </h1>
-              <p>
-                {" "}
-                At the core of I-O psychology is the careful planning and
-                administration of procedures for selecting new employees. I-O
-                psychologists leverage their expertise to construct
-                comprehensive frameworks for evaluating and choosing individuals
-                who possess the competencies essential for organizational
-                effectiveness. This includes the integration of psychometric
-                assessments, structured interviews, and other scientifically
-                validated tools to ensure the accuracy and fairness of personnel
-                selection processes. By aligning selection systems with
-                organizational needs, I-O psychologists contribute to the
-                cultivation of high-performing and cohesive teams.
-              </p>
+              {" "}
+              At the core of I-O psychology is the careful planning and
+              administration of procedures for selecting new employees. I-O
+              psychologists leverage their expertise to construct comprehensive
+              frameworks for evaluating and choosing individuals who possess the
+              competencies essential for organizational effectiveness. This
+              includes the integration of psychometric assessments, structured
+              interviews, and other scientifically validated tools to ensure the
+              accuracy and fairness of personnel selection processes. By
+              aligning selection systems with organizational needs, I-O
+              psychologists contribute to the cultivation of high-performing and
+              cohesive teams.
             </p>
           </article>
         </section>
