@@ -1,5 +1,5 @@
 import AppraisalForm from "@/models/appraisalFormModel";
-import { connectDB } from "@/lib/mongodb";
+import { connectDB } from "@/lib/database";
 
 export const DELETE = async (request: Request) => {
   const { id } = await request.json();
