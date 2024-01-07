@@ -115,7 +115,7 @@ DELETE http://localhost:3000/api/departments/delete
 Content-Type: application/json
 
 {
-    "id": "6597a34b224d1a66fe975cad"
+    "id": "6599e9f3f46e36652b3da22f"
 }
 
 
