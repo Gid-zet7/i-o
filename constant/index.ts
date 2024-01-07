@@ -1,6 +1,10 @@
 export const SubLinks = [
   { href: "/", key: "Job Analysis", text: "Job Analysis" },
-  { href: "/", key: "Selection", text: "Selection and Placement" },
+  {
+    href: "/selection-and-placement",
+    key: "Selection",
+    text: "Selection and Placement",
+  },
   { href: "/", key: "Health", text: "Occupational Health and Safety" },
   { href: "/", key: "Consumer", text: "Consumer Behaviour" },
   { href: "/", key: "Taining", text: "Training and Development" },
