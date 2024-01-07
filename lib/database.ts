@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import Department from "@/models/departmentModel";
+import UserModel from "@/models/userModel";
 
 export const connectDB = async () => {
   try {
@@ -8,3 +10,6 @@ export const connectDB = async () => {
     console.log("Error connecting to MongoDB: ", error);
   }
 };
+
+export { Department };
+export { UserModel };
