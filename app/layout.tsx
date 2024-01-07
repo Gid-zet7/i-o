@@ -26,7 +26,7 @@ export default function RootLayout({
       >
         <Navbar />
         <Subfields />
-        <main className="mx-auto max-w-5xl p-3">{children}</main>
+        <main>{children}</main>
       </body>
     </html>
   );
