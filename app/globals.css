@@ -4,7 +4,7 @@
 
 @layer utilities {
   .section-min-height {
-    min-height: calc(100vh - 240px);
+    min-height: calc(100vh - 260px);
   }
 }
 
@@ -52,3 +52,10 @@
 .desc {
   @apply mt-8 text-lg text-gray-600 sm:text-xl max-w-2xl;
 }
+
+/* .bg_image {
+  background-image: url("../public/christina-unsplash.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 10rem;
+} */
