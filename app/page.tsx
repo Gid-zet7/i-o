@@ -21,7 +21,7 @@ export default function Home() {
             src="/tired.png"
             width={500}
             height={500}
-            alt="Photo by Bellinon on pixabay | A man holding a jug"
+            alt="Photo by Bellinon on pixabay | A man holding a mug"
           />
         </div>
         <section className="grid gap-12 sm:grid-cols-3 sm:gap-16 p-2">
