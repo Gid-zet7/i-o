@@ -42,6 +42,7 @@ type Manager = {
 };
 
 type Department = {
+  _id: string;
   name: string;
   head_of_department: Manager;
   description: string;
@@ -51,6 +52,7 @@ type Department = {
 };
 
 type Meeting = {
+  _id: string;
   title: string;
   date: Date;
   startTime: string;
@@ -63,6 +65,7 @@ type Meeting = {
 };
 
 type Performance = {
+  _id: string;
   employee: Employee;
   date: Date;
   feedback: string;
@@ -73,6 +76,7 @@ type Performance = {
 };
 
 type Forms = {
+  _id: string;
   form_title: string;
   form_desc: string;
   questions: {
