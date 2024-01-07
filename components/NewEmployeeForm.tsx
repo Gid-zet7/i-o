@@ -1,19 +1,38 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getAllDepartments, getAllUsers } from "@/lib/actions";
 
-export default async function NewEmployeeForm() {
+export default function NewEmployeeForm() {
   const [username, setUserName] = useState("");
   const [department, setDepartment] = useState("");
   const [position, setPosition] = useState("");
   const [skills, setSkills] = useState("");
   const [startDate, setStartDate] = useState("");
-  const [error, setError] = useState("");
+  const [options, setOptions] = useState<User[]>([]);
+  const [deptOptions, setDeptOptions] = useState<Department[]>([]);
+  const [error, setError] = useState<any>("");
 
   const router = useRouter();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const usersData: Promise<User[]> = getAllUsers();
+      const departmentsData: Promise<Department[]> = getAllDepartments();
+
+      const [users, departments] = await Promise.all([
+        usersData,
+        departmentsData,
+      ]);
+
+      setOptions(users);
+      setDeptOptions(departments);
+    };
+
+    fetchData();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -33,8 +52,7 @@ export default async function NewEmployeeForm() {
           username,
           department,
           position,
-          skills,
-          performance,
+          skills: [skills],
           startDate,
         }),
       });
@@ -42,22 +60,16 @@ export default async function NewEmployeeForm() {
       if (employee.ok) {
         const form = e.target as HTMLFormElement;
         form.reset();
-        router.push("/");
-      } else {
-        console.log("Employee registration failed.");
+        router.push("/employees");
+      } else if (employee.statusText === "Conflict") {
+        setError("This User is already an employee");
       }
-    } catch (error) {
-      console.log("Error during registration: ", error);
+    } catch (error: any) {
+      setError(error.message);
     }
   };
 
-  const usersData: Promise<User[]> = getAllUsers();
-  const users = await usersData;
-
-  const departmentsData: Promise<Department[]> = getAllDepartments();
-  const departments = await departmentsData;
-
-  const options = users.map((user) => {
+  const optionsData = options.map((user) => {
     return (
       <option key={user._id} value={user.username}>
         {user.username}
@@ -65,7 +77,7 @@ export default async function NewEmployeeForm() {
     );
   });
 
-  const deptOptions = departments.map((department) => {
+  const deptOptionsData = deptOptions.map((department) => {
     return (
       <option key={department._id} value={department.name}>
         {department.name}
@@ -96,7 +108,7 @@ export default async function NewEmployeeForm() {
               value={username}
             >
               <option>--Select User--</option>
-              {options}
+              {optionsData}
             </select>
             <label htmlFor="department" className="">
               Choose department
@@ -109,7 +121,7 @@ export default async function NewEmployeeForm() {
               value={department}
             >
               <option>--Select Department--</option>
-              {deptOptions}
+              {deptOptionsData}
             </select>
             <label htmlFor="position" className="">
               Position
@@ -141,7 +153,10 @@ export default async function NewEmployeeForm() {
               name="startDate"
               type="date"
             />
-            <button className="bg-amber-300 text-black font-bold cursor-pointer px-6 py-2 w-5/6 sm:w-3/5 hover:bg-opacity-90">
+            <button
+              type="submit"
+              className="bg-amber-300 text-black font-bold cursor-pointer px-6 py-2 w-5/6 sm:w-3/5 hover:bg-opacity-90"
+            >
               Save
             </button>
 
