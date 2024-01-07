@@ -8,14 +8,18 @@ type Props = {
 };
 
 export const GET = async (request: Request, { params: { id } }: Props) => {
-  await connectDB();
+  try {
+    await connectDB();
 
-  const employee = await Employee.findById(id)
-    .populate("user")
-    .populate("department")
-    .lean();
+    const employee = await Employee.findById(id)
+      .populate("user")
+      .populate("department")
+      .lean();
 
-  if (!employee) return new Response("Employee not found", { status: 400 });
+    if (!employee) return new Response("Employee not found", { status: 400 });
 
-  return new Response(JSON.stringify(employee), { status: 200 });
+    return new Response(JSON.stringify(employee), { status: 200 });
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
 };
