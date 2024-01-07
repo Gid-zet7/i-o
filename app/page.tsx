@@ -5,7 +5,7 @@ export default function Home() {
     <>
       <section id="hero">
         <div className="widescreen:section-min-height tallscreen:section-min-height mb-3 flex scroll-mt-40 flex-col items-center justify-center gap-8 p-6 md:flex-row ">
-          <article className="sm:w-1/2">
+          <article className="p-4">
             <div className="main">
               <div className=" dark:gradient" />
             </div>
