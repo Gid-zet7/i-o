@@ -1,7 +1,7 @@
 // ---------------Users----------------------
 export const getAllUsers = async () => {
   const users = await fetch("http://localhost:3000/api/users", {
-    next: { revalidate: 10 },
+    next: { revalidate: 60 },
   });
 
   if (!users.ok) throw new Error("Failed to fetch users");
@@ -11,7 +11,7 @@ export const getAllUsers = async () => {
 
 export const getUser = async (userId: string) => {
   const user = await fetch(`http://localhost:3000/api/users/${userId}`, {
-    next: { revalidate: 10 },
+    next: { revalidate: 60 },
   });
 
   if (!user.ok) return undefined;
@@ -22,7 +22,7 @@ export const getUser = async (userId: string) => {
 // ---------------Employees----------------------
 export const getAllEmployees = async () => {
   const employees = await fetch("http://localhost:3000/api/employees", {
-    next: { revalidate: 10 },
+    next: { revalidate: 60 },
   });
 
   if (!employees.ok) throw new Error("Failed to fetch employees");
@@ -34,7 +34,7 @@ export const getEmployee = async (employeeId: string) => {
   const employee = await fetch(
     `http://localhost:3000/api/employees/${employeeId}`,
     {
-      next: { revalidate: 10 },
+      next: { revalidate: 60 },
     }
   );
 
@@ -46,7 +46,7 @@ export const getEmployee = async (employeeId: string) => {
 // ---------------Managers----------------------
 export const getAllManagers = async () => {
   const managers = await fetch("http://localhost:3000/api/managers", {
-    next: { revalidate: 10 },
+    next: { revalidate: 60 },
   });
 
   if (!managers.ok) throw new Error("Failed to fetch managers");
@@ -58,7 +58,7 @@ export const getManger = async (managerId: string) => {
   const manager = await fetch(
     `http://localhost:3000/api/managers/${managerId}`,
     {
-      next: { revalidate: 10 },
+      next: { revalidate: 60 },
     }
   );
 
@@ -71,7 +71,7 @@ export const getManger = async (managerId: string) => {
 
 export const getAllDepartments = async () => {
   const departments = await fetch("http://localhost:3000/api/departments", {
-    next: { revalidate: 10 },
+    next: { revalidate: 60 },
   });
 
   if (!departments.ok) throw new Error("Failed to fetch departments");
@@ -83,7 +83,7 @@ export const getDepartment = async (departmentId: string) => {
   const department = await fetch(
     `http://localhost:3000/api/departments/${departmentId}`,
     {
-      next: { revalidate: 10 },
+      next: { revalidate: 60 },
     }
   );
 
@@ -95,7 +95,7 @@ export const getDepartment = async (departmentId: string) => {
 // -----------------------------Forms----------------------
 export const getAllForms = async () => {
   const forms = await fetch("http://localhost:3000/api/appraisal-form", {
-    next: { revalidate: 30 },
+    next: { revalidate: 60 },
   });
 
   if (!forms.ok) throw new Error("Failed to fetch forms");
