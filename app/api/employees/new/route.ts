@@ -20,43 +20,51 @@ export const POST = async (request: Request) => {
     return new Response("Fill all required fields", { status: 400 });
   }
 
-  // Connecting to the database
-  await connectDB();
+  try {
+    // Connecting to the database
+    await connectDB();
 
-  // Check if the 'employee to be' has signed up as a user
-  const findUser = await UserModel.findOne({ username }).exec();
+    // Check if the 'employee to be' has signed up as a user
+    const findUser = await UserModel.findOne({ username }).exec();
 
-  if (!findUser) return new Response("Sign up first", { status: 400 });
+    if (!findUser) return new Response("Sign up first", { status: 400 });
 
-  const findDepartment = await Department.findOne({ name: department }).exec();
+    const findDepartment = await Department.findOne({
+      name: department,
+    }).exec();
 
-  if (!findDepartment)
-    return new Response("Invalid department", { status: 400 });
+    if (!findDepartment)
+      return new Response("Invalid department", { status: 400 });
 
-  // Check for duplicates
-  const duplicate = await Employee.findOne({ user: findUser })
-    .collation({ locale: "en", strength: 2 })
-    .lean()
-    .exec();
+    // Check for duplicates
+    const duplicate = await Employee.findOne({ user: findUser })
+      .collation({ locale: "en", strength: 2 })
+      .lean()
+      .exec();
 
-  if (duplicate)
-    return new Response("Employee already exists", {
-      status: 409,
+    if (duplicate)
+      return new Response("Employee already exists", {
+        status: 409,
+      });
+
+    // Create employee object
+    const employeeObj = {
+      user: findUser,
+      department: findDepartment,
+      position,
+      skills,
+      startDate,
+    };
+
+    // Save to the database
+    const newEmployee = await Employee.create(employeeObj);
+
+    if (newEmployee) {
+      return new Response("New employee added successfully", { status: 200 });
+    }
+  } catch (error) {
+    return new Response("Error during registration ", {
+      status: 500,
     });
-
-  // Create employee object
-  const employeeObj = {
-    user: findUser,
-    department: findDepartment,
-    position,
-    skills,
-    startDate,
-  };
-
-  // Save to the database
-  const newEmployee = await Employee.create(employeeObj);
-
-  if (newEmployee) {
-    return new Response("New employee added successfully", { status: 200 });
   }
 };
