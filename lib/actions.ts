@@ -1,3 +1,4 @@
+// ---------------Users----------------------
 export const getAllUsers = async () => {
   const users = await fetch("http://localhost:3000/api/users", {
     next: { revalidate: 10 },
@@ -18,6 +19,7 @@ export const getUser = async (userId: string) => {
   return user.json();
 };
 
+// ---------------Employees----------------------
 export const getAllEmployees = async () => {
   const employees = await fetch("http://localhost:3000/api/employees", {
     next: { revalidate: 10 },
@@ -41,6 +43,7 @@ export const getEmployee = async (employeeId: string) => {
   return employee.json();
 };
 
+// ---------------Managers----------------------
 export const getAllManagers = async () => {
   const managers = await fetch("http://localhost:3000/api/managers", {
     next: { revalidate: 10 },
@@ -64,6 +67,32 @@ export const getManger = async (managerId: string) => {
   return manager.json();
 };
 
+// --------------------------Department---------------------------
+
+export const getAllDepartments = async () => {
+  const departments = await fetch("http://localhost:3000/api/departments", {
+    next: { revalidate: 10 },
+  });
+
+  if (!departments.ok) throw new Error("Failed to fetch departments");
+
+  return departments.json();
+};
+
+export const getAllDepartment = async (departmentId: string) => {
+  const department = await fetch(
+    `http://localhost:3000/api/departments/${departmentId}`,
+    {
+      next: { revalidate: 10 },
+    }
+  );
+
+  if (!department.ok) return undefined;
+
+  return department.json();
+};
+
+// -----------------------------Forms----------------------
 export const getAllForms = async () => {
   const forms = await fetch("http://localhost:3000/api/appraisal-form", {
     next: { revalidate: 30 },
