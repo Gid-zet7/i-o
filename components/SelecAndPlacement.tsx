@@ -36,11 +36,12 @@ export default function SelecAndPlacement() {
             />
           </div>
         </section>
+        <div className="grid place-content-center">
+          <hr className="mb-12 w-36" />
+        </div>
         <section className="mb-16">
           <article className="mb-20">
-            <h1
-              className={`${dancing_script.className} text-8xl mb-8 text-amber-400 dark:text-amber-200`}
-            >
+            <h1 className={`${salsa.className} text-6xl mb-8 blue_gradient`}>
               Recruitment
             </h1>
             <p className={`text-xl ${jost.className}`}>
@@ -55,21 +56,12 @@ export default function SelecAndPlacement() {
             </p>
           </article>
           <article>
-            <h1
-              className={`${salsa.className} text-2xl mb-3 text-amber-400 dark:text-amber-200`}
-            >
+            <h1 className={`${salsa.className} text-2xl mb-3 blue_gradient`}>
               {" "}
               (a) Strategic Recruitment Processes:
             </h1>
             <p className="mb-8">
               {" "}
-              {/* The process of attracting individuals in sufficient numbers with
-              the right skills and at appropriate times to apply for open
-              positions within the organization. E.g. developing job
-              announcements, advertising the position(s), defining key
-              qualifications for applicants, and short-listing qualified
-              applicants which leads to screening out candidates who do not
-              qualified.  */}
               I-O psychologists are instrumental in the development and
               enhancement of recruitment strategies. This involves the creation
               of targeted methodologies for attracting, assessing, and selecting
@@ -90,9 +82,7 @@ export default function SelecAndPlacement() {
 
         <section className="mb-16">
           <article>
-            <h1
-              className={`${dancing_script.className} text-8xl mb-8 text-amber-400 dark:text-amber-200`}
-            >
+            <h1 className={`${salsa.className} text-6xl mb-8 blue_gradient`}>
               Selection
             </h1>
             <p className={`text-xl ${jost.className} mb-16`}>
@@ -106,9 +96,7 @@ export default function SelecAndPlacement() {
               decision-making process.
             </p>
 
-            <h1
-              className={`${salsa.className} text-2xl mb-3 text-amber-400 dark:text-amber-200`}
-            >
+            <h1 className={`${salsa.className} text-2xl mb-3 blue_gradient`}>
               {" "}
               (b) Personnel Selection Systems:
             </h1>
@@ -131,25 +119,23 @@ export default function SelecAndPlacement() {
 
         <section>
           <article>
-            <h1
-              className={`${dancing_script.className} text-8xl mb-8 text-amber-400 dark:text-amber-200`}
-            >
+            <h1 className={`${salsa.className} text-6xl mb-8 blue_gradient`}>
               Placement
             </h1>
             <p className={`text-xl ${jost.className} mb-16`}>
-              Placement involves carefully matching an individual's
+              Placement involves carefully matching an individual&apos;s
               competencies, which include knowledge, skills, talents, interests,
               and personality traits, with with the requisite specifications of
               a given job role. Usually, this strategic endeavor is carried out
               when a person has already entered the workforce or or has become
               an integral member of the organization. The method is
-              distinguished by a careful evaluation of the candidate's aptitudes
-              and preferences, which is followed by a discerning matching
-              procedure to guarantee the best possible fit between the candidate
-              and the organizational framework. This professional practice is
-              essential for maximizing human capital effectiveness, fostering
-              employee satisfaction, and contributing to the overall synergy and
-              efficiency of the organizational structure..
+              distinguished by a careful evaluation of the candidate&apos;s
+              aptitudes and preferences, which is followed by a discerning
+              matching procedure to guarantee the best possible fit between the
+              candidate and the organizational framework. This professional
+              practice is essential for maximizing human capital effectiveness,
+              fostering employee satisfaction, and contributing to the overall
+              synergy and efficiency of the organizational structure..
             </p>
           </article>
         </section>
