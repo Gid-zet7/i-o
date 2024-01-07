@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@next/font": "^14.0.4",
     "@types/bcrypt": "^5.0.2",
     "bcrypt": "^5.1.1",
     "mongoose": "^8.0.3",
