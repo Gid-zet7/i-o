@@ -1,5 +1,6 @@
 "use client";
 import { SubLinks } from "@/constant";
+import Link from "next/link";
 
 const Subfields = () => {
   return (
@@ -12,7 +13,7 @@ const Subfields = () => {
             className="px-4 py-1 rounded-full capitalize whitespace-nowrap font-normal mt-3"
           >
             <span className="bg-gradient-to-r from-indigo-500 to-indigo-300 bg-clip-text text-transparent ">
-              {link.text}
+              <Link href={link.href}>{link.text}</Link>
             </span>
           </button>
         ))}
