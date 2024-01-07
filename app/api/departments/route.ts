@@ -6,16 +6,16 @@ export const GET = async () => {
     await connectDB();
 
     // Fetch departments from database
-    const deparments = await Department.find()
+    const departments = await Department.find()
       .populate("head_of_department")
       .lean();
 
-    // If there are no deparments return an error
-    if (!deparments?.length)
-      return new Response("No deparments found", { status: 400 });
+    // If there are no departments return an error
+    if (!departments?.length)
+      return new Response("No departments found", { status: 400 });
 
-    return new Response(JSON.stringify(deparments), { status: 200 });
+    return new Response(JSON.stringify(departments), { status: 200 });
   } catch (error) {
-    return new Response("Failed to fetch deparments", { status: 500 });
+    return new Response("Failed to fetch departments", { status: 500 });
   }
 };
