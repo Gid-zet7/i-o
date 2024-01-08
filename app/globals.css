@@ -53,9 +53,6 @@
   @apply mt-8 text-lg text-gray-600 sm:text-xl max-w-2xl;
 }
 
-/* .bg_image {
-  background-image: url("../public/christina-unsplash.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  padding: 10rem;
-} */
+.details {
+  @apply bg-gradient-to-r from-slate-200 to-slate-300 rounded-lg p-1.5 text-xs;
+}
