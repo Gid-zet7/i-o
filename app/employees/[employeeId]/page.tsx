@@ -48,10 +48,6 @@ export default async function EmployeePage({ params: { employeeId } }: Params) {
             height={200}
             className="rounded-3xl"
           />
-          {/* <p>{employee?.user?.username} </p>
-          <p>{employee.user.firstname} </p>
-          <p>{employee.user.lastname} </p>
-          <p>{employee.user.email} </p> */}
           <Link href={`/employees/${employee._id}/edit`}>
             <button>Edit details</button>
           </Link>
