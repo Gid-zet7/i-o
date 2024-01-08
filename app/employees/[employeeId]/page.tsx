@@ -40,51 +40,79 @@ export default async function EmployeePage({ params: { employeeId } }: Params) {
 
     return (
       <section key={employee._id} className="flex max-w-7xl mx-auto p-3">
-        <div className="flex-1">
-          <Image
-            src={employee.user.avatarUrl}
-            alt="employee Image"
-            width={500}
-            height={200}
-            className="rounded-3xl"
-          />
-          <Link href={`/employees/${employee._id}/edit`}>
-            <button>Edit details</button>
-          </Link>
-        </div>
-        <div className="flex-1 p-3">
-          <h1 className="text-2xl">{employee.user.username}</h1>
-          <hr />
-          <h3>First name: {employee.user.firstname}</h3>
-          <h3>Last name: {employee.user.lastname}</h3>
-          <h3>Email: {employee.user.email}</h3>
-          <h3>Department: {employee.department.name}</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto
-            ea adipisci deserunt iste eos eaque est rerum voluptatem dolores
-            sunt explicabo, molestias amet corporis nam doloremque vitae a
-            inventore aliquam? Ex labore ipsa, nesciunt ipsum quasi alias fuga
-            aliquid fugit? Laboriosam officiis quia inventore ducimus a dicta
-            saepe. Ea, similique! Voluptatibus accusamus veritatis eos explicabo
-            qui accusantium unde, numquam ex amet eum cum in quod dolores sit
-            reiciendis doloremque! Assumenda perferendis doloribus ad
-            doloremque. Consequuntur necessitatibus distinctio omnis.
-            Perferendis illum dolores, molestiae debitis quod consectetur
-            dolorum vero quidem obcaecati nihil saepe ipsum mollitia numquam
-            eveniet repudiandae laborum explicabo provident tenetur cupiditate
-            dicta amet laboriosam tempora expedita? Quis non in repellat quia
-            quo obcaecati cupiditate amet similique accusantium nam? Aut
-            provident hic, velit fugiat libero temporibus dolore, amet, est unde
-            dolorum deleniti nemo numquam molestiae blanditiis voluptatem. Natus
-            sapiente delectus a, provident libero eligendi at omnis et aperiam,
-            sed, totam quod perspiciatis quidem animi necessitatibus. Dolores
-            in, corporis tempore dicta architecto, voluptatibus ratione omnis
-            autem cum reprehenderit porro laboriosam consectetur saepe dolor,
-            aliquid dolore? Molestias in provident ratione sapiente fugiat
-            deleniti esse praesentium dolore enim perspiciatis voluptatum,
-            impedit nihil numquam culpa quaerat soluta dolor ducimus commodi
-            quam. Nihil fugit at libero.
-          </p>
+        <div className="grid gap-5 sm:grid-rows-3 sm:grid-cols-3 sm:gap-8 p-2">
+          <div className="flex-1">
+            <h1 className="mb-10 text-2xl font-semibold">Employee Profile</h1>
+            <Image
+              src={employee.user.avatarUrl}
+              alt="employee Image"
+              width={350}
+              height={200}
+              className="rounded-3xl mb-12"
+            />
+
+            <div className="flex flex-col gap-2">
+              <h1 className="text-2xl font-semibold">Employee Details</h1>
+              <div className="details">
+                <p>First name</p>
+                <p className="font-semibold text-black ">
+                  {employee.user.firstname}
+                </p>
+              </div>
+              <div className="details">
+                <p>Last name</p>
+                <p className="font-semibold text-black ">
+                  {employee.user.lastname}
+                </p>
+              </div>
+              <div className="details">
+                <p>Email</p>
+                <p className="font-semibold text-black ">
+                  {employee.user.email}
+                </p>
+              </div>
+              <div className="details">
+                <p>Department</p>
+                <p className="font-semibold text-black ">
+                  {employee.department.name}
+                </p>
+              </div>
+              <div className="details">
+                <p>Position</p>
+                <p className="font-semibold text-black ">{employee.position}</p>
+              </div>
+            </div>
+
+            <Link href={`/employees/${employee._id}/edit`}>
+              <button>Edit details</button>
+            </Link>
+          </div>
+          <div className="flex-1 p-3">
+            <h1 className="text-2xl font-semibold mb-8">Skills</h1>
+
+            <p className="mb-8">{employee.skills}</p>
+          </div>
+          <div className="flex-1 p-3">
+            <h1 className="text-2xl font-semibold mb-8">Performance</h1>
+
+            <p className="mb-8">
+              {employee.performance.length
+                ? employee.performance
+                : "Performance not appraised yet"}
+            </p>
+
+            <p className="leading-7">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Architecto ea adipisci deserunt iste eos eaque est rerum
+              voluptatem dolores sunt explicabo, molestias amet corporis nam
+              doloremque vitae a inventore aliquam? Ex labore ipsa, nesciunt
+              ipsum quasi alias fuga aliquid fugit? Laboriosam officiis quia
+              inventore ducimus a dicta saepe. Ea, similique! Voluptatibus
+              quidem obcaecati nihil saepe ipsum mollitia numquam eveniet
+              repudiandae laborum explicabo provident tenetur cupiditate dicta
+              amet laboriosam tempora
+            </p>
+          </div>
         </div>
       </section>
     );
