@@ -54,7 +54,7 @@ export const getAllManagers = async () => {
   return managers.json();
 };
 
-export const getManger = async (managerId: string) => {
+export const getManager = async (managerId: string) => {
   const manager = await fetch(
     `http://localhost:3000/api/managers/${managerId}`,
     {
