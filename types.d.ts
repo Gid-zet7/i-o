@@ -39,6 +39,9 @@ type Manager = {
   username: string;
   firstname: string;
   lastname: string;
+  email: string;
+  avatarUrl: string;
+  teamusernames: string[];
 };
 
 type Department = {
