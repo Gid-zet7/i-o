@@ -14,25 +14,26 @@ export const GET = async (request: Request, { params: { id } }: Props) => {
     await connectDB();
 
     const manager: any = await Manager.findById(id)
-      .populate("employee")
-      .populate("team")
-      .lean();
+      .populate({
+        path: "employee",
+        populate: {
+          path: "user",
+          model: "user",
+        },
+      })
+      .populate({
+        path: "team",
+        populate: {
+          path: "user",
+          model: "user",
+        },
+      })
+      .lean()
+      .exec();
 
     if (!manager) return new Response("Manager not found", { status: 400 });
 
-    const employee: any = await Employee.findById(manager.employee)
-      .lean()
-      .exec();
-    const user: any = await UserModel.findById(employee?.user).lean().exec();
-
-    const managerWithUser = {
-      ...manager,
-      username: user?.username,
-      firstname: user?.firstname,
-      lastname: user?.lastname,
-    };
-
-    return new Response(JSON.stringify(managerWithUser), { status: 200 });
+    return new Response(JSON.stringify(manager), { status: 200 });
   } catch (error) {
     return new Response("Failed to fetch manager", { status: 500 });
   }
