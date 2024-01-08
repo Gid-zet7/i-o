@@ -1,6 +1,6 @@
 
 # ------------------Users routes---------------------
-GET http://localhost:3000/api/users/659732c919d838a15cb7bcd7
+GET http://localhost:3000/api/users/659aea1d3871e3fe39d1e95e
 
 ###
 GET http://localhost:3000/api/users
@@ -10,10 +10,10 @@ POST http://localhost:3000/api/users/new
 Content-Type: application/json
 
 {
-    "username": "User_demo4",
+    "username": "User_demo5",
     "firstname": "Demo first",
     "lastname": "Demo last",
-    "email": "demo4@gmail.com",
+    "email": "demo5@gmail.com",
     "password": "0987654321",
     "avatarUrl": "/clark.jpg",
     "roles": ["User"],
@@ -43,13 +43,13 @@ DELETE http://localhost:3000/api/users/delete
 Content-Type: application/json
 
 {
-    "id": "6597327619d838a15cb7bcd1"
+    "id": "659aec1eabdeeec1dd77a30d"
 
 }
 
 # ------------------Employees routes---------------------
 ###
-GET http://localhost:3000/api/employees/659794fe9ab447fc8050bca2
+GET http://localhost:3000/api/employees/659aecd9abdeeec1dd77a32d
 
 ###
 GET http://localhost:3000/api/employees
@@ -60,11 +60,11 @@ POST http://localhost:3000/api/employees/new
 Content-Type: application/json
 
 {
-    "username": "User_demo4",
-    "department": "Sales department",
-    "position": "Junior Developer",
-    "skills": ["Html", "Css", "Javascript"],
-    "startDate": "1-28-2024"
+    "username": "User_demo2",
+    "department": "IT department",
+    "position": "Senior Developer",
+    "skills": ["Html", "Css", "Javascript", "React"],
+    "startDate": "1-1-2016"
 }
 
 ###
@@ -83,6 +83,14 @@ Content-Type: application/json
     "startDate": "12-29-2023"
 }
 
+###
+DELETE http://localhost:3000/api/employees/delete
+Content-Type: application/json
+
+{
+    "id": "659b1d4984fea34050d68ec7"
+}
+
 #--------------------Department routes-------------------------------
 ###
 GET http://localhost:3000/api/departments/659794ee9ab447fc8050bc9d
@@ -94,9 +102,9 @@ POST http://localhost:3000/api/departments/create
 Content-Type: application/json
 
 {
-    "name": "Del department",
-    "head_of_department": "Demo_user",
-    "description": "Del department was established in the year 2000"
+    "name": "IT department",
+    "head_of_department": "User_demo",
+    "description": "IT department was established in the year 1986"
 }
 
 ###
@@ -131,9 +139,9 @@ POST http://localhost:3000/api/managers/new
 Content-Type: application/json
 
 {
-    "employee": "User_demo",
-    "team": ["User_demo2", "User_demo3"],
-    "projects": ["Project A"]
+    "employee": "User_demo2",
+    "team": ["User_demo3"],
+    "projects": ["Project Sales"]
     
 }
 
