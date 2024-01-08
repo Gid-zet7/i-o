@@ -9,6 +9,9 @@ export const POST = async (request: Request) => {
   if (!employee || !Array.isArray(projects) || !projects.length) {
     return new Response("All fields are required", { status: 400 });
   }
+  console.log(employee, team, projects);
+
+  await connectDB();
 
   const findUser = await UserModel.findOne({ username: employee }).exec();
 
@@ -18,10 +21,11 @@ export const POST = async (request: Request) => {
     .populate("user")
     .exec();
 
+  // console.log(findEmployee);
+
   if (!findEmployee)
     return new Response("Register as an employee first", { status: 409 });
 
-  await connectDB();
   const duplicate = await Manager.findOne({ employee: findEmployee })
     .collation({ locale: "en", strength: 2 })
     .lean()
@@ -34,6 +38,7 @@ export const POST = async (request: Request) => {
   let verifyTeam = [];
   for (const users of team) {
     const result = await UserModel.findOne({ username: users }).exec();
+    // console.log(result);
 
     if (result) {
       const findEmployeesFromResults = await Employee.findOne({
