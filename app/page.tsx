@@ -7,7 +7,7 @@ export default function Home() {
         <section id="hero">
           <div className="widescreen:section-min-height tallscreen:section-min-height mb-3 flex scroll-mt-40 flex-col items-center justify-center gap-8 p-6 md:flex-row ">
             <article className="p-4">
-              <h1 className="mt-5 text-6xl font-extrabold md:text-8xl">
+              <h1 className={`mt-5 text-6xl font-extrabold md:text-8xl`}>
                 Applying <span className="blue_gradient">psychology</span> to
                 work
               </h1>
