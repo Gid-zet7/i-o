@@ -38,7 +38,7 @@ const Card = ({
         </Link>
       ) : (
         <div className="flexCenter flex-col rounded-full shadow-md dark:bg-slate-100 dark:text-black min-w-1/4">
-          <Link href={`/managers/${id}`} className="flexCenter group relative">
+          <Link href={`/employees/${id}`} className="flexCenter group relative">
             <Image
               src="/undraw_male_avatar_g98d.svg"
               width={180}
