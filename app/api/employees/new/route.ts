@@ -5,16 +5,24 @@ import Department from "@/models/departmentModel";
 
 export const POST = async (request: Request) => {
   // Destructure employee details from request
-  const { username, department, position, skills, startDate } =
-    await request.json();
+  const {
+    username,
+    firstname,
+    lastname,
+    department,
+    position,
+    skills,
+    startDate,
+  } = await request.json();
 
   // Return an error is any these details is missing
   if (
     !username ||
+    !firstname ||
+    !lastname ||
     !department ||
     !position ||
-    !Array.isArray(skills) ||
-    !skills.length ||
+    !skills ||
     !startDate
   ) {
     return new Response("Fill all required fields", { status: 400 });
@@ -50,9 +58,11 @@ export const POST = async (request: Request) => {
     // Create employee object
     const employeeObj = {
       user: findUser,
+      firstname,
+      lastname,
       department: findDepartment,
       position,
-      skills,
+      skills: skills.includes(",") ? skills.split(",") : skills.includes(" "),
       startDate,
     };
 
