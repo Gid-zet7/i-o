@@ -9,7 +9,6 @@ export const POST = async (request: Request) => {
   if (!employee || !Array.isArray(projects) || !projects.length) {
     return new Response("All fields are required", { status: 400 });
   }
-  console.log(employee, team, projects);
 
   await connectDB();
 
