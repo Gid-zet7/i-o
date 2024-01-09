@@ -30,8 +30,8 @@ export default async function ManagersPage() {
                 <ManagerCard
                   id={manager._id}
                   username={manager.employee.user.username}
-                  firstname={manager.employee.user.firstname}
-                  lastname={manager.employee.user.lastname}
+                  firstname={manager.employee.firstname}
+                  lastname={manager.employee.lastname}
                   position={manager.employee.position}
                   image={manager.employee.user.avatarUrl}
                 />
