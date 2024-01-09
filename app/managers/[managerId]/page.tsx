@@ -34,8 +34,6 @@ export default async function ManagerPage({ params: { managerId } }: Params) {
     const managerData: Promise<Manager> = getManager(managerId);
     const manager: Manager = await managerData;
 
-    // console.log(manager.teamusernames);
-
     if (!manager?.employee.user.username) {
       throw new Error("Manager not found");
     }
@@ -109,11 +107,47 @@ export default async function ManagerPage({ params: { managerId } }: Params) {
             <div>
               <h1 className="text-2xl font-semibold mb-8">Team</h1>
               <div>
-                <p>
-                  {manager.team.map((teammate) => {
-                    return <li>{teammate.user.username} </li>;
-                  })}{" "}
-                </p>
+                {manager.team.map((teammate) => {
+                  return (
+                    <li key={teammate._id} className="list-none details ">
+                      {teammate.user.avatarUrl ? (
+                        <div key={teammate._id} className="flex gap-4">
+                          <Image
+                            src={teammate.user.avatarUrl}
+                            width={50}
+                            height={90}
+                            alt="teammate image"
+                            className="rounded-full "
+                          />
+                          <Link
+                            href={`http://localhost:3000/employees/${teammate._id}`}
+                          >
+                            <p className="blue_gradient text-xl">
+                              {teammate.user.username}
+                            </p>
+                          </Link>
+                        </div>
+                      ) : (
+                        <div className="flex gap-4">
+                          <Image
+                            src="/undraw_male_avatar_g98d.svg"
+                            width={50}
+                            height={90}
+                            alt="teammate image"
+                            className="rounded-full "
+                          />
+                          <Link
+                            href={`http://localhost:3000/employees/${teammate._id}`}
+                          >
+                            <p className="blue_gradient">
+                              {teammate.user.username}
+                            </p>
+                          </Link>
+                        </div>
+                      )}
+                    </li>
+                  );
+                })}{" "}
               </div>
             </div>
           </div>
