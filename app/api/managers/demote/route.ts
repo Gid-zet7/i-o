@@ -17,7 +17,7 @@ export const DELETE = async (request: Request) => {
 
   await manager.deleteOne();
 
-  return new Response("Manager demoted to employee successfully", {
+  return new Response("Manager demoted successfully", {
     status: 200,
   });
 };
