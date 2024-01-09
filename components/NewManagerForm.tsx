@@ -41,8 +41,6 @@ export default function NewManagerForm() {
       return;
     }
 
-    console.log(employee, team, projects);
-
     try {
       const manager = await fetch("http://localhost:3000/api/managers/new", {
         method: "POST",
