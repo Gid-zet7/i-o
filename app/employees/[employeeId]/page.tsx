@@ -65,29 +65,33 @@ export default async function EmployeePage({ params: { employeeId } }: Params) {
               <h1 className="text-2xl font-semibold">Employee Details</h1>
               <div className="details">
                 <p>First name</p>
-                <p className="font-semibold text-black ">
+                <p className="font-semibold blue_gradient">
                   {employee.firstname}
                 </p>
               </div>
               <div className="details">
                 <p>Last name</p>
-                <p className="font-semibold text-black ">{employee.lastname}</p>
+                <p className="font-semibold blue_gradient ">
+                  {employee.lastname}
+                </p>
               </div>
               <div className="details">
                 <p>Email</p>
-                <p className="font-semibold text-black ">
+                <p className="font-semibold blue_gradient ">
                   {employee.user.email}
                 </p>
               </div>
               <div className="details">
                 <p>Department</p>
-                <p className="font-semibold text-black ">
+                <p className="font-semibold blue_gradient ">
                   {employee.department.name}
                 </p>
               </div>
               <div className="details">
                 <p>Position</p>
-                <p className="font-semibold text-black ">{employee.position}</p>
+                <p className="font-semibold blue_gradient ">
+                  {employee.position}
+                </p>
               </div>
             </div>
 
