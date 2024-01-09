@@ -45,43 +45,53 @@ export default async function ManagerPage({ params: { managerId } }: Params) {
         <div className="grid gap-5 sm:grid-rows-3 sm:grid-cols-3 sm:gap-8 p-2">
           <div className="flex-1">
             <h1 className="mb-10 text-2xl font-semibold">Manager Profile</h1>
-            <Image
-              src={manager.employee.user.avatarUrl}
-              alt="manager Image"
-              width={350}
-              height={200}
-              className="rounded-3xl mb-12"
-            />
+            {manager?.employee.user?.avatarUrl ? (
+              <Image
+                src={manager.employee.user.avatarUrl}
+                alt="manager Image"
+                width={350}
+                height={200}
+                className="rounded-3xl mb-12"
+              />
+            ) : (
+              <Image
+                src="/undraw_male_avatar_g98d.svg"
+                alt="manager Image"
+                width={350}
+                height={200}
+                className="rounded-3xl mb-12"
+              />
+            )}
 
             <div className="flex flex-col gap-2">
               <h1 className="text-2xl font-semibold">Employee Details</h1>
               <div className="details">
                 <p>First name</p>
-                <p className="font-semibold text-black ">
-                  {manager.employee.user.firstname}
+                <p className="font-semibold blue_gradient ">
+                  {manager.employee.firstname}
                 </p>
               </div>
               <div className="details">
                 <p>Last name</p>
-                <p className="font-semibold text-black ">
-                  {manager.employee.user.lastname}
+                <p className="font-semibold blue_gradient ">
+                  {manager.employee.lastname}
                 </p>
               </div>
               <div className="details">
                 <p>Email</p>
-                <p className="font-semibold text-black ">
+                <p className="font-semibold blue_gradient ">
                   {manager.employee.user.email}
                 </p>
               </div>
               <div className="details">
                 <p>Department</p>
-                <p className="font-semibold text-black ">
+                <p className="font-semibold blue_gradient ">
                   {manager.employee.department.name}
                 </p>
               </div>
               <div className="details">
                 <p>Position</p>
-                <p className="font-semibold text-black ">
+                <p className="font-semibold blue_gradient ">
                   {manager.employee.position}
                 </p>
               </div>
@@ -104,11 +114,6 @@ export default async function ManagerPage({ params: { managerId } }: Params) {
                     return <li>{teammate.user.username} </li>;
                   })}{" "}
                 </p>
-                {/* <ul>
-                  {manager.teamusernames.map((teamusername) => {
-                    return <li>{teamusername} </li>;
-                  })}
-                </ul> */}
               </div>
             </div>
           </div>
@@ -117,7 +122,9 @@ export default async function ManagerPage({ params: { managerId } }: Params) {
 
             <p className="mb-8">
               {manager?.employee.performance.length
-                ? manager?.employee.performance
+                ? manager?.employee.performance.map((perf) => {
+                    return <li> {perf.feedback}</li>;
+                  })
                 : "Performance not appraised yet"}
             </p>
 
