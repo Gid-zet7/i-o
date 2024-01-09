@@ -1,8 +1,6 @@
 type User = {
   _id: string;
   username: string;
-  firstname: string;
-  lastname: string;
   email: string;
   password?: string;
   avatarUrl?: string;
@@ -16,6 +14,8 @@ type User = {
 type Employee = {
   _id: string;
   user: User;
+  firstname: string;
+  lastname: string;
   department: Department;
   position: string;
   skills: string[];
