@@ -3,17 +3,8 @@ import { connectDB } from "@/lib/database";
 import bcrypt from "bcrypt";
 
 export const PATCH = async (request: Request) => {
-  const {
-    id,
-    username,
-    firstname,
-    lastname,
-    email,
-    password,
-    avatarUrl,
-    roles,
-    active,
-  } = await request.json();
+  const { id, username, email, password, avatarUrl, roles, active } =
+    await request.json();
 
   // Check if and id is provided
   if (!id) return new Response("Id is required", { status: 400 });
@@ -21,8 +12,6 @@ export const PATCH = async (request: Request) => {
   // All fields are required
   if (
     !username ||
-    !firstname ||
-    !lastname ||
     !email ||
     !password ||
     !Array.isArray(roles) ||
@@ -52,8 +41,6 @@ export const PATCH = async (request: Request) => {
 
   // update user details
   user.username = username;
-  user.firstname = firstname;
-  user.lastname = lastname;
   user.email = email;
   user.avatarUrl = avatarUrl;
   user.roles = roles;
