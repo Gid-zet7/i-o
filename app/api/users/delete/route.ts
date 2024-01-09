@@ -12,8 +12,8 @@ export const DELETE = async (request: Request) => {
 
   await connectDB();
   const [user, employee] = await Promise.all([
-    UserModel.findById(id).lean().exec(),
-    Employee.findOne({ user: id }).lean().exec(),
+    UserModel.findById(id).exec(),
+    Employee.findOne({ user: id }).exec(),
   ]);
 
   const manager = await Manager.findOne({ employee: employee?._id })
