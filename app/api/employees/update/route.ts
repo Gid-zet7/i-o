@@ -4,13 +4,24 @@ import Department from "@/models/departmentModel";
 
 export const PATCH = async (request: Request) => {
   // Destructure employee details from request
-  const { id, department, position, skills, performance, startDate, endDate } =
-    await request.json();
+  const {
+    id,
+    firstname,
+    lastname,
+    department,
+    position,
+    skills,
+    performance,
+    startDate,
+    endDate,
+  } = await request.json();
 
   if (!id) return new Response("Id is required", { status: 400 });
 
   if (
     !department ||
+    !firstname ||
+    !lastname ||
     !position ||
     !Array.isArray(skills) ||
     !skills.length ||
@@ -35,6 +46,8 @@ export const PATCH = async (request: Request) => {
 
   // Update employee details
   employee.department = findDepartment;
+  employee.firstname = firstname;
+  employee.lastname = lastname;
   employee.position = position;
   employee.skills = skills;
   employee.startDate = startDate;
