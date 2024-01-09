@@ -4,11 +4,10 @@ import bcrypt from "bcrypt";
 
 export const POST = async (request: Request) => {
   // Destructure user details from request
-  const { username, firstname, lastname, email, password, avatarUrl, roles } =
-    await request.json();
+  const { username, email, password, avatarUrl, roles } = await request.json();
 
   // Return an error is any these details is missing
-  if (!username || !firstname || !lastname || !email || !password) {
+  if (!username || !email || !password) {
     return new Response("Please fill all required fields", { status: 400 });
   }
 
@@ -33,11 +32,9 @@ export const POST = async (request: Request) => {
   //Create user object with data provided
   const userObj =
     !Array.isArray(roles) || !roles.length || !avatarUrl
-      ? { username, firstname, lastname, email, password: hashedPassword }
+      ? { username, email, password: hashedPassword }
       : {
           username,
-          firstname,
-          lastname,
           email,
           password: hashedPassword,
           avatarUrl,
