@@ -23,8 +23,8 @@ export default async function EmployeesPage() {
               <Card
                 id={employee._id}
                 // username={employee.user.username}
-                firstname={employee.user.firstname}
-                lastname={employee.user.lastname}
+                firstname={employee.firstname}
+                lastname={employee.lastname}
                 position={employee.position}
                 image={employee.user.avatarUrl}
               />
