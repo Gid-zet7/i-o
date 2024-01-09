@@ -54,5 +54,5 @@
 }
 
 .details {
-  @apply bg-gradient-to-r from-slate-200 to-slate-300 rounded-lg p-1.5 text-xs;
+  @apply bg-slate-200 dark:bg-slate-900 rounded-lg p-1.5 text-xs;
 }

@@ -43,27 +43,35 @@ export default async function EmployeePage({ params: { employeeId } }: Params) {
         <div className="grid gap-5 sm:grid-rows-3 sm:grid-cols-3 sm:gap-8 p-2">
           <div className="flex-1">
             <h1 className="mb-10 text-2xl font-semibold">Employee Profile</h1>
-            <Image
-              src={employee.user.avatarUrl}
-              alt="employee Image"
-              width={350}
-              height={200}
-              className="rounded-3xl mb-12"
-            />
+            {employee?.user?.avatarUrl ? (
+              <Image
+                src={employee.user.avatarUrl}
+                alt="employee Image"
+                width={350}
+                height={200}
+                className="rounded-3xl mb-12"
+              />
+            ) : (
+              <Image
+                src="/undraw_male_avatar_g98d.svg"
+                alt="employee Image"
+                width={350}
+                height={200}
+                className="rounded-3xl mb-12"
+              />
+            )}
 
             <div className="flex flex-col gap-2">
               <h1 className="text-2xl font-semibold">Employee Details</h1>
               <div className="details">
                 <p>First name</p>
                 <p className="font-semibold text-black ">
-                  {employee.user.firstname}
+                  {employee.firstname}
                 </p>
               </div>
               <div className="details">
                 <p>Last name</p>
-                <p className="font-semibold text-black ">
-                  {employee.user.lastname}
-                </p>
+                <p className="font-semibold text-black ">{employee.lastname}</p>
               </div>
               <div className="details">
                 <p>Email</p>
@@ -96,8 +104,10 @@ export default async function EmployeePage({ params: { employeeId } }: Params) {
             <h1 className="text-2xl font-semibold mb-8">Performance</h1>
 
             <p className="mb-8">
-              {employee.performance.length
-                ? employee.performance
+              {employee?.performance.length
+                ? employee.performance.map((perf) => {
+                    return <li> {perf.feedback}</li>;
+                  })
                 : "Performance not appraised yet"}
             </p>
 
