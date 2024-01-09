@@ -3,15 +3,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { getAllDepartments, getAllUsers } from "@/lib/actions";
+import { getAllDepartments } from "@/lib/actions";
 
 export default function NewEmployeeForm() {
-  const [username, setUserName] = useState("");
+  const [username, setUsername] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
   const [department, setDepartment] = useState("");
   const [position, setPosition] = useState("");
   const [skills, setSkills] = useState("");
   const [startDate, setStartDate] = useState("");
-  const [options, setOptions] = useState<User[]>([]);
   const [deptOptions, setDeptOptions] = useState<Department[]>([]);
   const [error, setError] = useState<any>("");
 
@@ -19,15 +20,10 @@ export default function NewEmployeeForm() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const usersData: Promise<User[]> = getAllUsers();
       const departmentsData: Promise<Department[]> = getAllDepartments();
 
-      const [users, departments] = await Promise.all([
-        usersData,
-        departmentsData,
-      ]);
+      const departments = await departmentsData;
 
-      setOptions(users);
       setDeptOptions(departments);
     };
 
@@ -37,7 +33,15 @@ export default function NewEmployeeForm() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!username || !department || !position || !skills || !startDate) {
+    if (
+      !username ||
+      !firstname ||
+      !lastname ||
+      !department ||
+      !position ||
+      !skills ||
+      !startDate
+    ) {
       setError("All fields are necessary.");
       return;
     }
@@ -50,9 +54,11 @@ export default function NewEmployeeForm() {
         },
         body: JSON.stringify({
           username,
+          firstname,
+          lastname,
           department,
           position,
-          skills: [skills],
+          skills: skills,
           startDate,
         }),
       });
@@ -61,21 +67,15 @@ export default function NewEmployeeForm() {
         const form = e.target as HTMLFormElement;
         form.reset();
         router.push("/employees");
+      } else if (employee.statusText === "Bad Request") {
+        setError("User does not exist!");
       } else if (employee.statusText === "Conflict") {
-        setError("This User is already an employee");
+        setError("Employee already exists!");
       }
     } catch (error: any) {
       setError(error.message);
     }
   };
-
-  const optionsData = options.map((user) => {
-    return (
-      <option key={user._id} value={user.username}>
-        {user.username}
-      </option>
-    );
-  });
 
   const deptOptionsData = deptOptions.map((department) => {
     return (
@@ -95,21 +95,41 @@ export default function NewEmployeeForm() {
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-4 ">
             <label htmlFor="user" className="">
-              Select a user from the users list below. <br />
+              Username <br />
               <span className="text-xs text-slate-400">
-                Employees need to sign up as users first
+                Make sure to enter correct detail
               </span>
             </label>
-            <select
+            <input
               className="p-1 rounded text-black outline-none w-5/6 sm:w-3/5"
+              onChange={(e) => setUsername(e.target.value)}
               id="user"
               name="user"
-              onChange={(e) => setUserName(e.target.value)}
-              value={username}
-            >
-              <option>--Select User--</option>
-              {optionsData}
-            </select>
+              type="text"
+              placeholder="Username..."
+            />
+            <label htmlFor="firstname" className="">
+              First Name
+            </label>
+            <input
+              className="p-1 rounded text-black outline-none w-5/6 sm:w-3/5"
+              onChange={(e) => setFirstname(e.target.value)}
+              id="firstname"
+              name="firstname"
+              type="text"
+              placeholder="firstname..."
+            />
+            <label htmlFor="lastname" className="">
+              Last Name
+            </label>
+            <input
+              className="p-1 rounded text-black outline-none w-5/6 sm:w-3/5"
+              onChange={(e) => setLastname(e.target.value)}
+              id="lastname"
+              name="lastname"
+              type="text"
+              placeholder="lastname..."
+            />
             <label htmlFor="department" className="">
               Choose department
             </label>
@@ -135,7 +155,12 @@ export default function NewEmployeeForm() {
               placeholder="eg.project manager..."
             />
             <label htmlFor="skills" className="">
-              Skills
+              Skills <br />
+              <span className="text-xs text-slate-400">
+                Enter skills separated by commas eg., communication, project{" "}
+                <br />
+                management, Time management etc.
+              </span>
             </label>
             <input
               className="p-1 rounded text-black outline-none w-5/6 sm:w-3/5"
@@ -143,7 +168,7 @@ export default function NewEmployeeForm() {
               id="skills"
               name="skills"
               type="text"
-              placeholder="skills..."
+              placeholder="eg. strong leadership, training and coaching..."
             />
             <label htmlFor="startDate">Start Date:</label>
             <input
