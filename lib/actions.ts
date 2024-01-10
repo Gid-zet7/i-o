@@ -1,7 +1,14 @@
+import { getServerSession } from "next-auth";
+import { authOptions } from "./session";
+
 // ---------------Users----------------------
 export const getAllUsers = async () => {
+  const session: SessionInterface | null = await getServerSession(authOptions);
   const users = await fetch("http://localhost:3000/api/users", {
-    next: { revalidate: 60 },
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${session?.user?.accessToken}`,
+    },
   });
 
   if (!users.ok) throw new Error("Failed to fetch users");
@@ -10,8 +17,12 @@ export const getAllUsers = async () => {
 };
 
 export const getUser = async (userId: string) => {
+  const session: SessionInterface | null = await getServerSession(authOptions);
   const user = await fetch(`http://localhost:3000/api/users/${userId}`, {
-    next: { revalidate: 60 },
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${session?.user?.accessToken}`,
+    },
   });
 
   if (!user.ok) return undefined;
@@ -21,8 +32,12 @@ export const getUser = async (userId: string) => {
 
 // ---------------Employees----------------------
 export const getAllEmployees = async () => {
+  const session: SessionInterface | null = await getServerSession(authOptions);
   const employees = await fetch("http://localhost:3000/api/employees", {
-    next: { revalidate: 60 },
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${session?.user?.accessToken}`,
+    },
   });
 
   if (!employees.ok) throw new Error("Failed to fetch employees");
@@ -31,10 +46,14 @@ export const getAllEmployees = async () => {
 };
 
 export const getEmployee = async (employeeId: string) => {
+  const session: SessionInterface | null = await getServerSession(authOptions);
   const employee = await fetch(
     `http://localhost:3000/api/employees/${employeeId}`,
     {
-      next: { revalidate: 60 },
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${session?.user?.accessToken}`,
+      },
     }
   );
 
@@ -45,8 +64,12 @@ export const getEmployee = async (employeeId: string) => {
 
 // ---------------Managers----------------------
 export const getAllManagers = async () => {
+  const session: SessionInterface | null = await getServerSession(authOptions);
   const managers = await fetch("http://localhost:3000/api/managers", {
-    next: { revalidate: 60 },
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${session?.user?.accessToken}`,
+    },
   });
 
   if (!managers.ok) throw new Error("Failed to fetch managers");
@@ -55,10 +78,14 @@ export const getAllManagers = async () => {
 };
 
 export const getManager = async (managerId: string) => {
+  const session: SessionInterface | null = await getServerSession(authOptions);
   const manager = await fetch(
     `http://localhost:3000/api/managers/${managerId}`,
     {
-      next: { revalidate: 60 },
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${session?.user?.accessToken}`,
+      },
     }
   );
 
@@ -70,8 +97,12 @@ export const getManager = async (managerId: string) => {
 // --------------------------Department---------------------------
 
 export const getAllDepartments = async () => {
+  const session: SessionInterface | null = await getServerSession(authOptions);
   const departments = await fetch("http://localhost:3000/api/departments", {
-    next: { revalidate: 60 },
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${session?.user?.accessToken}`,
+    },
   });
 
   if (!departments.ok) throw new Error("Failed to fetch departments");
@@ -80,10 +111,14 @@ export const getAllDepartments = async () => {
 };
 
 export const getDepartment = async (departmentId: string) => {
+  const session: SessionInterface | null = await getServerSession(authOptions);
   const department = await fetch(
     `http://localhost:3000/api/departments/${departmentId}`,
     {
-      next: { revalidate: 60 },
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${session?.user?.accessToken}`,
+      },
     }
   );
 
@@ -94,8 +129,12 @@ export const getDepartment = async (departmentId: string) => {
 
 // -----------------------------Forms----------------------
 export const getAllForms = async () => {
+  const session: SessionInterface | null = await getServerSession(authOptions);
   const forms = await fetch("http://localhost:3000/api/appraisal-form", {
-    next: { revalidate: 60 },
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${session?.user?.accessToken}`,
+    },
   });
 
   if (!forms.ok) throw new Error("Failed to fetch forms");
