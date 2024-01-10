@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { getAllManagers } from "@/lib/actions";
 import { getManager } from "@/lib/actions";
 import Image from "next/image";
 // import { notFound } from "next/navigation";
@@ -180,15 +179,4 @@ export default async function ManagerPage({ params: { managerId } }: Params) {
   } catch (error) {
     console.error("Error fetching manager data:", error);
   }
-}
-
-export async function generateStaticParams() {
-  const managersData: Promise<Manager[]> = getAllManagers();
-  const managers = await managersData;
-
-  return managers.map((manager) => ({
-    params: {
-      managerId: manager._id.toString(),
-    },
-  }));
 }
