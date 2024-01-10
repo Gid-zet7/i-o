@@ -8,6 +8,9 @@ Content-Type: application/json
 }
 
 ###
+GET http://localhost:3000/api/auth/token
+
+###
 # ------------------Users routes---------------------
 GET http://localhost:3000/api/users/659aea1d3871e3fe39d1e95e
 
@@ -19,8 +22,8 @@ POST http://localhost:3000/api/users/new
 Content-Type: application/json
 
 {
-    "username": "User_demo3",
-    "email": "adontenggideon57@gmail.com",
+    "username": "User_demo4",
+    "email": "adontenggideon@gmail.com",
     "password": "0987654321",
     "avatarUrl": "/clark.jpg",
     "roles": ["User", "Employee", "Manager", "Admin"],
