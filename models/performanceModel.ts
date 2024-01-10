@@ -2,14 +2,7 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-interface PerformanceInterface {
-  employee: mongoose.Types.ObjectId | null | undefined;
-  date: Date;
-  feedback: string;
-  ratings: number;
-}
-
-const performanceSchema = new Schema<PerformanceInterface>(
+const performanceSchema = new Schema<Performance>(
   {
     employee: { type: Schema.Types.ObjectId, ref: "employee" },
     date: { type: Date, require: true },
@@ -21,6 +14,6 @@ const performanceSchema = new Schema<PerformanceInterface>(
 
 const Performance =
   mongoose.models.performance ||
-  mongoose.model<PerformanceInterface>("performance", performanceSchema);
+  mongoose.model<Performance>("performance", performanceSchema);
 
 export default Performance;
