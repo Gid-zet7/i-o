@@ -14,6 +14,7 @@ type Params = {
 export const generateMetadata = async ({
   params: { employeeId },
 }: Params): Promise<Metadata> => {
+  // const session = await getCurrentUser();
   const employeeData: Promise<Employee> = getEmployee(employeeId);
   const employee: Employee = await employeeData;
 
@@ -64,6 +65,12 @@ export default async function EmployeePage({ params: { employeeId } }: Params) {
             <div className="flex flex-col gap-2">
               <h1 className="text-2xl font-semibold">Employee Details</h1>
               <div className="details">
+                <p>Username</p>
+                <p className="font-semibold blue_gradient">
+                  {employee.user.username}
+                </p>
+              </div>
+              <div className="details">
                 <p>First name</p>
                 <p className="font-semibold blue_gradient">
                   {employee.firstname}
@@ -93,6 +100,12 @@ export default async function EmployeePage({ params: { employeeId } }: Params) {
                   {employee.position}
                 </p>
               </div>
+              {/* <div className="details">
+                <p>Start Date</p>
+                <p className="font-semibold blue_gradient ">
+                  {employee.startDate}
+                </p>
+              </div> */}
             </div>
 
             <Link href={`/employees/${employee._id}/edit`}>
@@ -133,15 +146,4 @@ export default async function EmployeePage({ params: { employeeId } }: Params) {
   } catch (error) {
     console.error("Error fetching employee data:", error);
   }
-}
-
-export async function generateStaticParams() {
-  const employeesData: Promise<Employee[]> = getAllEmployees();
-  const employees = await employeesData;
-
-  return employees.map((employee) => ({
-    params: {
-      employeeId: employee._id.toString(),
-    },
-  }));
 }
