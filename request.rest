@@ -1,4 +1,13 @@
+#--------------------Login routes-----------------
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
 
+{
+    "username": "User_demo2",
+    "password": "0987654321"
+}
+
+###
 # ------------------Users routes---------------------
 GET http://localhost:3000/api/users/659aea1d3871e3fe39d1e95e
 
@@ -10,11 +19,11 @@ POST http://localhost:3000/api/users/new
 Content-Type: application/json
 
 {
-    "username": "User_demo2",
-    "email": "demo2@gmail.com",
+    "username": "User_demo3",
+    "email": "adontenggideon57@gmail.com",
     "password": "0987654321",
     "avatarUrl": "/clark.jpg",
-    "roles": ["User"],
+    "roles": ["User", "Employee", "Manager", "Admin"],
     "active": true
     
 }
@@ -49,6 +58,8 @@ GET http://localhost:3000/api/employees/659aecd9abdeeec1dd77a32d
 
 ###
 GET http://localhost:3000/api/employees
+Authorization: Bearer 
+
 
 
 ###
