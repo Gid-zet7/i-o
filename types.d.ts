@@ -92,10 +92,12 @@ type Forms = {
 interface SessionInterface extends Session {
   user: User & {
     _doc: {
-      id: string;
+      _id: string;
       username: string;
       email: string;
       avatarUrl: string;
+      roles: string[];
+      active: boolean;
     };
     accessToken: string;
   };
