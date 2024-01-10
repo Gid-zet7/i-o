@@ -1,3 +1,5 @@
+// import NextAuth from "next-auth";
+
 type User = {
   _id: string;
   username: string;
@@ -36,12 +38,6 @@ type Manager = {
   createdAt: Date;
   updatedAt: Date;
   __v: number;
-  username: string;
-  firstname: string;
-  lastname: string;
-  email: string;
-  avatarUrl: string;
-  teamusernames: string[];
 };
 
 type Department = {
@@ -67,7 +63,7 @@ type Meeting = {
   __v: number;
 };
 
-type Performance = {
+interface Performance {
   _id: string;
   employee: Employee;
   date: Date;
@@ -76,7 +72,7 @@ type Performance = {
   createdAt: Date;
   updatedAt: Date;
   __v: number;
-};
+}
 
 type Forms = {
   _id: string;
@@ -92,3 +88,15 @@ type Forms = {
   updatedAt: Date;
   __v: number;
 };
+
+interface SessionInterface extends Session {
+  user: User & {
+    _doc: {
+      id: string;
+      username: string;
+      email: string;
+      avatarUrl: string;
+    };
+    accessToken: string;
+  };
+}
