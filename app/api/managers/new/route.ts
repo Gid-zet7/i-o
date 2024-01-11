@@ -5,10 +5,9 @@ import Employee from "@/models/employeeModel";
 import { verifyJwt } from "@/lib/jwt";
 
 export const POST = async (request: Request) => {
-  const authHeader = request.headers.get("authorization");
-  request.headers.get("Authorization");
-
-  console.log(authHeader);
+  const authHeader =
+    request.headers.get("authorization") ||
+    request.headers.get("Authorization");
 
   if (!authHeader?.startsWith("Bearer ")) {
     return new Response(

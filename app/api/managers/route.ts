@@ -4,10 +4,11 @@ import { verifyJwt } from "@/lib/jwt";
 
 export const GET = async (request: Request) => {
   try {
-    const authHeader = request.headers.get("authorization");
-    request.headers.get("Authorization");
+    const authHeader =
+      request.headers.get("authorization") ||
+      request.headers.get("Authorization");
 
-    console.log(authHeader);
+    // console.log(authHeader);
 
     if (!authHeader?.startsWith("Bearer ")) {
       return new Response(
@@ -35,6 +36,7 @@ export const GET = async (request: Request) => {
     }
     await connectDB();
 
+    console.log("Checking");
     const managers = await Manager.find()
       .populate({
         path: "employee",
@@ -53,6 +55,7 @@ export const GET = async (request: Request) => {
       .lean()
       .exec();
 
+    console.log("fini");
     if (!managers?.length)
       return new Response("No Managers found", { status: 400 });
 

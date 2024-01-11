@@ -4,10 +4,11 @@ import Manager from "@/models/managerModel";
 import { verifyJwt } from "@/lib/jwt";
 
 export const DELETE = async (request: Request) => {
-  const authHeader = request.headers.get("authorization");
-  request.headers.get("Authorization");
+  const authHeader =
+    request.headers.get("authorization") ||
+    request.headers.get("Authorization");
 
-  console.log(authHeader);
+  // console.log(authHeader);
 
   if (!authHeader?.startsWith("Bearer ")) {
     return new Response(

@@ -5,10 +5,9 @@ import Manager from "@/models/managerModel";
 import { verifyJwt } from "@/lib/jwt";
 
 export const PATCH = async (request: Request) => {
-  const authHeader = request.headers.get("authorization");
-  request.headers.get("Authorization");
-
-  console.log(authHeader);
+  const authHeader =
+    request.headers.get("authorization") ||
+    request.headers.get("Authorization");
 
   if (!authHeader?.startsWith("Bearer ")) {
     return new Response(

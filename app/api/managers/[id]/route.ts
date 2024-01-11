@@ -14,7 +14,7 @@ export const GET = async (request: Request, { params: { id } }: Props) => {
       request.headers.get("authorization") ||
       request.headers.get("Authorization");
 
-    console.log(authHeader);
+    // console.log(authHeader);
 
     if (!authHeader?.startsWith("Bearer ")) {
       return new Response(
