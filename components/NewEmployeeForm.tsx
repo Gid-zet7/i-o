@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { getAllDepartments } from "@/lib/actions";
+import { createEmployee, getAllDepartments } from "@/lib/actions";
 
 export default function NewEmployeeForm() {
   const [username, setUsername] = useState("");
@@ -15,6 +15,7 @@ export default function NewEmployeeForm() {
   const [startDate, setStartDate] = useState("");
   const [deptOptions, setDeptOptions] = useState<Department[]>([]);
   const [error, setError] = useState<any>("");
+  const [isSuccess, setIsSuccess] = useState<string>("");
 
   const router = useRouter();
 
@@ -47,30 +48,26 @@ export default function NewEmployeeForm() {
     }
 
     try {
-      const employee = await fetch("http://localhost:3000/api/employees/new", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username,
-          firstname,
-          lastname,
-          department,
-          position,
-          skills: skills,
-          startDate,
-        }),
-      });
+      const result = await createEmployee(
+        username,
+        firstname,
+        lastname,
+        department,
+        position,
+        skills,
+        startDate
+      );
 
-      if (employee.ok) {
+      console.log("Result:", result);
+
+      if (result !== undefined && result !== null) {
         const form = e.target as HTMLFormElement;
         form.reset();
+        setError("");
+        setIsSuccess("Succesful");
         router.push("/employees");
-      } else if (employee.statusText === "Bad Request") {
-        setError("User does not exist!");
-      } else if (employee.statusText === "Conflict") {
-        setError("Employee already exists!");
+      } else {
+        setError("Failed to create employee. Please check the input.");
       }
     } catch (error: any) {
       setError(error.message);
@@ -184,7 +181,11 @@ export default function NewEmployeeForm() {
             >
               Save
             </button>
-
+            {isSuccess && (
+              <div className="bg-green-400 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
+                {isSuccess}
+              </div>
+            )}
             {error && (
               <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
                 {error}
