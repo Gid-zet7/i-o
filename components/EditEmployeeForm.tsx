@@ -1,16 +1,17 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
+import moment from "moment";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { getAllDepartments } from "@/lib/actions";
 
 export default function EditEmployeeForm({ employee }: any) {
+  let date = new Date(employee.startDate).toLocaleDateString();
   const [department, setDepartment] = useState(employee.department.name);
   const [position, setPosition] = useState(employee.position);
   const [skills, setSkills] = useState(employee.skills);
   const [performance, setPerformance] = useState(employee.performance);
-  const [startDate, setStartDate] = useState(employee.startDate);
+  const [startDate, setStartDate] = useState<string>(date);
   const [deptOptions, setDeptOptions] = useState<Department[]>([]);
   const [error, setError] = useState("");
 
@@ -125,7 +126,7 @@ export default function EditEmployeeForm({ employee }: any) {
               onChange={(e) => setStartDate(e.target.value)}
               id="startDate"
               name="startDate"
-              type="date"
+              type="text"
               value={startDate}
             />
             <button
@@ -139,9 +140,7 @@ export default function EditEmployeeForm({ employee }: any) {
                 {error}
               </div>
             )}
-            <Link className="text-sm mt-3 text-left" href={"/"}>
-              Back to Home
-            </Link>
+            <button onClick={router.back}>Back</button>
           </form>
         </div>
         <Image
