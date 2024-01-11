@@ -16,13 +16,15 @@ GET http://localhost:3000/api/users/659aea1d3871e3fe39d1e95e
 
 ###
 GET http://localhost:3000/api/users
+Authorization: Bearer 
 
 ###
 POST http://localhost:3000/api/users/new
+Authorization: Bearer 
 Content-Type: application/json
 
 {
-    "username": "User_demo4",
+    "username": "User_demo5",
     "email": "adontenggideon@gmail.com",
     "password": "0987654321",
     "avatarUrl": "/clark.jpg",
@@ -147,9 +149,13 @@ GET http://localhost:3000/api/managers/659c4d1d9633be178a6232ce
 
 ###
 GET http://localhost:3000/api/managers
+Authorization: Bearer 
+
+
 
 ###
 POST http://localhost:3000/api/managers/new
+Authorization: Bearer 
 Content-Type: application/json
 
 {
@@ -173,8 +179,9 @@ Content-Type: application/json
 
 ###
 DELETE  http://localhost:3000/api/managers/demote
+Authorization: Bearer 
 Content-Type: application/json
 
 {
-    "id": "659cceb9e11d8b034959223f"
+    "id": "65a044dad02db4e41b872d4f"
 }
