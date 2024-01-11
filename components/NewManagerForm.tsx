@@ -3,14 +3,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { getAllEmployees } from "@/lib/actions";
+import { createManager, getAllEmployees } from "@/lib/actions";
 
 export default function NewManagerForm() {
   const [employee, setEmployee] = useState("");
   const [team, setTeam] = useState<string[]>([]);
   const [projects, setProjects] = useState("");
   const [options, setOptions] = useState<Employee[]>([]);
-  const [error, setError] = useState<any>("");
+  const [error, setError] = useState<string>("");
+  const [isSuccess, setIsSuccess] = useState<string>("");
 
   const router = useRouter();
 
@@ -42,24 +43,16 @@ export default function NewManagerForm() {
     }
 
     try {
-      const manager = await fetch("http://localhost:3000/api/managers/new", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          employee,
-          team: team,
-          projects: [projects],
-        }),
-      });
+      const result = await createManager(employee, team, projects);
 
-      if (manager.ok) {
+      if (result !== undefined && result !== null) {
         const form = e.target as HTMLFormElement;
         form.reset();
+        setError("");
+        setIsSuccess("Succesful");
         router.push("/managers");
-      } else if (manager.statusText === "Conflict") {
-        setError("This Employee is already a manager");
+      } else {
+        setError("Failed to create manager. Please check the input.");
       }
     } catch (error: any) {
       setError(error.message);
@@ -130,9 +123,14 @@ export default function NewManagerForm() {
             >
               Promote
             </button>
+            {isSuccess && (
+              <div className="bg-green-400 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
+                {isSuccess}
+              </div>
+            )}
 
             {error && (
-              <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
+              <div className="bg-red-400 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
                 {error}
               </div>
             )}
