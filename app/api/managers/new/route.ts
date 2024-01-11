@@ -2,8 +2,39 @@ import Manager from "@/models/managerModel";
 import UserModel from "@/models/userModel";
 import { connectDB } from "@/lib/database";
 import Employee from "@/models/employeeModel";
+import { verifyJwt } from "@/lib/jwt";
 
 export const POST = async (request: Request) => {
+  const authHeader = request.headers.get("authorization");
+  request.headers.get("Authorization");
+
+  console.log(authHeader);
+
+  if (!authHeader?.startsWith("Bearer ")) {
+    return new Response(
+      JSON.stringify({
+        error: "unauthorized",
+      }),
+      {
+        status: 401,
+      }
+    );
+  }
+
+  const token = authHeader.split(" ")[1];
+  // console.log(token);
+
+  if (!token || !verifyJwt(token)) {
+    return new Response(
+      JSON.stringify({
+        error: "unauthorized",
+      }),
+      {
+        status: 401,
+      }
+    );
+  }
+
   const { employee, team, projects } = await request.json();
 
   if (!employee || !Array.isArray(projects) || !projects.length) {

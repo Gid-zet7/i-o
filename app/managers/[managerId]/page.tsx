@@ -105,7 +105,7 @@ export default async function ManagerPage({ params: { managerId } }: Params) {
 
             <div>
               <h1 className="text-2xl font-semibold mb-8">Team</h1>
-              <div>
+              <div className="flex flex-col gap-3">
                 {manager.team.map((teammate) => {
                   return (
                     <li key={teammate._id} className="list-none details ">
@@ -121,7 +121,7 @@ export default async function ManagerPage({ params: { managerId } }: Params) {
                           <Link
                             href={`http://localhost:3000/employees/${teammate._id}`}
                           >
-                            <p className="blue_gradient text-xl">
+                            <p className="blue_gradient text-sm md:text-xl">
                               {teammate.user.username}
                             </p>
                           </Link>

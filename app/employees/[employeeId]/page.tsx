@@ -39,6 +39,13 @@ export default async function EmployeePage({ params: { employeeId } }: Params) {
       throw new Error("Employee not found");
     }
 
+    // const date = new Intl.DateTimeFormat("en-Us", {
+    //   dateStyle: "full",
+    //   timeStyle: "long",
+    // }).format(employee.startDate);
+
+    // console.log(employee.startDate);
+
     return (
       <section key={employee._id} className="flex max-w-7xl mx-auto p-3">
         <div className="grid gap-5 sm:grid-rows-3 sm:grid-cols-3 sm:gap-8 p-2">
@@ -100,12 +107,13 @@ export default async function EmployeePage({ params: { employeeId } }: Params) {
                   {employee.position}
                 </p>
               </div>
-              {/* <div className="details">
+              <div className="details">
                 <p>Start Date</p>
                 <p className="font-semibold blue_gradient ">
-                  {employee.startDate}
+                  {employee.startDate.toString()}
+                  {/* {date.format(employee.startDate)} */}
                 </p>
-              </div> */}
+              </div>
             </div>
 
             <Link href={`/employees/${employee._id}/edit`}>

@@ -1,7 +1,38 @@
 import { connectDB } from "@/lib/database";
 import Department from "@/models/departmentModel";
+import { verifyJwt } from "@/lib/jwt";
 
 export const PATCH = async (request: Request) => {
+  const authHeader = request.headers.get("authorization");
+  request.headers.get("Authorization");
+
+  console.log(authHeader);
+
+  if (!authHeader?.startsWith("Bearer ")) {
+    return new Response(
+      JSON.stringify({
+        error: "unauthorized",
+      }),
+      {
+        status: 401,
+      }
+    );
+  }
+
+  const token = authHeader.split(" ")[1];
+  // console.log(token);
+
+  if (!token || !verifyJwt(token)) {
+    return new Response(
+      JSON.stringify({
+        error: "unauthorized",
+      }),
+      {
+        status: 401,
+      }
+    );
+  }
+
   // Destructure department details from request
   const { id, name, head_of_department, description } = await request.json();
 

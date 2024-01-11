@@ -2,8 +2,39 @@ import Employee from "@/models/employeeModel";
 import UserModel from "@/models/userModel";
 import { connectDB } from "@/lib/database";
 import Department from "@/models/departmentModel";
+import { verifyJwt } from "@/lib/jwt";
 
 export const POST = async (request: Request) => {
+  const authHeader = request.headers.get("authorization");
+  request.headers.get("Authorization");
+
+  console.log(authHeader);
+
+  if (!authHeader?.startsWith("Bearer ")) {
+    return new Response(
+      JSON.stringify({
+        error: "unauthorized",
+      }),
+      {
+        status: 401,
+      }
+    );
+  }
+
+  const token = authHeader.split(" ")[1];
+  // console.log(token);
+
+  if (!token || !verifyJwt(token)) {
+    return new Response(
+      JSON.stringify({
+        error: "unauthorized",
+      }),
+      {
+        status: 401,
+      }
+    );
+  }
+
   // Destructure employee details from request
   const {
     username,

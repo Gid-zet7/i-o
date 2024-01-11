@@ -1,7 +1,7 @@
 import Link from "next/link";
 import ProfileMenu from "./ProfileMenu";
 import { getCurrentUser } from "@/lib/session";
-import AuthProviders from "./AuthProviders";
+import AuthProvider from "./AuthProvider";
 
 const Navbar = async () => {
   const session = await getCurrentUser();
@@ -17,7 +17,7 @@ const Navbar = async () => {
               <ProfileMenu session={session} />
             </>
           ) : (
-            <AuthProviders />
+            <AuthProvider />
           )}
         </div>
       </div>
