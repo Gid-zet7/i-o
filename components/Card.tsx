@@ -27,7 +27,10 @@ const Card = ({
   return (
     <div className="flexCenter flex-col rounded-2xl shadow-md dark:bg-slate-100 dark:text-black min-w-1/4">
       {image ? (
-        <Link href={`/employees/${id}`} className="flexCenter group relative">
+        <Link
+          href={`/dashboard/employees/${id}`}
+          className="flexCenter group relative"
+        >
           <Image
             src={image}
             width={130}
