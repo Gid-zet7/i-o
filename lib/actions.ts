@@ -110,6 +110,58 @@ export const createEmployee = async (
     return responseText;
   }
 };
+export const updateEmployee = async (
+  id: string,
+  firstname: string,
+  lastname: string,
+  department: string,
+  position: string,
+  skills: string,
+  performance: string,
+  startDate: string
+) => {
+  const session: SessionInterface | null = await getServerSession(authOptions);
+  let res = await fetch(`http://localhost:3000/api/employees/update`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${session?.user?.accessToken}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id,
+      firstname,
+      lastname,
+      department,
+      position,
+      skills,
+      performance,
+      startDate,
+    }),
+  });
+
+  console.log("Response status:", res.status);
+  const contentType = res.headers.get("content-type");
+
+  if (contentType && contentType.includes("application/json")) {
+    try {
+      const jsonResponse = await res.json();
+      console.log("Json response:", jsonResponse);
+      return jsonResponse;
+    } catch (error) {
+      console.error("Error parsing JSON:", error);
+      return undefined;
+    }
+  } else {
+    // If the content type is not JSON, handle it differently
+    const responseText = await res.text();
+    console.log("Response body:", responseText);
+
+    if (!res.ok) return undefined;
+
+    // Handle the non-JSON response accordingly
+    return responseText;
+  }
+};
 
 // ---------------Managers----------------------
 export const getAllManagers = async () => {
