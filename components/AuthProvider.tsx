@@ -1,13 +1,15 @@
 "use client";
 
-import { signIn } from "next-auth/react";
+import Link from "next/link";
 
 import Button from "./Button";
 
 const AuthProvider = () => {
   return (
     <div className="flex flex-row gap-3">
-      <Button title="Sign In" handleClick={() => signIn()} />
+      <Link href={`/login`}>
+        <Button title="Sign In" />
+      </Link>
     </div>
   );
 };
