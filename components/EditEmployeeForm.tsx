@@ -1,19 +1,22 @@
 "use client";
 import Image from "next/image";
-import moment from "moment";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { getAllDepartments } from "@/lib/actions";
+import { getAllDepartments, updateEmployee } from "@/lib/actions";
 
 export default function EditEmployeeForm({ employee }: any) {
   let date = new Date(employee.startDate).toLocaleDateString();
+  const [firstname, setFirstname] = useState(employee.firstname);
+  const [lastname, setLastname] = useState(employee.lastname);
   const [department, setDepartment] = useState(employee.department.name);
   const [position, setPosition] = useState(employee.position);
   const [skills, setSkills] = useState(employee.skills);
   const [performance, setPerformance] = useState(employee.performance);
   const [startDate, setStartDate] = useState<string>(date);
+  const [endDate, setEndDate] = useState<string>(employee.endDate);
   const [deptOptions, setDeptOptions] = useState<Department[]>([]);
   const [error, setError] = useState("");
+  const [isSuccess, setIsSuccess] = useState<string>("");
 
   const router = useRouter();
 
@@ -31,39 +34,43 @@ export default function EditEmployeeForm({ employee }: any) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!department || !position || !skills || !startDate) {
+    if (
+      !department ||
+      !firstname ||
+      !lastname ||
+      !position ||
+      !skills ||
+      !startDate
+    ) {
       setError("All fields are necessary.");
       return;
     }
 
     try {
-      const updateEmployee = await fetch(
-        "http://localhost:3000/api/employees/update",
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            id: employee._id,
-            department,
-            position,
-            skills: [skills],
-            performance,
-            startDate,
-          }),
-        }
+      const result = await updateEmployee(
+        employee._id,
+        firstname,
+        lastname,
+        department,
+        position,
+        skills,
+        performance,
+        startDate
       );
 
-      if (updateEmployee.ok) {
+      console.log("Result:", result);
+
+      if (result !== undefined && result !== null) {
         const form = e.target as HTMLFormElement;
         form.reset();
+        setError("");
+        setIsSuccess("Succesful");
         router.push("/employees");
       } else {
-        setError(updateEmployee.statusText);
+        setError("Failed to create employee. Please check the input.");
       }
-    } catch (error) {
-      console.log("Error during registration: ", error);
+    } catch (error: any) {
+      setError(error.message);
     }
   };
 
@@ -96,6 +103,28 @@ export default function EditEmployeeForm({ employee }: any) {
             >
               {deptOptionsData}
             </select>
+            <label htmlFor="firstname" className="">
+              First Name
+            </label>
+            <input
+              className="p-1 rounded text-black outline-none w-5/6 sm:w-3/5"
+              onChange={(e) => setFirstname(e.target.value)}
+              id="firstname"
+              name="firstname"
+              type="text"
+              value={firstname}
+            />
+            <label htmlFor="lastname" className="">
+              Last Name
+            </label>
+            <input
+              className="p-1 rounded text-black outline-none w-5/6 sm:w-3/5"
+              onChange={(e) => setLastname(e.target.value)}
+              id="lastname"
+              name="lastname"
+              type="text"
+              value={lastname}
+            />
             <label htmlFor="position" className="">
               Position
             </label>
@@ -109,7 +138,12 @@ export default function EditEmployeeForm({ employee }: any) {
               value={position}
             />
             <label htmlFor="skills" className="">
-              Skills
+              Skills <br />
+              <span className="text-xs text-slate-400">
+                Enter skills separated by commas eg., communication, project{" "}
+                <br />
+                management, Time management etc.
+              </span>
             </label>
             <input
               className="p-1 rounded text-black outline-none w-5/6 sm:w-3/5"
@@ -120,7 +154,10 @@ export default function EditEmployeeForm({ employee }: any) {
               placeholder="skills..."
               value={skills}
             />
-            <label htmlFor="startDate">Start Date:</label>
+            <label htmlFor="startDate">
+              Start Date: <br />
+              <span className="text-xs text-slate-400">mmm/ddd/yyy</span>
+            </label>
             <input
               className="p-1 rounded text-black outline-none w-5/6 sm:w-3/5"
               onChange={(e) => setStartDate(e.target.value)}
@@ -129,12 +166,29 @@ export default function EditEmployeeForm({ employee }: any) {
               type="text"
               value={startDate}
             />
+            <label htmlFor="endDate">
+              End Date: <br />{" "}
+              <span className="text-xs text-slate-400">mmm/ddd/yyy</span>
+            </label>
+            <input
+              className="p-1 rounded text-black outline-none w-5/6 sm:w-3/5"
+              onChange={(e) => setEndDate(e.target.value)}
+              id="endDate"
+              name="endDate"
+              type="text"
+              value={endDate}
+            />
             <button
               type="submit"
               className="bg-amber-300 text-black font-bold cursor-pointer px-6 py-2 w-5/6 sm:w-3/5 hover:bg-opacity-90"
             >
               Save
             </button>
+            {isSuccess && (
+              <div className="bg-green-400 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
+                {isSuccess}
+              </div>
+            )}
             {error && (
               <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
                 {error}
