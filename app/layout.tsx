@@ -24,8 +24,6 @@ export default function RootLayout({
       <body
         className={`${inter.className} min-h-screen bg-slate-50 dark:bg-slate-950 dark:text-white`}
       >
-        <Navbar />
-        <Subfields />
         <main>{children}</main>
       </body>
     </html>
