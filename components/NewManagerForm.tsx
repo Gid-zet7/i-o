@@ -50,7 +50,7 @@ export default function NewManagerForm() {
         form.reset();
         setError("");
         setIsSuccess("Succesful");
-        router.push("/managers");
+        router.push("dashboard/managers");
       } else {
         setError("Failed to create manager. Please check the input.");
       }
@@ -79,7 +79,7 @@ export default function NewManagerForm() {
             <label htmlFor="employee" className="">
               Select an employee from the employees list below. <br />
               <span className="text-xs text-slate-400">
-                Managers need to sign up as users first
+                Managers need to sign up as users first and must be an employee
               </span>
             </label>
             <select
