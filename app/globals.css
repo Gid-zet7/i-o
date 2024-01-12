@@ -54,5 +54,5 @@
 }
 
 .details {
-  @apply bg-slate-200 dark:bg-slate-900 rounded-lg p-1.5 text-xs;
+  @apply bg-blue-50 dark:bg-slate-900 rounded-lg p-1.5 text-xs;
 }
