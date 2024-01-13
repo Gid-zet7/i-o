@@ -4,7 +4,15 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { getAllDepartments, updateEmployee } from "@/lib/actions";
 
-export default function EditEmployeeForm({ employee }: any) {
+type Params = {
+  employee: Employee;
+  departments: Department;
+};
+
+export default function EditEmployeeForm({
+  employee: employee,
+  departments: departments,
+}: Params) {
   let date = new Date(employee.startDate).toLocaleDateString();
   const [firstname, setFirstname] = useState(employee.firstname);
   const [lastname, setLastname] = useState(employee.lastname);
@@ -14,22 +22,23 @@ export default function EditEmployeeForm({ employee }: any) {
   const [performance, setPerformance] = useState(employee.performance);
   const [startDate, setStartDate] = useState<string>(date);
   const [endDate, setEndDate] = useState<string>(employee.endDate);
-  const [deptOptions, setDeptOptions] = useState<Department[]>([]);
+  // const [deptOptions, setDeptOptions] = useState<Department[]>([]);
   const [error, setError] = useState("");
   const [isSuccess, setIsSuccess] = useState<string>("");
 
   const router = useRouter();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const departmentsData: Promise<Department[]> = getAllDepartments();
-      const departments = await departmentsData;
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const departmentsData: Promise<Department[]> = getAllDepartments();
+  //     const departments = await departmentsData;
 
-      setDeptOptions(departments);
-    };
+  //     setDeptOptions(departments);
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+
+  // }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -74,7 +83,7 @@ export default function EditEmployeeForm({ employee }: any) {
     }
   };
 
-  const deptOptionsData = deptOptions.map((department) => {
+  const deptOptionsData = departments.map((department: any) => {
     return (
       <option key={department._id} value={department.name}>
         {department.name}
