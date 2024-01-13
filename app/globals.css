@@ -56,3 +56,33 @@
 .details {
   @apply bg-blue-50 dark:bg-slate-900 rounded-lg p-1.5 text-xs;
 }
+
+.loader {
+  width: fit-content;
+  background: #000;
+  padding: 0 8px;
+  font-size: 30px;
+  font-family: monospace;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 8px;
+  position: relative;
+}
+.loader::before {
+  content: "08:00";
+  white-space: pre;
+  animation: l8 0.5s infinite;
+}
+.loader::after {
+  content: "";
+  position: absolute;
+  inset: auto auto 100% 10px;
+  height: 5px;
+  width: 40%;
+  background: linear-gradient(90deg, red 40%, #0000 0 60%, #444 0);
+}
+@keyframes l8 {
+  100% {
+    content: "  :  ";
+  }
+}
