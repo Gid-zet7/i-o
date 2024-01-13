@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getEmployee } from "@/lib/actions";
+import { getAllDepartments, getEmployee } from "@/lib/actions";
 import { notFound } from "next/navigation";
 import EditEmployeeForm from "@/components/EditEmployeeForm";
 
@@ -33,10 +33,13 @@ export default async function EditEmployeePage({
   const employeeData: Promise<Employee> = getEmployee(employeeId);
   const employee: Employee = await employeeData;
 
+  const departmentsData: Promise<Department> = getAllDepartments();
+  const departments: Department = await departmentsData;
+
   // console.log(employee?.department.name);
 
   if (!employee?.user?.username) return notFound();
-  // console.log(employee);
+  // console.log(departments);
 
-  return <EditEmployeeForm employee={employee} />;
+  return <EditEmployeeForm employee={employee} departments={departments} />;
 }
