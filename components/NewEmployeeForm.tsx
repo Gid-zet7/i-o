@@ -1,11 +1,15 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { createEmployee, getAllDepartments } from "@/lib/actions";
+import { createEmployee } from "@/lib/actions";
 
-export default function NewEmployeeForm() {
+type Params = {
+  departments: Department;
+};
+
+export default function NewEmployeeForm({ departments: departments }: Params) {
   const [username, setUsername] = useState("");
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
@@ -13,23 +17,23 @@ export default function NewEmployeeForm() {
   const [position, setPosition] = useState("");
   const [skills, setSkills] = useState("");
   const [startDate, setStartDate] = useState("");
-  const [deptOptions, setDeptOptions] = useState<Department[]>([]);
+  // const [deptOptions, setDeptOptions] = useState<Department[]>([]);
   const [error, setError] = useState<any>("");
   const [isSuccess, setIsSuccess] = useState<string>("");
 
   const router = useRouter();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const departmentsData: Promise<Department[]> = getAllDepartments();
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const departmentsData: Promise<Department[]> = getAllDepartments();
 
-      const departments = await departmentsData;
+  //     const departments = await departmentsData;
 
-      setDeptOptions(departments);
-    };
+  //     setDeptOptions(departments);
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -74,7 +78,7 @@ export default function NewEmployeeForm() {
     }
   };
 
-  const deptOptionsData = deptOptions.map((department) => {
+  const deptOptionsData = departments.map((department) => {
     return (
       <option key={department._id} value={department.name}>
         {department.name}
