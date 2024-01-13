@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { getEmployee } from "@/lib/actions";
 import Image from "next/image";
-// import { notFound } from "next/navigation";
 import Link from "next/link";
 
 type Params = {
@@ -13,7 +12,6 @@ type Params = {
 export const generateMetadata = async ({
   params: { employeeId },
 }: Params): Promise<Metadata> => {
-  // const session = await getCurrentUser();
   const employeeData: Promise<Employee> = getEmployee(employeeId);
   const employee: Employee = await employeeData;
 
@@ -114,11 +112,7 @@ export default async function EmployeePage({ params: { employeeId } }: Params) {
               </div>
               <div className="details">
                 <p>Start Date</p>
-                <p className="font-semibold blue_gradient ">
-                  {formattedDate}
-                  {/* {employee.startDate.toString()} */}
-                  {/* {date.format(employee.startDate)} */}
-                </p>
+                <p className="font-semibold blue_gradient ">{formattedDate}</p>
               </div>
             </div>
 
