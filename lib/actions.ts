@@ -1,63 +1,102 @@
-"use server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./session";
+
+const apiUrl = process.env.API_URL || "http://localhost:3000/api";
 
 // ---------------Users----------------------
 export const getAllUsers = async () => {
   const session: SessionInterface | null = await getServerSession(authOptions);
-  const res = await fetch("http://localhost:3000/api/users", {
+  if (!session?.user?.accessToken) {
+    throw new Error("User not authenticated or access token missing");
+  }
+
+  const endpoint = `${apiUrl}/users`;
+  const result = await fetch(endpoint, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${session?.user?.accessToken}`,
     },
   });
 
-  if (!res.ok) throw new Error("Failed to fetch users");
+  if (!result.ok) {
+    const errorMessage = `Failed to fetch users. Status: ${result.status}, ${result.statusText}`;
+    throw new Error(errorMessage);
+  }
 
-  return res.json();
+  return result.json();
 };
 
 export const getUser = async (userId: string) => {
   const session: SessionInterface | null = await getServerSession(authOptions);
-  const res = await fetch(`http://localhost:3000/api/users/${userId}`, {
+
+  if (!session?.user?.accessToken) {
+    throw new Error("User not authenticated or access token missing");
+  }
+
+  const endpoint = `${apiUrl}/users/${userId}`;
+
+  const result = await fetch(endpoint, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${session?.user?.accessToken}`,
     },
   });
 
-  if (!res.ok) return undefined;
+  if (!result.ok) {
+    const errorMessage = `Failed to fetch user. Status: ${result.status}, ${result.statusText}`;
+    throw new Error(errorMessage);
+  }
 
-  return res.json();
+  return result.json();
 };
 
 // ---------------Employees----------------------
 export const getAllEmployees = async () => {
   const session: SessionInterface | null = await getServerSession(authOptions);
-  let res = await fetch("http://localhost:3000/api/employees", {
+
+  if (!session?.user?.accessToken) {
+    throw new Error("User not authenticated or access token missing");
+  }
+
+  const endpoint = `${apiUrl}/employees`;
+
+  const result = await fetch(endpoint, {
     method: "GET",
     headers: {
-      Authorization: `Bearer ${session?.user?.accessToken}`,
+      Authorization: `Bearer ${session.user.accessToken}`,
     },
   });
 
-  if (!res.ok) throw new Error("Failed to fetch employees");
+  if (!result.ok) {
+    const errorMessage = `Failed to fetch employees. Status: ${result.status}, ${result.statusText}`;
+    throw new Error(errorMessage);
+  }
 
-  return res.json();
+  return result.json();
 };
 
 export const getEmployee = async (employeeId: string) => {
   const session: SessionInterface | null = await getServerSession(authOptions);
-  let res = await fetch(`http://localhost:3000/api/employees/${employeeId}`, {
+
+  if (!session?.user?.accessToken) {
+    throw new Error("User not authenticated or access token missing");
+  }
+
+  const endpoint = `${apiUrl}/employees/${employeeId}`;
+
+  let result = await fetch(endpoint, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${session?.user?.accessToken}`,
     },
   });
 
-  if (!res.ok) return undefined;
+  if (!result.ok) {
+    const errorMessage = `Failed to fetch employee. Status: ${result.status}, ${result.statusText}`;
+    throw new Error(errorMessage);
+  }
 
-  return res.json();
+  return result.json();
 };
 
 export const createEmployee = async (
@@ -70,7 +109,14 @@ export const createEmployee = async (
   startDate: string
 ) => {
   const session: SessionInterface | null = await getServerSession(authOptions);
-  let res = await fetch(`http://localhost:3000/api/employees/new`, {
+
+  if (!session?.user?.accessToken) {
+    throw new Error("User not authenticated or access token missing");
+  }
+
+  const endpoint = `${apiUrl}/employees`;
+
+  let res = await fetch(endpoint, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${session?.user?.accessToken}`,
@@ -110,21 +156,24 @@ export const createEmployee = async (
     return responseText;
   }
 };
+
 export const updateEmployee = async (
   id: string,
   firstname: string,
   lastname: string,
   department: string,
   position: string,
-  skills: string,
-  performance: string,
+  skills: string[],
+  performance: Performance[],
   startDate: string
 ) => {
-  const session: SessionInterface | null = await getServerSession(authOptions);
-  let res = await fetch(`http://localhost:3000/api/employees/update`, {
+  // const session: SessionInterface | null = await getServerSession(authOptions);
+
+  const endpoint = `${apiUrl}/employees/update`;
+  let res = await fetch(endpoint, {
     method: "PATCH",
     headers: {
-      Authorization: `Bearer ${session?.user?.accessToken}`,
+      // Authorization: `Bearer ${session?.user?.accessToken}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -166,7 +215,14 @@ export const updateEmployee = async (
 // ---------------Managers----------------------
 export const getAllManagers = async () => {
   const session: SessionInterface | null = await getServerSession(authOptions);
-  let res = await fetch("http://localhost:3000/api/managers", {
+
+  if (!session?.user?.accessToken) {
+    throw new Error("User not authenticated or access token missing");
+  }
+
+  const endpoint = `${apiUrl}/managers`;
+
+  let result = await fetch(endpoint, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${session?.user?.accessToken}`,
@@ -175,23 +231,35 @@ export const getAllManagers = async () => {
 
   // console.log(res);
 
-  if (!res.ok) throw new Error("Failed to fetch managers");
+  if (!result.ok) {
+    const errorMessage = `Failed to fetch managers. Status: ${result.status}, ${result.statusText}`;
+    throw new Error(errorMessage);
+  }
 
-  return res.json();
+  return result.json();
 };
 
 export const getManager = async (managerId: string) => {
   const session: SessionInterface | null = await getServerSession(authOptions);
-  let res = await fetch(`http://localhost:3000/api/managers/${managerId}`, {
+
+  if (!session?.user?.accessToken) {
+    throw new Error("User not authenticated or access token missing");
+  }
+
+  const endpoint = `${apiUrl}/managers/${managerId}`;
+  let result = await fetch(endpoint, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${session?.user?.accessToken}`,
     },
   });
 
-  if (!res.ok) return undefined;
+  if (!result.ok) {
+    const errorMessage = `Failed to fetch manager. Status: ${result.status}, ${result.statusText}`;
+    throw new Error(errorMessage);
+  }
 
-  return res.json();
+  return result.json();
 };
 
 export const createManager = async (
@@ -200,7 +268,13 @@ export const createManager = async (
   projects: string
 ) => {
   const session: SessionInterface | null = await getServerSession(authOptions);
-  let res = await fetch(`http://localhost:3000/api/managers/new`, {
+
+  if (!session?.user?.accessToken) {
+    throw new Error("User not authenticated or access token missing");
+  }
+
+  const endpoint = `${apiUrl}/managers/new`;
+  let res = await fetch(endpoint, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${session?.user?.accessToken}`,
@@ -241,21 +315,36 @@ export const createManager = async (
 
 export const getAllDepartments = async () => {
   const session: SessionInterface | null = await getServerSession(authOptions);
-  let res = await fetch("http://localhost:3000/api/departments", {
+
+  if (!session?.user?.accessToken) {
+    throw new Error("User not authenticated or access token missing");
+  }
+
+  const endpoint = `${apiUrl}/departments`;
+  let result = await fetch(endpoint, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${session?.user?.accessToken}`,
     },
   });
 
-  if (!res.ok) throw new Error("Failed to fetch departments");
+  if (!result.ok) {
+    const errorMessage = `Failed to fetch departments. Status: ${result.status}, ${result.statusText}`;
+    throw new Error(errorMessage);
+  }
 
-  return res.json();
+  return result.json();
 };
 
 export const getDepartment = async (departmentId: string) => {
   const session: SessionInterface | null = await getServerSession(authOptions);
-  let res = await fetch(
+
+  if (!session?.user?.accessToken) {
+    throw new Error("User not authenticated or access token missing");
+  }
+
+  const endpoint = `${apiUrl}/departments/${departmentId}`;
+  let result = await fetch(
     `http://localhost:3000/api/departments/${departmentId}`,
     {
       method: "GET",
@@ -265,22 +354,34 @@ export const getDepartment = async (departmentId: string) => {
     }
   );
 
-  if (!res.ok) return undefined;
+  if (!result.ok) {
+    const errorMessage = `Failed to fetch departments. Status: ${result.status}, ${result.statusText}`;
+    throw new Error(errorMessage);
+  }
 
-  return res.json();
+  return result.json();
 };
 
 // -----------------------------Forms----------------------
 export const getAllForms = async () => {
   const session: SessionInterface | null = await getServerSession(authOptions);
-  let res = await fetch("http://localhost:3000/api/appraisal-form", {
+
+  if (!session?.user?.accessToken) {
+    throw new Error("User not authenticated or access token missing");
+  }
+
+  const endpoint = `${apiUrl}/appraisal-form`;
+  let result = await fetch(endpoint, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${session?.user?.accessToken}`,
     },
   });
 
-  if (!res.ok) throw new Error("Failed to fetch forms");
+  if (!result.ok) {
+    const errorMessage = `Failed to fetch departments. Status: ${result.status}, ${result.statusText}`;
+    throw new Error(errorMessage);
+  }
 
-  return res.json();
+  return result.json();
 };
