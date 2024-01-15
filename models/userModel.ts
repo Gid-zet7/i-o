@@ -8,7 +8,11 @@ const userShema = new Schema<User>(
     email: { type: String, required: true },
     password: { type: String, required: true },
     avatarUrl: { type: String, required: false },
-    roles: { type: [String], default: ["User"] },
+    roles: {
+      type: [String],
+      default: ["User"],
+      enum: ["User", "Employee", "Manager", "Admin"],
+    },
     active: { type: Boolean, default: true },
   },
   { timestamps: true }

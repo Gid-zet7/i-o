@@ -24,7 +24,7 @@ Authorization: Bearer
 Content-Type: application/json
 
 {
-    "username": "User_demo5",
+    "username": "User_demo6",
     "email": "adontenggideon@gmail.com",
     "password": "0987654321",
     "avatarUrl": "/clark.jpg",
