@@ -1,7 +1,6 @@
 "use client";
 import * as React from "react";
 import { signIn, signOut } from "next-auth/react";
-import { useState } from "react";
 import Box from "@mui/material/Box";
 import Menu from "@mui/material/Menu";
 import Tooltip from "@mui/material/Tooltip";
