@@ -16,7 +16,7 @@ import {
 
 type Params = {
   employee: Employee;
-  departments: Department;
+  departments: Department[];
 };
 
 export default function EditEmployeeForm({
@@ -133,7 +133,7 @@ export default function EditEmployeeForm({
                         onChange={(e) => setDepartment(e.target.value)}
                         value={department}
                       >
-                        {deptOptionsData.map((option) => {
+                        {deptOptionsData.map((option: any) => {
                           return <MenuItem>{option} </MenuItem>;
                         })}
                       </Select>
