@@ -1,72 +1,93 @@
 "use client";
-
-import Image from "next/image";
-import { signOut } from "next-auth/react";
+import * as React from "react";
+import { signIn, signOut } from "next-auth/react";
 import { useState } from "react";
-import Link from "next/link";
+import Box from "@mui/material/Box";
+import Menu from "@mui/material/Menu";
+import Tooltip from "@mui/material/Tooltip";
+import IconButton from "@mui/material/IconButton";
+import Avatar from "@mui/material/Avatar";
+import MenuItem from "@mui/material/MenuItem";
+import Typography from "@mui/material/Typography";
 
 const ProfileMenu = ({ session }: { session: SessionInterface }) => {
-  const [openModal, setOpenModal] = useState(false);
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
+    null
+  );
+
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
 
   return (
-    <div className="flexCenter flex-col relative top-4">
-      <div className="rounded-full">
-        <button
-          className="flexCenter flex items-baseline"
-          onClick={() => setOpenModal((prevState) => !prevState)}
-        >
-          {session?.user && (
-            <Image
-              src={session.user._doc.avatarUrl}
-              width={40}
-              height={40}
-              className="rounded-full"
-              alt="user profile image"
+    <>
+      <Box sx={{ flexGrow: 0 }}>
+        <Tooltip title="Open profile menu">
+          <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+            <Avatar
+              alt={session?.user?.username as string}
+              src={session?.user._doc.avatarUrl}
             />
-          )}
-          <p className="font-normal text-xs underline">
-            {session?.user?._doc.username}
-          </p>
-        </button>
-
-        {openModal && (
-          <>
-            <div className="flex flex-col items-center gap-y-2 bg-slate-100 p-3 md:p-12 dark:bg-black rounded-3xl w-36 text-xs absolute left-px md:gap-y-4 md:w-60">
-              {session?.user?._doc.avatarUrl && (
-                <Image
-                  src={session?.user?._doc.avatarUrl}
-                  className="rounded-full"
-                  width={80}
-                  height={80}
-                  alt="profile Image"
-                />
-              )}
-              <p className=" font-medium md:font-semibold">
-                {session?.user?._doc.username}
-              </p>
-              <p className="font-medium md:font-semibold">
-                {session?.user?._doc.email}
-              </p>
-
-              <Link href={`/employees/${session.user._doc._id}`}>
-                <p>Edit Profile</p>
-              </Link>
-              <div className="flexStart border-t border-nav-border mt-2 pt-2">
-                <button
-                  type="button"
-                  className="bg-red-500 px-1 py-2 rounded-lg hover:opacity-90 w-14 text-xs md:px-4 md:py-2 md:w-full"
-                  onClick={() =>
-                    signOut({ callbackUrl: "http://localhost:3000" })
-                  }
-                >
-                  Sign out
-                </button>
-              </div>
-            </div>
-          </>
-        )}
-      </div>
-    </div>
+          </IconButton>
+        </Tooltip>
+        <Menu
+          sx={{ mt: "45px" }}
+          id="menu-appbar"
+          anchorEl={anchorElUser}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+          open={Boolean(anchorElUser)}
+          onClose={handleCloseUserMenu}
+        >
+          <MenuItem>
+            <Typography textAlign="center" fontSize={13}>
+              {session?.user._doc.email}
+            </Typography>
+          </MenuItem>
+          <hr />
+          <MenuItem>
+            <Typography textAlign="center" fontSize={13}>
+              {session?.user._doc.username}
+            </Typography>
+          </MenuItem>
+          <hr />
+          <MenuItem>
+            <Typography textAlign="center" fontSize={13}>
+              Profile
+            </Typography>
+          </MenuItem>
+          <hr className="mt-8" />
+          <MenuItem
+            onClick={() =>
+              session
+                ? signOut({ callbackUrl: "http://localhost:3000" })
+                : signIn()
+            }
+          >
+            <Typography
+              bgcolor="red"
+              padding={1}
+              borderRadius={2}
+              // marginTop={3}
+              textAlign="center"
+            >
+              {session ? "Logout" : "Login"}
+            </Typography>
+          </MenuItem>
+        </Menu>
+      </Box>
+    </>
   );
 };
 
