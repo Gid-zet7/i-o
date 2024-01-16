@@ -33,8 +33,8 @@ export default async function EditEmployeePage({
   const employeeData: Promise<Employee> = getEmployee(employeeId);
   const employee: Employee = await employeeData;
 
-  const departmentsData: Promise<Department> = getAllDepartments();
-  const departments: Department = await departmentsData;
+  const departmentsData: Promise<Department[]> = getAllDepartments();
+  const departments: Department[] = await departmentsData;
 
   // console.log(employee?.department.name);
 
