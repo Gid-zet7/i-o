@@ -1,7 +1,7 @@
 import React from "react";
-import Button from "./Button";
+// import Button from "./Button";
 import Image from "next/image";
-import { signIn } from "next-auth/react";
+import Link from "next/link";
 
 export default function ErrorPage({ error }: { error: Error }) {
   return (
@@ -19,11 +19,7 @@ export default function ErrorPage({ error }: { error: Error }) {
           width={100}
           height={60}
         />
-        <Button
-          title="Please in sign in again"
-          bgColor="bg-red-600"
-          handleClick={() => signIn()}
-        />
+        <Link href="/login">Login again</Link>
       </div>
     </div>
   );
