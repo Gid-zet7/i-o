@@ -1,8 +1,18 @@
 "use client";
-import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { getAllDepartments, updateEmployee } from "@/lib/actions";
+import { updateEmployee } from "@/lib/actions";
+import Paper from "@mui/material/Paper";
+import Select from "@mui/material/Select";
+import {
+  Avatar,
+  Box,
+  Button,
+  Grid,
+  InputLabel,
+  MenuItem,
+  TextField,
+} from "@mui/material";
 
 type Params = {
   employee: Employee;
@@ -13,32 +23,28 @@ export default function EditEmployeeForm({
   employee: employee,
   departments: departments,
 }: Params) {
-  let date = new Date(employee.startDate).toLocaleDateString();
+  let formattedStartDate = new Date(employee.startDate).toLocaleDateString();
+  let formattedendDate;
+  if (employee.endDate) {
+    formattedendDate = new Date(employee.endDate).toLocaleDateString();
+  }
   const [firstname, setFirstname] = useState(employee.firstname);
   const [lastname, setLastname] = useState(employee.lastname);
   const [department, setDepartment] = useState(employee.department.name);
   const [position, setPosition] = useState(employee.position);
-  const [skills, setSkills] = useState(employee.skills);
+  const [skills, setSkills] = useState<string[]>(employee.skills);
   const [performance, setPerformance] = useState(employee.performance);
-  const [startDate, setStartDate] = useState<string>(date);
-  const [endDate, setEndDate] = useState<string>(employee.endDate);
+  const [startDate, setStartDate] = useState<string>(formattedStartDate);
+  const [endDate, setEndDate] = useState<string | undefined>(formattedendDate);
   // const [deptOptions, setDeptOptions] = useState<Department[]>([]);
   const [error, setError] = useState("");
   const [isSuccess, setIsSuccess] = useState<string>("");
 
   const router = useRouter();
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const departmentsData: Promise<Department[]> = getAllDepartments();
-  //     const departments = await departmentsData;
-
-  //     setDeptOptions(departments);
-  //   };
-
-  //   fetchData();
-
-  // }, []);
+  const onSkillChanged = (text: string) => {
+    setSkills([text]);
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -74,7 +80,7 @@ export default function EditEmployeeForm({
         form.reset();
         setError("");
         setIsSuccess("Succesful");
-        router.push("/employees");
+        router.back();
       } else {
         setError("Failed to create employee. Please check the input.");
       }
@@ -83,7 +89,7 @@ export default function EditEmployeeForm({
     }
   };
 
-  const deptOptionsData = departments.map((department: any) => {
+  const deptOptionsData = departments.map((department: Department) => {
     return (
       <option key={department._id} value={department.name}>
         {department.name}
@@ -92,128 +98,134 @@ export default function EditEmployeeForm({
   });
 
   return (
-    <div className="max-w-5xl mx-auto p-3">
-      <div className="p-4 mt-10 flex flex-col-reverse md:flex-row w-full">
-        <div className="flex-1 ">
-          <h1 className="text-xl font-bold my-4 grid place-content-center">
-            Edit Employee
-          </h1>
-
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            <label htmlFor="department" className="">
-              Change department
-            </label>
-            <select
-              className="p-1 rounded text-black outline-none w-5/6 sm:w-3/5"
-              id="department"
-              name="department"
-              onChange={(e) => setDepartment(e.target.value)}
-              value={department}
-            >
-              {deptOptionsData}
-            </select>
-            <label htmlFor="firstname" className="">
-              First Name
-            </label>
-            <input
-              className="p-1 rounded text-black outline-none w-5/6 sm:w-3/5"
-              onChange={(e) => setFirstname(e.target.value)}
-              id="firstname"
-              name="firstname"
-              type="text"
-              value={firstname}
-            />
-            <label htmlFor="lastname" className="">
-              Last Name
-            </label>
-            <input
-              className="p-1 rounded text-black outline-none w-5/6 sm:w-3/5"
-              onChange={(e) => setLastname(e.target.value)}
-              id="lastname"
-              name="lastname"
-              type="text"
-              value={lastname}
-            />
-            <label htmlFor="position" className="">
-              Position
-            </label>
-            <input
-              className="p-1 rounded text-black outline-none w-5/6 sm:w-3/5"
-              onChange={(e) => setPosition(e.target.value)}
-              id="position"
-              name="position"
-              type="text"
-              placeholder="eg.project manager..."
-              value={position}
-            />
-            <label htmlFor="skills" className="">
-              Skills <br />
-              <span className="text-xs text-slate-400">
-                Enter skills separated by commas eg., communication, project{" "}
-                <br />
-                management, Time management etc.
-              </span>
-            </label>
-            <input
-              className="p-1 rounded text-black outline-none w-5/6 sm:w-3/5"
-              onChange={(e) => setSkills(e.target.value)}
-              id="skills"
-              name="skills"
-              type="text"
-              placeholder="skills..."
-              value={skills}
-            />
-            <label htmlFor="startDate">
-              Start Date: <br />
-              <span className="text-xs text-slate-400">mmm/ddd/yyy</span>
-            </label>
-            <input
-              className="p-1 rounded text-black outline-none w-5/6 sm:w-3/5"
-              onChange={(e) => setStartDate(e.target.value)}
-              id="startDate"
-              name="startDate"
-              type="text"
-              value={startDate}
-            />
-            <label htmlFor="endDate">
-              End Date: <br />{" "}
-              <span className="text-xs text-slate-400">mmm/ddd/yyy</span>
-            </label>
-            <input
-              className="p-1 rounded text-black outline-none w-5/6 sm:w-3/5"
-              onChange={(e) => setEndDate(e.target.value)}
-              id="endDate"
-              name="endDate"
-              type="text"
-              value={endDate}
-            />
-            <button
-              type="submit"
-              className="bg-amber-300 text-black font-bold cursor-pointer px-6 py-2 w-5/6 sm:w-3/5 hover:bg-opacity-90"
-            >
-              Save
-            </button>
-            {isSuccess && (
-              <div className="bg-green-400 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
-                {isSuccess}
-              </div>
-            )}
-            {error && (
-              <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
-                {error}
-              </div>
-            )}
-            <button onClick={router.back}>Back</button>
-          </form>
-        </div>
-        <Image
-          src="/undraw_redesign_feedback_re_jvm0.svg"
-          width={330}
-          height={80}
-          className=""
-          alt="edit employee image"
-        />
+    <>
+      <h1 className="text-xl font-bold my-4 grid place-content-center underline mt-6">
+        Edit Employee
+      </h1>
+      <div>
+        <Box bgcolor="purple" color="black">
+          <Paper sx={{ padding: "1rem 2rem" }}>
+            <Grid container justifyContent="center">
+              <Grid item xs={12} sm={8} md={6}>
+                <Box display="flex" flexDirection="column" alignItems="center">
+                  <Avatar
+                    sx={{
+                      height: 100,
+                      width: 100,
+                      marginBottom: 2,
+                    }}
+                    src={employee.user.avatarUrl as string}
+                  />
+                </Box>
+                <form
+                  onSubmit={handleSubmit}
+                  style={{ maxWidth: 600, margin: "0 auto" }}
+                >
+                  <InputLabel id="department">Department*</InputLabel>
+                  <Grid container spacing={3}>
+                    <Grid item xs={12} sm={6}>
+                      <Select
+                        id="department"
+                        required
+                        fullWidth
+                        // className="text-black"
+                        // label="Department"
+                        onChange={(e) => setDepartment(e.target.value)}
+                        value={department}
+                      >
+                        {deptOptionsData.map((option) => {
+                          return <MenuItem>{option} </MenuItem>;
+                        })}
+                      </Select>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        required
+                        fullWidth
+                        label="First Name"
+                        name="firstName"
+                        value={firstname}
+                        onChange={(e) => setFirstname(e.target.value)}
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        required
+                        fullWidth
+                        label="Last Name"
+                        name="lastName"
+                        onChange={(e) => setLastname(e.target.value)}
+                        value={lastname}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                        required
+                        fullWidth
+                        label="Position"
+                        name="position"
+                        onChange={(e) => setPosition(e.target.value)}
+                        value={position}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                        required
+                        fullWidth
+                        label="Skills"
+                        name="skills"
+                        value={skills}
+                        onChange={(e) => onSkillChanged(e.target.value)}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                        required
+                        fullWidth
+                        label="Start Date"
+                        name="start date"
+                        onChange={(e) => setStartDate(e.target.value)}
+                        value={startDate}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                        fullWidth
+                        label="End Date"
+                        name="end date"
+                        onChange={(e) => setEndDate(e.target.value)}
+                        value={endDate}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Button
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        className="text-black"
+                        // onClick={handleSubmit}
+                      >
+                        Save Changes
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </form>
+              </Grid>
+            </Grid>
+          </Paper>
+        </Box>
+        {isSuccess && (
+          <div className="bg-green-400 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
+            {isSuccess}
+          </div>
+        )}
+        {error && (
+          <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
+            {error}
+          </div>
+        )}
+        <button onClick={router.back}>Back</button>
       </div>
-    </div>
+    </>
   );
 }
