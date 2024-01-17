@@ -8,6 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import Avatar from "@mui/material/Avatar";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
+import { useRouter } from "next/navigation";
 
 const ProfileMenu = ({ session }: { session: SessionInterface }) => {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
@@ -21,6 +22,8 @@ const ProfileMenu = ({ session }: { session: SessionInterface }) => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const router = useRouter();
 
   return (
     <>
@@ -61,9 +64,9 @@ const ProfileMenu = ({ session }: { session: SessionInterface }) => {
             </Typography>
           </MenuItem>
 
-          <MenuItem>
+          <MenuItem onClick={() => router.push("dashboard/employees/new")}>
             <Typography textAlign="center" fontSize={13}>
-              Profile
+              Add a new employee
             </Typography>
           </MenuItem>
 
