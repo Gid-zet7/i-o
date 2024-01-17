@@ -28,7 +28,7 @@ const PerformancesPerDay = () => {
             variant={"outlined"}
           >
             <div>
-              <Typography className="text-3xl">Total Products</Typography>
+              <Typography className="text-3xl">Increase Rate</Typography>
             </div>
             <div>
               <Typography className=" text-xl">1.275</Typography>
@@ -40,7 +40,7 @@ const PerformancesPerDay = () => {
             variant={"outlined"}
           >
             <div className="text-3xl">
-              <Typography>Buy-to-detail</Typography>
+              <Typography>Training</Typography>
             </div>
             <div className=" text-xl">
               <Typography>4.40%</Typography>
@@ -52,7 +52,7 @@ const PerformancesPerDay = () => {
             variant={"outlined"}
           >
             <div className="text-3xl">
-              <Typography>Refunds</Typography>
+              <Typography>Errors</Typography>
             </div>
             <div className=" text-xl">
               <Typography>0</Typography>
