@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { Paper } from "@mui/material";
+import Typography from "@mui/material/Typography";
 
 type Props = {
   id: string;
@@ -10,6 +12,7 @@ type Props = {
   firstname: string;
   lastname: string;
   position?: string;
+  department: string;
   skills?: string[];
   projects?: string[];
 };
@@ -21,11 +24,11 @@ const ManagerCard = ({
   firstname,
   lastname,
   position,
-  skills,
+  department,
   projects,
 }: Props) => {
   return (
-    <div className="flexCenter flex-col rounded-2xl shadow-md dark:bg-slate-100 dark:text-black min-w-1/4">
+    <Paper className="rounded-lg">
       {image ? (
         <Link
           href={`/dashboard/managers/${id}`}
@@ -35,36 +38,35 @@ const ManagerCard = ({
             src={image}
             width={130}
             height={80}
-            className="object-cover rounded-t-2xl w-auto"
+            className="object-cover rounded-t-lg w-auto"
             alt="employee image"
           />
         </Link>
       ) : (
         <div className="flexCenter flex-col rounded-full shadow-md dark:bg-slate-100 dark:text-black min-w-1/4">
-          <Link href={`/managers/${id}`} className="flexCenter group relative">
+          <Link href={`/managers/${id}}`} className="flexCenter group relative">
             <Image
               src="/undraw_male_avatar_g98d.svg"
-              width={180}
+              width={130}
               height={80}
-              className="object-cover rounded-t-2xl w-aut"
+              className="object-cover rounded-t-lg w-auto"
               alt="employee image"
             />
           </Link>
         </div>
       )}
-
-      <div className="flexBetween px-2 mt-3 font-semibold text-sm">
-        <div>
-          <p> {username} </p>
-          <p>
-            {" "}
-            {firstname} {lastname}{" "}
-          </p>
-          <p> {position} </p>
-          <p> {projects} </p>
-        </div>
+      <div className="p-4">
+        <Typography fontSize={"h6"} color={"lightslategrey"}>
+          {firstname} {lastname}
+        </Typography>
+        <Typography fontSize={"h6"} color={"lightslategrey"}>
+          {department}
+        </Typography>
+        <Typography fontSize={"h6"} color={"lightslategrey"}>
+          {position}
+        </Typography>
       </div>
-    </div>
+    </Paper>
   );
 };
 
