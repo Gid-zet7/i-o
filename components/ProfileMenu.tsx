@@ -54,19 +54,19 @@ const ProfileMenu = ({ session }: { session: SessionInterface }) => {
               {session?.user._doc.email}
             </Typography>
           </MenuItem>
-          <hr />
+
           <MenuItem>
             <Typography textAlign="center" fontSize={13}>
               {session?.user._doc.username}
             </Typography>
           </MenuItem>
-          <hr />
+
           <MenuItem>
             <Typography textAlign="center" fontSize={13}>
               Profile
             </Typography>
           </MenuItem>
-          <hr className="mt-8" />
+
           <MenuItem
             onClick={() =>
               session
