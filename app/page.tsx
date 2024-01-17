@@ -5,7 +5,6 @@ import Subfields from "@/components/Subfields";
 export default function Home() {
   return (
     <>
-      <Navbar />
       <Subfields />
       <div className="max-w-5xl mx-auto p-3">
         <section id="hero">
@@ -31,7 +30,7 @@ export default function Home() {
           <section className="grid gap-12 sm:grid-cols-3 sm:gap-16 p-2">
             <article>
               <h2>
-                <span className="flex tabular-nums text-slate-900 text-5xl font-extrabold mb-2 animate-[counter2_3s_ease-out_forwards] [counter-set:_num_var(--num)] before:content-[counter(num)] dark:text-slate-50">
+                <span className="flex tabular-nums text-5xl font-extrabold mb-2 animate-[counter2_3s_ease-out_forwards] [counter-set:_num_var(--num)] before:content-[counter(num)] ">
                   <span className="supports-[counter-set]:sr-only">40</span>K+
                 </span>
                 <span className="inline-flex font-semibold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-indigo-300 mb-2">
@@ -46,7 +45,7 @@ export default function Home() {
             </article>
             <article>
               <h2>
-                <span className="flex tabular-nums text-slate-900 text-5xl font-extrabold mb-2 animate-[counter_3s_ease-out_forwards] [counter-set:_num_var(--num)] before:content-[counter(num)] dark:text-slate-50">
+                <span className="flex tabular-nums text-5xl font-extrabold mb-2 animate-[counter_3s_ease-out_forwards] [counter-set:_num_var(--num)] before:content-[counter(num)] ">
                   <span className="supports-[counter-set]:sr-only">60</span>K+
                 </span>
                 <span className="inline-flex font-semibold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-indigo-300 mb-2">
@@ -61,7 +60,7 @@ export default function Home() {
             </article>
             <article>
               <h2>
-                <span className="flex tabular-nums text-slate-900 text-5xl font-extrabold mb-2 animate-[counter3_3s_ease-out_forwards] [counter-set:_num_var(--num)] before:content-[counter(num)] dark:text-slate-50">
+                <span className="flex tabular-nums text-5xl font-extrabold mb-2 animate-[counter3_3s_ease-out_forwards] [counter-set:_num_var(--num)] before:content-[counter(num)] ">
                   <span className="supports-[counter-set]:sr-only">10</span>K+
                 </span>
                 <span className="inline-flex font-semibold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-indigo-300 mb-2">
@@ -87,13 +86,13 @@ export default function Home() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-5 w-5 bg-sky-500"></span>
               </span>
-              <h1 className="mb-6 mx-5 text-center text-2xl font-bold text-slate-900 dark:text-white sm:text-3xl">
+              <h1 className="mb-6 mx-5 text-center text-2xl font-bold sm:text-3xl">
                 Industrial side
               </h1>
             </div>
             <div>
               {/* <Transition>EE</Transition> */}
-              <p className="mt-8 text-lg text-gray-600 dark:text-gray-300 sm:text-xl max-w-2xl flex flex-col gap-5 ">
+              <p className="mt-8 text-xl sm:text-lg max-w-2xl flex flex-col gap-5 ">
                 <Image
                   src="/employee-skills-svgrepo-com.svg"
                   width={50}
@@ -104,7 +103,7 @@ export default function Home() {
                 matching these individuals to jobs they are likely to perform
                 well.
               </p>
-              <p className="mt-8 text-lg text-gray-600 dark:text-gray-300 sm:text-xl max-w-2xl flex flex-col gap-1">
+              <p className="mt-8 text-xl sm:text-lg max-w-2xl flex flex-col gap-1">
                 <Image
                   src="/dumbbell-svgrepo-com.svg"
                   width={50}
@@ -123,11 +122,11 @@ export default function Home() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-5 w-5 bg-sky-500"></span>
               </span>
-              <h1 className="mb-6 mx-5 text-center text-2xl font-bold text-slate-900 dark:text-white sm:text-3xl">
+              <h1 className="mb-6 mx-5 text-center text-2xl font-bold sm:text-3xl">
                 Organizational side
               </h1>
             </div>
-            <p className="mt-8 text-lg text-gray-600 dark:text-gray-300 sm:text-xl max-w-2xl flex flex-col gap-1">
+            <p className="mt-8 text-xl sm:text-lg max-w-2xl flex flex-col gap-1">
               <Image
                 src="/growth-svgrepo-com.svg"
                 width={50}
@@ -138,7 +137,7 @@ export default function Home() {
               including organizational behaviour, leadership, communication,
               employee satisfaction.
             </p>
-            <p className="mt-8 text-lg text-gray-600 dark:text-gray-300 sm:text-xl max-w-2xl flex flex-col gap-1">
+            <p className="mt-8 text-xl sm:text-lg max-w-2xl flex flex-col gap-1">
               <Image
                 src="/business-partnership-svgrepo-com.svg"
                 width={50}
