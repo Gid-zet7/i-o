@@ -12,15 +12,18 @@ import {
   MenuItem,
   TextField,
 } from "@mui/material";
+import { deleteManager } from "@/lib/actions";
 
 type Params = {
+  managerId: string;
   manager: Manager;
   employees: Employee[];
 };
 
 export default function EditManagerForm({
-  manager: manager,
-  employees: employees,
+  managerId,
+  manager,
+  employees,
 }: Params) {
   const [employee, setEmployee] = useState(manager.employee.user.username);
   const [team, setTeam] = useState<Employee[]>(manager.team);
@@ -71,6 +74,21 @@ export default function EditManagerForm({
         router.back();
       } else {
         setError("Failed to create employee. Please check the input.");
+      }
+    } catch (error: any) {
+      setError(error.message);
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      const result = await deleteManager(managerId);
+      if (result !== undefined && result !== null) {
+        setError("");
+        setIsSuccess("Succesful");
+        router.push("/dashboard/managers");
+      } else {
+        setError("Failed to delete employee");
       }
     } catch (error: any) {
       setError(error.message);
@@ -161,6 +179,15 @@ export default function EditManagerForm({
                         // onClick={handleSubmit}
                       >
                         Save Changes
+                      </Button>
+                      <Button
+                        type="button"
+                        variant="contained"
+                        color="primary"
+                        className="text-black"
+                        onClick={handleDelete}
+                      >
+                        Demote Manager
                       </Button>
                     </Grid>
                   </Grid>
