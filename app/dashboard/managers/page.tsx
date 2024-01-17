@@ -12,12 +12,6 @@ export default async function ManagersPage() {
 
   const managers = await managersData;
 
-  managers.map((manager) =>
-    manager.team.map((teamate) => {
-      console.log(teamate.department);
-    })
-  );
-
   const content = (
     <>
       <SideMenu />
