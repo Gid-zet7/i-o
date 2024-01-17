@@ -36,7 +36,6 @@ export const GET = async (request: Request) => {
     }
     await connectDB();
 
-    console.log("Checking");
     const managers = await Manager.find()
       .populate({
         path: "employee",
@@ -55,7 +54,6 @@ export const GET = async (request: Request) => {
       .lean()
       .exec();
 
-    console.log("fini");
     if (!managers?.length)
       return new Response("No Managers found", { status: 400 });
 
