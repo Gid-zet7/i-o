@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import { getEmployee } from "@/lib/actions";
 import Image from "next/image";
 import Link from "next/link";
-import { IconButton } from "@mui/material";
+import { IconButton, Tooltip } from "@mui/material";
 import { Edit } from "@mui/icons-material";
-import Typography from "@mui/material/Typography";
 
 type Params = {
   params: {
@@ -122,15 +121,13 @@ export default async function EmployeePage({ params: { employeeId } }: Params) {
                   </p>
                 </div>
               </div>
-
-              <Link href={`/dashboard/employees/${employee._id}/edit`}>
-                <Typography fontSize={"h6"} color={"lightslategrey"}>
-                  Update Employee
-                </Typography>
-                <IconButton aria-label="edit">
-                  <Edit color="secondary" />
-                </IconButton>
-              </Link>
+              <Tooltip title="edit employee details">
+                <Link href={`/dashboard/employees/${employee._id}/edit`}>
+                  <IconButton>
+                    <Edit color="secondary" />
+                  </IconButton>
+                </Link>
+              </Tooltip>
             </div>
             <div className="flex-1 p-3">
               <h1 className="text-2xl font-semibold mb-8">Skills</h1>
