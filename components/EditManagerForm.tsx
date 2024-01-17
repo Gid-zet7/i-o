@@ -1,30 +1,36 @@
 "use client";
-import Image from "next/image";
-import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { getAllEmployees } from "@/lib/actions";
+import Paper from "@mui/material/Paper";
+import Select from "@mui/material/Select";
+import {
+  Avatar,
+  Box,
+  Button,
+  Grid,
+  InputLabel,
+  MenuItem,
+  TextField,
+} from "@mui/material";
 
-export default function EditEmployeeForm({ manager }: any) {
+type Params = {
+  manager: Manager;
+  employees: Employee[];
+};
+
+export default function EditManagerForm({
+  manager: manager,
+  employees: employees,
+}: Params) {
   const [employee, setEmployee] = useState(manager.employee.user.username);
-  const [team, setTeam] = useState<string[]>(manager.team);
+  const [team, setTeam] = useState<Employee[]>(manager.team);
   const [projects, setProjects] = useState(manager.projects);
   const [meetings, setMeetings] = useState(manager.meetings);
-  const [options, setOptions] = useState<Employee[]>([]);
-  const [error, setError] = useState<any>("");
+  // const [options, setOptions] = useState<Employee[]>([]);
+  const [error, setError] = useState("");
+  const [isSuccess, setIsSuccess] = useState<string>("");
 
   const router = useRouter();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const employeesData: Promise<Employee[]> = getAllEmployees();
-      const employees = await employeesData;
-
-      setOptions(employees);
-    };
-
-    fetchData();
-  }, []);
 
   const onTeamChanged = (e: React.FormEvent<HTMLSelectElement>) => {
     const options = e.target as HTMLSelectElement;
@@ -44,35 +50,34 @@ export default function EditEmployeeForm({ manager }: any) {
     }
 
     try {
-      const updateManager = await fetch(
-        "http://localhost:3000/api/managers/update",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            employee,
-            team: team,
-            projects: [projects],
-            meetings,
-          }),
-        }
-      );
+      const result = await fetch("http://localhost:3000/api/managers/update", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          employee,
+          team: team,
+          projects: [projects],
+          meetings,
+        }),
+      });
 
-      if (updateManager.ok) {
+      if (result !== undefined && result !== null) {
         const form = e.target as HTMLFormElement;
         form.reset();
-        router.push("/managers");
+        setError("");
+        setIsSuccess("Succesful");
+        router.back();
       } else {
-        setError(updateManager.statusText);
+        setError("Failed to create employee. Please check the input.");
       }
-    } catch (error) {
-      console.log("Error during registration: ", error);
+    } catch (error: any) {
+      setError(error.message);
     }
   };
 
-  const optionsData = options.map((employee) => {
+  const employeesData = employees.map((employee: Employee) => {
     return (
       <option key={employee._id} value={employee.user.username}>
         {employee.user.username}
@@ -81,82 +86,101 @@ export default function EditEmployeeForm({ manager }: any) {
   });
 
   return (
-    <div className="max-w-5xl mx-auto p-3">
-      <div className="p-4 mt-10 flex flex-col-reverse md:flex-row w-full">
-        <div className="flex-1 ">
-          <h1 className="text-xl font-bold my-4 grid place-content-center">
-            Edit Employee
-          </h1>
+    <>
+      <h1 className="text-xl font-bold my-4 grid place-content-center underline mt-6">
+        Update Manager
+      </h1>
+      <div>
+        <Box>
+          <Paper sx={{ padding: "1rem 2rem" }}>
+            <Grid container justifyContent="center">
+              <Grid item xs={12} sm={8} md={6}>
+                <Box display="flex" flexDirection="column" alignItems="center">
+                  <Avatar
+                    sx={{
+                      height: 100,
+                      width: 100,
+                      marginBottom: 2,
+                    }}
+                    src={manager.employee.user.avatarUrl as string}
+                  />
+                </Box>
+                <form
+                  onSubmit={handleSubmit}
+                  style={{ maxWidth: 600, margin: "0 auto" }}
+                >
+                  <InputLabel id="employee">Employee*</InputLabel>
+                  <Grid container spacing={3}>
+                    <Grid item xs={12} sm={6}>
+                      <Select
+                        required
+                        fullWidth
+                        id="employee"
+                        name="employee"
+                        onChange={(e) => setEmployee(e.target.value)}
+                        value={employee}
+                      >
+                        {employeesData.map((option: any) => {
+                          return <MenuItem>{option} </MenuItem>;
+                        })}
+                      </Select>
+                    </Grid>
+                    <InputLabel id="employee">Team*</InputLabel>
+                    <Grid item xs={12} sm={6}>
+                      <Select
+                        required
+                        fullWidth
+                        id="team"
+                        name="team"
+                        onChange={onTeamChanged}
+                        value={team}
+                        multiple={true}
+                      >
+                        {employeesData.map((option: any) => {
+                          return <MenuItem>{option} </MenuItem>;
+                        })}
+                      </Select>
+                    </Grid>
+                    <Grid className="text-white" item xs={12} sm={6}>
+                      <TextField
+                        required
+                        fullWidth
+                        label="Project"
+                        name="project"
+                        value={projects}
+                        onChange={(e) => setProjects(e.target.value)}
+                      />
+                    </Grid>
 
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            <label htmlFor="employee" className="">
-              Select an employee from the employees list below. <br />
-              <span className="text-xs text-slate-400">
-                Managers need to sign up as users first
-              </span>
-            </label>
-            <select
-              className="p-1 rounded text-black outline-none w-5/6 sm:w-3/5"
-              id="employee"
-              name="employee"
-              onChange={(e) => setEmployee(e.target.value)}
-              value={employee}
-            >
-              <option>--Select Employee--</option>
-              {optionsData}
-            </select>
-
-            <label htmlFor="team" className="">
-              Team
-            </label>
-            <select
-              className="p-1 rounded text-black outline-none w-5/6 sm:w-3/5"
-              id="team"
-              name="team"
-              onChange={onTeamChanged}
-              value={team}
-              multiple={true}
-            >
-              <option>--Select Team--</option>
-              {optionsData}
-            </select>
-
-            <label htmlFor="project" className="">
-              Project
-            </label>
-            <input
-              className="p-1 rounded text-black outline-none w-5/6 sm:w-3/5"
-              onChange={(e) => setProjects(e.target.value)}
-              id="project"
-              name="project"
-              type="text"
-              placeholder="eg.project A..."
-            />
-
-            <button
-              type="submit"
-              className="bg-amber-300 text-black font-bold cursor-pointer px-6 py-2 w-5/6 sm:w-3/5 hover:bg-opacity-90"
-            >
-              Save
-            </button>
-            {error && (
-              <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
-                {error}
-              </div>
-            )}
-            <Link className="text-sm mt-3 text-left" href={"/"}>
-              Back to Home
-            </Link>
-          </form>
-        </div>
-        <Image
-          src="/undraw_redesign_feedback_re_jvm0.svg"
-          width={330}
-          height={80}
-          className=""
-          alt="edit employee image"
-        />
+                    <Grid item xs={12}>
+                      <Button
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        className="text-black"
+                        // onClick={handleSubmit}
+                      >
+                        Save Changes
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </form>
+              </Grid>
+            </Grid>
+          </Paper>
+        </Box>
+        {isSuccess && (
+          <div className="bg-green-400 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
+            {isSuccess}
+          </div>
+        )}
+        {error && (
+          <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
+            {error}
+          </div>
+        )}
+        <button onClick={router.back}>Back</button>
       </div>
-    </div>
+    </>
   );
 }
