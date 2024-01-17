@@ -103,7 +103,7 @@ export default function EditEmployeeForm({
         Edit Employee
       </h1>
       <div>
-        <Box bgcolor="purple" color="black">
+        <Box>
           <Paper sx={{ padding: "1rem 2rem" }}>
             <Grid container justifyContent="center">
               <Grid item xs={12} sm={8} md={6}>
@@ -128,7 +128,6 @@ export default function EditEmployeeForm({
                         id="department"
                         required
                         fullWidth
-                        // className="text-black"
                         // label="Department"
                         onChange={(e) => setDepartment(e.target.value)}
                         value={department}
@@ -138,7 +137,7 @@ export default function EditEmployeeForm({
                         })}
                       </Select>
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid className="text-white" item xs={12} sm={6}>
                       <TextField
                         required
                         fullWidth
