@@ -13,15 +13,18 @@ import {
   MenuItem,
   TextField,
 } from "@mui/material";
+import { deleteEmployee } from "@/lib/actions";
 
 type Params = {
+  employeeId: string;
   employee: Employee;
   departments: Department[];
 };
 
 export default function EditEmployeeForm({
-  employee: employee,
-  departments: departments,
+  employeeId,
+  employee,
+  departments,
 }: Params) {
   let formattedStartDate = new Date(employee.startDate).toLocaleDateString();
   let formattedendDate;
@@ -83,6 +86,21 @@ export default function EditEmployeeForm({
         router.back();
       } else {
         setError("Failed to create employee. Please check the input.");
+      }
+    } catch (error: any) {
+      setError(error.message);
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      const result = await deleteEmployee(employeeId);
+      if (result !== undefined && result !== null) {
+        setError("");
+        setIsSuccess("Succesful");
+        router.push("dashboard/employees");
+      } else {
+        setError("Failed to delete employee");
       }
     } catch (error: any) {
       setError(error.message);
@@ -200,11 +218,20 @@ export default function EditEmployeeForm({
                       <Button
                         type="submit"
                         variant="contained"
-                        color="primary"
+                        color="secondary"
                         className="text-black"
                         // onClick={handleSubmit}
                       >
                         Save Changes
+                      </Button>
+                      <Button
+                        type="button"
+                        variant="contained"
+                        color="primary"
+                        className="text-black"
+                        onClick={handleDelete}
+                      >
+                        Delete Employee
                       </Button>
                     </Grid>
                   </Grid>
