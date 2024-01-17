@@ -145,7 +145,8 @@ Content-Type: application/json
 
 #--------------------Manager routes-------------------------------
 ###
-GET http://localhost:3000/api/managers/659c4d1d9633be178a6232ce
+GET http://localhost:3000/api/managers/659cfd37a8e21f1bfa843faf
+Authorization: Bearer 
 
 ###
 GET http://localhost:3000/api/managers
