@@ -1,26 +1,29 @@
 import { getCurrentUser } from "@/lib/session";
-import Link from "next/link";
 import React from "react";
 import Navbar from "@/components/Navbar";
-import Subfields from "@/components/Subfields";
+import SideMenu from "@/stories/SideMenu/SideMenu";
+import TransactionsPerDay from "@/components/Dashboard/Transactions";
+import { Box } from "@mui/material";
+import DataRibbon from "@/components/Dashboard/DataRibbon";
 
 export default async function DashBoard() {
   const session = await getCurrentUser();
 
-  let employeesButton;
+  let dash;
   if (session?.user._doc.roles.includes("Employee" || "Manager" || "Admin")) {
-    employeesButton = (
-      <Link href={`http://localhost:3000/dashboard/employees`}>
-        <button> Employees </button>
-      </Link>
+    dash = (
+      <>
+        {/* <Navbar /> */}
+        <SideMenu />
+        <div className="mx-auto max-w-6xl p-3 md:ml-64">
+          <Box>
+            <DataRibbon />
+            <TransactionsPerDay />
+          </Box>
+        </div>
+      </>
     );
   }
 
-  return (
-    <>
-      <Navbar />
-      <Subfields />
-      <nav>{employeesButton} </nav>
-    </>
-  );
+  return dash;
 }
