@@ -3,6 +3,9 @@ import { getManager } from "@/lib/actions";
 import Image from "next/image";
 // import { notFound } from "next/navigation";
 import Link from "next/link";
+import { IconButton } from "@mui/material";
+import { Edit } from "@mui/icons-material";
+import Typography from "@mui/material/Typography";
 
 type Params = {
   params: {
@@ -95,7 +98,12 @@ export default async function ManagerPage({ params: { managerId } }: Params) {
             </div>
 
             <Link href={`/dashboard/managers/${manager._id}/edit`}>
-              <button>Edit details</button>
+              <Typography fontSize={"h6"} color={"lightslategrey"}>
+                Update Manager
+              </Typography>
+              <IconButton aria-label="edit">
+                <Edit color="secondary" />
+              </IconButton>
             </Link>
           </div>
           <div className="flex-1 p-3">
