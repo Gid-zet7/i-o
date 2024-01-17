@@ -3,6 +3,7 @@ import { getAllEmployees } from "@/lib/actions";
 import Card from "@/components/Card";
 import Navbar from "@/components/Navbar";
 import Subfields from "@/components/Subfields";
+import SideMenu from "@/stories/SideMenu/SideMenu";
 
 export const metadata: Metadata = {
   title: "Employees",
@@ -15,13 +16,14 @@ export default async function EmployeesPage() {
 
   const content = (
     <>
-      <Navbar />
-      <Subfields />
-      <section className="px-10">
+      {/* <Navbar /> */}
+      {/* <Subfields /> */}
+      <SideMenu />
+      <section className="px-10 ">
         <h1 className="text-5xl font-extrabold grid place-content-center mt-5 ">
           Employees
         </h1>
-        <div className="flex flex-wrap gap-8 mt-10">
+        <div className="flex flex-wrap gap-8 mt-10 max-w-5xl mx-auto p-3">
           {employees.map((employee) => {
             return (
               <Card
