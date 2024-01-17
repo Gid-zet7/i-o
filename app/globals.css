@@ -54,7 +54,49 @@
 }
 
 .details {
-  @apply bg-blue-50 dark:bg-slate-900 rounded-lg p-1.5 text-xs;
+  @apply bg-slate-900 rounded-lg p-1.5 text-xs;
+}
+
+.sideMenu {
+  @apply flex items-center justify-end py-0 px-1;
+}
+
+.topCardContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.dataCard {
+  @apply p-4;
+}
+
+.dataCard {
+  position: relative;
+  top: 1rem;
+  height: 100%;
+  width: calc(100% - 0.1rem);
+  padding: 1rem 0.5rem;
+}
+
+.dataCard > p {
+  padding: 0.5rem 1rem;
+  margin: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+}
+
+.header > button {
+  padding: 0.25rem;
+}
+.header > p {
+  padding: 0.25rem;
+}
+
+.list_item {
+  padding: 1rem;
 }
 
 .loader {
