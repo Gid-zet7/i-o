@@ -1,10 +1,10 @@
 import { getCurrentUser } from "@/lib/session";
 import React from "react";
-import Navbar from "@/components/Navbar";
 import SideMenu from "@/stories/SideMenu/SideMenu";
-import TransactionsPerDay from "@/components/Dashboard/Transactions";
+import PerformancesPerDay from "@/components/Dashboard/Performances";
 import { Box } from "@mui/material";
 import DataRibbon from "@/components/Dashboard/DataRibbon";
+import PerformanceBottomRow from "@/components/Dashboard/PerformanceBottom";
 
 export default async function DashBoard() {
   const session = await getCurrentUser();
@@ -13,12 +13,12 @@ export default async function DashBoard() {
   if (session?.user._doc.roles.includes("Employee" || "Manager" || "Admin")) {
     dash = (
       <>
-        {/* <Navbar /> */}
         <SideMenu />
         <div className="mx-auto max-w-6xl p-3 md:ml-64">
           <Box>
             <DataRibbon />
-            <TransactionsPerDay />
+            <PerformancesPerDay />
+            <PerformanceBottomRow />
           </Box>
         </div>
       </>
