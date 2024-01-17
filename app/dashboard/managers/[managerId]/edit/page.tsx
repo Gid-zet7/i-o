@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getManager } from "@/lib/actions";
 import { notFound } from "next/navigation";
 import EditManagerForm from "@/components/EditManagerForm";
+import { getAllEmployees } from "@/lib/actions";
 
 type Params = {
   params: {
@@ -33,7 +34,11 @@ export default async function EditEmployeePage({
   const managerData: Promise<Manager> = getManager(managerId);
   const manager: Manager = await managerData;
 
-  if (!manager?.employee.user?.username) return notFound();
+  const employeesData: Promise<Employee[]> = getAllEmployees();
+  const employees: Employee[] = await employeesData;
 
-  return <EditManagerForm manager={manager} />;
+  if (!manager?.employee.user?.username) return notFound();
+  if (!employees?.length) return notFound();
+
+  return <EditManagerForm manager={manager} employees={employees} />;
 }
