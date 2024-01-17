@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { getAllEmployees } from "@/lib/actions";
 import Card from "@/components/Card";
-import Navbar from "@/components/Navbar";
-import Subfields from "@/components/Subfields";
 import SideMenu from "@/stories/SideMenu/SideMenu";
 
 export const metadata: Metadata = {
@@ -16,8 +14,6 @@ export default async function EmployeesPage() {
 
   const content = (
     <>
-      {/* <Navbar /> */}
-      {/* <Subfields /> */}
       <SideMenu />
       <section className="px-10 ">
         <h1 className="text-5xl font-extrabold grid place-content-center mt-5 ">
@@ -33,6 +29,7 @@ export default async function EmployeesPage() {
                 lastname={employee.lastname}
                 position={employee.position}
                 image={employee.user.avatarUrl}
+                department={employee.department.name}
               />
             );
           })}
