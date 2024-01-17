@@ -40,5 +40,11 @@ export default async function EditEmployeePage({
   if (!manager?.employee.user?.username) return notFound();
   if (!employees?.length) return notFound();
 
-  return <EditManagerForm manager={manager} employees={employees} />;
+  return (
+    <EditManagerForm
+      managerId={manager._id}
+      manager={manager}
+      employees={employees}
+    />
+  );
 }
