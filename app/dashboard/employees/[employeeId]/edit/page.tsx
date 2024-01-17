@@ -41,5 +41,11 @@ export default async function EditEmployeePage({
   if (!employee?.user?.username) return notFound();
   // console.log(departments);
 
-  return <EditEmployeeForm employee={employee} departments={departments} />;
+  return (
+    <EditEmployeeForm
+      employeeId={employee._id}
+      employee={employee}
+      departments={departments}
+    />
+  );
 }
