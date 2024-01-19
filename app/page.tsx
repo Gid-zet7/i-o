@@ -1,13 +1,16 @@
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Subfields from "@/components/Subfields";
+import Slides from "@/components/Slides";
+import Services from "@/components/Services";
+import Contact from "@/components/Contact";
 
 export default function Home() {
   return (
     <>
       <Subfields />
       <div className="max-w-5xl mx-auto p-3">
-        <section id="hero">
+        <section id="hero" className="mb-32">
           <div className="widescreen:section-min-height tallscreen:section-min-height mb-3 flex scroll-mt-40 flex-col items-center justify-center gap-8 p-6 md:flex-row ">
             <article className="p-4">
               <h1 className={`mt-5 text-6xl font-extrabold md:text-8xl`}>
@@ -75,79 +78,96 @@ export default function Home() {
             </article>
           </section>
         </section>
-
+        <Slides />
         <section
           id="i-o_descSection"
-          className="widescreen:section-min-height tallscreen:section-min-height my-12 scroll-mt-20 p-6 flex flex-col sm:flex-row items-center gap-20 border-2 rounded-xl border-amber-400 dark:border-amber-200"
+          className="widescreen:section-min-height tallscreen:section-min-height my-12 scroll-mt-20 p-6  "
         >
-          <div className="flex-1">
-            <div className="flex">
-              <span className="relative flex h-5 w-5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-5 w-5 bg-sky-500"></span>
-              </span>
-              <h1 className="mb-6 mx-5 text-center text-2xl font-bold sm:text-3xl">
-                Industrial side
-              </h1>
+          <div className="flex mb-12 justify-center">
+            <h1 className=" text-3xl font-bold sm:text-4xl blue_gradient mb-4">
+              Industrial/Organization
+            </h1>
+          </div>
+          <div className="flex flex-col sm:flex-row items-center gap-20">
+            <div className="flex-1">
+              <div className="flex">
+                <span className="relative flex h-5 w-5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-5 w-5 bg-sky-500"></span>
+                </span>
+                <h1 className="mb-6 mx-5 text-center text-2xl font-bold sm:text-3xl">
+                  Industrial side
+                </h1>
+              </div>
+              <div>
+                <p className="mt-8 text-xl sm:text-lg max-w-2xl flex flex-col gap-5 ">
+                  <Image
+                    src="/employee-skills-svgrepo-com.svg"
+                    width={50}
+                    height={30}
+                    alt="skills"
+                  />
+                  Assessing employee characteristics (KSAOs), selecting and
+                  matching these individuals to jobs they are likely to perform
+                  well.
+                </p>
+                <p className="mt-8 text-xl sm:text-lg max-w-2xl flex flex-col gap-1">
+                  <Image
+                    src="/dumbbell-svgrepo-com.svg"
+                    width={50}
+                    height={30}
+                    alt="skills"
+                  />
+                  Training employees, developing job performance standards, and
+                  measuring job performance.
+                </p>
+              </div>
             </div>
-            <div>
-              {/* <Transition>EE</Transition> */}
-              <p className="mt-8 text-xl sm:text-lg max-w-2xl flex flex-col gap-5 ">
+
+            <div className="flex-1">
+              <div className="flex">
+                <span className="relative flex h-5 w-5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-5 w-5 bg-sky-500"></span>
+                </span>
+                <h1 className="mb-6 mx-5 text-center text-2xl font-bold sm:text-3xl">
+                  Organizational side
+                </h1>
+              </div>
+              <p className="mt-8 text-xl sm:text-lg max-w-2xl flex flex-col gap-1">
                 <Image
-                  src="/employee-skills-svgrepo-com.svg"
+                  src="/growth-svgrepo-com.svg"
                   width={50}
                   height={30}
                   alt="skills"
                 />
-                Assessing employee characteristics (KSAOs), selecting and
-                matching these individuals to jobs they are likely to perform
-                well.
+                Focused on understanding and improving workplace dynamics,
+                including organizational behaviour, leadership, communication,
+                employee satisfaction.
               </p>
               <p className="mt-8 text-xl sm:text-lg max-w-2xl flex flex-col gap-1">
                 <Image
-                  src="/dumbbell-svgrepo-com.svg"
+                  src="/business-partnership-svgrepo-com.svg"
                   width={50}
                   height={30}
                   alt="skills"
                 />
-                Training employees, developing job performance standards, and
-                measuring job performance.
+                Study how individuals interact within an organizational context
+                and how these interactions impact productivity and wellbeing
               </p>
             </div>
           </div>
-
-          <div className="flex-1">
-            <div className="flex">
-              <span className="relative flex h-5 w-5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-5 w-5 bg-sky-500"></span>
-              </span>
-              <h1 className="mb-6 mx-5 text-center text-2xl font-bold sm:text-3xl">
-                Organizational side
-              </h1>
-            </div>
-            <p className="mt-8 text-xl sm:text-lg max-w-2xl flex flex-col gap-1">
-              <Image
-                src="/growth-svgrepo-com.svg"
-                width={50}
-                height={30}
-                alt="skills"
-              />
-              Focused on understanding and improving workplace dynamics,
-              including organizational behaviour, leadership, communication,
-              employee satisfaction.
-            </p>
-            <p className="mt-8 text-xl sm:text-lg max-w-2xl flex flex-col gap-1">
-              <Image
-                src="/business-partnership-svgrepo-com.svg"
-                width={50}
-                height={30}
-                alt="skills"
-              />
-              Study how individuals interact within an organizational context
-              and how these interactions impact productivity and wellbeing
-            </p>
+        </section>
+        <section className="widescreen:section-min-height tallscreen:section-min-height my-12 scroll-mt-20 p-6">
+          <div className="grid place-content-center">
+            <h1 className="text-center text-3xl font-bold sm:text-4xl mb-4 blue_gradient">
+              Our Services
+            </h1>
+            <Services />
           </div>
+        </section>
+        <section className="widescreen:section-min-height tallscreen:section-min-height my-12 scroll-mt-16 p-6">
+          <Contact />
         </section>
       </div>
     </>
