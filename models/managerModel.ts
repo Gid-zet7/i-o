@@ -6,7 +6,7 @@ const managerSchema = new Schema<Manager>(
   {
     employee: { type: Schema.Types.ObjectId, ref: "employee" },
     team: [{ type: Schema.Types.ObjectId, ref: "employee" }],
-    projects: [String],
+    projects: [{ type: Schema.Types.ObjectId, ref: "project" }],
     meetings: [{ type: Schema.Types.ObjectId, ref: "meeting" }],
   },
   { timestamps: true }
