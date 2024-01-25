@@ -94,7 +94,7 @@ export const POST = async (request: Request) => {
       lastname,
       department: findDepartment,
       position,
-      skills: skills.includes(",") ? skills.split(",") : skills.includes(" "),
+      skills,
       startDate,
     };
 
@@ -105,6 +105,7 @@ export const POST = async (request: Request) => {
       return new Response("New employee added successfully", { status: 200 });
     }
   } catch (error) {
+    console.log(error);
     return new Response("Error during registration ", {
       status: 500,
     });
