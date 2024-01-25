@@ -28,7 +28,7 @@ const ManagerCard = ({
   projects,
 }: Props) => {
   return (
-    <Paper className="rounded-lg">
+    <Paper className="rounded-lg" key={id}>
       {image ? (
         <Link
           href={`/dashboard/managers/${id}`}
