@@ -20,7 +20,7 @@ type Employee = {
   lastname: string;
   department: Department;
   position: string;
-  skills: string[];
+  skills: { skill: string }[];
   performance: Performance[];
   startDate: Date;
   endDate?: Date;
@@ -33,7 +33,7 @@ type Manager = {
   _id: string;
   employee: Employee;
   team: Employee[];
-  projects: string[];
+  projects: Project[];
   meetings: Meeting;
   createdAt: Date;
   updatedAt: Date;
@@ -81,13 +81,43 @@ type Forms = {
   questions: {
     questionText: string;
     questionType: string;
-    options: { opyionText: string }[];
+    options: { _id: string; optionText: string }[];
+    // type: string
     open: boolean;
   }[];
   createdAt: Date;
   updatedAt: Date;
   __v: number;
 };
+
+type Task = {
+  description: string;
+  dueDate: Date;
+  completed: Boolean;
+};
+
+type Project = {
+  _id: string;
+  title: string;
+  description: string;
+  startDate: Date;
+  tasks: Task[];
+  createdAt: Date;
+  updatedAt: Date;
+  __v: number;
+};
+
+type Questions = {
+  questionText: string;
+  questionType: string;
+  options: {
+    optionText: string;
+    optionId?: string;
+  }[];
+  type: boolean;
+  open: boolean;
+  required: boolean;
+}[];
 
 interface SessionInterface extends Session {
   user: User & {
