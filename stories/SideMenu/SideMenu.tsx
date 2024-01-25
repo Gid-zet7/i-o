@@ -17,15 +17,7 @@ import Link from "next/link";
 
 const drawerWidth = 240;
 
-interface Props {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * Remove this when copying and pasting into your project.
-   */
-  window?: () => Window;
-}
-
-export default function SideMenu(props: Props) {
+export default function SideMenu() {
   // const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
@@ -53,6 +45,7 @@ export default function SideMenu(props: Props) {
         {["dashboard", "employees", "managers", "data", "profile"].map(
           (text, index) => (
             <Link
+              key={text}
               href={text === "dashboard" ? `/${text} ` : `/dashboard/${text}`}
             >
               <ListItem key={text} disablePadding>
@@ -69,8 +62,9 @@ export default function SideMenu(props: Props) {
       </List>
       <Divider />
       <List>
-        {["settings", "Trash", "Spam"].map((text, index) => (
-          <Link href={`/dashboard/${text}`}>
+        {["settings", "appraisal-form", "Spam"].map((text, index) => (
+          // text === "Create Appraisal form" ? text = "appraisal-form/new" : text
+          <Link key={text} href={`/dashboard/${text}/new`}>
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
@@ -84,8 +78,6 @@ export default function SideMenu(props: Props) {
       </List>
     </div>
   );
-
-  // Remove this const when copying and pasting into your project.
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -142,8 +134,4 @@ export default function SideMenu(props: Props) {
       </Box>
     </Box>
   );
-}
-
-{
-  /* The implementation can be swapped with js to avoid SEO duplication of links. */
 }
