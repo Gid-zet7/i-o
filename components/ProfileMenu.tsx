@@ -10,16 +10,16 @@ import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 import { useRouter } from "next/navigation";
 
-const ProfileMenu = ({ session }: { session: SessionInterface }) => {
+const ProfileMenu = ({ session }: any) => {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
 
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+  const handleOpenProfileMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseProfileMenu = () => {
     setAnchorElUser(null);
   };
 
@@ -29,7 +29,7 @@ const ProfileMenu = ({ session }: { session: SessionInterface }) => {
     <>
       <Box sx={{ flexGrow: 0 }}>
         <Tooltip title="Open profile menu">
-          <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+          <IconButton onClick={handleOpenProfileMenu} sx={{ p: 0 }}>
             <Avatar
               alt={session?.user?.username as string}
               src={session?.user._doc.avatarUrl}
@@ -50,7 +50,7 @@ const ProfileMenu = ({ session }: { session: SessionInterface }) => {
             horizontal: "right",
           }}
           open={Boolean(anchorElUser)}
-          onClose={handleCloseUserMenu}
+          onClose={handleCloseProfileMenu}
         >
           <MenuItem>
             <Typography textAlign="center" fontSize={13}>
