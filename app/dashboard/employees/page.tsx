@@ -15,7 +15,7 @@ export default async function EmployeesPage() {
   const content = (
     <>
       <SideMenu />
-      <section className="px-10 ">
+      <section className="mx-auto max-w-6xl p-3 md:ml-64">
         <h1 className="text-5xl font-extrabold grid place-content-center mt-5 ">
           Employees
         </h1>
@@ -23,8 +23,8 @@ export default async function EmployeesPage() {
           {employees.map((employee) => {
             return (
               <Card
+                key={employee._id}
                 id={employee._id}
-                // username={employee.user.username}
                 firstname={employee.firstname}
                 lastname={employee.lastname}
                 position={employee.position}
