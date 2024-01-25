@@ -8,7 +8,7 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {},
-      async authorize(credentials) {
+      async authorize(credentials: any) {
         const { username, password } = credentials;
         const res = await fetch("http://localhost:3000/api/auth/login", {
           method: "POST",
