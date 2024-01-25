@@ -9,7 +9,7 @@ const employeeSchema = new Schema<Employee>(
     lastname: { type: String, required: true, minlength: 3 },
     department: { type: Schema.Types.ObjectId, ref: "department" },
     position: { type: String, require: true },
-    skills: [String],
+    skills: [{ skill: String }],
     performance: [{ type: Schema.Types.ObjectId, ref: "performance" }],
     startDate: { type: Date, require: true },
     endDate: { type: Date, require: false },
