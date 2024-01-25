@@ -1,4 +1,5 @@
-import { Paper } from "@mui/material";
+"use client";
+import Paper from "@mui/material/Paper";
 import React from "react";
 import Typography from "@mui/material/Typography";
 import Image from "next/image";
