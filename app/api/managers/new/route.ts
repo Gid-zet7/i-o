@@ -3,6 +3,7 @@ import UserModel from "@/models/userModel";
 import { connectDB } from "@/lib/database";
 import Employee from "@/models/employeeModel";
 import { verifyJwt } from "@/lib/jwt";
+import Project from "@/models/projectModel";
 
 export const POST = async (request: Request) => {
   const authHeader =
@@ -35,6 +36,7 @@ export const POST = async (request: Request) => {
   }
 
   const { employee, team, projects } = await request.json();
+  console.log(employee, team, projects);
 
   if (!employee || !Array.isArray(projects) || !projects.length) {
     return new Response("All fields are required", { status: 400 });
@@ -86,10 +88,23 @@ export const POST = async (request: Request) => {
     }
   }
 
+  let verifyProjects = [];
+  for (const project of projects) {
+    console.log(project);
+    const result = await Project.findOne({ title: project }).exec();
+    // console.log(result);
+
+    if (!result) {
+      return new Response("Invalid projects");
+    }
+
+    verifyProjects.push(result);
+  }
+
   const managerObj =
     !Array.isArray(team) || !team.length
-      ? { employee: findEmployee, projects }
-      : { employee: findEmployee, team: verifyTeam, projects };
+      ? { employee: findEmployee, verifyProjects }
+      : { employee: findEmployee, team: verifyTeam, projects: verifyProjects };
 
   const newManager = await Manager.create(managerObj);
 
