@@ -4,36 +4,36 @@ import Manager from "@/models/managerModel";
 import { verifyJwt } from "@/lib/jwt";
 
 export const DELETE = async (request: Request) => {
-  // const authHeader =
-  //   request.headers.get("authorization") ||
-  //   request.headers.get("Authorization");
+  const authHeader =
+    request.headers.get("authorization") ||
+    request.headers.get("Authorization");
 
-  // // console.log(authHeader);
+  // console.log(authHeader);
 
-  // if (!authHeader?.startsWith("Bearer ")) {
-  //   return new Response(
-  //     JSON.stringify({
-  //       error: "unauthorized",
-  //     }),
-  //     {
-  //       status: 401,
-  //     }
-  //   );
-  // }
+  if (!authHeader?.startsWith("Bearer ")) {
+    return new Response(
+      JSON.stringify({
+        error: "unauthorized",
+      }),
+      {
+        status: 401,
+      }
+    );
+  }
 
-  // const token = authHeader.split(" ")[1];
-  // // console.log(token);
+  const token = authHeader.split(" ")[1];
+  // console.log(token);
 
-  // if (!token || !verifyJwt(token)) {
-  //   return new Response(
-  //     JSON.stringify({
-  //       error: "unauthorized",
-  //     }),
-  //     {
-  //       status: 401,
-  //     }
-  //   );
-  // }
+  if (!token || !verifyJwt(token)) {
+    return new Response(
+      JSON.stringify({
+        error: "unauthorized",
+      }),
+      {
+        status: 401,
+      }
+    );
+  }
 
   const { id } = await request.json();
 
