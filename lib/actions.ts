@@ -1,6 +1,5 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "./session";
-import { useSession } from "next-auth/react";
 
 const apiUrl = process.env.API_URL || "http://localhost:3000/api";
 
@@ -101,26 +100,28 @@ export const getEmployee = async (employeeId: string) => {
 };
 
 export const createEmployee = async (
+  session: any,
   username: string,
   firstname: string,
   lastname: string,
   department: string,
   position: string,
-  skills: string,
+  // skills: string
+  skills: { skill: string }[],
   startDate: string
 ) => {
-  const session: SessionInterface | null = await getServerSession(authOptions);
+  // const session: SessionInterface | null = await getServerSession(authOptions);
 
   if (!session?.user?.accessToken) {
     throw new Error("User not authenticated or access token missing");
   }
 
-  const endpoint = `${apiUrl}/employees`;
+  const endpoint = `${apiUrl}/employees/new`;
 
   let res = await fetch(endpoint, {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${session?.user?.accessToken}`,
+      Authorization: `Bearer ${session.user.accessToken}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -159,22 +160,24 @@ export const createEmployee = async (
 };
 
 export const updateEmployee = async (
+  session: any,
   id: string,
   firstname: string,
   lastname: string,
   department: string,
   position: string,
-  skills: string[],
+  skills: {}[],
   performance: Performance[],
   startDate: string
 ) => {
-  // const session: SessionInterface | null = await getServerSession(authOptions);
-
+  if (!session?.user?.accessToken) {
+    throw new Error("User not authenticated or access token missing");
+  }
   const endpoint = `${apiUrl}/employees/update`;
   let res = await fetch(endpoint, {
     method: "PATCH",
     headers: {
-      // Authorization: `Bearer ${session?.user?.accessToken}`,
+      Authorization: `Bearer ${session?.user?.accessToken}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -213,12 +216,16 @@ export const updateEmployee = async (
   }
 };
 
-export const deleteEmployee = async (id: string) => {
+export const deleteEmployee = async (session: any, id: string) => {
+  if (!session?.user?.accessToken) {
+    throw new Error("User not authenticated or access token missing");
+  }
   const endpoint = `${apiUrl}/employees/delete`;
 
   let res = await fetch(endpoint, {
     method: "DELETE",
     headers: {
+      Authorization: `Bearer ${session?.user?.accessToken}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -300,12 +307,11 @@ export const getManager = async (managerId: string) => {
 };
 
 export const createManager = async (
+  session: any,
   employee: string,
   team: string[],
-  projects: string
+  projects: any
 ) => {
-  const session: SessionInterface | null = await getServerSession(authOptions);
-
   if (!session?.user?.accessToken) {
     throw new Error("User not authenticated or access token missing");
   }
@@ -320,7 +326,58 @@ export const createManager = async (
     body: JSON.stringify({
       employee,
       team: team,
-      projects: [projects],
+      projects,
+    }),
+  });
+
+  console.log("Response status:", res.status);
+  const contentType = res.headers.get("content-type");
+
+  if (contentType && contentType.includes("application/json")) {
+    try {
+      const jsonResponse = await res.json();
+      console.log("Json response:", jsonResponse);
+      return jsonResponse;
+    } catch (error) {
+      console.error("Error parsing JSON:", error);
+      return undefined;
+    }
+  } else {
+    // If the content type is not JSON, handle it differently
+    const responseText = await res.text();
+    console.log("Response body:", responseText);
+
+    if (!res.ok) return undefined;
+
+    // Handle the non-JSON response accordingly
+    return responseText;
+  }
+};
+
+export const updateManager = async (
+  session: any,
+  id: string,
+  employee: string,
+  team: string[],
+  projects: string[],
+  meeting?: Meeting[]
+) => {
+  if (!session?.user?.accessToken) {
+    throw new Error("User not authenticated or access token missing");
+  }
+  const endpoint = `${apiUrl}/managers/update`;
+  let res = await fetch(endpoint, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${session?.user?.accessToken}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id,
+      employee,
+      team,
+      projects,
+      meeting,
     }),
   });
 
@@ -350,6 +407,143 @@ export const createManager = async (
 
 export const deleteManager = async (id: string) => {
   const endpoint = `${apiUrl}/managers/demote`;
+
+  let res = await fetch(endpoint, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id,
+    }),
+  });
+
+  const contentType = res.headers.get("content-type");
+
+  if (contentType && contentType.includes("application/json")) {
+    try {
+      const jsonResponse = await res.json();
+      console.log("Json response:", jsonResponse);
+      return jsonResponse;
+    } catch (error) {
+      console.error("Error parsing JSON:", error);
+      return undefined;
+    }
+  } else {
+    // If the content type is not JSON, handle it differently
+    const responseText = await res.text();
+    console.log("Response body:", responseText);
+
+    if (!res.ok) return undefined;
+
+    // Handle the non-JSON response accordingly
+    return responseText;
+  }
+};
+
+// --------------------------Projects---------------------------
+export const getAllProjects = async () => {
+  const session: SessionInterface | null = await getServerSession(authOptions);
+
+  if (!session?.user?.accessToken) {
+    throw new Error("User not authenticated or access token missing");
+  }
+
+  const endpoint = `${apiUrl}/projects`;
+
+  let result = await fetch(endpoint, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${session?.user?.accessToken}`,
+    },
+  });
+
+  // console.log(res);
+
+  if (!result.ok) {
+    const errorMessage = `Failed to fetch projects. Status: ${result.status}, ${result.statusText}`;
+    throw new Error(errorMessage);
+  }
+
+  return result.json();
+};
+
+export const getProject = async (projectId: string) => {
+  const session: SessionInterface | null = await getServerSession(authOptions);
+
+  if (!session?.user?.accessToken) {
+    throw new Error("User not authenticated or access token missing");
+  }
+
+  const endpoint = `${apiUrl}/projects/${projectId}`;
+  let result = await fetch(endpoint, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${session?.user?.accessToken}`,
+    },
+  });
+
+  if (!result.ok) {
+    const errorMessage = `Failed to fetch project. Status: ${result.status}, ${result.statusText}`;
+    throw new Error(errorMessage);
+  }
+
+  return result.json();
+};
+
+export const createProject = async (
+  title: string,
+  description: string,
+  startDate: string,
+  tasks: Task[]
+) => {
+  const session: SessionInterface | null = await getServerSession(authOptions);
+
+  if (!session?.user?.accessToken) {
+    throw new Error("User not authenticated or access token missing");
+  }
+
+  const endpoint = `${apiUrl}/projects/new`;
+  let res = await fetch(endpoint, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${session?.user?.accessToken}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      title,
+      description,
+      startDate,
+      tasks,
+    }),
+  });
+
+  console.log("Response status:", res.status);
+  const contentType = res.headers.get("content-type");
+
+  if (contentType && contentType.includes("application/json")) {
+    try {
+      const jsonResponse = await res.json();
+      console.log("Json response:", jsonResponse);
+      return jsonResponse;
+    } catch (error) {
+      console.error("Error parsing JSON:", error);
+      return undefined;
+    }
+  } else {
+    // If the content type is not JSON, handle it differently
+    const responseText = await res.text();
+    console.log("Response body:", responseText);
+
+    if (!res.ok) return undefined;
+
+    // Handle the non-JSON response accordingly
+    return responseText;
+  }
+};
+
+export const deleteProject = async (id: string) => {
+  const endpoint = `${apiUrl}/projects/delete`;
 
   let res = await fetch(endpoint, {
     method: "DELETE",
