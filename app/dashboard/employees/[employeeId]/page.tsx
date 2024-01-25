@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import { getEmployee } from "@/lib/actions";
 import Image from "next/image";
 import Link from "next/link";
-import { IconButton, Tooltip } from "@mui/material";
+import { IconButton, Tooltip, Typography } from "@mui/material";
 import { Edit } from "@mui/icons-material";
+import Details from "@/components/Details";
+import SkillsCard from "@/components/SkillsCard";
+import Paper from "@mui/material/Paper";
 
 type Params = {
   params: {
@@ -75,52 +78,18 @@ export default async function EmployeePage({ params: { employeeId } }: Params) {
                   className="rounded-3xl mb-12"
                 />
               )}
+              <h1 className="text-2xl mb-3">Details</h1>
+              <Details
+                id={employee._id}
+                username={employee.user.username}
+                firstname={employee.firstname}
+                lastname={employee.lastname}
+                email={employee.user.email}
+                department={employee.department.name}
+                position={employee.position}
+                startDate={formattedDate}
+              />
 
-              <div className="flex flex-col gap-2">
-                <h1 className="text-2xl font-semibold">Employee Details</h1>
-                <div className="details">
-                  <p>Username</p>
-                  <p className="font-semibold blue_gradient">
-                    {employee.user.username}
-                  </p>
-                </div>
-                <div className="details">
-                  <p>First name</p>
-                  <p className="font-semibold blue_gradient">
-                    {employee.firstname}
-                  </p>
-                </div>
-                <div className="details">
-                  <p>Last name</p>
-                  <p className="font-semibold blue_gradient ">
-                    {employee.lastname}
-                  </p>
-                </div>
-                <div className="details">
-                  <p>Email</p>
-                  <p className="font-semibold blue_gradient ">
-                    {employee.user.email}
-                  </p>
-                </div>
-                <div className="details">
-                  <p>Department</p>
-                  <p className="font-semibold blue_gradient ">
-                    {employee.department.name}
-                  </p>
-                </div>
-                <div className="details">
-                  <p>Position</p>
-                  <p className="font-semibold blue_gradient ">
-                    {employee.position}
-                  </p>
-                </div>
-                <div className="details">
-                  <p>Start Date</p>
-                  <p className="font-semibold blue_gradient ">
-                    {formattedDate}
-                  </p>
-                </div>
-              </div>
               <Tooltip title="edit employee details">
                 <Link href={`/dashboard/employees/${employee._id}/edit`}>
                   <IconButton>
@@ -129,11 +98,16 @@ export default async function EmployeePage({ params: { employeeId } }: Params) {
                 </Link>
               </Tooltip>
             </div>
-            <div className="flex-1 p-3">
+            <Paper className="flex-1 p-3 h-min">
               <h1 className="text-2xl font-semibold mb-8">Skills</h1>
-
-              <p className="mb-8">{employee.skills}</p>
-            </div>
+              {employee.skills.map((skill, i) => {
+                return (
+                  <Typography fontSize={"h6"} className="blue_gradient">
+                    {skill.skill}
+                  </Typography>
+                );
+              })}
+            </Paper>
             <div className="flex-1 p-3">
               <h1 className="text-2xl font-semibold mb-8">Performance</h1>
 
