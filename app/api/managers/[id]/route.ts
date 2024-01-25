@@ -51,12 +51,20 @@ export const GET = async (request: Request, { params: { id } }: Props) => {
         },
       })
       .populate({
+        path: "employee",
+        populate: {
+          path: "department",
+          model: "department",
+        },
+      })
+      .populate({
         path: "team",
         populate: {
           path: "user",
           model: "user",
         },
       })
+      .populate("projects")
       .lean()
       .exec();
 
