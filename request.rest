@@ -17,7 +17,6 @@ GET http://localhost:3000/api/users/659aea1d3871e3fe39d1e95e
 ###
 GET http://localhost:3000/api/users
 Authorization: Bearer 
-
 ###
 POST http://localhost:3000/api/users/new
 Authorization: Bearer 
@@ -67,12 +66,14 @@ Authorization: Bearer
 
 
 
+
 ###
 POST http://localhost:3000/api/employees/new
+Authorization: Bearer 
 Content-Type: application/json
 
 {
-    "username": "User_demo2",
+    "username": "User_demo",
     "firstname": "Demo first",
     "lastname": "Demo last",
     "department": "IT department",
@@ -104,7 +105,7 @@ DELETE http://localhost:3000/api/employees/delete
 Content-Type: application/json
 
 {
-    "id": "659cc7d5e11d8b0349592204"
+    "id": "659f0716714ed7be0193377e"
 }
 
 #--------------------Department routes-------------------------------
@@ -145,7 +146,7 @@ Content-Type: application/json
 
 #--------------------Manager routes-------------------------------
 ###
-GET http://localhost:3000/api/managers/659cfd37a8e21f1bfa843faf
+GET http://localhost:3000/api/managers/65afb16318f8ad780287acd0
 Authorization: Bearer 
 
 ###
@@ -160,20 +161,21 @@ Authorization: Bearer
 Content-Type: application/json
 
 {
-    "employee": "User_demo",
-    "team": ["User_demo2"],
-    "projects": ["Project A"]
+    "employee": "User_demo3",
+    "team": ["User_demo3"],
+    "projects": ["Create a work remote plan", "Demo project"]
     
 }
 
 ###
 PATCH http://localhost:3000/api/managers/update
+Authorization: Bearer 
 Content-Type: application/json
 
 {
-    "id": "659c4d1d9633be178a6232ce",
+    "id": "65a0460cd02db4e41b872d7c",
     "employee": "User_demo",
-    "team": ["User_demo2", "User_demo"],
+    "team": ["User_demo", "User_demo4"],
     "projects": ["Project C"]
     
 }
@@ -184,5 +186,20 @@ Authorization: Bearer
 Content-Type: application/json
 
 {
-    "id": "65a044dad02db4e41b872d4f"
+    "id": "65afb5f618f8ad780287ad52"
+}
+
+###
+GET http://localhost:3000/api/projects
+
+###
+POST http://localhost:3000/api/projects/new
+Authorization: Bearer 
+Content-Type: application/json
+
+{
+    "title": "Demo project",
+    "description": "The goal of this project is to develop a comprehensive Remote Work Plan system that facilitates efficient and productive remote collaboration within our orgainzation. The system will provide tools and features to enhance communication, task management, and overall workflow for remote teams",
+    "startDate": "1/1/2024",
+    "tasks": [{"description": "Personalized dashboards for users to track tasks, deadlines, and team activities", "dueDate": "2/11/2024", "completed": false}, {"description": "Create, assign, and track tasks. Also set deadlines and priorities for tasks", "dueDate": "2/11/2024", "completed": false}, {"description": "Real-time messaging and discussion boards for team communication", "dueDate": "2/11/2024", "completed": false}]
 }
