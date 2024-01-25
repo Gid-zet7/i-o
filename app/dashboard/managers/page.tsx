@@ -15,7 +15,7 @@ export default async function ManagersPage() {
   const content = (
     <>
       <SideMenu />
-      <section className="px-10">
+      <section className="mx-auto max-w-6xl p-3 md:ml-64">
         <h1 className="text-5xl font-extrabold grid place-content-center mt-5 ">
           Managers
         </h1>
@@ -24,6 +24,7 @@ export default async function ManagersPage() {
             managers.map((manager) => {
               return (
                 <ManagerCard
+                  key={manager._id}
                   id={manager._id}
                   username={manager.employee.user.username}
                   firstname={manager.employee.firstname}
