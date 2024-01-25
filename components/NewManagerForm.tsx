@@ -9,31 +9,48 @@ import {
   Box,
   Button,
   Grid,
+  FormControl,
   InputLabel,
   MenuItem,
   TextField,
+  OutlinedInput,
+  Stack,
+  Chip,
+  Autocomplete,
 } from "@mui/material";
+import { Cancel, Check } from "@mui/icons-material";
+import { useSession } from "next-auth/react";
 
 type Params = {
   employees: Employee[];
+  projects: Project[];
 };
-export default function NewManagerForm({ employees: employees }: Params) {
+export default function NewManagerForm({ employees, projects }: Params) {
+  const { data: session } = useSession();
   const [employee, setEmployee] = useState("");
   const [team, setTeam] = useState<string[]>([]);
-  const [projects, setProjects] = useState("");
+  const [managerProjects, setManagerProjects] = useState<any>([]);
   const [error, setError] = useState<string>("");
   const [isSuccess, setIsSuccess] = useState<string>("");
 
   const router = useRouter();
 
-  const onTeamChanged = (e: React.FormEvent<HTMLSelectElement>) => {
-    const options = e.target as HTMLSelectElement;
-    const values = Array.from(
-      options.selectedOptions,
-      (option) => option.value
-    );
-    setTeam(values);
-  };
+  // const onTeamChanged = (e: React.FormEvent<HTMLSelectElement>) => {
+  //   const options = e.target as HTMLSelectElement;
+  //   const values = Array.from(
+  //     options.selectedOptions,
+  //     (option) => option.value
+  //   );
+  //   setTeam(values);
+  // };
+  // const onProjectChanged = (e: React.FormEvent<HTMLSelectElement>) => {
+  //   const options = e.target as HTMLSelectElement;
+  //   const values = Array.from(
+  //     options.selectedOptions,
+  //     (option) => option.value
+  //   );
+  //   setManagerProjects(values);
+  // };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -44,7 +61,12 @@ export default function NewManagerForm({ employees: employees }: Params) {
     }
 
     try {
-      const result = await createManager(employee, team, projects);
+      const result = await createManager(
+        session,
+        employee,
+        team,
+        managerProjects
+      );
 
       if (result !== undefined && result !== null) {
         const form = e.target as HTMLFormElement;
@@ -60,11 +82,27 @@ export default function NewManagerForm({ employees: employees }: Params) {
     }
   };
 
+  const employeeArr: any[] = [];
+  employees.map((employee) => {
+    employeeArr.push(employee.user.username);
+  });
+
   const employeesData = employees.map((employee) => {
     return (
-      <option key={employee._id} value={employee.user.username}>
+      <MenuItem key={employee._id} value={employee.user.username}>
         {employee.user.username}
-      </option>
+      </MenuItem>
+    );
+  });
+
+  const projectsData = projects?.map((project) => {
+    return (
+      <MenuItem key={project._id} value={project?.title}>
+        {project?.title}
+        {managerProjects.includes(project?.title) ? (
+          <Check color="info" />
+        ) : null}
+      </MenuItem>
     );
   });
 
@@ -82,47 +120,151 @@ export default function NewManagerForm({ employees: employees }: Params) {
                   onSubmit={handleSubmit}
                   style={{ maxWidth: 600, margin: "0 auto" }}
                 >
-                  <InputLabel id="employee">Employee*</InputLabel>
                   <Grid container spacing={3}>
                     <Grid item xs={12} sm={6}>
-                      <Select
-                        required
+                      <Autocomplete
                         fullWidth
-                        id="employee"
-                        name="employee"
-                        onChange={(e) => setEmployee(e.target.value)}
-                        value={employee}
-                      >
-                        {employeesData.map((option: any) => {
-                          return <MenuItem>{option} </MenuItem>;
-                        })}
-                      </Select>
+                        options={employeeArr}
+                        getOptionLabel={(option) => option}
+                        disableCloseOnSelect
+                        onChange={(e, newValue) => {
+                          setEmployee(newValue);
+                        }}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            variant="outlined"
+                            label="Employee"
+                            placeholder="Select Employee"
+                          />
+                        )}
+                      />
+                      {/* <FormControl fullWidth>
+                        <InputLabel id="employee">Employee*</InputLabel>
+                        <Select
+                          id="employee"
+                          required
+                          labelId="Employee"
+                          label="Employee"
+                          // className="text-black"
+                          // label="Department"
+                          onChange={(e) => setEmployee(e.target.value)}
+                          value={employee}
+                        >
+                          {employeesData}
+                        </Select>
+                      </FormControl> */}
                     </Grid>
-                    <InputLabel id="employee">Team*</InputLabel>
+
                     <Grid item xs={12} sm={6}>
-                      <Select
-                        required
+                      {/* <FormControl fullWidth>
+                        <InputLabel id="team">Team*</InputLabel>
+                        <Select
+                          id="team"
+                          required
+                          labelId="Team"
+                          label="Team"
+                          multiple={true}
+                          // className="text-black"
+                          // label="Department"
+                          onChange={(e) => setTeam(e.target.value)}
+                          input={<OutlinedInput label="Multiple Select" />}
+                          renderValue={(selected) => (
+                            <Stack gap={1} direction="row" flexWrap="wrap">
+                              {selected.map((value) => (
+                                <Chip
+                                  key={value}
+                                  label={value}
+                                  onDelete={() =>
+                                    setTeam(
+                                      team.filter((item) => item !== value)
+                                    )
+                                  }
+                                  deleteIcon={
+                                    <Cancel
+                                      onMouseDown={(event) =>
+                                        event.stopPropagation()
+                                      }
+                                    />
+                                  }
+                                />
+                              ))}
+                            </Stack>
+                          )}
+                          value={team}
+                        >
+                          {employeesData}
+                        </Select>
+                      </FormControl> */}
+                      <Autocomplete
                         fullWidth
-                        id="team"
-                        name="team"
-                        onChange={onTeamChanged}
-                        value={team}
-                        multiple={true}
-                      >
-                        {employeesData.map((option: any) => {
-                          return <MenuItem>{option} </MenuItem>;
-                        })}
-                      </Select>
+                        multiple
+                        options={employeeArr}
+                        getOptionLabel={(option) => option}
+                        disableCloseOnSelect
+                        onChange={(e, newValue) => {
+                          setTeam(newValue);
+                        }}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            variant="outlined"
+                            label="Team"
+                            placeholder="Select team"
+                          />
+                        )}
+                      />
                     </Grid>
                     <Grid className="text-white" item xs={12} sm={6}>
-                      <TextField
+                      <FormControl fullWidth>
+                        <InputLabel id="projects">Projects*</InputLabel>
+                        <Select
+                          id="projects"
+                          required
+                          labelId="Projects"
+                          label="Projects"
+                          multiple={true}
+                          // className="text-black"
+                          // label="Department"
+                          onChange={(e) => setManagerProjects(e.target.value)}
+                          input={<OutlinedInput label="Multiple Select" />}
+                          renderValue={(selected) => (
+                            <Stack gap={1} direction="row" flexWrap="wrap">
+                              {selected.map((value: any) => (
+                                <Chip
+                                  key={value}
+                                  label={value}
+                                  onDelete={() =>
+                                    setManagerProjects(
+                                      managerProjects.filter(
+                                        (item: any) => item !== value
+                                      )
+                                    )
+                                  }
+                                  deleteIcon={
+                                    <Cancel
+                                      onMouseDown={(event) =>
+                                        event.stopPropagation()
+                                      }
+                                    />
+                                  }
+                                />
+                              ))}
+                            </Stack>
+                          )}
+                          value={managerProjects}
+                        >
+                          {projectsData}
+                        </Select>
+                      </FormControl>
+                      {/* <TextField
                         required
                         fullWidth
                         label="Project"
                         name="project"
                         value={projects}
                         onChange={(e) => setProjects(e.target.value)}
-                      />
+                      /> */}
                     </Grid>
 
                     <Grid item xs={12}>
@@ -130,10 +272,9 @@ export default function NewManagerForm({ employees: employees }: Params) {
                         type="submit"
                         variant="contained"
                         color="primary"
-                        className="text-black"
-                        // onClick={handleSubmit}
+                        className="text-black bg-slate-50"
                       >
-                        Save Changes
+                        Promote
                       </Button>
                     </Grid>
                   </Grid>
