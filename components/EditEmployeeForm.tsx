@@ -4,16 +4,21 @@ import { useRouter } from "next/navigation";
 import { updateEmployee } from "@/lib/actions";
 import Paper from "@mui/material/Paper";
 import Select from "@mui/material/Select";
+import { Close } from "@mui/icons-material";
+import IconButton from "@mui/material/IconButton";
 import {
   Avatar,
   Box,
   Button,
   Grid,
+  FormControl,
+  FormControlLabel,
   InputLabel,
   MenuItem,
   TextField,
 } from "@mui/material";
 import { deleteEmployee } from "@/lib/actions";
+import { useSession } from "next-auth/react";
 
 type Params = {
   employeeId: string;
@@ -31,11 +36,12 @@ export default function EditEmployeeForm({
   if (employee.endDate) {
     formattedendDate = new Date(employee.endDate).toLocaleDateString();
   }
+  const { data: session } = useSession();
   const [firstname, setFirstname] = useState(employee.firstname);
   const [lastname, setLastname] = useState(employee.lastname);
   const [department, setDepartment] = useState(employee.department.name);
   const [position, setPosition] = useState(employee.position);
-  const [skills, setSkills] = useState<string[]>(employee.skills);
+  const [skills, setSkills] = useState(employee.skills);
   const [performance, setPerformance] = useState(employee.performance);
   const [startDate, setStartDate] = useState<string>(formattedStartDate);
   const [endDate, setEndDate] = useState<string | undefined>(formattedendDate);
@@ -45,9 +51,33 @@ export default function EditEmployeeForm({
 
   const router = useRouter();
 
-  const onSkillChanged = (text: string) => {
-    setSkills([text]);
+  const addOption = () => {
+    let allSkills = [...skills];
+    allSkills.push({ skill: "Skill" + " " + (allSkills.length + 1) });
+    setSkills(allSkills);
+    console.log(skills);
   };
+
+  function changeOptionValue(text: string, i: number) {
+    let optionSkills = [...skills];
+    optionSkills[i].skill = text;
+    setSkills(optionSkills);
+    console.log(skills);
+  }
+
+  function removeOption(i: number) {
+    let RemoveOptionSkills = [...skills];
+    if (RemoveOptionSkills.length > 1) {
+      RemoveOptionSkills.splice(i, 1);
+      console.log(RemoveOptionSkills);
+      setSkills(RemoveOptionSkills);
+      console.log(skills);
+    }
+  }
+
+  // const onSkillChanged = (text: string) => {
+  //   setSkills([text]);
+  // };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -66,6 +96,7 @@ export default function EditEmployeeForm({
 
     try {
       const result = await updateEmployee(
+        session,
         employee._id,
         firstname,
         lastname,
@@ -94,7 +125,7 @@ export default function EditEmployeeForm({
 
   const handleDelete = async () => {
     try {
-      const result = await deleteEmployee(employeeId);
+      const result = await deleteEmployee(session, employeeId);
       if (result !== undefined && result !== null) {
         setError("");
         setIsSuccess("Succesful");
@@ -139,21 +170,23 @@ export default function EditEmployeeForm({
                   onSubmit={handleSubmit}
                   style={{ maxWidth: 600, margin: "0 auto" }}
                 >
-                  <InputLabel id="department">Department*</InputLabel>
                   <Grid container spacing={3}>
                     <Grid item xs={12} sm={6}>
-                      <Select
-                        id="department"
-                        required
-                        fullWidth
-                        // label="Department"
-                        onChange={(e) => setDepartment(e.target.value)}
-                        value={department}
-                      >
-                        {deptOptionsData.map((option: any) => {
-                          return <MenuItem>{option} </MenuItem>;
-                        })}
-                      </Select>
+                      <FormControl fullWidth>
+                        <InputLabel id="department">Department*</InputLabel>
+                        <Select
+                          id="department"
+                          required
+                          labelId="Department"
+                          label="Department"
+                          // className="text-black"
+                          // label="Department"
+                          onChange={(e) => setDepartment(e.target.value)}
+                          value={department}
+                        >
+                          {deptOptionsData}
+                        </Select>
+                      </FormControl>
                     </Grid>
                     <Grid className="text-white" item xs={12} sm={6}>
                       <TextField
@@ -185,16 +218,50 @@ export default function EditEmployeeForm({
                         value={position}
                       />
                     </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        required
-                        fullWidth
-                        label="Skills"
-                        name="skills"
-                        value={skills}
-                        onChange={(e) => onSkillChanged(e.target.value)}
-                      />
-                    </Grid>
+                    {skills.map((skill, i) => (
+                      <div className="flex items-center" key={i}>
+                        <div className="flex items-center mb-2">
+                          <TextField
+                            type="text"
+                            className="h-9 outline-none focus:border-b-2 border-blue-500 text- base text-black w-full mt-4"
+                            placeholder="skill"
+                            value={skills[i].skill}
+                            onChange={(e) => {
+                              changeOptionValue(e.target.value, i);
+                            }}
+                          />
+                        </div>
+                        <IconButton
+                          key={i}
+                          aria-label="delete"
+                          onClick={() => {
+                            removeOption(i);
+                          }}
+                        >
+                          <Close />
+                        </IconButton>
+                      </div>
+                    ))}
+                    <FormControlLabel
+                      control={<input type="radio" />}
+                      label={
+                        <div>
+                          <Button
+                            size="small"
+                            style={{
+                              textTransform: "none",
+                              color: "#4285f4",
+                              fontSize: "13px",
+                              fontWeight: "600",
+                              marginTop: "1rem",
+                            }}
+                            onClick={() => addOption()}
+                          >
+                            Add skill
+                          </Button>
+                        </div>
+                      }
+                    ></FormControlLabel>
                     <Grid item xs={12}>
                       <TextField
                         required
@@ -219,7 +286,7 @@ export default function EditEmployeeForm({
                         type="submit"
                         variant="contained"
                         color="secondary"
-                        className="text-black"
+                        className="text-black bg-white"
                         // onClick={handleSubmit}
                       >
                         Save Changes
@@ -228,7 +295,7 @@ export default function EditEmployeeForm({
                         type="button"
                         variant="contained"
                         color="primary"
-                        className="text-black"
+                        className="text-black bg-white ml-3"
                         onClick={handleDelete}
                       >
                         Delete Employee

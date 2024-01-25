@@ -1,36 +1,68 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createEmployee } from "@/lib/actions";
+import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
 import Select from "@mui/material/Select";
+import { Close } from "@mui/icons-material";
 import {
   Box,
   Button,
+  FormControl,
+  FormControlLabel,
   Grid,
   InputLabel,
   MenuItem,
   TextField,
+  Autocomplete,
 } from "@mui/material";
+import { useSession } from "next-auth/react";
 
 type Params = {
+  users: User[];
   departments: Department[];
 };
 
-export default function NewEmployeeForm({ departments: departments }: Params) {
+export default function NewEmployeeForm({ departments, users }: Params) {
+  const { data: session } = useSession();
   const [username, setUsername] = useState("");
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [department, setDepartment] = useState("");
   const [position, setPosition] = useState("");
-  const [skills, setSkills] = useState("");
+  // const [skills, setSkills] = useState<string>();
+  const [skills, setSkills] = useState([{ skill: "Skill 1" }]);
   const [startDate, setStartDate] = useState("");
   const [error, setError] = useState<any>("");
   const [isSuccess, setIsSuccess] = useState<string>("");
 
   const router = useRouter();
+
+  const addOption = () => {
+    let allSkills = [...skills];
+    allSkills.push({ skill: "Skill" + " " + (allSkills.length + 1) });
+    setSkills(allSkills);
+    console.log(skills);
+  };
+
+  function changeOptionValue(text: string, i: number) {
+    let optionSkills = [...skills];
+    optionSkills[i].skill = text;
+    setSkills(optionSkills);
+    console.log(skills);
+  }
+
+  function removeOption(i: number) {
+    let RemoveOptionSkills = [...skills];
+    if (RemoveOptionSkills.length > 1) {
+      RemoveOptionSkills.splice(i, 1);
+      console.log(RemoveOptionSkills);
+      setSkills(RemoveOptionSkills);
+      console.log(skills);
+    }
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -50,6 +82,7 @@ export default function NewEmployeeForm({ departments: departments }: Params) {
 
     try {
       const result = await createEmployee(
+        session,
         username,
         firstname,
         lastname,
@@ -75,11 +108,16 @@ export default function NewEmployeeForm({ departments: departments }: Params) {
     }
   };
 
+  const usersArr: any[] = [];
+  users.map((user) => {
+    usersArr.push(user.username);
+  });
+
   const deptOptionsData = departments.map((department: Department) => {
     return (
-      <option key={department._id} value={department.name}>
+      <MenuItem key={department._id} value={department.name}>
         {department.name}
-      </option>
+      </MenuItem>
     );
   });
 
@@ -96,31 +134,42 @@ export default function NewEmployeeForm({ departments: departments }: Params) {
                 onSubmit={handleSubmit}
                 style={{ maxWidth: 600, margin: "0 auto" }}
               >
-                <InputLabel id="department">Department*</InputLabel>
+                {/*  */}
                 <Grid container spacing={3}>
                   <Grid item xs={12} sm={6}>
-                    <Select
-                      id="department"
-                      required
-                      fullWidth
-                      // className="text-black"
-                      // label="Department"
-                      onChange={(e) => setDepartment(e.target.value)}
-                      value={department}
-                    >
-                      {deptOptionsData.map((option: any) => {
-                        return <MenuItem>{option} </MenuItem>;
-                      })}
-                    </Select>
+                    <FormControl fullWidth>
+                      <InputLabel id="department">Department*</InputLabel>
+                      <Select
+                        id="department"
+                        required
+                        labelId="Department"
+                        label="Department"
+                        // className="text-black"
+                        // label="Department"
+                        onChange={(e) => setDepartment(e.target.value)}
+                        value={department}
+                      >
+                        {deptOptionsData}
+                      </Select>
+                    </FormControl>
                   </Grid>
                   <Grid item xs={12} sm={6}>
-                    <TextField
-                      required
+                    <Autocomplete
                       fullWidth
-                      label="Username"
-                      name="username"
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
+                      options={usersArr}
+                      getOptionLabel={(option) => option}
+                      disableCloseOnSelect
+                      onChange={(e, newValue) => {
+                        setUsername(newValue);
+                      }}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          variant="outlined"
+                          label="Username"
+                          placeholder="Select Username"
+                        />
+                      )}
                     />
                   </Grid>
                   <Grid item xs={12} sm={6}>
@@ -154,18 +203,64 @@ export default function NewEmployeeForm({ departments: departments }: Params) {
                     />
                   </Grid>
                   <Grid item xs={12}>
-                    <TextField
-                      required
-                      fullWidth
-                      label="Skills"
-                      name="skills"
-                      value={skills}
-                      onChange={(e) => setSkills(e.target.value)}
-                    />
+                    <div>
+                      {skills.map((skill, i) => (
+                        <div className="flex items-center" key={i}>
+                          <div className="flex items-center mb-2">
+                            <TextField
+                              type="text"
+                              className="h-9 outline-none focus:border-b-2 border-blue-500 text- base text-black w-full mt-4"
+                              placeholder="skill"
+                              value={skills[i].skill}
+                              onChange={(e) => {
+                                changeOptionValue(e.target.value, i);
+                              }}
+                            />
+                          </div>
+                          <IconButton
+                            key={i}
+                            aria-label="delete"
+                            onClick={() => {
+                              removeOption(i);
+                            }}
+                          >
+                            <Close />
+                          </IconButton>
+                        </div>
+                      ))}
+                      <FormControlLabel
+                        control={<input type="radio" />}
+                        label={
+                          <div>
+                            <Button
+                              size="small"
+                              style={{
+                                textTransform: "none",
+                                color: "#4285f4",
+                                fontSize: "13px",
+                                fontWeight: "600",
+                                marginTop: "1rem",
+                              }}
+                              onClick={() => addOption()}
+                            >
+                              Add skill
+                            </Button>
+                          </div>
+                        }
+                      ></FormControlLabel>
+                      {/* <TextField
+                        required
+                        fullWidth
+                        label="Skills"
+                        name="skills"
+                        value={skills}
+                        onChange={(e) => setSkills(e.target.value)}
+                      /> */}
+                    </div>
                   </Grid>
                   <Grid item xs={12}>
                     <TextField
-                      required
+                      // required
                       fullWidth
                       label="Start Date"
                       name="start date"
@@ -178,7 +273,7 @@ export default function NewEmployeeForm({ departments: departments }: Params) {
                       type="submit"
                       variant="contained"
                       color="primary"
-                      className="text-black"
+                      className="text-black bg-slate-50"
                       // onClick={handleSubmit}
                     >
                       Add Employee

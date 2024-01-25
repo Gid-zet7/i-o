@@ -11,23 +11,42 @@ import {
   InputLabel,
   MenuItem,
   TextField,
+  FormControl,
+  OutlinedInput,
+  Stack,
+  Chip,
+  Autocomplete,
 } from "@mui/material";
-import { deleteManager } from "@/lib/actions";
+import { deleteManager, updateManager } from "@/lib/actions";
+import { Cancel, Check } from "@mui/icons-material";
+import { useSession } from "next-auth/react";
 
 type Params = {
   managerId: string;
   manager: Manager;
   employees: Employee[];
+  projects: Project[];
 };
 
 export default function EditManagerForm({
   managerId,
   manager,
   employees,
+  projects,
 }: Params) {
+  let teamFormatted: string[] = [];
+  manager.team.map((employee) => {
+    teamFormatted.push(employee.user.username);
+  });
+  let projectsFormatted: string[] = [];
+  manager.projects.map((project) => {
+    projectsFormatted.push(project.title);
+  });
+  const { data: session } = useSession();
   const [employee, setEmployee] = useState(manager.employee.user.username);
-  const [team, setTeam] = useState<Employee[]>(manager.team);
-  const [projects, setProjects] = useState(manager.projects);
+  const [team, setTeam] = useState(teamFormatted);
+  const [managerProjects, setManagerProjects] =
+    useState<any>(projectsFormatted);
   const [meetings, setMeetings] = useState(manager.meetings);
   // const [options, setOptions] = useState<Employee[]>([]);
   const [error, setError] = useState("");
@@ -35,14 +54,23 @@ export default function EditManagerForm({
 
   const router = useRouter();
 
-  const onTeamChanged = (e: React.FormEvent<HTMLSelectElement>) => {
-    const options = e.target as HTMLSelectElement;
-    const values = Array.from(
-      options.selectedOptions,
-      (option) => option.value
-    );
-    setTeam(values);
-  };
+  // const onProjectsChanged = (e: React.FormEvent<HTMLSelectElement>) => {
+  //   const options = e.target as HTMLSelectElement;
+  //   const values = Array.from(
+  //     options.selectedOptions,
+  //     (option) => option.value
+  //   );
+  //   setProjects(values);
+  // };
+
+  // const onTeamChanged = (e: React.FormEvent<HTMLSelectElement>) => {
+  //   const options = e.target as HTMLSelectElement;
+  //   const values = Array.from(
+  //     options.selectedOptions,
+  //     (option) => option.value
+  //   );
+  //   setTeam(values);
+  // };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -53,18 +81,13 @@ export default function EditManagerForm({
     }
 
     try {
-      const result = await fetch("http://localhost:3000/api/managers/update", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          employee,
-          team: team,
-          projects: [projects],
-          meetings,
-        }),
-      });
+      const result = updateManager(
+        session,
+        manager._id,
+        employee,
+        team,
+        managerProjects
+      );
 
       if (result !== undefined && result !== null) {
         const form = e.target as HTMLFormElement;
@@ -94,6 +117,22 @@ export default function EditManagerForm({
       setError(error.message);
     }
   };
+
+  const employeeArr: any[] = [];
+  employees.map((employee) => {
+    employeeArr.push(employee.user.username);
+  });
+
+  const projectsData = projects?.map((project: any) => {
+    return (
+      <MenuItem key={project._id} value={project?.title}>
+        {project?.title}
+        {managerProjects.includes(project?.title) ? (
+          <Check color="info" />
+        ) : null}
+      </MenuItem>
+    );
+  });
 
   const employeesData = employees.map((employee: Employee) => {
     return (
@@ -127,10 +166,27 @@ export default function EditManagerForm({
                   onSubmit={handleSubmit}
                   style={{ maxWidth: 600, margin: "0 auto" }}
                 >
-                  <InputLabel id="employee">Employee*</InputLabel>
                   <Grid container spacing={3}>
                     <Grid item xs={12} sm={6}>
-                      <Select
+                      <Autocomplete
+                        fullWidth
+                        options={employeeArr}
+                        getOptionLabel={(option) => option}
+                        disableCloseOnSelect
+                        onChange={(e, newValue) => {
+                          setEmployee(newValue);
+                        }}
+                        value={employee}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            variant="outlined"
+                            label={"Employee"}
+                            placeholder="Select Employee"
+                          />
+                        )}
+                      />
+                      {/* <Select
                         required
                         fullWidth
                         id="employee"
@@ -139,35 +195,98 @@ export default function EditManagerForm({
                         value={employee}
                       >
                         {employeesData.map((option: any) => {
-                          return <MenuItem>{option} </MenuItem>;
+                          return (
+                            <MenuItem key={option._id} value={option.value}>
+                              {option}{" "}
+                            </MenuItem>
+                          );
                         })}
-                      </Select>
+                      </Select> */}
                     </Grid>
-                    <InputLabel id="employee">Team*</InputLabel>
                     <Grid item xs={12} sm={6}>
-                      <Select
+                      <Autocomplete
+                        fullWidth
+                        multiple
+                        options={employeeArr}
+                        getOptionLabel={(option) => option}
+                        disableCloseOnSelect
+                        onChange={(e, newValue) => {
+                          setTeam(newValue);
+                        }}
+                        value={team}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            variant="outlined"
+                            label="Team"
+                            placeholder="Select team"
+                          />
+                        )}
+                      />
+                      {/* <Select
                         required
                         fullWidth
                         id="team"
                         name="team"
-                        onChange={onTeamChanged}
+                        onChange={(e) => onTeamChanged}
                         value={team}
                         multiple={true}
                       >
                         {employeesData.map((option: any) => {
                           return <MenuItem>{option} </MenuItem>;
                         })}
-                      </Select>
+                      </Select> */}
                     </Grid>
                     <Grid className="text-white" item xs={12} sm={6}>
-                      <TextField
+                      <FormControl fullWidth>
+                        <InputLabel id="projects">Projects*</InputLabel>
+                        <Select
+                          id="projects"
+                          required
+                          labelId="Projects"
+                          label="Projects"
+                          multiple={true}
+                          // className="text-black"
+                          // label="Department"
+                          onChange={(e) => setManagerProjects(e.target.value)}
+                          input={<OutlinedInput label="Multiple Select" />}
+                          renderValue={(selected) => (
+                            <Stack gap={1} direction="row" flexWrap="wrap">
+                              {selected.map((value: any) => (
+                                <Chip
+                                  key={value}
+                                  label={value}
+                                  onDelete={() =>
+                                    setManagerProjects(
+                                      managerProjects.filter(
+                                        (item: any) => item !== value
+                                      )
+                                    )
+                                  }
+                                  deleteIcon={
+                                    <Cancel
+                                      onMouseDown={(event) =>
+                                        event.stopPropagation()
+                                      }
+                                    />
+                                  }
+                                />
+                              ))}
+                            </Stack>
+                          )}
+                          value={managerProjects}
+                        >
+                          {projectsData}
+                        </Select>
+                      </FormControl>
+                      {/* <TextField
                         required
                         fullWidth
                         label="Project"
                         name="project"
                         value={projects}
                         onChange={(e) => setProjects(e.target.value)}
-                      />
+                      /> */}
                     </Grid>
 
                     <Grid item xs={12}>
@@ -175,7 +294,7 @@ export default function EditManagerForm({
                         type="submit"
                         variant="contained"
                         color="primary"
-                        className="text-black"
+                        className="text-black bg-white"
                         // onClick={handleSubmit}
                       >
                         Save Changes
@@ -184,7 +303,7 @@ export default function EditManagerForm({
                         type="button"
                         variant="contained"
                         color="primary"
-                        className="text-black"
+                        className="text-black bg-white ml-3"
                         onClick={handleDelete}
                       >
                         Demote Manager
