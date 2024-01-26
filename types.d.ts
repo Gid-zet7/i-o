@@ -75,14 +75,15 @@ interface Performance {
 }
 
 type Forms = {
-  _id: string;
-  form_title: string;
-  form_desc: string;
+  employeeName: string;
+  position: string;
+  department: string;
+  dateOfReview: Date;
+  typeOfReview: string;
   questions: {
     questionText: string;
     questionType: string;
-    options: { _id: string; optionText: string }[];
-    // type: string
+    options: { optionText: string }[];
     open: boolean;
   }[];
   createdAt: Date;
