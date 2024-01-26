@@ -5,7 +5,6 @@ import Link from "next/link";
 import { IconButton, Tooltip, Typography } from "@mui/material";
 import { Edit } from "@mui/icons-material";
 import Details from "@/components/Details";
-import SkillsCard from "@/components/SkillsCard";
 import Paper from "@mui/material/Paper";
 
 type Params = {
@@ -98,16 +97,18 @@ export default async function EmployeePage({ params: { employeeId } }: Params) {
                 </Link>
               </Tooltip>
             </div>
-            <Paper className="flex-1 p-3 h-min">
+            <div>
               <h1 className="text-2xl font-semibold mb-8">Skills</h1>
-              {employee.skills.map((skill, i) => {
-                return (
-                  <Typography fontSize={"h6"} className="blue_gradient">
-                    {skill.skill}
-                  </Typography>
-                );
-              })}
-            </Paper>
+              <Paper className="flex-1 p-3 h-min">
+                {employee.skills.map((skill, i) => {
+                  return (
+                    <Typography fontSize={"h6"} className="blue_gradient">
+                      {skill.skill}
+                    </Typography>
+                  );
+                })}
+              </Paper>
+            </div>
             <div className="flex-1 p-3">
               <h1 className="text-2xl font-semibold mb-8">Performance</h1>
 
