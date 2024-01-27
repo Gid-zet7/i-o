@@ -11,7 +11,7 @@ type Props = {
 
 const ProjectsCard = ({ id, title, description, tasks }: Props) => {
   return (
-    <Paper className="rounded-lg" key={id}>
+    <Paper className="rounded-lg mb-3" key={id}>
       <div className="p-4">
         <Typography fontSize={"h6"} marginBottom={3}>
           Project Title: {title}
@@ -34,6 +34,9 @@ const ProjectsCard = ({ id, title, description, tasks }: Props) => {
             </div>
           );
         })}
+      </div>
+      <div className="border-t-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50">
+        Last updated 2 days ago
       </div>
     </Paper>
   );
