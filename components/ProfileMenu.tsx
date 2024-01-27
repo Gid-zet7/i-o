@@ -78,7 +78,6 @@ const ProfileMenu = ({ session }: any) => {
             }
           >
             <Typography
-              bgcolor="red"
               padding={1}
               borderRadius={2}
               // marginTop={3}
