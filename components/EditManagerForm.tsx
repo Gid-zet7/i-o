@@ -26,6 +26,7 @@ type Params = {
   manager: Manager;
   employees: Employee[];
   projects: Project[];
+  meetings: Meeting[];
 };
 
 export default function EditManagerForm({
@@ -33,6 +34,7 @@ export default function EditManagerForm({
   manager,
   employees,
   projects,
+  meetings,
 }: Params) {
   let teamFormatted: string[] = [];
   manager.team.map((employee) => {
@@ -42,40 +44,28 @@ export default function EditManagerForm({
   manager.projects.map((project) => {
     projectsFormatted.push(project.title);
   });
+
+  let meetingsFormatted: string[] = [];
+  manager.meetings.map((meeting) => {
+    meetingsFormatted.push(meeting.title);
+  });
+
   const { data: session } = useSession();
   const [employee, setEmployee] = useState(manager.employee.user.username);
   const [team, setTeam] = useState(teamFormatted);
   const [managerProjects, setManagerProjects] =
     useState<any>(projectsFormatted);
-  const [meetings, setMeetings] = useState(manager.meetings);
+  const [managerMeetings, setManagerMeetings] = useState(meetingsFormatted);
   // const [options, setOptions] = useState<Employee[]>([]);
   const [error, setError] = useState("");
   const [isSuccess, setIsSuccess] = useState<string>("");
 
   const router = useRouter();
 
-  // const onProjectsChanged = (e: React.FormEvent<HTMLSelectElement>) => {
-  //   const options = e.target as HTMLSelectElement;
-  //   const values = Array.from(
-  //     options.selectedOptions,
-  //     (option) => option.value
-  //   );
-  //   setProjects(values);
-  // };
-
-  // const onTeamChanged = (e: React.FormEvent<HTMLSelectElement>) => {
-  //   const options = e.target as HTMLSelectElement;
-  //   const values = Array.from(
-  //     options.selectedOptions,
-  //     (option) => option.value
-  //   );
-  //   setTeam(values);
-  // };
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!employee || !team || !projects) {
+    if (!employee || !team || !managerProjects) {
       setError("All fields are necessary.");
       return;
     }
@@ -86,7 +76,8 @@ export default function EditManagerForm({
         manager._id,
         employee,
         team,
-        managerProjects
+        managerProjects,
+        managerMeetings
       );
 
       if (result !== undefined && result !== null) {
@@ -96,7 +87,7 @@ export default function EditManagerForm({
         setIsSuccess("Succesful");
         router.back();
       } else {
-        setError("Failed to create employee. Please check the input.");
+        setError("Failed to update manager. Please check the input.");
       }
     } catch (error: any) {
       setError(error.message);
@@ -132,6 +123,11 @@ export default function EditManagerForm({
         ) : null}
       </MenuItem>
     );
+  });
+
+  const meetingsData: any[] = [];
+  meetings.map((meeting) => {
+    meetingsData.push(meeting.title);
   });
 
   const employeesData = employees.map((employee: Employee) => {
@@ -287,6 +283,27 @@ export default function EditManagerForm({
                         value={projects}
                         onChange={(e) => setProjects(e.target.value)}
                       /> */}
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <Autocomplete
+                        fullWidth
+                        multiple
+                        options={meetingsData}
+                        getOptionLabel={(option) => option}
+                        disableCloseOnSelect
+                        onChange={(e, newValue) => {
+                          setManagerMeetings(newValue);
+                        }}
+                        value={managerMeetings}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            variant="outlined"
+                            label="Meeting"
+                            placeholder="Select meeting(s)"
+                          />
+                        )}
+                      />
                     </Grid>
 
                     <Grid item xs={12}>
