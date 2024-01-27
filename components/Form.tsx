@@ -99,33 +99,18 @@ export default function Form({ form }: Params) {
                 {question.options.map((option, i) => {
                   return (
                     <div key={i}>
-                      {question.questionType !== "text" ? (
-                        <label htmlFor={option.optionText}>
-                          <input
-                            className="mb-4"
-                            type={question.questionType}
-                            value={option.optionText}
-                            name={question.questionText}
-                            onChange={(e) => {
-                              onResponseChanged(
-                                e.target.value,
-                                e.target.name,
-                                i
-                              );
-                            }}
-                          />
-                          <span className="ml-2 ">{option.optionText}</span>
-                        </label>
-                      ) : (
+                      <label htmlFor={option.optionText}>
                         <input
-                          type="text"
-                          value={data[i].response}
+                          className="mb-4"
+                          type="radio"
+                          value={option.optionText}
                           name={question.questionText}
                           onChange={(e) => {
                             onResponseChanged(e.target.value, e.target.name, i);
                           }}
                         />
-                      )}
+                        <span className="ml-2 ">{option.optionText}</span>
+                      </label>
                     </div>
                   );
                 })}
