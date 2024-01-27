@@ -34,7 +34,7 @@ type Manager = {
   employee: Employee;
   team: Employee[];
   projects: Project[];
-  meetings: Meeting;
+  meetings: Meeting[];
   createdAt: Date;
   updatedAt: Date;
   __v: number;
