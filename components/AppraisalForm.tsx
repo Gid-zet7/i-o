@@ -1,8 +1,5 @@
 "use client";
-
-import { useState, useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
-// import { useAddNewDataFormMutation } from "./dataFormsApiSlice";
+import { useState } from "react";
 import Typography from "@mui/material/Typography";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Select from "@mui/material/Select";
@@ -12,35 +9,22 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
-import Radio from "@mui/material/Radio";
 import MenuItem from "@mui/material/MenuItem";
-import {
-  ShortText,
-  Subject,
-  FilterNone,
-  Close,
-  CheckBox,
-  Delete,
-} from "@mui/icons-material";
+import { FilterNone, Close, Delete } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 import { Paper, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import InputLabel from "@mui/material/InputLabel";
 import SideMenu from "@/stories/SideMenu/SideMenu";
-import Autocomplete from "@mui/material/Autocomplete";
 import FormControl from "@mui/material/FormControl";
 
 const AppraisalForm = () => {
-  //   const navigate = useNavigate();
-
   const [employeeName, setEmployeeName] = useState("");
   const [position, setPosition] = useState("");
   const [department, setDepartment] = useState("");
   const [dateOfReview, setDateOfReview] = useState("");
   const [typeOfReview, setTypeOfReview] = useState("");
-
-  //   const { Username } = useAuth();
 
   const [questions, setQuestions] = useState<Questions>([
     {
@@ -68,15 +52,15 @@ const AppraisalForm = () => {
     setQuestions(optionsQuestion);
   }
 
-  function addQuestionType(i: number, type: string) {
-    let ques = [...questions];
-    ques[i].questionType = type;
-    ques[i].options.optionId = type;
-    if (type === "text" && ques[i].options.length > 1) {
-      ques[i].options.splice(1);
-    }
-    setQuestions(ques);
-  }
+  // function addQuestionType(i: number, type: string) {
+  //   let ques = [...questions];
+  //   ques[i].questionType = type;
+  //   ques[i].options.optionId = type;
+  //   if (type === "text" && ques[i].options.length > 1) {
+  //     ques[i].options.splice(1);
+  //   }
+  //   setQuestions(ques);
+  // }
 
   function removeOption(i: number, j: number) {
     let RemoveOptionQuestion = [...questions];
@@ -156,19 +140,7 @@ const AppraisalForm = () => {
     setQuestions(qs);
   }
 
-  //   useEffect(() => {
-  //     if (isSuccess) {
-  //       setFormTitle("");
-  //       setFormDesc("");
-  //       setQuestions("");
-  //       navigate("/dashboard/dataforms");
-  //     }
-  //   }, [isSuccess, navigate]);
-
-  const onSaveFormClicked = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log("something");
-
+  const onSaveFormClicked = async () => {
     if (
       !employeeName ||
       !position ||
@@ -202,8 +174,6 @@ const AppraisalForm = () => {
       );
 
       if (result.ok) {
-        const form = e.target as HTMLFormElement;
-        form.reset();
         router.push("/");
       } else {
         console.log("failed to create from.");
@@ -225,13 +195,7 @@ const AppraisalForm = () => {
             handleExpand(i);
           }}
         >
-          <AccordionSummary
-            // aria-controls="panelia-content"
-            // id="panelia-header"
-            // elevation={1}
-            // style={{ width: "100%" }}
-            className="w-full"
-          >
+          <AccordionSummary className="w-full">
             {!questions[i].open ? (
               <div className="h-60 text-2xl p-4">
                 <Typography
@@ -256,9 +220,6 @@ const AppraisalForm = () => {
                             type={question.questionType}
                             color="primary"
                             className="mr-1"
-                            // style={{
-                            //   marginRight: "8px",
-                            // }}
                             required={question.type}
                             disabled
                           />
@@ -270,7 +231,6 @@ const AppraisalForm = () => {
                               fontWeight: "400",
                               letterSpacing: ".2px",
                               lineHeight: "20px",
-                              // color: "#202124",
                             }}
                           >
                             {question.options[j].optionText}
@@ -298,7 +258,7 @@ const AppraisalForm = () => {
                       changeQuestion(e.target.value, i);
                     }}
                   />
-                  <Select
+                  {/* <Select
                     className="select"
                     style={{
                       color: "#5f6368",
@@ -341,18 +301,12 @@ const AppraisalForm = () => {
                       />
                       Multiple Choice
                     </MenuItem>
-                  </Select>
+                  </Select> */}
                 </div>
                 {question.options.map((op, j) => (
                   <div className="flex items-center" key={j}>
-                    {question.questionType !== "text" ? (
-                      <input
-                        type={question.questionType}
-                        style={{ marginRight: "10px" }}
-                      />
-                    ) : (
-                      <ShortText style={{ marginRight: "10px" }} />
-                    )}
+                    <input type="radio" style={{ marginRight: "10px" }} />
+
                     <div>
                       <TextField
                         type="text"
@@ -375,25 +329,20 @@ const AppraisalForm = () => {
                   </div>
                 ))}
 
-                {question.options.optionId !== "text" &&
-                question.options.length < 5 ? (
+                {question.options.length < 5 ? (
                   <div className="flex items-center">
                     <FormControlLabel
                       disabled
                       control={
-                        question.questionType !== "text" ? (
-                          <input
-                            type={question.questionType}
-                            color="primary"
-                            style={{
-                              marginLeft: "10px",
-                              marginRight: "10px",
-                            }}
-                            disabled
-                          />
-                        ) : (
-                          <ShortText style={{ marginRight: "10px" }} />
-                        )
+                        <input
+                          type="radio"
+                          color="primary"
+                          style={{
+                            marginLeft: "10px",
+                            marginRight: "10px",
+                          }}
+                          disabled
+                        />
                       }
                       label={
                         <div>
