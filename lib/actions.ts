@@ -360,7 +360,7 @@ export const updateManager = async (
   employee: string,
   team: string[],
   projects: string[],
-  meeting?: Meeting[]
+  meetings?: string[]
 ) => {
   if (!session?.user?.accessToken) {
     throw new Error("User not authenticated or access token missing");
@@ -377,7 +377,7 @@ export const updateManager = async (
       employee,
       team,
       projects,
-      meeting,
+      meetings,
     }),
   });
 
@@ -631,13 +631,62 @@ export const getDepartment = async (departmentId: string) => {
 
 // -----------------------------Forms----------------------
 export const getAllForms = async () => {
+  // const session: SessionInterface | null = await getServerSession(authOptions);
+
+  // if (!session?.user?.accessToken) {
+  //   throw new Error("User not authenticated or access token missing");
+  // }
+
+  const endpoint = `${apiUrl}/appraisal-form`;
+  let result = await fetch(endpoint, {
+    method: "GET",
+    headers: {
+      // Authorization: `Bearer ${session?.user?.accessToken}`,
+    },
+  });
+
+  if (!result.ok) {
+    const errorMessage = `Failed to fetch forms. Status: ${result.status}, ${result.statusText}`;
+    throw new Error(errorMessage);
+  }
+
+  return result.json();
+};
+
+// --------------------------Meetings---------------------------
+export const getAllMeetings = async () => {
   const session: SessionInterface | null = await getServerSession(authOptions);
 
   if (!session?.user?.accessToken) {
     throw new Error("User not authenticated or access token missing");
   }
 
-  const endpoint = `${apiUrl}/appraisal-form`;
+  const endpoint = `${apiUrl}/meetings`;
+
+  const result = await fetch(endpoint, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${session.user.accessToken}`,
+    },
+  });
+
+  if (!result.ok) {
+    const errorMessage = `Failed to fetch meetings. Status: ${result.status}, ${result.statusText}`;
+    throw new Error(errorMessage);
+  }
+
+  return result.json();
+};
+
+export const getMeeting = async (managerId: string) => {
+  const session: SessionInterface | null = await getServerSession(authOptions);
+
+  if (!session?.user?.accessToken) {
+    throw new Error("User not authenticated or access token missing");
+  }
+
+  const endpoint = `${apiUrl}/managers/${managerId}`;
+
   let result = await fetch(endpoint, {
     method: "GET",
     headers: {
@@ -646,9 +695,161 @@ export const getAllForms = async () => {
   });
 
   if (!result.ok) {
-    const errorMessage = `Failed to fetch departments. Status: ${result.status}, ${result.statusText}`;
+    const errorMessage = `Failed to fetch manager. Status: ${result.status}, ${result.statusText}`;
     throw new Error(errorMessage);
   }
 
   return result.json();
+};
+
+export const createMeeting = async (
+  session: any,
+  title: string,
+  date: Date,
+  startTime: string,
+  endTime: string,
+  participants: string[],
+  agenda: string
+) => {
+  // const session: SessionInterface | null = await getServerSession(authOptions);
+
+  if (!session?.user?.accessToken) {
+    throw new Error("User not authenticated or access token missing");
+  }
+
+  const endpoint = `${apiUrl}/meetings/new`;
+
+  let res = await fetch(endpoint, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${session.user.accessToken}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      title,
+      date,
+      startTime,
+      endTime,
+      participants,
+      agenda,
+    }),
+  });
+
+  // console.log("Response status:", res.status);
+  const contentType = res.headers.get("content-type");
+
+  if (contentType && contentType.includes("application/json")) {
+    try {
+      const jsonResponse = await res.json();
+      console.log("Json response:", jsonResponse);
+      return jsonResponse;
+    } catch (error) {
+      console.error("Error parsing JSON:", error);
+      return undefined;
+    }
+  } else {
+    // If the content type is not JSON, handle it differently
+    const responseText = await res.text();
+    console.log("Response body:", responseText);
+
+    if (!res.ok) return undefined;
+
+    // Handle the non-JSON response accordingly
+    return responseText;
+  }
+};
+
+export const updateMeeting = async (
+  session: any,
+  id: string,
+  title: string,
+  date: Date,
+  startTime: string,
+  endTime: string,
+  participants: string[],
+  agenda: string
+) => {
+  if (!session?.user?.accessToken) {
+    throw new Error("User not authenticated or access token missing");
+  }
+  const endpoint = `${apiUrl}/meetings/update`;
+  let res = await fetch(endpoint, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${session?.user?.accessToken}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id,
+      title,
+      date,
+      startTime,
+      endTime,
+      participants,
+      agenda,
+    }),
+  });
+
+  console.log("Response status:", res.status);
+  const contentType = res.headers.get("content-type");
+
+  if (contentType && contentType.includes("application/json")) {
+    try {
+      const jsonResponse = await res.json();
+      console.log("Json response:", jsonResponse);
+      return jsonResponse;
+    } catch (error) {
+      console.error("Error parsing JSON:", error);
+      return undefined;
+    }
+  } else {
+    // If the content type is not JSON, handle it differently
+    const responseText = await res.text();
+    console.log("Response body:", responseText);
+
+    if (!res.ok) return undefined;
+
+    // Handle the non-JSON response accordingly
+    return responseText;
+  }
+};
+
+export const deleteMeeting = async (session: any, id: string) => {
+  if (!session?.user?.accessToken) {
+    throw new Error("User not authenticated or access token missing");
+  }
+  const endpoint = `${apiUrl}/meetings/delete`;
+
+  let res = await fetch(endpoint, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${session?.user?.accessToken}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id,
+    }),
+  });
+
+  const contentType = res.headers.get("content-type");
+
+  if (contentType && contentType.includes("application/json")) {
+    try {
+      const jsonResponse = await res.json();
+      console.log("Json response:", jsonResponse);
+      return jsonResponse;
+    } catch (error) {
+      console.error("Error parsing JSON:", error);
+      return undefined;
+    }
+  } else {
+    // If the content type is not JSON, handle it differently
+    const responseText = await res.text();
+    console.log("Response body:", responseText);
+
+    if (!res.ok) return undefined;
+
+    // Handle the non-JSON response accordingly
+    return responseText;
+  }
 };
