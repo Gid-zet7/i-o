@@ -2,12 +2,15 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import Button from "@mui/material/Button";
+import { addPerformance } from "@/lib/actions";
+import { useSession } from "next-auth/react";
 
 type Params = {
   form: Forms;
 };
 
 export default function Form({ form }: Params) {
+  const { data: session } = useSession();
   const [data, setData] = useState(
     form.questions.map((question) => {
       return { question: question.questionText, response: "" };
@@ -19,46 +22,44 @@ export default function Form({ form }: Params) {
     question: string,
     index: number
   ) => {
+    console.log(response, question, index);
     let newData = [...data];
+    console.log(newData);
     newData[index].question = question;
     newData[index].response = response;
     setData(newData);
   };
 
-  //   const onSubmitForm = async (e) => {
-  //     e.preventDefault();
+  const onSubmitForm = async () => {
+    addPerformance(session, form.employeeName, form.dateOfReview, data);
+  };
 
-  //     // await addNewData({
-  //     //   data,
-  //     // });
-  //   };
+  // const onDeleteButtonClicked = async () => {
+  //   await deleteDataform({
+  //     id: dataformId,
+  //   });
+  // };
 
-  //   const onDeleteButtonClicked = async () => {
-  //     await deleteDataform({
-  //       id: dataformId,
-  //     });
-  //   };
-
-  //   let deleteButton;
-  //   if (dataform.user_id?.username === Username) {
-  //     deleteButton = (
-  //       <div>
-  //         <Button
-  //           variant="contained"
-  //           color="error"
-  //           style={{
-  //             fontSize: "14px",
-  //             maxWidth: "20rem",
-  //             // backgroundColor: "tomato",
-  //           }}
-  //           onClick={onDeleteButtonClicked}
-  //           // disabled={!canSave}
-  //         >
-  //           Delete
-  //         </Button>
-  //       </div>
-  //     );
-  //   }
+  // let deleteButton;
+  // if (dataform.user_id?.username === Username) {
+  //   deleteButton = (
+  //     <div>
+  //       <Button
+  //         variant="contained"
+  //         color="error"
+  //         style={{
+  //           fontSize: "14px",
+  //           maxWidth: "20rem",
+  //           // backgroundColor: "tomato",
+  //         }}
+  //         onClick={onDeleteButtonClicked}
+  //         // disabled={!canSave}
+  //       >
+  //         Delete
+  //       </Button>
+  //     </div>
+  //   );
+  // }
 
   if (form) {
     // const handleEdit = () => navigate(`/dashboard/dataforms/${dataformId}`);
@@ -96,9 +97,9 @@ export default function Form({ form }: Params) {
                 <p className="font-medium text-2xl mb-4">
                   {i + 1}. {question.questionText}
                 </p>
-                {question.options.map((option, i) => {
+                {question.options.map((option, j) => {
                   return (
-                    <div key={i}>
+                    <div key={j}>
                       <label htmlFor={option.optionText}>
                         <input
                           className="mb-4"
@@ -122,8 +123,7 @@ export default function Form({ form }: Params) {
               variant="contained"
               color="secondary"
               className=" text-blue-300"
-
-              // onClick={onSubmitForm}
+              onClick={onSubmitForm}
               // disabled={!canSave}
             >
               Submit
