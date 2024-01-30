@@ -45,6 +45,7 @@ export const GET = async (request: Request, { params: { id } }: Props) => {
     const employee = await Employee.findById(id)
       .populate("user")
       .populate("department")
+      .populate("performance")
       .lean();
 
     if (!employee) return new Response("Employee not found", { status: 400 });
