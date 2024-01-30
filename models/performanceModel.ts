@@ -7,7 +7,13 @@ const performanceSchema = new Schema<Performance>(
     employee: { type: Schema.Types.ObjectId, ref: "employee" },
     date: { type: Date, require: true },
     feedback: { type: String, require: true },
-    ratings: { type: Number, require: true },
+    ratings: { type: Number, require: false },
+    data: [
+      {
+        question: { type: String, required: true },
+        response: { type: String, required: true },
+      },
+    ],
   },
   { timestamps: true }
 );
