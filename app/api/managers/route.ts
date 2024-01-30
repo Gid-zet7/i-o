@@ -39,10 +39,16 @@ export const GET = async (request: Request) => {
     const managers = await Manager.find()
       .populate({
         path: "employee",
-        populate: {
-          path: "user",
-          model: "user",
-        },
+        populate: [
+          {
+            path: "user",
+            model: "user",
+          },
+          {
+            path: "department",
+            model: "department",
+          },
+        ],
       })
       .populate({
         path: "team",
