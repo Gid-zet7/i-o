@@ -1,5 +1,5 @@
 import Employee from "@/models/employeeModel";
-import { connectDB } from "@/lib/database";
+import { connectDB, Performance, UserModel } from "@/lib/database";
 import Department from "@/models/departmentModel";
 import { verifyJwt } from "@/lib/jwt";
 
@@ -85,7 +85,13 @@ export const PATCH = async (request: Request) => {
   employee.startDate = startDate;
 
   if (performance) {
-    employee.performance = performance;
+    const findUser = await UserModel.findOne({ username: performance });
+    console.log(findUser);
+    const findEmployee = await Employee.findOne({ user: findUser });
+    const findPerformance = await Performance.findOne({
+      employee: findEmployee,
+    });
+    employee.performance = findPerformance;
   }
 
   if (endDate) {
