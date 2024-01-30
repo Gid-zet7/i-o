@@ -45,17 +45,16 @@ export const GET = async (request: Request, { params: { id } }: Props) => {
     const manager: any = await Manager.findById(id)
       .populate({
         path: "employee",
-        populate: {
-          path: "user",
-          model: "user",
-        },
-      })
-      .populate({
-        path: "employee",
-        populate: {
-          path: "department",
-          model: "department",
-        },
+        populate: [
+          {
+            path: "user",
+            model: "user",
+          },
+          {
+            path: "department",
+            model: "department",
+          },
+        ],
       })
       .populate({
         path: "team",
@@ -65,6 +64,15 @@ export const GET = async (request: Request, { params: { id } }: Props) => {
         },
       })
       .populate("projects")
+      .populate("meetings")
+      .populate({
+        path: "meetings",
+        populate: [
+          {
+            path: "participants",
+          },
+        ],
+      })
       .lean()
       .exec();
 
