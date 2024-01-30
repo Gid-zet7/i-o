@@ -69,6 +69,7 @@ interface Performance {
   date: Date;
   feedback: string;
   ratings: number;
+  data: { question: string; response: string }[];
   createdAt: Date;
   updatedAt: Date;
   __v: number;
