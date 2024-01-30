@@ -2,6 +2,7 @@ import Employee from "@/models/employeeModel";
 import { connectDB } from "@/lib/database";
 import UserModel from "@/models/userModel";
 import Manager from "@/models/managerModel";
+import Meeting from "@/models/meetingModel";
 import { verifyJwt } from "@/lib/jwt";
 import Project from "@/models/projectModel";
 
@@ -36,7 +37,7 @@ export const PATCH = async (request: Request) => {
   }
 
   const { id, team, projects, meetings } = await request.json();
-  console.log(team, projects);
+  console.log(team, projects, meetings);
 
   if (!id) return new Response("Id is required", { status: 400 });
 
@@ -93,7 +94,19 @@ export const PATCH = async (request: Request) => {
   manager.projects = verifyProjects;
 
   if (meetings) {
-    manager.meetings = meetings;
+    let verifyMeetings = [];
+    for (const meeting of meetings) {
+      // console.log(project);
+      const result = await Meeting.findOne({ title: meeting }).exec();
+      // console.log(result);
+
+      if (!result) {
+        return new Response("Invalid meeting");
+      }
+
+      verifyMeetings.push(result);
+    }
+    manager.meetings = verifyMeetings;
   }
 
   await manager.save();
