@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
-import { getAllDepartments, getEmployee } from "@/lib/actions";
+import {
+  getAllDepartments,
+  getAllPerformances,
+  getEmployee,
+} from "@/lib/actions";
 import { notFound } from "next/navigation";
 import EditEmployeeForm from "@/components/EditEmployeeForm";
 
@@ -30,22 +34,21 @@ export const generateMetadata = async ({
 export default async function EditEmployeePage({
   params: { employeeId },
 }: Params) {
-  const employeeData: Promise<Employee> = getEmployee(employeeId);
-  const employee: Employee = await employeeData;
-
-  const departmentsData: Promise<Department[]> = getAllDepartments();
-  const departments: Department[] = await departmentsData;
-
-  // console.log(employee?.department.name);
+  const [employee, departments, performances] = await Promise.all([
+    getEmployee(employeeId),
+    getAllDepartments(),
+    getAllPerformances(),
+  ]);
 
   if (!employee?.user?.username) return notFound();
-  // console.log(departments);
+  console.log(performances);
 
   return (
     <EditEmployeeForm
       employeeId={employee._id}
       employee={employee}
       departments={departments}
+      performances={performances}
     />
   );
 }
