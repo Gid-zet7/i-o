@@ -33,7 +33,7 @@ const ManagerCard = ({
       <Paper className="w-64 mx-auto rounded-2xl px-8 py-6 shadow-lg">
         <div className="flex items-center justify-between">
           <Link href={`/dashboard/managers/${id}`}>
-            <span className="text-black text-sm bg-emerald-400 p-2 rounded-md">
+            <span className="text-black text-sm bg-emerald-400 hover:opacity-90 p-2 rounded-md">
               View profile
             </span>
           </Link>
@@ -74,10 +74,6 @@ const ManagerCard = ({
           </h2>
         </div>
         <p className="text-emerald-400 font-semibold mt-2.5">Active</p>
-
-        {/* <div className="h-1 w-full bg-black mt-8 rounded-full">
-          <div className="h-1 rounded-full w-2/5 bg-yellow-500 "></div>
-        </div> */}
         <div className="mt-3 text-sm">
           <span className="text-gray-400 font-semibold">Department: </span>
           <span>{department}</span>
