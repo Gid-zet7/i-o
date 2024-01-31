@@ -14,7 +14,7 @@ import {
   FormControl,
   FormControlLabel,
   InputLabel,
-  MenuItem,
+  Autocomplete,
   TextField,
 } from "@mui/material";
 import { deleteEmployee } from "@/lib/actions";
@@ -24,12 +24,14 @@ type Params = {
   employeeId: string;
   employee: Employee;
   departments: Department[];
+  performances: Performance[];
 };
 
 export default function EditEmployeeForm({
   employeeId,
   employee,
   departments,
+  performances,
 }: Params) {
   let formattedStartDate = new Date(employee.startDate).toLocaleDateString();
   let formattedendDate;
@@ -45,7 +47,6 @@ export default function EditEmployeeForm({
   const [performance, setPerformance] = useState(employee.performance);
   const [startDate, setStartDate] = useState<string>(formattedStartDate);
   const [endDate, setEndDate] = useState<string | undefined>(formattedendDate);
-  // const [deptOptions, setDeptOptions] = useState<Department[]>([]);
   const [error, setError] = useState("");
   const [isSuccess, setIsSuccess] = useState<string>("");
 
@@ -144,6 +145,11 @@ export default function EditEmployeeForm({
         {department.name}
       </option>
     );
+  });
+
+  const performanceData: any[] = [];
+  performances.map((performance) => {
+    performanceData.push(performance.employee.user.username);
   });
 
   return (
@@ -279,6 +285,26 @@ export default function EditEmployeeForm({
                         name="end date"
                         onChange={(e) => setEndDate(e.target.value)}
                         value={endDate}
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <Autocomplete
+                        fullWidth
+                        options={performanceData}
+                        getOptionLabel={(option) => option}
+                        disableCloseOnSelect
+                        onChange={(e, newValue) => {
+                          setPerformance(newValue);
+                        }}
+                        value={performance}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            variant="outlined"
+                            label={"Performance"}
+                            placeholder="Select performance"
+                          />
+                        )}
                       />
                     </Grid>
                     <Grid item xs={12}>
