@@ -104,10 +104,22 @@ export const createEmployee = async (
   username: string,
   firstname: string,
   lastname: string,
+  bio: string,
+  gender: string,
+  contact: string,
+  permanent_address: string,
+  current_address: string,
+  birthday: string,
   department: string,
   position: string,
-  // skills: string
   skills: { skill: string }[],
+  experiences: { position: string; startDate: string; endDate: string }[],
+  education: {
+    school: string;
+    certificate: string;
+    startDate: string;
+    endDate: string;
+  }[],
   startDate: string
 ) => {
   // const session: SessionInterface | null = await getServerSession(authOptions);
@@ -128,9 +140,17 @@ export const createEmployee = async (
       username,
       firstname,
       lastname,
+      bio,
+      gender,
+      contact,
+      permanent_address,
+      current_address,
+      birthday,
       department,
       position,
       skills,
+      experiences,
+      education,
       startDate,
     }),
   });
@@ -164,9 +184,22 @@ export const updateEmployee = async (
   id: string,
   firstname: string,
   lastname: string,
+  bio: string,
+  gender: string,
+  contact: string,
+  permanent_address: string,
+  current_address: string,
+  birthday: string,
   department: string,
   position: string,
   skills: {}[],
+  experiences: { position: string; startDate: string; endDate: string }[],
+  education: {
+    school: string;
+    certificate: string;
+    startDate: string;
+    endDate: string;
+  }[],
   performance: Performance[],
   startDate: string
 ) => {
@@ -184,9 +217,17 @@ export const updateEmployee = async (
       id,
       firstname,
       lastname,
+      bio,
+      gender,
+      contact,
+      permanent_address,
+      current_address,
+      birthday,
       department,
       position,
       skills,
+      experiences,
+      education,
       performance,
       startDate,
     }),
@@ -631,18 +672,9 @@ export const getDepartment = async (departmentId: string) => {
 
 // -----------------------------Forms----------------------
 export const getAllForms = async () => {
-  // const session: SessionInterface | null = await getServerSession(authOptions);
-
-  // if (!session?.user?.accessToken) {
-  //   throw new Error("User not authenticated or access token missing");
-  // }
-
   const endpoint = `${apiUrl}/appraisal-form`;
   let result = await fetch(endpoint, {
     method: "GET",
-    headers: {
-      // Authorization: `Bearer ${session?.user?.accessToken}`,
-    },
   });
 
   if (!result.ok) {
@@ -651,6 +683,87 @@ export const getAllForms = async () => {
   }
 
   return result.json();
+};
+
+export const getForm = async (formId: string) => {
+  const session: SessionInterface | null = await getServerSession(authOptions);
+
+  if (!session?.user?.accessToken) {
+    throw new Error("User not authenticated or access token missing");
+  }
+
+  const endpoint = `${apiUrl}/appraisal-form/${formId}`;
+
+  let result = await fetch(endpoint, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${session?.user?.accessToken}`,
+    },
+  });
+
+  if (!result.ok) {
+    const errorMessage = `Failed to fetch form. Status: ${result.status}, ${result.statusText}`;
+    throw new Error(errorMessage);
+  }
+
+  return result.json();
+};
+
+export const createForm = async (
+  session: any,
+  employeeName: string,
+  position: string,
+  department: string,
+  dateOfReview: string,
+  typeOfReview: string,
+  questions: any
+) => {
+  // const session: SessionInterface | null = await getServerSession(authOptions);
+
+  if (!session?.user?.accessToken) {
+    throw new Error("User not authenticated or access token missing");
+  }
+
+  const endpoint = `${apiUrl}/appraisal-form/new`;
+
+  let res = await fetch(endpoint, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${session.user.accessToken}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      employeeName,
+      position,
+      department,
+      dateOfReview,
+      typeOfReview,
+      questions,
+    }),
+  });
+
+  // console.log("Response status:", res.status);
+  const contentType = res.headers.get("content-type");
+
+  if (contentType && contentType.includes("application/json")) {
+    try {
+      const jsonResponse = await res.json();
+      console.log("Json response:", jsonResponse);
+      return jsonResponse;
+    } catch (error) {
+      console.error("Error parsing JSON:", error);
+      return undefined;
+    }
+  } else {
+    // If the content type is not JSON, handle it differently
+    const responseText = await res.text();
+    console.log("Response body:", responseText);
+
+    if (!res.ok) return undefined;
+
+    // Handle the non-JSON response accordingly
+    return responseText;
+  }
 };
 
 // --------------------------Meetings---------------------------
@@ -695,7 +808,7 @@ export const getMeeting = async (meetingId: string) => {
   });
 
   if (!result.ok) {
-    const errorMessage = `Failed to fetch manager. Status: ${result.status}, ${result.statusText}`;
+    const errorMessage = `Failed to fetch meeting. Status: ${result.status}, ${result.statusText}`;
     throw new Error(errorMessage);
   }
 
