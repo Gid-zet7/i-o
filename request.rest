@@ -67,6 +67,7 @@ Authorization: Bearer
 
 
 
+
 ###
 POST http://localhost:3000/api/employees/new
 Authorization: Bearer 
@@ -102,10 +103,11 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:3000/api/employees/delete
+Authorization: Bearer 
 Content-Type: application/json
 
 {
-    "id": "659f0716714ed7be0193377e"
+    "id": "65bb297941c3a74a300bd8d3"
 }
 
 #--------------------Department routes-------------------------------
@@ -146,12 +148,13 @@ Content-Type: application/json
 
 #--------------------Manager routes-------------------------------
 ###
-GET http://localhost:3000/api/managers/65afb16318f8ad780287acd0
+GET http://localhost:3000/api/managers/65b16eb81c81b14695211846
 Authorization: Bearer 
 
 ###
 GET http://localhost:3000/api/managers
 Authorization: Bearer 
+
 
 
 
@@ -202,4 +205,80 @@ Content-Type: application/json
     "description": "The goal of this project is to develop a comprehensive Remote Work Plan system that facilitates efficient and productive remote collaboration within our orgainzation. The system will provide tools and features to enhance communication, task management, and overall workflow for remote teams",
     "startDate": "1/1/2024",
     "tasks": [{"description": "Personalized dashboards for users to track tasks, deadlines, and team activities", "dueDate": "2/11/2024", "completed": false}, {"description": "Create, assign, and track tasks. Also set deadlines and priorities for tasks", "dueDate": "2/11/2024", "completed": false}, {"description": "Real-time messaging and discussion boards for team communication", "dueDate": "2/11/2024", "completed": false}]
+}
+
+# ----------------------Appraisal form------------------
+
+###
+GET http://localhost:3000/api/appraisal-form
+
+###
+POST http://localhost:3000/api/appraisal-form/new
+Authorization: Bearer 
+Content-Type: application/json
+
+{
+    "employeeName": "User_demo6",
+    "position": "Junior Developer",
+    "department": "IT Department",
+    "dateOfReview": "1-25-2024",
+    "typeOfReview": "Six-Month Review",
+    "questions": [
+  {
+    "questionText": "Knowledge of job?",
+    "questionType": "radio",
+    "options": [ [{"optionText": "Outstanding"}], [{"optionText": "Very Good"}], [{"optionText": "Good"}], [{"optionText": "Below Average"}], [{"optionText": "Unsatisfactory"}] ],
+    "type": false,
+    "open": true,
+    "required": false
+  }
+]
+
+}
+
+# ----------------------Meeting------------------
+###
+GET http://localhost:3000/api/meetings
+Authorization: Bearer 
+
+###
+POST http://localhost:3000/api/meetings/new
+Authorization: Bearer
+Content-Type: application/json
+
+{
+    "title": "Demo project",
+    "date": "1/1/2024",
+    "startTime": "2pm",
+    "endTime": "4pm",
+    "participants": ["User_demo6"],
+    "agenda": "Sales improvement"
+}
+
+
+# ----------------------Performance------------------
+###
+GET http://localhost:3000/api/performance
+Authorization: Bearer
+
+###
+POST http://localhost:3000/api/performance/new
+Authorization: Bearer
+Content-Type: application/json
+
+{
+    "employee": "User_demo5",
+    "date": "1/1/2024",
+    "feedback": "feedback",
+    "rating": "8.9",
+    "data": [
+  { "question": "Knowledge of job?", "response": "Outstanding" },
+  { "question": "Productivity?", "response": "Very Good" },
+  {
+    "question": "Reliability and Dependability?",
+    "response": "Outstanding"
+  },
+  { "question": "Creativity", "response": "Outstanding" }
+]
+    
 }
