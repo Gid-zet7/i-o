@@ -34,11 +34,21 @@ export const POST = async (request: Request) => {
     );
   }
 
-  const { form_title, form_desc, questions } = await request.json();
+  const {
+    employeeName,
+    position,
+    department,
+    dateOfReview,
+    typeOfReview,
+    questions,
+  } = await request.json();
 
   if (
-    !form_title ||
-    !form_desc ||
+    !employeeName ||
+    !position ||
+    !department ||
+    !dateOfReview ||
+    !typeOfReview ||
     !Array.isArray(questions) ||
     !questions.length
   ) {
@@ -48,12 +58,15 @@ export const POST = async (request: Request) => {
   await connectDB();
 
   const appraisalForm = await AppraisalForm.create({
-    form_title,
-    form_desc,
+    employeeName,
+    position,
+    department,
+    dateOfReview,
+    typeOfReview,
     questions: questions.map((question) => question),
   });
 
-  if (!appraisalForm) {
+  if (appraisalForm) {
     return new Response("Form saved!", { status: 200 });
   } else {
     return new Response("Something went wrong!, try again", { status: 400 });
