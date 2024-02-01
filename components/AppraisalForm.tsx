@@ -1,25 +1,31 @@
 "use client";
 import { useState } from "react";
 import Typography from "@mui/material/Typography";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Select from "@mui/material/Select";
-import Switch from "@mui/material/Switch";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import IconButton from "@mui/material/IconButton";
-import Button from "@mui/material/Button";
-import MenuItem from "@mui/material/MenuItem";
 import { FilterNone, Close, Delete } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
-import { Paper, TextField } from "@mui/material";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import InputLabel from "@mui/material/InputLabel";
+import {
+  Paper,
+  TextField,
+  Box,
+  Grid,
+  InputLabel,
+  FormControlLabel,
+  Select,
+  Switch,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  IconButton,
+  Button,
+  MenuItem,
+  FormControl,
+} from "@mui/material";
 import SideMenu from "@/stories/SideMenu/SideMenu";
-import FormControl from "@mui/material/FormControl";
+import { createForm } from "@/lib/actions";
+import { useSession } from "next-auth/react";
 
 const AppraisalForm = () => {
+  const { data: session } = useSession();
   const [employeeName, setEmployeeName] = useState("");
   const [position, setPosition] = useState("");
   const [department, setDepartment] = useState("");
@@ -37,7 +43,8 @@ const AppraisalForm = () => {
     },
   ]);
 
-  const [error, setError] = useState("");
+  const [error, setError] = useState<any>("");
+  const [isSuccess, setIsSuccess] = useState<string>("");
   const router = useRouter();
 
   function changeQuestion(text: string, i: number) {
@@ -51,16 +58,6 @@ const AppraisalForm = () => {
     optionsQuestion[i].options[j].optionText = text;
     setQuestions(optionsQuestion);
   }
-
-  // function addQuestionType(i: number, type: string) {
-  //   let ques = [...questions];
-  //   ques[i].questionType = type;
-  //   ques[i].options.optionId = type;
-  //   if (type === "text" && ques[i].options.length > 1) {
-  //     ques[i].options.splice(1);
-  //   }
-  //   setQuestions(ques);
-  // }
 
   function removeOption(i: number, j: number) {
     let RemoveOptionQuestion = [...questions];
@@ -155,31 +152,25 @@ const AppraisalForm = () => {
     }
 
     try {
-      const result = await fetch(
-        "http://localhost:3000/api/appraisal-form/new",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            employeeName,
-            position,
-            department,
-            dateOfReview,
-            typeOfReview,
-            questions,
-          }),
-        }
+      const result = await createForm(
+        session,
+        employeeName,
+        position,
+        department,
+        dateOfReview,
+        typeOfReview,
+        questions
       );
 
-      if (result.ok) {
-        router.push("/");
+      if (result !== undefined && result !== null) {
+        setError("");
+        setIsSuccess("Succesful");
+        router.push("/employees");
       } else {
-        console.log("failed to create from.");
+        setError("Failed to create employee. Please check the input.");
       }
-    } catch (error) {
-      console.log("Error: ", error);
+    } catch (error: any) {
+      setError(error.message);
     }
   };
 
@@ -258,50 +249,6 @@ const AppraisalForm = () => {
                       changeQuestion(e.target.value, i);
                     }}
                   />
-                  {/* <Select
-                    className="select"
-                    style={{
-                      color: "#5f6368",
-                      fontSize: ".8rem",
-                      width: "clamp(3rem, 10vw, 8rem)",
-                    }}
-                    value="select"
-                  >
-                    <MenuItem
-                      className="text-slate-400"
-                      id="text"
-                      value="Text"
-                      onClick={() => addQuestionType(i, "text")}
-                    >
-                      <Subject style={{ marginRight: "10px" }} />
-                      Paragraph
-                    </MenuItem>
-                    <MenuItem
-                      className="text-slate-400"
-                      id="checkbox"
-                      value="Checkbox"
-                      onClick={() => addQuestionType(i, "checkbox")}
-                    >
-                      <CheckBox
-                        // style={{ marginRight: "10px", color: "#70757a" }}
-                        // checked
-                        className="mr-3 text-slate-500"
-                      />
-                      Checkbox
-                    </MenuItem>
-                    <MenuItem
-                      className="text-slate-400"
-                      id="radio"
-                      value="Radio"
-                      onClick={() => addQuestionType(i, "radio")}
-                    >
-                      <Radio
-                        style={{ marginRight: "10px", color: "#70757a" }}
-                        checked
-                      />
-                      Multiple Choice
-                    </MenuItem>
-                  </Select> */}
                 </div>
                 {question.options.map((op, j) => (
                   <div className="flex items-center" key={j}>
@@ -496,78 +443,30 @@ const AppraisalForm = () => {
                       </MenuItem>
                     </Select>
                   </FormControl>
-                  {/* <Select
-                    id="review"
-                    required
-                    fullWidth
-                    name="review"
-                    // className="text-black"
-                    label="Type of Review"
-                    value={typeOfReview}
-                  >
-                    <MenuItem>Six-Month Review</MenuItem>
-                    <MenuItem>Annual Review</MenuItem>
-                  </Select> */}
                 </Grid>
               </Grid>
             </Grid>
           </Paper>
         </Box>
         {questionsUI()}
+        {isSuccess && (
+          <div className="bg-green-400 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
+            {isSuccess}
+          </div>
+        )}
+        {error && (
+          <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
+            {error}
+          </div>
+        )}
         <div className="save_form">
           <button
-            // variant="contained"
-            // color="primary"
-            // style={{ fontSize: "14px" }}
             onClick={onSaveFormClicked}
-            //   disabled={!canSave}
             className="text-base font-medium bg-green-400 text-black hover:opacity-90 p-3 rounded-lg"
           >
             Save Form
           </button>
         </div>
-        {/* <div className="flex flex-col items-center">
-
-        <br></br>
-        <div className="w-11/12">
-          <div className="question_title_section">
-            <div className="flex flex-col gap-6 bg-white border-2 rounded-lg py-8 px-7 capitalize">
-              <input
-                type="text"
-                className="box-border text-2xl font-medium w-full border-none border-b-2 h-10 outline-none"
-                style={{ color: "black" }}
-                placeholder="Untitled document"
-                name="research_title"
-                onChange={(e) => {
-                  setFormTitle(e.target.value);
-                }}
-              />
-              <input
-                type="text"
-                className="border-none outline-none text-black"
-                placeholder="Form description"
-                name="research_desc"
-                onChange={(e) => {
-                  setFormDesc(e.target.value);
-                }}
-              />
-            </div>
-          </div>
-          {questionsUI()}
-          <div className="save_form">
-            <button
-              // variant="contained"
-              // color="primary"
-              // style={{ fontSize: "14px" }}
-              onClick={onSaveFormClicked}
-              //   disabled={!canSave}
-              className="text-base font-medium bg-green-400 text-black hover:opacity-90 p-3 rounded-lg"
-            >
-              Save Form
-            </button>
-          </div>
-        </div>
-      </div> */}
       </section>
     </>
   );
