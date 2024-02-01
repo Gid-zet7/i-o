@@ -18,9 +18,22 @@ type Employee = {
   user: User;
   firstname: string;
   lastname: string;
+  bio: string;
+  gender: string;
+  contact: string;
+  permanent_address: string;
+  current_address: string;
+  birthday: string;
   department: Department;
   position: string;
   skills: { skill: string }[];
+  experience: { position: string; startDate: string; endDate: string }[];
+  education: {
+    school: string;
+    certificate: string;
+    startDate: string;
+    endDate: string;
+  }[];
   performance: Performance[];
   startDate: Date;
   endDate?: Date;
