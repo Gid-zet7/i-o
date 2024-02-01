@@ -41,20 +41,54 @@ export const POST = async (request: Request) => {
     username,
     firstname,
     lastname,
+    bio,
+    gender,
+    contact,
+    permanent_address,
+    current_address,
+    birthday,
     department,
     position,
     skills,
+    experiences,
+    education,
     startDate,
   } = await request.json();
+
+  console.log(
+    username,
+    firstname,
+    lastname,
+    bio,
+    gender,
+    contact,
+    permanent_address,
+    current_address,
+    birthday,
+    department,
+    position,
+    skills,
+    experiences,
+    education,
+    startDate
+  );
 
   // Return an error is any these details is missing
   if (
     !username ||
     !firstname ||
     !lastname ||
+    !bio ||
+    !gender ||
+    !contact ||
+    !permanent_address ||
+    !current_address ||
+    !birthday ||
     !department ||
     !position ||
     !skills ||
+    !experiences ||
+    !education ||
     !startDate
   ) {
     return new Response("Fill all required fields", { status: 400 });
@@ -92,9 +126,17 @@ export const POST = async (request: Request) => {
       user: findUser,
       firstname,
       lastname,
+      bio,
+      gender,
+      contact,
+      permanent_address,
+      current_address,
+      birthday,
       department: findDepartment,
       position,
       skills,
+      experience: experiences,
+      education,
       startDate,
     };
 

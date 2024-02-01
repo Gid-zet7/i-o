@@ -40,9 +40,17 @@ export const PATCH = async (request: Request) => {
     id,
     firstname,
     lastname,
+    bio,
+    gender,
+    contact,
+    permanent_address,
+    current_address,
+    birthday,
     department,
     position,
     skills,
+    experiences,
+    education,
     performance,
     startDate,
     endDate,
@@ -80,8 +88,16 @@ export const PATCH = async (request: Request) => {
   employee.department = findDepartment;
   employee.firstname = firstname;
   employee.lastname = lastname;
+  employee.bio = bio;
+  employee.gender = gender;
+  employee.contact = contact;
+  employee.permanent_address = permanent_address;
+  employee.current_address = current_address;
+  employee.birthday = birthday;
   employee.position = position;
   employee.skills = skills;
+  employee.experience = experiences;
+  employee.education = education;
   employee.startDate = startDate;
 
   if (performance) {
