@@ -1,6 +1,6 @@
 import AppraisalForm from "@/models/appraisalFormModel";
 import { connectDB } from "@/lib/database";
-import { verifyJwt } from "@/lib/jwt";
+// import { verifyJwt } from "@/lib/jwt";
 
 type Props = {
   params: {
@@ -9,36 +9,36 @@ type Props = {
 };
 
 export const GET = async (request: Request, { params: { id } }: Props) => {
-  const authHeader =
-    request.headers.get("authorization") ||
-    request.headers.get("Authorization");
+  // const authHeader =
+  //   request.headers.get("authorization") ||
+  //   request.headers.get("Authorization");
 
-  // console.log(authHeader);
+  // // console.log(authHeader);
 
-  if (!authHeader?.startsWith("Bearer ")) {
-    return new Response(
-      JSON.stringify({
-        error: "unauthorized",
-      }),
-      {
-        status: 401,
-      }
-    );
-  }
+  // if (!authHeader?.startsWith("Bearer ")) {
+  //   return new Response(
+  //     JSON.stringify({
+  //       error: "unauthorized",
+  //     }),
+  //     {
+  //       status: 401,
+  //     }
+  //   );
+  // }
 
-  const token = authHeader.split(" ")[1];
-  // console.log(token);
+  // const token = authHeader.split(" ")[1];
+  // // console.log(token);
 
-  if (!token || !verifyJwt(token)) {
-    return new Response(
-      JSON.stringify({
-        error: "unauthorized",
-      }),
-      {
-        status: 401,
-      }
-    );
-  }
+  // if (!token || !verifyJwt(token)) {
+  //   return new Response(
+  //     JSON.stringify({
+  //       error: "unauthorized",
+  //     }),
+  //     {
+  //       status: 401,
+  //     }
+  //   );
+  // }
 
   await connectDB();
 
