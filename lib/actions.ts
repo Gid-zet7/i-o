@@ -686,19 +686,19 @@ export const getAllForms = async () => {
 };
 
 export const getForm = async (formId: string) => {
-  const session: SessionInterface | null = await getServerSession(authOptions);
+  // const session: SessionInterface | null = await getServerSession(authOptions);
 
-  if (!session?.user?.accessToken) {
-    throw new Error("User not authenticated or access token missing");
-  }
+  // if (!session?.user?.accessToken) {
+  //   throw new Error("User not authenticated or access token missing");
+  // }
 
   const endpoint = `${apiUrl}/appraisal-form/${formId}`;
 
   let result = await fetch(endpoint, {
     method: "GET",
-    headers: {
-      Authorization: `Bearer ${session?.user?.accessToken}`,
-    },
+    // headers: {
+    //   Authorization: `Bearer ${session?.user?.accessToken}`,
+    // },
   });
 
   if (!result.ok) {
