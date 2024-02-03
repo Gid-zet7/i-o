@@ -4,6 +4,7 @@ import { useState } from "react";
 import Button from "@mui/material/Button";
 import { addPerformance } from "@/lib/actions";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 type Params = {
   form: Forms;
@@ -11,6 +12,7 @@ type Params = {
 
 export default function Form({ form }: Params) {
   const { data: session } = useSession();
+  const router = useRouter();
   const [data, setData] = useState(
     form.questions.map((question) => {
       return { question: question.questionText, response: "" };
@@ -24,7 +26,7 @@ export default function Form({ form }: Params) {
   ) => {
     console.log(response, question, index);
     let newData = [...data];
-    console.log(newData);
+    // console.log(newData);
     newData[index].question = question;
     newData[index].response = response;
     setData(newData);
@@ -67,34 +69,32 @@ export default function Form({ form }: Params) {
     return (
       <section className="mx-auto max-w-6xl p-3 md:ml-64">
         <form className="data-form">
-          <Paper className="rounded-lg mb-4 border-t-4 border-red-600">
-            <div className="p-4">
-              <Typography fontSize={"h6"} marginBottom={3}>
-                <span className="font-bold text-xl">Employee name: </span>
-                <span className="font-medium">{form.employeeName}</span>
-              </Typography>
-              <Typography fontSize={"h6"} marginBottom={3}>
-                <span className="font-bold text-xl">Position: </span>
-                <span className="font-medium">{form.position} </span>
-              </Typography>
-              <Typography fontSize={"h6"} marginBottom={3}>
-                <span className="font-bold text-xl">Department: </span>
-                <span className="font-medium">{form.department} </span>
-              </Typography>
-              <Typography fontSize={"h6"} marginBottom={3}>
-                <span className="font-bold text-xl">Type of Review: </span>
-                <span className="font-medium">{form.typeOfReview} </span>
-              </Typography>
+          <Paper className=" p-2 border-t-4 border-green-400 grid md:grid-cols-2 mb-4">
+            <div className="p-2 font-semibold">Employee</div>
+            <div className="p-2 text-sm text-gray-500 hover:text-gray-600 leading-6">
+              {form.employeeName}
+            </div>
+            <div className="p-2 font-semibold">Department</div>
+            <div className="p-2 text-sm text-gray-500 hover:text-gray-600 leading-6">
+              {form.department}
+            </div>
+            <div className="p-2 font-semibold">Position</div>
+            <div className="p-2 text-sm text-gray-500 hover:text-gray-600 leading-6">
+              {form.position}
+            </div>
+            <div className="p-2 font-semibold">Type of review</div>
+            <div className="p-2 text-sm text-gray-500 hover:text-gray-600 leading-6">
+              {form.typeOfReview}
             </div>
           </Paper>
 
           {form.questions.map((question, i: number) => {
             return (
               <Paper
-                className="rounded-lg mb-3 p-4 border-l-4 border-red-600"
+                className="rounded-lg mb-3 p-4 border-l-2 border-green-400"
                 key={i}
               >
-                <p className="font-medium text-2xl mb-4">
+                <p className="font-semibold mb-4">
                   {i + 1}. {question.questionText}
                 </p>
                 {question.options.map((option, j) => {
@@ -127,6 +127,15 @@ export default function Form({ form }: Params) {
               // disabled={!canSave}
             >
               Submit
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              className=" text-blue-300"
+              onClick={router.back}
+              // disabled={!canSave}
+            >
+              Cancel
             </Button>
             {/* {deleteButton} */}
           </div>
