@@ -89,6 +89,7 @@ interface Performance {
 }
 
 type Forms = {
+  _id: string;
   employeeName: string;
   position: string;
   department: string;
