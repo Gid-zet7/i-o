@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getEmployee } from "@/lib/actions";
 import Profile from "@/components/EmployeeAndManager/Profile";
+import { formatDate } from "@/helper/Util";
 
 type Params = {
   params: {
@@ -34,20 +35,7 @@ export default async function EmployeePage({ params: { employeeId } }: Params) {
     throw new Error("Employee not found");
   }
 
-  console.log(employee.performance);
-
-  let date = new Date(employee.startDate);
-  let fullDate = new Date(
-    date.getFullYear(),
-    date.getMonth(),
-    date.getDate()
-  ).toString();
-
-  const day = fullDate.split(" ")[0];
-  const month = fullDate.split(" ")[1];
-  const year = fullDate.split(" ")[3];
-
-  const formattedDate = `${day} ${month} ${year}`;
+  const formattedDate = formatDate(employee.startDate);
 
   return (
     <>
