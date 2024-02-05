@@ -1,4 +1,4 @@
-import NewManagerForm from "@/components/NewManagerForm";
+import NewManagerForm from "@/components/EmployeeAndManager/NewManagerForm";
 import { getAllEmployees, getAllProjects } from "@/lib/actions";
 import { notFound } from "next/navigation";
 
