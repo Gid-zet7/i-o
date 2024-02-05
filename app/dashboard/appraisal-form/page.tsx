@@ -1,7 +1,7 @@
 "use client";
 
 import { getAllForms } from "@/lib/actions";
-import FormsCard from "@/components/FormsCard";
+import FormsCard from "@/components/Appraisal/FormsCard";
 import SideMenu from "@/stories/SideMenu/SideMenu";
 
 export default async function FormsPage() {

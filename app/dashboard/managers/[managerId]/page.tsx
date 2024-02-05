@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getManager } from "@/lib/actions";
 // import { notFound } from "next/navigation";
-import Profile from "@/components/Profile";
+import Profile from "@/components/EmployeeAndManager/Profile";
 
 type Params = {
   params: {

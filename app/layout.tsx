@@ -4,7 +4,7 @@ import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import "./globals.css";
 import React from "react";
-import Subfields from "@/components/Subfields";
+import Subfields from "@/components/HomePage/Subfields";
 import lightTheme from "@/theme/lightTheme";
 import darkTheme from "@/theme/darkTheme";
 import { createTheme, ThemeProvider } from "@mui/material/styles";

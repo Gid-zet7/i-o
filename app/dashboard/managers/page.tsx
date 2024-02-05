@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getAllManagers } from "@/lib/actions";
-import ManagerCard from "@/components/ManagerCard";
+import ManagerCard from "@/components/EmployeeAndManager/ManagerCard";
 import SideMenu from "@/stories/SideMenu/SideMenu";
 
 export const metadata: Metadata = {

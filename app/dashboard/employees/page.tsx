@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getAllEmployees } from "@/lib/actions";
-import Card from "@/components/Card";
+import Card from "@/components/EmployeeAndManager/Card";
 import SideMenu from "@/stories/SideMenu/SideMenu";
 
 export const metadata: Metadata = {

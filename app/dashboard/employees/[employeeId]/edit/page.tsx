@@ -5,7 +5,7 @@ import {
   getEmployee,
 } from "@/lib/actions";
 import { notFound } from "next/navigation";
-import EditEmployeeForm from "@/components/EditEmployeeForm";
+import EditEmployeeForm from "@/components/EmployeeAndManager/EditEmployeeForm";
 
 type Params = {
   params: {

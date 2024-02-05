@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getAllMeetings, getManager } from "@/lib/actions";
 import { notFound } from "next/navigation";
-import EditManagerForm from "@/components/EditManagerForm";
+import EditManagerForm from "@/components/EmployeeAndManager/EditManagerForm";
 import { getAllEmployees, getAllProjects } from "@/lib/actions";
 
 type Params = {

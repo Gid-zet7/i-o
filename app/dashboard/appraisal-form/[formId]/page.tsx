@@ -1,7 +1,7 @@
 "use client";
 import type { Metadata } from "next";
 import { getForm } from "@/lib/actions";
-import Form from "@/components/Form";
+import Form from "@/components/Appraisal/Form";
 
 type Params = {
   params: {

@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import ProfileMenu from "./ProfileMenu";
+import ProfileMenu from "./EmployeeAndManager/ProfileMenu";
 import AuthProvider from "./AuthProvider";
 import { useSession } from "next-auth/react";
 import ThemeToggleButton from "@/components/themeToggleButton/themeToggleButton";

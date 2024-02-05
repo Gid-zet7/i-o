@@ -1,9 +1,8 @@
 import Image from "next/image";
-import Navbar from "@/components/Navbar";
-import Subfields from "@/components/Subfields";
-import Slides from "@/components/Slides";
-import Services from "@/components/Services";
-import Contact from "@/components/Contact";
+import Subfields from "@/components/HomePage/Subfields";
+import Slides from "@/components/HomePage/Slides";
+import Services from "@/components/HomePage/Services";
+import Contact from "@/components/HomePage/Contact";
 
 export default function Home() {
   return (
