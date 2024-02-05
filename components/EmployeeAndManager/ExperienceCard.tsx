@@ -1,3 +1,4 @@
+import { formatDate } from "@/helper/Util";
 import { Paper } from "@mui/material/";
 
 type Props = {
@@ -40,11 +41,13 @@ export default function Experience({ experiences, education }: Props) {
           </div>
           <ul className="list-inside space-y-2">
             {experiences?.map((experience) => {
+              const formatStartDate = formatDate(experience.startDate);
+              const formatEndDate = formatDate(experience.endDate);
               return (
                 <li>
                   <div className="text-teal-600">{experience.position}</div>
                   <div className="text-gray-500 text-xs">
-                    {experience.startDate} - {experience.endDate}
+                    {formatStartDate} - {formatEndDate}
                   </div>
                 </li>
               );
@@ -78,11 +81,13 @@ export default function Experience({ experiences, education }: Props) {
           </div>
           <ul className="list-inside space-y-2">
             {education?.map((edu) => {
+              const formatStartDate = formatDate(edu.startDate);
+              const formatEndDate = formatDate(edu.endDate);
               return (
                 <li>
                   <div className="text-teal-600">{`${edu.certificate} from ${edu.school}`}</div>
                   <div className="text-gray-500 text-xs">
-                    {edu.startDate}- {edu.endDate}
+                    {formatStartDate}- {formatEndDate}
                   </div>
                 </li>
               );
