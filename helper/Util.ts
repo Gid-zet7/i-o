@@ -27,3 +27,19 @@ export const months = (config: any) => {
 
   return values;
 };
+
+export const formatDate = (date: any) => {
+  let newDate = new Date(date);
+  let fullDate = new Date(
+    newDate.getFullYear(),
+    newDate.getMonth(),
+    newDate.getDate()
+  ).toString();
+
+  const day = fullDate.split(" ")[0];
+  const month = fullDate.split(" ")[1];
+  const year = fullDate.split(" ")[3];
+
+  const formattedDate = `${day} ${month} ${year}`;
+  return formattedDate;
+};
