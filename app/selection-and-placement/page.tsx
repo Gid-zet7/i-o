@@ -1,4 +1,4 @@
-import SelecAndPlacement from "@/components/SelecAndPlacement";
+import SelecAndPlacement from "@/components/HomePage/SelecAndPlacement";
 
 export default function SelectionPage() {
   return <SelecAndPlacement />;
