@@ -78,6 +78,7 @@ type Meeting = {
 
 interface Performance {
   _id: string;
+  title: string;
   employee: Employee;
   date: Date;
   feedback: string;
@@ -90,6 +91,7 @@ interface Performance {
 
 type Forms = {
   _id: string;
+  title: string;
   employeeName: string;
   position: string;
   department: string;
