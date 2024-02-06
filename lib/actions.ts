@@ -200,7 +200,7 @@ export const updateEmployee = async (
     startDate: string;
     endDate: string;
   }[],
-  performance: Performance[],
+  performance: string[],
   startDate: string
 ) => {
   if (!session?.user?.accessToken) {
@@ -711,6 +711,7 @@ export const getForm = async (formId: string) => {
 
 export const createForm = async (
   session: any,
+  title: string,
   employeeName: string,
   position: string,
   department: string,
@@ -733,6 +734,7 @@ export const createForm = async (
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
+      title,
       employeeName,
       position,
       department,
