@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 const performanceSchema = new Schema<Performance>(
   {
+    title: { type: String, require: true },
     employee: { type: Schema.Types.ObjectId, ref: "employee" },
     date: { type: Date, require: true },
     feedback: { type: String, require: true },

@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 const appraisalSchema = new Schema<Forms>(
   {
+    title: { type: String, require: true },
     employeeName: { type: String, require: true },
     position: { type: String, require: true },
     department: { type: String, require: true },
