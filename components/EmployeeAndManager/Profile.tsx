@@ -4,6 +4,7 @@ import AboutCard from "./AboutCard";
 import ExperienceCard from "./ExperienceCard";
 import ProjectsCard from "./ProjectsCard";
 import MeetingsCard from "./MeetingsCard";
+import PerformanceCard from "./PerformanceCard";
 
 type Props = {
   employee?: Employee;
@@ -73,6 +74,11 @@ export default function Profile({ employee, formattedDate, manager }: Props) {
             <div className="my-4"></div>
             {manager?.projects.length ? (
               <ProjectsCard projects={manager.projects} />
+            ) : null}
+
+            <div className="my-4"></div>
+            {employee?.performance ? (
+              <PerformanceCard performance={employee.performance} />
             ) : null}
           </div>
         </div>
