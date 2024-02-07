@@ -43,3 +43,9 @@ export const formatDate = (date: any) => {
   const formattedDate = `${day} ${month} ${year}`;
   return formattedDate;
 };
+
+export const getRandomNumber = (min: number, max: number) => {
+  min = Math.ceil(min);
+  max = Math.ceil(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
