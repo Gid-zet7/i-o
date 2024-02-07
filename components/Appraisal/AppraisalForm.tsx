@@ -26,6 +26,7 @@ import { useSession } from "next-auth/react";
 
 const AppraisalForm = () => {
   const { data: session } = useSession();
+  const [title, setTitle] = useState("");
   const [employeeName, setEmployeeName] = useState("");
   const [position, setPosition] = useState("");
   const [department, setDepartment] = useState("");
@@ -139,6 +140,7 @@ const AppraisalForm = () => {
 
   const onSaveFormClicked = async () => {
     if (
+      !title ||
       !employeeName ||
       !position ||
       !department ||
@@ -154,6 +156,7 @@ const AppraisalForm = () => {
     try {
       const result = await createForm(
         session,
+        title,
         employeeName,
         position,
         department,
@@ -377,6 +380,16 @@ const AppraisalForm = () => {
         <Box>
           <Paper sx={{ padding: "1rem 2rem" }}>
             <Grid container justifyContent="center">
+              <Grid item xs={12} sm={6} mb={2}>
+                <TextField
+                  required
+                  fullWidth
+                  label="Title"
+                  name="title"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+              </Grid>
               <Grid item xs={12} sm={6} mb={2}>
                 <TextField
                   required
