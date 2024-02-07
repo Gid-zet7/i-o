@@ -35,11 +35,11 @@ export const POST = async (request: Request) => {
   }
 
   // Destructure performance details from request
-  const { employee, date, feedback, data } = await request.json();
-  console.log(employee, date, feedback, data);
+  const { title, employee, date, feedback, data } = await request.json();
+  console.log(title, employee, date, feedback, data);
 
   // Return an error is any these details is missing
-  if (!employee || !date || !feedback || !data) {
+  if (!title || !employee || !date || !data) {
     return new Response("Fill all required fields", { status: 400 });
   }
 
@@ -47,9 +47,13 @@ export const POST = async (request: Request) => {
     // Connecting to the database
     await connectDB();
 
+    // const findByTitle = await Performance.findOne({ title }).exec();
+
     const findUser = await UserModel.findOne({
       username: employee,
     }).exec();
+
+    console.log(findUser);
 
     if (!findUser) return new Response("Sign up first", { status: 409 });
 
@@ -57,48 +61,31 @@ export const POST = async (request: Request) => {
       .populate("user")
       .exec();
 
-    // console.log(findEmployee);
+    console.log(findEmployee);
+    // if (!findByTitle)
+    //   return new Response("Invalid title", {
+    //     status: 409,
+    //   });
 
     if (!findEmployee)
       return new Response("Register as an employee first", {
         status: 409,
       });
-    //        for (const newData of data) {
-    //          const result = await ResearchData.findOne({
-    //            "data.question": newData.question,
-    //            "data.response": newData.response,
-    //          });
-    //          if (result) {
-    //            await ResearchData.updateOne(
-    //              {
-    //                "data.question": newData.question,
-    //                "data.response": newData.response,
-    //              },
-    //              { $set: { "data.value": result.data.value + 1 } }
-    //            );
-    //            console.log("Document updated successfully.");
-    //          } else {
-    //            await ResearchData.create({
-    //              data: {
-    //                question: newData.question,
-    //                response: newData.response,
-    //                value: 1,
-    //              },
-    //            });
-    //            console.log("Document inserted successfully.");
-    //          }
-    //        }
+
     // Create performance object
     const performanceObj = {
+      title,
       employee: findEmployee,
       date,
-      feedback,
+      // feedback,
       // ratings,
       data,
     };
+    console.log("saving...");
     // Save to the database
     const newPerformance = await Performance.create(performanceObj);
     if (newPerformance) {
+      console.log("done");
       return new Response("Performance appraised successfully", {
         status: 200,
       });
