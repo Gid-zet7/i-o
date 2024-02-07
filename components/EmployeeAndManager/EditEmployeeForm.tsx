@@ -42,6 +42,10 @@ export default function EditEmployeeForm({
   if (employee.endDate) {
     formattedendDate = new Date(employee.endDate).toLocaleDateString();
   }
+  let performacesFormatted: string[] = [];
+  employee.performance?.map((perf) => {
+    performacesFormatted.push(perf.title);
+  });
   const { data: session } = useSession();
   const [firstname, setFirstname] = useState(employee.firstname);
   const [lastname, setLastname] = useState(employee.lastname);
@@ -58,7 +62,7 @@ export default function EditEmployeeForm({
   const [department, setDepartment] = useState(employee.department.name);
   const [position, setPosition] = useState(employee.position);
   const [skills, setSkills] = useState(employee.skills);
-  const [performance, setPerformance] = useState(employee.performance);
+  const [performance, setPerformance] = useState(performacesFormatted);
   const [experiences, setExperiences] = useState(employee.experience);
   const [education, setEducation] = useState(employee.education);
   const [startDate, setStartDate] = useState<string>(formattedStartDate);
@@ -67,6 +71,8 @@ export default function EditEmployeeForm({
   const [isSuccess, setIsSuccess] = useState<string>("");
 
   const router = useRouter();
+
+  console.log(performance);
 
   // ------------------Skills------------------
   const addOption = () => {
@@ -152,35 +158,30 @@ export default function EditEmployeeForm({
       endDate: "",
     });
     setEducation(allEdus);
-    console.log(education);
   };
 
   function changeEduSchoolOptionValue(text: string, i: number) {
     let optionEdus = [...education];
     optionEdus[i].school = text;
     setEducation(optionEdus);
-    console.log(education);
   }
 
   function changeEduCertificateOptionValue(text: string, i: number) {
     let optionEdus = [...education];
     optionEdus[i].certificate = text;
     setEducation(optionEdus);
-    console.log(education);
   }
 
   function changeEduStartOptionValue(text: string, i: number) {
     let optionEdus = [...education];
     optionEdus[i].startDate = text;
     setEducation(optionEdus);
-    console.log(education);
   }
 
   function changeEduEndDateOptionValue(text: string, i: number) {
     let optionEdus = [...education];
     optionEdus[i].endDate = text;
     setEducation(optionEdus);
-    console.log(education);
   }
 
   function removeEduOption(i: number) {
@@ -189,7 +190,6 @@ export default function EditEmployeeForm({
       RemoveOptionEdus.splice(i, 1);
       console.log(RemoveOptionEdus);
       setEducation(RemoveOptionEdus);
-      console.log(education);
     }
   }
 
@@ -272,7 +272,7 @@ export default function EditEmployeeForm({
 
   const performanceData: any[] = [];
   performances?.map((performance) => {
-    performanceData.push(performance.employee.user.username);
+    performanceData.push(performance.title);
   });
 
   return (
@@ -454,24 +454,22 @@ export default function EditEmployeeForm({
                       />
                     </Grid>
                     <Grid item xs={12}>
-                      <div className="xl:w-full border-b border-gray-300 dark:border-gray-700 py-5 mb-8">
-                        <div className="flex w-11/12 mx-auto xl:w-full xl:mx-0 items-center">
-                          <p className="text-lg font-bold">Skills</p>
-                          <div className="ml-2 cursor-pointer text-gray-600 dark:text-gray-400">
-                            <Tooltip
-                              title={
-                                <Typography
-                                  fontSize={16}
-                                >{`Skills`}</Typography>
-                              }
-                            >
-                              <IconButton>
-                                <InfoOutlinedIcon />
-                              </IconButton>
-                            </Tooltip>
-                          </div>
+                      {/* <div className="xl:w-full  py-5 mb-8"> */}
+                      <div className="flex w-11/12 mx-auto xl:w-full xl:mx-0 items-center">
+                        <p className="text-lg font-bold">Skills</p>
+                        <div className="ml-2 cursor-pointer text-gray-600 dark:text-gray-400">
+                          <Tooltip
+                            title={
+                              <Typography fontSize={16}>{`Skills`}</Typography>
+                            }
+                          >
+                            <IconButton>
+                              <InfoOutlinedIcon />
+                            </IconButton>
+                          </Tooltip>
                         </div>
                       </div>
+                      {/* </div> */}
 
                       {skills.map((skill, i) => (
                         <div className="flex items-center" key={i}>
@@ -520,130 +518,130 @@ export default function EditEmployeeForm({
                         }
                       ></FormControlLabel>
                     </Grid>
-                    <Grid container spacing={3}>
-                      <Grid item xs={12} marginBottom={4}>
-                        <div className="xl:w-full border-b border-gray-300 dark:border-gray-700 py-5 mb-8">
-                          <div className="flex w-11/12 mx-auto xl:w-full xl:mx-0 items-center">
-                            <p className="text-lg font-bold">Experience</p>
-                            <div className="ml-2 cursor-pointer text-gray-600 dark:text-gray-400">
-                              <Tooltip
-                                title={
-                                  <Typography
-                                    fontSize={16}
-                                  >{`Experience`}</Typography>
-                                }
-                              >
-                                <IconButton>
-                                  <InfoOutlinedIcon />
-                                </IconButton>
-                              </Tooltip>
+
+                    <Grid item xs={12} marginBottom={4}>
+                      {/* <div className="xl:w-full  py-5 mb-8"> */}
+                      <div className="flex w-11/12 mx-auto xl:w-full xl:mx-0 items-center">
+                        <p className="text-lg font-bold">Experience</p>
+                        <div className="ml-2 cursor-pointer text-gray-600 dark:text-gray-400">
+                          <Tooltip
+                            title={
+                              <Typography
+                                fontSize={16}
+                              >{`Experience`}</Typography>
+                            }
+                          >
+                            <IconButton>
+                              <InfoOutlinedIcon />
+                            </IconButton>
+                          </Tooltip>
+                        </div>
+                      </div>
+                      {/* </div> */}
+
+                      {experiences.map((experience: any, i) => (
+                        <div>
+                          <div className="flex items-center gap-4" key={i}>
+                            <div className="flex items-center mb-2">
+                              <TextField
+                                type="text"
+                                className="h-9 outline-none focus:border-b-2 border-blue-500 text- base text-black w-full mt-4"
+                                label="Position"
+                                placeholder={experience.position}
+                                value={experience.position}
+                                onChange={(e) => {
+                                  changeExpPositionOptionValue(
+                                    e.target.value,
+                                    i
+                                  );
+                                }}
+                              />
                             </div>
+                            <div className="flex items-center mb-2">
+                              <TextField
+                                type="text"
+                                className="h-9 outline-none focus:border-b-2 border-blue-500 text- base text-black w-full mt-4"
+                                label="Start Date"
+                                placeholder={"mmm/ddd/yyy"}
+                                value={new Date(
+                                  experience.startDate
+                                ).toLocaleDateString()}
+                                onChange={(e) => {
+                                  changeExpStartOptionValue(e.target.value, i);
+                                }}
+                              />
+                            </div>
+                            <div className="flex items-center mb-2">
+                              <TextField
+                                type="text"
+                                className="h-9 outline-none focus:border-b-2 border-blue-500 text- base text-black w-full mt-4"
+                                label="End Date"
+                                placeholder={"mmm/ddd/yyy"}
+                                value={new Date(
+                                  experience.endDate
+                                ).toLocaleDateString()}
+                                onChange={(e) => {
+                                  changeExpEndOptionValue(e.target.value, i);
+                                }}
+                              />
+                            </div>
+                            <IconButton
+                              key={i}
+                              aria-label="delete"
+                              onClick={() => {
+                                removeExpOption(i);
+                              }}
+                            >
+                              <Close />
+                            </IconButton>
                           </div>
                         </div>
-
-                        {experiences.map((experience: any, i) => (
+                      ))}
+                      <FormControlLabel
+                        control={<input type="radio" />}
+                        label={
                           <div>
-                            <div className="flex items-center" key={i}>
-                              <div className="flex items-center mb-2">
-                                <TextField
-                                  type="text"
-                                  className="h-9 outline-none focus:border-b-2 border-blue-500 text- base text-black w-full mt-4"
-                                  label="Position"
-                                  placeholder={experience.position}
-                                  value={experience.position}
-                                  onChange={(e) => {
-                                    changeExpPositionOptionValue(
-                                      e.target.value,
-                                      i
-                                    );
-                                  }}
-                                />
-                              </div>
-                              <div className="flex items-center mb-2">
-                                <TextField
-                                  type="text"
-                                  className="h-9 outline-none focus:border-b-2 border-blue-500 text- base text-black w-full mt-4"
-                                  label="Start Date"
-                                  placeholder={experience.startDate}
-                                  value={experience.startDate}
-                                  onChange={(e) => {
-                                    changeExpStartOptionValue(
-                                      e.target.value,
-                                      i
-                                    );
-                                  }}
-                                />
-                              </div>
-                              <div className="flex items-center mb-2">
-                                <TextField
-                                  type="text"
-                                  className="h-9 outline-none focus:border-b-2 border-blue-500 text- base text-black w-full mt-4"
-                                  label="End Date"
-                                  placeholder={experience.endDate}
-                                  value={experience.endDate}
-                                  onChange={(e) => {
-                                    changeExpEndOptionValue(e.target.value, i);
-                                  }}
-                                />
-                              </div>
-                              <IconButton
-                                key={i}
-                                aria-label="delete"
-                                onClick={() => {
-                                  removeExpOption(i);
-                                }}
-                              >
-                                <Close />
-                              </IconButton>
-                            </div>
+                            <Button
+                              size="small"
+                              style={{
+                                textTransform: "none",
+                                color: "#4285f4",
+                                fontSize: "13px",
+                                fontWeight: "600",
+                                marginTop: "1rem",
+                              }}
+                              onClick={() => addExpOption()}
+                            >
+                              Add experience
+                            </Button>
                           </div>
-                        ))}
-                        <FormControlLabel
-                          control={<input type="radio" />}
-                          label={
-                            <div>
-                              <Button
-                                size="small"
-                                style={{
-                                  textTransform: "none",
-                                  color: "#4285f4",
-                                  fontSize: "13px",
-                                  fontWeight: "600",
-                                  marginTop: "1rem",
-                                }}
-                                onClick={() => addExpOption()}
-                              >
-                                Add experience
-                              </Button>
-                            </div>
-                          }
-                        ></FormControlLabel>
-                      </Grid>
+                        }
+                      ></FormControlLabel>
                     </Grid>
 
                     <Grid item xs={12}>
-                      <div className="xl:w-full border-b border-gray-300 dark:border-gray-700 py-5 mb-8">
-                        <div className="flex w-11/12 mx-auto xl:w-full xl:mx-0 items-center">
-                          <p className="text-lg font-bold">Education</p>
-                          <div className="ml-2 cursor-pointer text-gray-600 dark:text-gray-400">
-                            <Tooltip
-                              title={
-                                <Typography
-                                  fontSize={16}
-                                >{`Education`}</Typography>
-                              }
-                            >
-                              <IconButton>
-                                <InfoOutlinedIcon />
-                              </IconButton>
-                            </Tooltip>
-                          </div>
+                      {/* <div className="xl:w-full  py-5 mb-8"> */}
+                      <div className="flex w-11/12 mx-auto xl:w-full xl:mx-0 items-center">
+                        <p className="text-lg font-bold">Education</p>
+                        <div className="ml-2 cursor-pointer text-gray-600 dark:text-gray-400">
+                          <Tooltip
+                            title={
+                              <Typography
+                                fontSize={16}
+                              >{`Education`}</Typography>
+                            }
+                          >
+                            <IconButton>
+                              <InfoOutlinedIcon />
+                            </IconButton>
+                          </Tooltip>
                         </div>
                       </div>
+                      {/* </div> */}
 
                       {education.map((edu, i) => (
                         <div>
-                          <div className="flex items-center" key={i}>
+                          <div className="flex items-center gap-4" key={i}>
                             <div className="flex items-center mb-2">
                               <TextField
                                 type="text"
@@ -677,7 +675,9 @@ export default function EditEmployeeForm({
                                 className="h-9 outline-none focus:border-b-2 border-blue-500 text- base text-black w-full mt-4"
                                 label="Start Date"
                                 placeholder={edu.startDate}
-                                value={edu.startDate}
+                                value={new Date(
+                                  edu.startDate
+                                ).toLocaleDateString()}
                                 onChange={(e) => {
                                   changeEduStartOptionValue(e.target.value, i);
                                 }}
@@ -689,7 +689,9 @@ export default function EditEmployeeForm({
                                 className="h-9 outline-none focus:border-b-2 border-blue-500 text- base text-black w-full mt-4"
                                 label="End Date"
                                 placeholder={edu.endDate}
-                                value={edu.endDate}
+                                value={new Date(
+                                  edu.endDate
+                                ).toLocaleDateString()}
                                 onChange={(e) => {
                                   changeEduEndDateOptionValue(
                                     e.target.value,
