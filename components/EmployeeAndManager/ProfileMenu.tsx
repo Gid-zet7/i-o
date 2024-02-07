@@ -9,6 +9,7 @@ import Avatar from "@mui/material/Avatar";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const ProfileMenu = ({ session }: any) => {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
@@ -53,22 +54,49 @@ const ProfileMenu = ({ session }: any) => {
           onClose={handleCloseProfileMenu}
         >
           <MenuItem>
+            <Avatar
+              alt={session?.user?.username as string}
+              src={session?.user._doc.avatarUrl}
+              className="ml-10 w-20 h-20"
+            />
+          </MenuItem>
+          {/* <hr /> */}
+          <MenuItem>
             <Typography textAlign="center" fontSize={13}>
               {session?.user._doc.email}
             </Typography>
           </MenuItem>
-
+          {/* <hr /> */}
           <MenuItem>
             <Typography textAlign="center" fontSize={13}>
               {session?.user._doc.username}
             </Typography>
           </MenuItem>
 
-          <MenuItem onClick={() => router.push("dashboard/employees/new")}>
-            <Typography textAlign="center" fontSize={13}>
-              Add a new employee
-            </Typography>
-          </MenuItem>
+          <hr className="mb-4 w-4/5 ml-4 mt-2" />
+          <Link href="http://localhost:3000/dashboard/employees/new">
+            <MenuItem>
+              <Typography textAlign="center" fontSize={13}>
+                Add employee
+              </Typography>
+            </MenuItem>
+          </Link>
+
+          <Link href="http://localhost:3000/dashboard/managers/new">
+            <MenuItem>
+              <Typography textAlign="center" fontSize={13}>
+                Add manager
+              </Typography>
+            </MenuItem>
+          </Link>
+
+          <Link href="http://localhost:3000/dashboard/appraisal-form/new">
+            <MenuItem>
+              <Typography textAlign="center" fontSize={13}>
+                Create new form
+              </Typography>
+            </MenuItem>
+          </Link>
 
           <MenuItem
             onClick={() =>
