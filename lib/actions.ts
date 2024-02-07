@@ -1019,6 +1019,7 @@ export const getPerformance = async (performanceId: string) => {
 
 export const addPerformance = async (
   session: any,
+  title: string,
   employee: string,
   date: Date,
   data: { question: string; response: string }[],
@@ -1040,6 +1041,7 @@ export const addPerformance = async (
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
+      title,
       employee,
       date,
       feedback,
