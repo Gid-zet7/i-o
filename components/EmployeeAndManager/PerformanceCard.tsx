@@ -50,8 +50,7 @@ export default function PerformanceCard({ performance }: Props) {
                           </h4>
                         </div>
                       </>
-                    ) : item.response === "Good" ||
-                      item.response === "Below Average" ? (
+                    ) : item.response === "Good" ? (
                       <div className="flex justify-evenly items-center w-56 p-3 m-3 rounded">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -74,7 +73,8 @@ export default function PerformanceCard({ performance }: Props) {
                           </h4>
                         </div>
                       </div>
-                    ) : item.response === "Unsatisfactory" ? (
+                    ) : item.response === "Unsatisfactory" ||
+                      item.response === "Below Average" ? (
                       <div className="flex justify-evenly items-center w-56 p-3 m-3 rounded">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
