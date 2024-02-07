@@ -17,11 +17,11 @@ export default function PerformanceCard({ performance }: Props) {
           return perf.data.map((item) => {
             return (
               <div>
-                <div className=" gap-5 mt-5">
+                <div className="gap-5 mt-5">
                   <h1 className="ml-4 text-gray-400 font-semibold">
-                    {item.question}{" "}
+                    {item.question}
                   </h1>
-                  <div className="flex justify-evenly items-center w-56 p-3 m-3 border border-gray-300 rounded">
+                  <div className="flex justify-evenly items-center w-56 p-3 m-3 rounded">
                     {item.response === "Outstanding" ||
                     item.response === "Very Good" ? (
                       <>
@@ -52,7 +52,7 @@ export default function PerformanceCard({ performance }: Props) {
                       </>
                     ) : item.response === "Good" ||
                       item.response === "Below Average" ? (
-                      <div className="flex justify-evenly items-center w-96 lg:w-1/3 p-3 m-3 border border-gray-300 rounded">
+                      <div className="flex justify-evenly items-center w-56 p-3 m-3 rounded">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -68,14 +68,14 @@ export default function PerformanceCard({ performance }: Props) {
                           />
                         </svg>
                         <div className="text-center">
-                          <h2 className="text-4xl font-bold pb-2">0%</h2>
+                          <h2 className="text-4xl font-bold pb-2">50%</h2>
                           <h4 className="inline text-gray-500 text-md">
-                            Neutral
+                            {item.response}
                           </h4>
                         </div>
                       </div>
                     ) : item.response === "Unsatisfactory" ? (
-                      <div className="flex justify-evenly items-center w-96 lg:w-1/3 p-3 m-3 border border-gray-300 rounded">
+                      <div className="flex justify-evenly items-center w-56 p-3 m-3 rounded">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -91,9 +91,9 @@ export default function PerformanceCard({ performance }: Props) {
                           />
                         </svg>
                         <div className="text-center">
-                          <h2 className="text-4xl font-bold pb-2">0%</h2>
+                          <h2 className="text-4xl font-bold pb-2">20%</h2>
                           <h4 className="inline text-gray-500 text-md">
-                            Very Unsatisfied
+                            {item.response}
                           </h4>
                         </div>
                       </div>
