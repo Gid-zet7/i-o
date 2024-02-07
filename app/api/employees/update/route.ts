@@ -101,12 +101,9 @@ export const PATCH = async (request: Request) => {
   employee.startDate = startDate;
 
   if (performance) {
-    const findUser = await UserModel.findOne({ username: performance });
-    console.log(findUser);
-    const findEmployee = await Employee.findOne({ user: findUser });
-    const findPerformance = await Performance.findOne({
-      employee: findEmployee,
-    });
+    const findPerformance = await Performance.findOne({ title: performance });
+    if (!findPerformance) return new Response("Invalid title", { status: 400 });
+
     employee.performance = findPerformance;
   }
 

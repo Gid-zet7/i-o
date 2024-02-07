@@ -46,6 +46,13 @@ export const GET = async (request: Request, { params: { id } }: Props) => {
       .populate("user")
       .populate("department")
       .populate("performance")
+      .populate({
+        path: "performance",
+        populate: {
+          path: "employee",
+          model: "employee",
+        },
+      })
       .lean();
 
     if (!employee) return new Response("Employee not found", { status: 400 });
