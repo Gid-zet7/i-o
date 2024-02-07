@@ -35,6 +35,7 @@ export const POST = async (request: Request) => {
   }
 
   const {
+    title,
     employeeName,
     position,
     department,
@@ -44,6 +45,7 @@ export const POST = async (request: Request) => {
   } = await request.json();
 
   if (
+    !title ||
     !employeeName ||
     !position ||
     !department ||
@@ -58,6 +60,7 @@ export const POST = async (request: Request) => {
   await connectDB();
 
   const appraisalForm = await AppraisalForm.create({
+    title,
     employeeName,
     position,
     department,
