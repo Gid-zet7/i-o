@@ -33,7 +33,13 @@ export default function Form({ form }: Params) {
   };
 
   const onSubmitForm = async () => {
-    addPerformance(session, form.employeeName, form.dateOfReview, data);
+    addPerformance(
+      session,
+      form.title,
+      form.employeeName,
+      form.dateOfReview,
+      data
+    );
   };
 
   // const onDeleteButtonClicked = async () => {
@@ -70,6 +76,10 @@ export default function Form({ form }: Params) {
       <section className="mx-auto max-w-6xl p-3 md:ml-64">
         <form className="data-form">
           <Paper className=" p-2 border-t-4 border-green-400 grid md:grid-cols-2 mb-4">
+            <div className="p-2 font-semibold">Title</div>
+            <div className="p-2 text-sm text-gray-500 hover:text-gray-600 leading-6">
+              {form.title}
+            </div>
             <div className="p-2 font-semibold">Employee</div>
             <div className="p-2 text-sm text-gray-500 hover:text-gray-600 leading-6">
               {form.employeeName}
