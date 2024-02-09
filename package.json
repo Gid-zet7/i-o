@@ -30,7 +30,8 @@
     "next-auth": "^4.24.5",
     "react": "^18",
     "react-dom": "^18",
-    "storybook-dark-mode": "^3.0.3"
+    "storybook-dark-mode": "^3.0.3",
+    "tailwindcss-patterns": "^0.1.2"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.6.8",
