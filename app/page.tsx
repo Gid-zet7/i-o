@@ -3,46 +3,89 @@ import Subfields from "@/components/HomePage/Subfields";
 import Slides from "@/components/HomePage/Slides";
 import Services from "@/components/HomePage/Services";
 import Contact from "@/components/HomePage/Contact";
+import Footer from "@/components/HomePage/Footer";
+// import { Hammersmith_One } from "next/font/google";
+
+// const hammersmith = Hammersmith_One({
+//   subsets: ["latin"],
+//   weight: "400",
+// });
 
 export default function Home() {
   return (
     <>
       <Subfields />
-      <div className="max-w-5xl mx-auto p-3">
-        <section id="hero" className="mb-32">
-          <div className="widescreen:section-min-height tallscreen:section-min-height mb-3 flex scroll-mt-40 flex-col items-center justify-center gap-8 p-6 md:flex-row ">
-            <article className="p-4">
-              <h1 className={`mt-5 text-6xl font-extrabold md:text-8xl`}>
+      <main>
+        <section id="hero" className="mb-32 bg-emerald-400 rounded-b-3xl">
+          <div className="widescreen:section-min-height tallscreen:section-min-height mb-3 flex scroll-mt-40 flex-col items-center justify-center gap-10 p-6 md:flex-row max-w-6xl mx-auto">
+            <article className="text-white">
+              <h1 className={`mt-5 text-5xl font-extrabold md:text-6xl`}>
                 Applying <span className="blue_gradient">psychology</span> to
                 work
               </h1>
-              <p className="text-center mt-8 text-lg text-gray-600 dark:text-gray-400 sm:text-xl max-w-2xl">
-                The study and application of{" "}
-                <span>psychological principles</span> , theories and methods, in{" "}
-                <span>work settings</span>.
+              <p className="mt-8 text-lg sm:text-xl ">
+                I/O helps automate HR tasks like employee data management,
+                performance appraisals etc, streamlining processes, and
+                improving efficiency for HR officers.
               </p>
             </article>
             <Image
-              src="/tired.png"
-              width={500}
-              height={500}
+              src="/undraw_happy.svg"
+              width={400}
+              height={400}
               alt="Photo by Bellinon on pixabay | A man holding a mug"
             />
           </div>
-          <section className="grid gap-12 sm:grid-cols-3 sm:gap-16 p-2">
+          <div className="max-w-5xl mx-auto">
+            <Slides />
+          </div>
+        </section>
+
+        <section className={``}>
+          <div className="widescreen:section-min-height tallscreen:section-min-height my-12 scroll-mt-20 p-6 flex flex-col lg:flex-row mb-12 justify-center max-w-6xl mx-auto relative gap-4">
+            <div className=" pattern-wiggle rounded-full w-36 h-36 absolute top-14 right-10 sm:top-10 sm:right-40"></div>
+            <div className="pa pattern-volcano-lamp rounded-full w-36 h-36 absolute left-10 bottom-20"></div>
+            <div className="flex-1">
+              <h1
+                className={` text-3xl font-extrabold sm:text-5xl blue_gradient mb-4`}
+              >
+                HRIS (Human Resource Information System)
+              </h1>
+              <p className="leading-8">
+                As an HR personnel, we understand the frustration of drowning in
+                paperwork 📑 and tedious administrative tasks. Our solution is
+                here to revolutionize your workflow! 🚀 Say goodbye to piles of
+                paper and hello to seamless digitalization! 💻 With our
+                innovative approach, we'll transform your employee records and
+                performance appraisals into easily accessible digital formats.
+                📈. Get ready to skyrocket your organizational effectiveness
+                with us! 🌟
+              </p>
+            </div>
+            <Image
+              className="flex-2"
+              src="/fast.svg"
+              width={500}
+              height={500}
+              alt="skills"
+            />
+          </div>
+        </section>
+
+        <section className="">
+          <div className="max-w-6xl mx-auto grid gap-12 sm:grid-cols-3 sm:gap-16 p-4 mb-20">
             <article>
               <h2>
                 <span className="flex tabular-nums text-5xl font-extrabold mb-2 animate-[counter2_3s_ease-out_forwards] [counter-set:_num_var(--num)] before:content-[counter(num)] ">
                   <span className="supports-[counter-set]:sr-only">40</span>K+
                 </span>
                 <span className="inline-flex font-semibold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-indigo-300 mb-2">
-                  Users
+                  Employee Records
                 </span>
               </h2>
-              <p className="text-sm text-slate-500">
-                Numerous employees, human resource professionals, and managers
-                routinely leverage Industrial-Organizational (I/O) as their
-                primary learning platform.
+              <p className="text-sm text-slate-400">
+                Setting the Standard: Our Unmatched Expertise in Safeguarding
+                Confidential Employee Records with Professionalism and Precision
               </p>
             </article>
             <article>
@@ -51,13 +94,13 @@ export default function Home() {
                   <span className="supports-[counter-set]:sr-only">60</span>K+
                 </span>
                 <span className="inline-flex font-semibold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-indigo-300 mb-2">
-                  Employees
+                  Performance Appraisal
                 </span>
               </h2>
-              <p className="text-sm text-slate-500">
-                Many satisfied professionals, each expertly matched to positions
-                that align seamlessly with their career aspirations and
-                preferences, contributing to a thriving and content workforce.
+              <p className="text-sm text-slate-400">
+                Innovative Excellence: Leading the Management of Over 40k
+                Employee Performance Reviews with Outstanding Precision,
+                Establishing the Gold Standard in HR Achievement and Innovation!
               </p>
             </article>
             <article>
@@ -69,82 +112,66 @@ export default function Home() {
                   Trusted companies
                 </span>
               </h2>
-              <p className="text-sm text-slate-500">
+              <p className="text-sm text-slate-400">
                 Renowned for our commitment to excellence, we have consistently
-                delivered unparalleled solutions that not only meet but exceed
+                delivered exceptional solutions that not only meet but exceed
                 the expectations of our diverse corporate partners
               </p>
             </article>
-          </section>
+          </div>
         </section>
-        <Slides />
-        <section
-          id="i-o_descSection"
-          className="widescreen:section-min-height tallscreen:section-min-height my-12 scroll-mt-20 p-6  "
-        >
-          <div className="flex mb-12 justify-center">
-            <h1 className=" text-3xl font-bold sm:text-4xl blue_gradient mb-4">
-              Industrial/Organization
+
+        <section className="bg-[#fdf2eb] rounded-t-3xl">
+          <div className="flex justify-center items-center">
+            <h1 className=" text-3xl font-extrabold sm:text-5xl blue_gradient my-4">
+              I/O
             </h1>
           </div>
-          <div className="flex flex-col sm:flex-row items-center gap-20">
-            <div className="flex-1">
-              <div className="flex">
-                <span className="relative flex h-5 w-5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-5 w-5 bg-sky-500"></span>
-                </span>
-                <h1 className="mb-6 mx-5 text-center text-2xl font-bold sm:text-3xl">
-                  Industrial side
-                </h1>
-              </div>
-              <div>
-                <p className="mt-8 text-xl sm:text-lg max-w-2xl flex flex-col gap-5 ">
-                  <Image
-                    src="/employee-skills-svgrepo-com.svg"
-                    width={50}
-                    height={30}
-                    alt="skills"
-                  />
-                  Assessing employee characteristics (KSAOs), selecting and
-                  matching these individuals to jobs they are likely to perform
-                  well.
-                </p>
-                <p className="mt-8 text-xl sm:text-lg max-w-2xl flex flex-col gap-1">
-                  <Image
-                    src="/dumbbell-svgrepo-com.svg"
-                    width={50}
-                    height={30}
-                    alt="skills"
-                  />
-                  Training employees, developing job performance standards, and
-                  measuring job performance.
-                </p>
-              </div>
+          <div className="widescreen:section-min-height tallscreen:section-min-height my-12 scroll-mt-20 p-6 grid sm:grid-cols-3 max-w-6xl mx-auto gap-3 relative">
+            <div className=" pattern-tic-tac-toe rounded-full w-36 h-36 absolute bottom-10 right-0"></div>
+            <div>
+              {/* <h1 className=" text-3xl font-extrabold sm:text-5xl blue_gradient mb-4">
+                Recruitment
+              </h1> */}
+              <p className="mt-8 text-xl sm:text-lg max-w-2xl flex flex-col gap-5 text-slate-800">
+                <Image
+                  src="/employee-skills-svgrepo-com.svg"
+                  width={50}
+                  height={30}
+                  alt="skills"
+                />
+                Assessing employee characteristics (KSAOs), selecting and
+                matching these individuals to jobs they are likely to perform
+                well.
+              </p>
             </div>
-
-            <div className="flex-1">
-              <div className="flex">
-                <span className="relative flex h-5 w-5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-5 w-5 bg-sky-500"></span>
-                </span>
-                <h1 className="mb-6 mx-5 text-center text-2xl font-bold sm:text-3xl">
-                  Organizational side
-                </h1>
-              </div>
-              <p className="mt-8 text-xl sm:text-lg max-w-2xl flex flex-col gap-1">
+            <div>
+              <p className="mt-8 text-xl sm:text-lg max-w-2xl flex flex-col gap-1 text-slate-800">
+                <Image
+                  src="/dumbbell-svgrepo-com.svg"
+                  width={50}
+                  height={30}
+                  alt="skills"
+                />
+                Training employees, developing job performance standards, and
+                measuring job performance.
+              </p>
+            </div>
+            <div>
+              <p className="mt-8 text-xl sm:text-lg max-w-2xl flex flex-col gap-1 text-slate-800">
                 <Image
                   src="/growth-svgrepo-com.svg"
                   width={50}
                   height={30}
                   alt="skills"
                 />
-                Focused on understanding and improving workplace dynamics,
+                Focus on understanding and improving workplace dynamics,
                 including organizational behaviour, leadership, communication,
                 employee satisfaction.
               </p>
-              <p className="mt-8 text-xl sm:text-lg max-w-2xl flex flex-col gap-1">
+            </div>
+            <div>
+              <p className="mt-8 text-xl sm:text-lg max-w-2xl flex flex-col gap-1 text-slate-800">
                 <Image
                   src="/business-partnership-svgrepo-com.svg"
                   width={50}
@@ -157,18 +184,22 @@ export default function Home() {
             </div>
           </div>
         </section>
+
         <section className="widescreen:section-min-height tallscreen:section-min-height my-12 scroll-mt-20 p-6">
           <div className="grid place-content-center">
-            <h1 className="text-center text-3xl font-bold sm:text-4xl mb-4 blue_gradient">
+            <h1 className="text-center text-3xl font-extrabold sm:text-5xl blue_gradient my-4">
               Our Services
             </h1>
             <Services />
           </div>
         </section>
-        <section className="widescreen:section-min-height tallscreen:section-min-height my-12 scroll-mt-16 p-6">
+        <section className="widescreen:section-min-height tallscreen:section-min-height mt-12 scroll-mt-16 p-6 bg-black">
           <Contact />
         </section>
-      </div>
+        <section className="widescreen:section-min-height tallscreen:section-min-height scroll-mt-16 p-6 bg-blue-800">
+          <Footer />
+        </section>
+      </main>
     </>
   );
 }
