@@ -33,8 +33,8 @@ export default function MeetingsCard({ meetings }: Props) {
               <div className="lg:flex shadow rounded-lg border  border-gray-400">
                 <div className="bg-blue-600 rounded-lg lg:w-2/12 py-4 block shadow-inner">
                   <div className="text-center tracking-wide">
-                    <div className="text-white font-bold text-4xl ">24</div>
-                    <div className="text-white font-normal text-2xl">Sept</div>
+                    <div className="text-white font-bold text-4xl ">10</div>
+                    <div className="text-white font-normal text-2xl">Feb</div>
                   </div>
                 </div>
                 <div className="w-full  lg:w-11/12 xl:w-full px-1 bg-white py-5 lg:px-2 lg:py-2 tracking-wide">
@@ -44,7 +44,7 @@ export default function MeetingsCard({ meetings }: Props) {
                       {meeting.endTime}
                     </div>
                     <div className="text-gray-700 font-medium text-sm text-center lg:text-left px-2">
-                      Organiser : IHC
+                      Organiser : Gideon
                     </div>
                   </div>
                   <div className="font-semibold text-gray-800 text-xl text-center lg:text-left px-2">
@@ -52,7 +52,7 @@ export default function MeetingsCard({ meetings }: Props) {
                   </div>
 
                   <div className="text-gray-600 font-medium text-sm pt-1 text-center lg:text-left px-2">
-                    A-142/1, A-142, Ganesh Nagar, Tilak Nagar, New Delhi, 110018
+                    A-142/1, A-142, Conference hall, 110018
                   </div>
                 </div>
               </div>
