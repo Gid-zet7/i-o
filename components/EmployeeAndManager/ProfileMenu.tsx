@@ -98,6 +98,16 @@ const ProfileMenu = ({ session }: any) => {
             </MenuItem>
           </Link>
 
+          <Link
+            href={`http://localhost:3000/dashboard/users/${session?.user._doc._id}/edit`}
+          >
+            <MenuItem>
+              <Typography textAlign="center" fontSize={13}>
+                View profile
+              </Typography>
+            </MenuItem>
+          </Link>
+
           <MenuItem
             onClick={() =>
               session
