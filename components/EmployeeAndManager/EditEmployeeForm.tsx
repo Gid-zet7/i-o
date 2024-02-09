@@ -72,8 +72,6 @@ export default function EditEmployeeForm({
 
   const router = useRouter();
 
-  console.log(performance);
-
   // ------------------Skills------------------
   const addOption = () => {
     let allSkills = [...skills];
