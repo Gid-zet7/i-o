@@ -7,26 +7,94 @@ import TextareaAutosize from "@mui/material/TextareaAutosize";
 export default function Contact() {
   return (
     <div id="contact">
-      <h2 className="mb-6 text-center text-2xl font-bold sm:text-3xl blue_gradient">
+      <h2 className=" text-center text-3xl font-extrabold sm:text-5xl blue_gradient my-4">
         Contact Us
       </h2>
-      <form action="" className="items-left mx-auto flex flex-col gap-4 ">
-        <Grid className="text-white" item xs={12} sm={6}>
-          <TextField required fullWidth label="Email" name="email" />
-        </Grid>
-        <Grid className="text-white" item xs={12} sm={6}>
-          <TextField required fullWidth label="Subject" name="subject" />
-        </Grid>
-        <Grid className="" item xs={12} sm={6}>
-          <TextareaAutosize placeholder="Your message..." />
-        </Grid>
+      <form action="" className="items-center mx-auto flex flex-col gap-4 ">
+        <div className=" mb-6 flex flex-col xl:w-2/6 lg:w-1/2 md:w-1/2 w-full">
+          <label
+            htmlFor="Email"
+            className="pb-2 text-sm font-bold text-gray-100"
+          >
+            Email
+          </label>
+          <div className="border shadow-sm rounded flex border-gray-700">
+            <div
+              tabIndex={0}
+              className="focus:outline-none px-4 py-3 flex items-center border-r border-gray-700"
+            >
+              <img
+                className="dark:hidden"
+                src="https://tuk-cdn.s3.amazonaws.com/can-uploader/simple_form-svg2.svg"
+                alt="mail"
+              />
+              <img
+                className="dark:block hidden"
+                src="https://tuk-cdn.s3.amazonaws.com/can-uploader/simple_form-svg2dark.svg"
+                alt="mail"
+              />
+            </div>
+            <input
+              tabIndex={0}
+              type="text"
+              id="Email"
+              name="email"
+              required
+              className="pl-3 py-3 w-full text-sm focus:outline-none placeholder-gray-500 rounded bg-transparent text-gray-400"
+              placeholder="example@gmail.com"
+            />
+          </div>
+          {/* <div className="flex justify-between items-center pt-1 text-green-700">
+            <p className="text-xs">Email submission success!</p>
+            <img
+              src="https://tuk-cdn.s3.amazonaws.com/can-uploader/simple_form-svg3.svg"
+              alt="success"
+            />
+          </div> */}
+        </div>
+        <div className=" flex flex-col xl:w-2/6 lg:w-1/2 md:w-1/2 w-full">
+          <label
+            htmlFor="username"
+            className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100"
+          >
+            Username
+          </label>
+          <input
+            tabIndex={0}
+            type="text"
+            id="username"
+            name="username"
+            required
+            className="border border-gray-700 pl-3 py-3 shadow-sm rounded text-sm focus:outline-none focus:border-indigo-700 bg-transparent placeholder-gray-500 text-gray-400"
+            placeholder="@example"
+          />
+        </div>
+        <div className="flex flex-col xl:w-2/6 lg:w-1/2 md:w-1/2 w-full">
+          <label
+            htmlFor="about"
+            className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100"
+          >
+            Your message
+          </label>
+          <textarea
+            id="about"
+            name="about"
+            required
+            className="bg-transparent border border-gray-700 pl-3 py-3 shadow-sm rounded text-sm focus:outline-none focus:border-indigo-700 resize-none placeholder-gray-500 text-gray-400"
+            placeholder="type your message..."
+            rows={5}
+          ></textarea>
+          <p className="w-full text-right text-xs pt-1 text-gray-600 dark:text-gray-400">
+            Character Limit: 200
+          </p>
+        </div>
 
         <Grid item xs={12}>
           <Button
             type="submit"
             variant="contained"
             color="secondary"
-            className="text-black"
+            className="bg-white text-black hover:text-white"
             // onClick={handleSubmit}
           >
             Submit
