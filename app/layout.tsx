@@ -4,7 +4,6 @@ import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import "./globals.css";
 import React from "react";
-import Subfields from "@/components/HomePage/Subfields";
 import lightTheme from "@/theme/lightTheme";
 import darkTheme from "@/theme/darkTheme";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -58,7 +57,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${inter.className} min-h-screen ${
-          mode === "dark" ? " bg-black" : "bg-slate-50"
+          mode === "dark" ? " bg-slate-700" : "bg-slate-50"
         } ${mode === "dark" ? " text-slate-50" : "text-slate-800"} `}
       >
         <ColorModeContext.Provider value={colorMode}>
