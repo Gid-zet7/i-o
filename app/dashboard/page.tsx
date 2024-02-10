@@ -10,7 +10,7 @@ export default async function DashBoard() {
   const session = await getCurrentUser();
 
   let dash;
-  if (session?.user._doc.roles.includes("Employee" || "Manager" || "Admin")) {
+  if (session?.user?._doc?.roles.includes("Employee" || "Manager" || "Admin")) {
     dash = (
       <>
         <SideMenu />
