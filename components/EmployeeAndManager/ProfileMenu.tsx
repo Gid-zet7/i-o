@@ -33,7 +33,7 @@ const ProfileMenu = ({ session }: any) => {
           <IconButton onClick={handleOpenProfileMenu} sx={{ p: 0 }}>
             <Avatar
               alt={session?.user?.username as string}
-              src={session?.user._doc.avatarUrl}
+              src={session?.user?._doc?.avatarUrl}
             />
           </IconButton>
         </Tooltip>
@@ -50,30 +50,37 @@ const ProfileMenu = ({ session }: any) => {
             vertical: "top",
             horizontal: "right",
           }}
+          // className="p-4"
           open={Boolean(anchorElUser)}
           onClose={handleCloseProfileMenu}
         >
           <MenuItem>
             <Avatar
               alt={session?.user?.username as string}
-              src={session?.user._doc.avatarUrl}
+              src={session?.user?._doc?.avatarUrl}
               className="ml-10 w-20 h-20"
             />
           </MenuItem>
           {/* <hr /> */}
           <MenuItem>
+            <div className="text-extrabold text-xl">Account</div>
+          </MenuItem>
+          <MenuItem>
             <Typography textAlign="center" fontSize={13}>
-              {session?.user._doc.email}
+              {session?.user?._doc?.email}
             </Typography>
           </MenuItem>
           {/* <hr /> */}
-          <MenuItem>
+          {/* <MenuItem>
             <Typography textAlign="center" fontSize={13}>
-              {session?.user._doc.username}
+              {session?.user?._doc?.username}
             </Typography>
-          </MenuItem>
+          </MenuItem> */}
 
-          <hr className="mb-4 w-4/5 ml-4 mt-2" />
+          <hr className="mb-4 mt-2 text-slate-500" />
+          <MenuItem>
+            <div className="text-extrabold text-xl">Manage</div>
+          </MenuItem>
           <Link href="http://localhost:3000/dashboard/employees/new">
             <MenuItem>
               <Typography textAlign="center" fontSize={13}>
@@ -99,7 +106,7 @@ const ProfileMenu = ({ session }: any) => {
           </Link>
 
           <Link
-            href={`http://localhost:3000/dashboard/users/${session?.user._doc._id}/edit`}
+            href={`http://localhost:3000/dashboard/users/${session?.user?._doc?._id}/edit`}
           >
             <MenuItem>
               <Typography textAlign="center" fontSize={13}>
@@ -107,7 +114,7 @@ const ProfileMenu = ({ session }: any) => {
               </Typography>
             </MenuItem>
           </Link>
-
+          <hr className="mt-2 text-slate-500" />
           <MenuItem
             onClick={() =>
               session
