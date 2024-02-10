@@ -37,7 +37,7 @@ export default function Experience({ experiences, education }: Props) {
                 />
               </svg>
             </span>
-            <span className="tracking-wide">Experience</span>
+            <span>Experience</span>
           </div>
           <ul className="list-inside space-y-2">
             {experiences?.map((experience) => {
