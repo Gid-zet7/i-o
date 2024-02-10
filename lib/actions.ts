@@ -55,10 +55,10 @@ export const updateUser = async (
   id: string,
   username: string,
   email: string,
-  password: string,
   avatarUrl: string,
   roles: string[],
-  active: boolean
+  active: boolean,
+  password?: string
 ) => {
   if (!session?.user?.accessToken) {
     throw new Error("User not authenticated or access token missing");
