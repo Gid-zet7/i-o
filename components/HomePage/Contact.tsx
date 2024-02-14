@@ -1,8 +1,6 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import TextareaAutosize from "@mui/material/TextareaAutosize";
 
 export default function Contact() {
   return (
@@ -44,29 +42,22 @@ export default function Contact() {
               placeholder="example@gmail.com"
             />
           </div>
-          {/* <div className="flex justify-between items-center pt-1 text-green-700">
-            <p className="text-xs">Email submission success!</p>
-            <img
-              src="https://tuk-cdn.s3.amazonaws.com/can-uploader/simple_form-svg3.svg"
-              alt="success"
-            />
-          </div> */}
         </div>
         <div className=" flex flex-col xl:w-2/6 lg:w-1/2 md:w-1/2 w-full">
           <label
-            htmlFor="username"
+            htmlFor="subject"
             className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100"
           >
-            Username
+            Subject
           </label>
           <input
             tabIndex={0}
             type="text"
-            id="username"
-            name="username"
+            id="subject"
+            name="subject"
             required
             className="border border-gray-700 pl-3 py-3 shadow-sm rounded text-sm focus:outline-none focus:border-indigo-700 bg-transparent placeholder-gray-500 text-gray-400"
-            placeholder="@example"
+            placeholder="your subject"
           />
         </div>
         <div className="flex flex-col xl:w-2/6 lg:w-1/2 md:w-1/2 w-full">
