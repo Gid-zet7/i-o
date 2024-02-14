@@ -8,6 +8,10 @@ import lightTheme from "@/theme/lightTheme";
 import darkTheme from "@/theme/darkTheme";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Providers from "@/components/Providers";
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
+import { extractRouterConfig } from "uploadthing/server";
+
+import { ourFileRouter } from "./api/uploadthing/core";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -60,6 +64,15 @@ export default function RootLayout({
           mode === "dark" ? " bg-slate-700" : "bg-slate-50"
         } ${mode === "dark" ? " text-slate-50" : "text-slate-800"} `}
       >
+        <NextSSRPlugin
+          /**
+           * The `extractRouterConfig` will extract **only** the route configs
+           * from the router to prevent additional information from being
+           * leaked to the client. The data passed to the client is the same
+           * as if you were to fetch `/api/uploadthing` directly.
+           */
+          routerConfig={extractRouterConfig(ourFileRouter)}
+        />
         <ColorModeContext.Provider value={colorMode}>
           <ThemeProvider
             theme={mode === "dark" ? darkThemeChosen : lightThemeChosen}
