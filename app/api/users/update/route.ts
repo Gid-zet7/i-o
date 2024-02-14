@@ -13,7 +13,7 @@ export const PATCH = async (request: Request) => {
   if (
     !username ||
     !email ||
-    !password ||
+    // !password ||
     !Array.isArray(roles) ||
     !roles.length ||
     !active
