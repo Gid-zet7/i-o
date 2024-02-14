@@ -3,7 +3,7 @@ POST http://localhost:3000/api/auth/login
 Content-Type: application/json
 
 {
-    "username": "User_demo2",
+    "username": "User_demo6",
     "password": "0987654321"
 }
 
@@ -58,12 +58,12 @@ Content-Type: application/json
 
 # ------------------Employees routes---------------------
 ###
-GET http://localhost:3000/api/employees/659aecd9abdeeec1dd77a32d
+GET http://localhost:3000/api/employees/65bb3193268184c4c326ac29
+Authorization: Bearer 
 
 ###
 GET http://localhost:3000/api/employees
 Authorization: Bearer 
-
 
 
 
@@ -107,7 +107,7 @@ Authorization: Bearer
 Content-Type: application/json
 
 {
-    "id": "65bb297941c3a74a300bd8d3"
+    "id": "65bb3193268184c4c326ac29"
 }
 
 #--------------------Department routes-------------------------------
@@ -189,7 +189,7 @@ Authorization: Bearer
 Content-Type: application/json
 
 {
-    "id": "65afb5f618f8ad780287ad52"
+    "id": "65bd9caeaf0d65c856269ea6"
 }
 
 ###
@@ -241,9 +241,10 @@ Content-Type: application/json
 GET http://localhost:3000/api/meetings
 Authorization: Bearer 
 
+
 ###
 POST http://localhost:3000/api/meetings/new
-Authorization: Bearer
+Authorization: Bearer 
 Content-Type: application/json
 
 {
@@ -259,7 +260,7 @@ Content-Type: application/json
 # ----------------------Performance------------------
 ###
 GET http://localhost:3000/api/performance
-Authorization: Bearer
+Authorization: Bearer 
 
 ###
 POST http://localhost:3000/api/performance/new
