@@ -30,8 +30,6 @@ export const generateMetadata = async ({
 export default async function EditEmployeePage({ params: { userId } }: Params) {
   const user = await getUser(userId);
 
-  console.log(user);
-
   if (!user?.username) return notFound();
 
   return <EditUserForm user={user} />;
