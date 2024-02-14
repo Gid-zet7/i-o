@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { updateUser } from "@/lib/actions";
 import Paper from "@mui/material/Paper";
@@ -23,6 +23,7 @@ import {
 import { Cancel, Check } from "@mui/icons-material";
 import { deleteUser } from "@/lib/actions";
 import { useSession } from "next-auth/react";
+import { UploadButton } from "@/utils/uploadthing";
 
 type Params = {
   user: User;
@@ -32,19 +33,48 @@ export default function EditUserForm({ user }: Params) {
   const { data: session } = useSession();
   const [username, setUsername] = useState(user.username);
   const [email, setEmail] = useState(user.email);
-  const [password, setPassword] = useState(user.password);
+  // const [password, setPassword] = useState(user.password);
   const [avatarUrl, setAvatarUrl] = useState(user.avatarUrl);
-  const [roles, setRoles] = useState(user.roles);
+  const [roles, setRoles] = useState<any>(user.roles);
   const [active, setActive] = useState(user.active);
   const [error, setError] = useState("");
   const [isSuccess, setIsSuccess] = useState<string>("");
 
+  const [imagePreview, setImagePreview] = useState<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const imagePreview = document.getElementById("image-preview");
+    setImagePreview(imagePreview);
+  }, []);
+
   const router = useRouter();
+
+  const handleImageChange = (url: any) => {
+    if (url) {
+      setAvatarUrl(url);
+      if (imagePreview) {
+        console.log("Almost..");
+        imagePreview.innerHTML = `<img src="${url}" className="w-64 h-64 rounded-full" alt="Image preview" />`;
+      }
+
+      setImagePreview(imagePreview);
+    } else {
+      if (imagePreview)
+        imagePreview.innerHTML = `<div class="bg-gray-200 h-48 rounded-lg flex items-center justify-center text-gray-500">No image preview</div>`;
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!username || !email || !password || !avatarUrl || !roles || !active) {
+    if (
+      !username ||
+      !email ||
+      !avatarUrl ||
+      !Array.isArray(roles) ||
+      !roles.length
+      // !active
+    ) {
       setError("All fields are necessary.");
       return;
     }
@@ -55,7 +85,7 @@ export default function EditUserForm({ user }: Params) {
         user._id,
         username,
         email,
-        password,
+        // password,
         avatarUrl,
         roles,
         active
@@ -113,38 +143,39 @@ export default function EditUserForm({ user }: Params) {
           <Paper sx={{ padding: "1rem 2rem" }}>
             <Grid container justifyContent="center">
               <Grid item xs={12} sm={8} md={6}>
-                <Box display="flex" flexDirection="column" alignItems="center">
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  alignItems="center"
+                  marginBottom={3}
+                >
                   <div className=" rounded-full bg-cover bg-center bg-no-repeat  shadow flex items-center justify-center">
                     <div className="relative hover:opacity-60">
-                      <Avatar
-                        sx={{
-                          height: 100,
-                          width: 100,
-                          marginBottom: 2,
-                        }}
-                        src={avatarUrl}
-                        className=" cursor-pointer"
-                      />
-                      <div className="cursor-pointer flex flex-col justify-center items-center z-10 text-gray-100 absolute left-3 top-8 ">
-                        <label className="block pt-2">
-                          <span className="sr-only t-2">
-                            {/* <img
-                              src="https://tuk-cdn.s3.amazonaws.com/can-uploader/simple_form-svg1.svg"
-                              alt="Edit"
-                            /> */}
-                          </span>
-                          <input
-                            type="file"
-                            className="w w-4/5 text-xs text-slate-500 file:mr-4 
-                            file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold"
-                            // value={"C:\fakepathCapture.PNG"}
-                            onChange={(e) => setAvatarUrl(e.target.value)}
+                      <div className="mx-auto w-64 text-center ">
+                        <div id="image-preview" className="w-64 ">
+                          <Avatar
+                            className="w-64 h-64 rounded-full relative"
+                            src={user.avatarUrl}
+                            alt=""
                           />
-                        </label>
-                        {/* <p className="text-xs text-gray-100">Edit Picture</p> */}
+                          <div className="w-64 h-64 group hover:bg-gray-200 opacity-60 rounded-full flex justify-center items-center cursor-pointer transition duration-500 absolute top-0">
+                            <UploadButton
+                              // className="hidden"
+                              endpoint="imageUploader"
+                              onClientUploadComplete={(res) => {
+                                if (res) {
+                                  res.map((img) => handleImageChange(img.url));
+                                }
+                              }}
+                              onUploadError={(error: Error) => {
+                                // Do something with the error.
+                                alert(`ERROR! ${error.message}`);
+                              }}
+                            />
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    {/* <div className="absolute bg-black opacity-50 top-0 right-0 bottom-0 left-0 rounded-full z-0"></div> */}
                   </div>
                 </Box>
                 <form
@@ -172,16 +203,15 @@ export default function EditUserForm({ user }: Params) {
                         value={email}
                       />
                     </Grid>
-                    <Grid item xs={12}>
+                    {/* <Grid item xs={12}>
                       <TextField
-                        required
                         fullWidth
                         label="Password"
                         name="password"
                         onChange={(e) => setPassword(e.target.value)}
                         value={password}
                       />
-                    </Grid>
+                    </Grid> */}
                     <Grid className="text-white" item xs={12} sm={6}>
                       <FormControl fullWidth>
                         <InputLabel id="roles">Roles*</InputLabel>
@@ -191,8 +221,6 @@ export default function EditUserForm({ user }: Params) {
                           labelId="Roles"
                           label="Roles"
                           multiple={true}
-                          // className="text-black"
-                          // label="Department"
                           onChange={(e) => setRoles(e.target.value)}
                           input={<OutlinedInput label="Multiple Select" />}
                           renderValue={(selected) => (
@@ -227,9 +255,10 @@ export default function EditUserForm({ user }: Params) {
                     </Grid>
                     <Grid item xs={12}>
                       <FormControlLabel
-                        required
                         control={<Checkbox />}
                         label="Active"
+                        checked={active}
+                        onChange={(e) => setActive((prevVal) => !prevVal)}
                         defaultChecked
                         color="success"
                       />
@@ -239,7 +268,7 @@ export default function EditUserForm({ user }: Params) {
                         type="submit"
                         variant="contained"
                         color="secondary"
-                        className="text-black bg-white"
+                        className="text-black bg-white mb-4 mr-3"
                         // onClick={handleSubmit}
                       >
                         Save Changes
@@ -248,7 +277,7 @@ export default function EditUserForm({ user }: Params) {
                         type="button"
                         variant="contained"
                         color="primary"
-                        className="text-black bg-white ml-3"
+                        className="text-black bg-white mb-4"
                         onClick={handleDelete}
                       >
                         Delete Employee
