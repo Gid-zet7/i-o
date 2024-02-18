@@ -42,24 +42,23 @@ export default function Home() {
         </section>
 
         <section className={``}>
-          <div className="widescreen:section-min-height tallscreen:section-min-height my-12 scroll-mt-20 p-6 flex flex-col lg:flex-row mb-12 justify-center max-w-6xl mx-auto relative gap-4">
-            <div className=" pattern-wiggle rounded-full w-36 h-36 absolute top-14 right-10 sm:top-10 sm:right-40"></div>
-            <div className="pa pattern-volcano-lamp rounded-full w-36 h-36 absolute left-10 bottom-20"></div>
-            <div className="flex-1">
+          <div className="widescreen:section-min-height tallscreen:section-min-height my-12 scroll-mt-20 p-6 flex flex-col lg:flex-row mb-12 justify-center max-w-6xl mx-auto relative gap-4 ">
+            {/* <div className=" pattern-wiggle rounded-full w-36 h-36 absolute top-14 right-10 sm:top-10 sm:right-40 lg:top-0"></div> */}
+            {/* <div className="pa pattern-volcano-lamp rounded-full w-36 h-36 absolute left-10 bottom-4 lg:bottom-0 lg:left-36"></div> */}
+            <div className="flex-1 ">
               <h1
-                className={` text-3xl font-extrabold sm:text-5xl blue_gradient mb-4`}
+                className={` text-3xl font-extrabold sm:text-6xl blue_gradient mb-4`}
               >
                 HRIS (Human Resource Information System)
               </h1>
-              <p className="leading-8">
+              <p className="leading-8 font-serif">
                 As an HR personnel, we understand the frustration of drowning in
-                paperwork 📑 and tedious administrative tasks. Our solution is
-                here to revolutionize your workflow! 🚀 Say goodbye to piles of
-                paper and hello to seamless digitalization! 💻 With our
-                innovative approach, we'll transform your employee records and
-                performance appraisals into easily accessible digital formats.
-                📈. Get ready to skyrocket your organizational effectiveness
-                with us! 🌟
+                paperwork and tedious administrative tasks. Our solution is here
+                to revolutionize your workflow! Say goodbye to piles of paper
+                and hello to seamless digitalization! With our innovative
+                approach, we'll transform your employee records and performance
+                appraisals into easily accessible digital formats. Get ready to
+                skyrocket your organizational effectiveness with us!
               </p>
             </div>
             <Image
@@ -128,8 +127,12 @@ export default function Home() {
             </h1>
           </div>
           <div className="widescreen:section-min-height tallscreen:section-min-height my-12 scroll-mt-20 p-6 grid sm:grid-cols-3 max-w-6xl mx-auto gap-3 relative">
-            <div className=" pattern-tic-tac-toe rounded-full w-36 h-36 absolute bottom-10 right-0"></div>
+            <div className=" pattern-tic-tac-toe rounded-full w-36 h-36 absolute bottom-10 right-[-30rem]"></div>
+            <div className=" pattern-tic-tac-toe rounded-full w-36 h-36 absolute top-[-4rem] right-20"></div>
             <div>
+              <div className="pattern-tic-tac-toe rounded-full w-36 h-36 absolute bottom-36 left-96"></div>
+              <div className="pattern-tic-tac-toe rounded-full w-36 h-36 absolute bottom-36 left-96"></div>
+              <div></div>
               {/* <h1 className=" text-3xl font-extrabold sm:text-5xl blue_gradient mb-4">
                 Recruitment
               </h1> */}
