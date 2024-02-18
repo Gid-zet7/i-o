@@ -145,6 +145,31 @@ export const deleteUser = async (session: any, id: string) => {
   }
 };
 
+// -------------------TABLE DATA------------------
+export const getData = async (session: any) => {
+  // const session: SessionInterface | null = await getServerSession(authOptions);
+
+  if (!session?.user?.accessToken) {
+    throw new Error("User not authenticated or access token missing");
+  }
+
+  const endpoint = `${apiUrl}/employees`;
+
+  const result = await fetch(endpoint, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${session.user.accessToken}`,
+    },
+  });
+
+  if (!result.ok) {
+    const errorMessage = `Failed to fetch employees. Status: ${result.status}, ${result.statusText}`;
+    throw new Error(errorMessage);
+  }
+
+  return result.json();
+};
+
 // ---------------Employees----------------------
 export const getAllEmployees = async () => {
   const session: SessionInterface | null = await getServerSession(authOptions);
