@@ -55,11 +55,15 @@ const ProfileMenu = ({ session }: any) => {
           onClose={handleCloseProfileMenu}
         >
           <MenuItem>
-            <Avatar
-              alt={session?.user?.username as string}
-              src={session?.user?._doc?.avatarUrl}
-              className="ml-10 w-20 h-20"
-            />
+            <Link
+              href={`http://localhost:3000/dashboard/users/${session?.user?._doc?._id}/edit`}
+            >
+              <Avatar
+                alt={session?.user?.username as string}
+                src={session?.user?._doc?.avatarUrl}
+                className="ml-10 w-20 h-20"
+              />
+            </Link>
           </MenuItem>
           {/* <hr /> */}
           <MenuItem>
