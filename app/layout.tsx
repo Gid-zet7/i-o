@@ -61,7 +61,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${inter.className} min-h-screen ${
-          mode === "dark" ? " bg-slate-700" : "bg-slate-50"
+          mode === "dark" ? " bg-black" : "bg-slate-50"
         } ${mode === "dark" ? " text-slate-50" : "text-slate-800"} `}
       >
         <NextSSRPlugin
@@ -83,6 +83,7 @@ export default function RootLayout({
             </Providers>
           </ThemeProvider>
         </ColorModeContext.Provider>
+        <script src="https://unpkg.com/taos@1.0.5/dist/taos.js"></script>
       </body>
     </html>
   );
