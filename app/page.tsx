@@ -4,22 +4,24 @@ import Slides from "@/components/HomePage/Slides";
 import Services from "@/components/HomePage/Services";
 import Contact from "@/components/HomePage/Contact";
 import Footer from "@/components/HomePage/Footer";
-// import { Hammersmith_One } from "next/font/google";
+import { Syne } from "next/font/google";
 
-// const hammersmith = Hammersmith_One({
-//   subsets: ["latin"],
-//   weight: "400",
-// });
+const syne = Syne({
+  subsets: ["latin"],
+  weight: "700",
+});
 
 export default function Home() {
   return (
     <>
       <Subfields />
       <main>
-        <section id="hero" className="mb-32 bg-emerald-400 rounded-b-3xl">
+        <section id="hero" className="mb-32 bg-emerald-500 rounded-b-3xl">
           <div className="widescreen:section-min-height tallscreen:section-min-height mb-3 flex scroll-mt-40 flex-col items-center justify-center gap-10 p-6 md:flex-row max-w-6xl mx-auto">
             <article className="text-white">
-              <h1 className={`mt-5 text-5xl font-extrabold md:text-6xl`}>
+              <h1
+                className={`mt-5 text-5xl font-extrabold md:text-9xl mb-4  pb-4 leading-tigh ${syne.className}`}
+              >
                 Applying <span className="blue_gradient">psychology</span> to
                 work
               </h1>
@@ -30,7 +32,7 @@ export default function Home() {
               </p>
             </article>
             <Image
-              src="/undraw_happy.svg"
+              src="/undraw_team_up.svg"
               width={400}
               height={400}
               alt="Photo by Bellinon on pixabay | A man holding a mug"
@@ -40,18 +42,24 @@ export default function Home() {
             <Slides />
           </div>
         </section>
-
         <section className={``}>
-          <div className="widescreen:section-min-height tallscreen:section-min-height my-12 scroll-mt-20 p-6 flex flex-col lg:flex-row mb-12 justify-center max-w-6xl mx-auto relative gap-4 ">
+          <div className="widescreen:section-min-height tallscreen:section-min-height my-12 scroll-mt-20 p-6 flex flex-col-reverse lg:flex-row mb-12 justify-center max-w-6xl mx-auto relative gap-8">
             {/* <div className=" pattern-wiggle rounded-full w-36 h-36 absolute top-14 right-10 sm:top-10 sm:right-40 lg:top-0"></div> */}
             {/* <div className="pa pattern-volcano-lamp rounded-full w-36 h-36 absolute left-10 bottom-4 lg:bottom-0 lg:left-36"></div> */}
-            <div className="flex-1 ">
+            <Image
+              className="flex-2"
+              src="/info.svg"
+              width={500}
+              height={500}
+              alt="skills"
+            />
+            <div>
               <h1
-                className={` text-3xl font-extrabold sm:text-6xl blue_gradient mb-4`}
+                className={` text-3xl font-extrabold sm:text-6xl blue_gradient mb-4 pb-4 leading-tigh ${syne.className}`}
               >
                 HRIS (Human Resource Information System)
               </h1>
-              <p className="leading-8 font-serif">
+              <p className="leading-8 font-serif ">
                 As an HR personnel, we understand the frustration of drowning in
                 paperwork and tedious administrative tasks. Our solution is here
                 to revolutionize your workflow! Say goodbye to piles of paper
@@ -61,16 +69,8 @@ export default function Home() {
                 skyrocket your organizational effectiveness with us!
               </p>
             </div>
-            <Image
-              className="flex-2"
-              src="/fast.svg"
-              width={500}
-              height={500}
-              alt="skills"
-            />
           </div>
         </section>
-
         <section className="">
           <div className="max-w-6xl mx-auto grid gap-12 sm:grid-cols-3 sm:gap-16 p-4 mb-20">
             <article>
@@ -119,10 +119,11 @@ export default function Home() {
             </article>
           </div>
         </section>
-
         <section className="bg-[#fdf2eb] rounded-t-3xl">
           <div className="flex justify-center items-center">
-            <h1 className=" text-3xl font-extrabold sm:text-5xl blue_gradient my-4">
+            <h1
+              className={`my-4 text-3xl font-extrabold sm:text-6xl blue_gradient mb-4 pb-4 leading-tigh ${syne.className}`}
+            >
               I/O
             </h1>
           </div>
@@ -187,10 +188,13 @@ export default function Home() {
             </div>
           </div>
         </section>
-
+        {/* delay-[300ms] duration-[600ms] taos:translate-y-[200px] taos:opacity-0"
+        data-taos-offset="300 */}
         <section className="widescreen:section-min-height tallscreen:section-min-height my-12 scroll-mt-20 p-6">
           <div className="grid place-content-center">
-            <h1 className="text-center text-3xl font-extrabold sm:text-5xl blue_gradient my-4">
+            <h1
+              className={`text-center blue_gradient my-4 text-3xl font-extrabold sm:text-6xl blue_gradient mb-4 pb-4 leading-tigh ${syne.className}`}
+            >
               Our Services
             </h1>
             <Services />
