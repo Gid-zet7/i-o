@@ -35,6 +35,7 @@
     "react-dom": "^18",
     "storybook-dark-mode": "^3.0.3",
     "tailwindcss-patterns": "^0.1.2",
+    "taos": "^1.0.5",
     "uploadthing": "^6.3.3"
   },
   "devDependencies": {
@@ -49,7 +50,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "autoprefixer": "^10.0.1",
+    "autoprefixer": "^10.4.17",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
     "eslint-plugin-storybook": "^0.6.15",
