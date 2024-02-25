@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 export default function Contact() {
   return (
     <div id="contact">
-      <h2 className=" text-center blue_gradient my-4 text-3xl font-extrabold sm:text-8xl blue_gradient mb-4 pb-4 leading-tigh">
+      <h2 className="text-center blue_gradient my-4 text-3xl font-extrabold sm:text-8xl blue_gradient mb-4 pb-4 leading-tigh">
         Contact Us
       </h2>
       <form action="" className="items-center mx-auto flex flex-col gap-4 ">
