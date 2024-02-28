@@ -1,21 +1,60 @@
+"use client";
 import Image from "next/image";
 import Subfields from "@/components/HomePage/Subfields";
 import Slides from "@/components/HomePage/Slides";
 import Services from "@/components/HomePage/Services";
 import Contact from "@/components/HomePage/Contact";
 import Footer from "@/components/HomePage/Footer";
-import { Syne } from "next/font/google";
+import { Concert_One } from "next/font/google";
+import { Chivo } from "next/font/google";
+import { useEffect, useState, useRef } from "react";
 
-const syne = Syne({
+const syne = Concert_One({
   subsets: ["latin"],
-  weight: "700",
+  weight: "400",
 });
 
+const chivo = Chivo({
+  subsets: ["latin"],
+  weight: "200",
+});
+
+export function useIsVisible(ref: any) {
+  const [isIntersecting, setIntersecting] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      setIntersecting(entry.isIntersecting);
+    });
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, [ref]);
+
+  return isIntersecting;
+}
+
 export default function Home() {
+  const ref1: any = useRef();
+  const isVisible1 = useIsVisible(ref1);
+
+  const ref2: any = useRef();
+  const isVisible2 = useIsVisible(ref2);
+
+  const ref3: any = useRef();
+  const isVisible3 = useIsVisible(ref3);
+
   return (
     <>
       <Subfields />
-      <main>
+      <main className="o overflow-x-hidden">
         <section id="hero" className="mb-32 bg-emerald-500 rounded-b-3xl">
           <div className="widescreen:section-min-height tallscreen:section-min-height mb-3 flex scroll-mt-40 flex-col items-center justify-center gap-10 p-6 md:flex-row max-w-6xl mx-auto">
             <article className="text-white">
@@ -25,7 +64,7 @@ export default function Home() {
                 Applying <span className="blue_gradient">psychology</span> to
                 work
               </h1>
-              <p className="mt-8 text-lg sm:text-xl ">
+              <p className={`mt-8 text-lg sm:text-xl ${chivo.className}`}>
                 I/O helps automate HR tasks like employee data management,
                 performance appraisals etc, streamlining processes, and
                 improving efficiency for HR officers.
@@ -42,7 +81,12 @@ export default function Home() {
             <Slides />
           </div>
         </section>
-        <section className={``}>
+        <section
+          ref={ref1}
+          className={`transition-opacity ease-in duration-700 ${
+            isVisible1 ? "opacity-100" : "opacity-0"
+          }`}
+        >
           <div className="widescreen:section-min-height tallscreen:section-min-height my-12 scroll-mt-20 p-6 flex flex-col-reverse lg:flex-row mb-12 justify-center max-w-6xl mx-auto relative gap-8">
             {/* <div className=" pattern-wiggle rounded-full w-36 h-36 absolute top-14 right-10 sm:top-10 sm:right-40 lg:top-0"></div> */}
             {/* <div className="pa pattern-volcano-lamp rounded-full w-36 h-36 absolute left-10 bottom-4 lg:bottom-0 lg:left-36"></div> */}
@@ -71,7 +115,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section className="">
+        <section>
           <div className="max-w-6xl mx-auto grid gap-12 sm:grid-cols-3 sm:gap-16 p-4 mb-20">
             <article>
               <h2>
@@ -82,7 +126,7 @@ export default function Home() {
                   Employee Records
                 </span>
               </h2>
-              <p className="text-sm text-slate-400">
+              <p className="text-sm text-slate-400 ">
                 Setting the Standard: Our Unmatched Expertise in Safeguarding
                 Confidential Employee Records with Professionalism and Precision
               </p>
@@ -119,25 +163,30 @@ export default function Home() {
             </article>
           </div>
         </section>
-        <section className="bg-[#fdf2eb] rounded-t-3xl">
+        <section
+          ref={ref2}
+          className={`transition-opacity ease-in duration-700 ${
+            isVisible2 ? "opacity-100" : "opacity-0"
+          }`}
+        >
           <div className="flex justify-center items-center">
             <h1
-              className={`my-4 text-3xl font-extrabold sm:text-6xl blue_gradient mb-4 pb-4 leading-tigh ${syne.className}`}
+              className={`my-8 text-3xl font-extrabold sm:text-4xl blue_gradient pb-4 leading-tigh mt-40 ${syne.className}`}
             >
               I/O
             </h1>
           </div>
-          <div className="widescreen:section-min-height tallscreen:section-min-height my-12 scroll-mt-20 p-6 grid sm:grid-cols-3 max-w-6xl mx-auto gap-3 relative">
+          <div className="bg-orange-400 rounded-2xl widescreen:section-min-height tallscreen:section-min-height my-12 scroll-mt-20 p-6 grid sm:grid-cols-3 max-w-6xl mx-auto gap-3 relative">
             <div className=" pattern-tic-tac-toe rounded-full w-36 h-36 absolute bottom-10 right-[-30rem]"></div>
             <div className=" pattern-tic-tac-toe rounded-full w-36 h-36 absolute top-[-4rem] right-20"></div>
-            <div>
+            <div className="border-1 border-white rounded-sm">
               <div className="pattern-tic-tac-toe rounded-full w-36 h-36 absolute bottom-36 left-96"></div>
               <div className="pattern-tic-tac-toe rounded-full w-36 h-36 absolute bottom-36 left-96"></div>
               <div></div>
               {/* <h1 className=" text-3xl font-extrabold sm:text-5xl blue_gradient mb-4">
                 Recruitment
               </h1> */}
-              <p className="mt-8 text-xl sm:text-lg max-w-2xl flex flex-col gap-5 text-slate-800">
+              <p className="mt-8 max-w-2xl flex flex-col gap-5 leading-8 font-serif">
                 <Image
                   src="/employee-skills-svgrepo-com.svg"
                   width={50}
@@ -150,7 +199,7 @@ export default function Home() {
               </p>
             </div>
             <div>
-              <p className="mt-8 text-xl sm:text-lg max-w-2xl flex flex-col gap-1 text-slate-800">
+              <p className="mt-8 max-w-2xl flex flex-col gap-1 leading-8 font-serif">
                 <Image
                   src="/dumbbell-svgrepo-com.svg"
                   width={50}
@@ -162,7 +211,7 @@ export default function Home() {
               </p>
             </div>
             <div>
-              <p className="mt-8 text-xl sm:text-lg max-w-2xl flex flex-col gap-1 text-slate-800">
+              <p className="mt-8 max-w-2xl flex flex-col gap-1 leading-8 font-serif">
                 <Image
                   src="/growth-svgrepo-com.svg"
                   width={50}
@@ -175,7 +224,7 @@ export default function Home() {
               </p>
             </div>
             <div>
-              <p className="mt-8 text-xl sm:text-lg max-w-2xl flex flex-col gap-1 text-slate-800">
+              <p className="mt-8 max-w-2xl flex flex-col gap-1 leading-8 font-serif">
                 <Image
                   src="/business-partnership-svgrepo-com.svg"
                   width={50}
@@ -188,19 +237,23 @@ export default function Home() {
             </div>
           </div>
         </section>
-        {/* delay-[300ms] duration-[600ms] taos:translate-y-[200px] taos:opacity-0"
-        data-taos-offset="300 */}
-        <section className="widescreen:section-min-height tallscreen:section-min-height my-12 scroll-mt-20 p-6">
-          <div className="grid place-content-center">
-            <h1
-              className={`text-center blue_gradient my-4 text-3xl font-extrabold sm:text-6xl blue_gradient mb-4 pb-4 leading-tigh ${syne.className}`}
-            >
-              Our Services
-            </h1>
+
+        <section
+          ref={ref3}
+          className={`transition-opacity ease-in duration-700 ${
+            isVisible3 ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          <h1
+            className={`text-center blue_gradient my-4 text-3xl font-extrabold sm:text-6xl blue_gradient mt-40 pb-4 leading-tigh ${syne.className}`}
+          >
+            Our Services
+          </h1>
+          <div className="no-scrollbar overflow-x-scroll max-w-6xl mx-auto">
             <Services />
           </div>
         </section>
-        <section className="widescreen:section-min-height tallscreen:section-min-height mt-12 scroll-mt-16 p-6 bg-black">
+        <section className="widescreen:section-min-height tallscreen:section-min-height scroll-mt-16 p-6 bg-black">
           <Contact />
         </section>
         <section className="widescreen:section-min-height tallscreen:section-min-height scroll-mt-16 p-6 bg-blue-800">
