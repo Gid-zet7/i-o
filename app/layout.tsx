@@ -62,7 +62,9 @@ export default function RootLayout({
       <body
         className={`${inter.className} min-h-screen ${
           mode === "dark" ? " bg-black" : "bg-slate-50"
-        } ${mode === "dark" ? " text-slate-50" : "text-slate-800"} `}
+        } ${
+          mode === "dark" ? " text-slate-50" : "text-slate-800"
+        } overflow-x-hidden `}
       >
         <NextSSRPlugin
           /**
