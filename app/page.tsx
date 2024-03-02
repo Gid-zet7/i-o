@@ -19,29 +19,28 @@ const chivo = Chivo({
   weight: "200",
 });
 
-export function useIsVisible(ref: any) {
-  const [isIntersecting, setIntersecting] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      setIntersecting(entry.isIntersecting);
-    });
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
-    };
-  }, [ref]);
-
-  return isIntersecting;
-}
-
 export default function Home() {
+  function useIsVisible(ref: React.RefObject<HTMLElement>): boolean {
+    const [isIntersecting, setIntersecting] = useState(false);
+
+    useEffect(() => {
+      const observer = new IntersectionObserver(([entry]) => {
+        setIntersecting(entry.isIntersecting);
+      });
+
+      if (ref.current) {
+        observer.observe(ref.current);
+      }
+
+      return () => {
+        if (ref.current) {
+          observer.unobserve(ref.current);
+        }
+      };
+    }, [ref]);
+
+    return isIntersecting;
+  }
   const ref1: any = useRef();
   const isVisible1 = useIsVisible(ref1);
 
