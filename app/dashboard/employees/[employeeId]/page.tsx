@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getEmployee } from "@/lib/actions";
-import Profile from "@/components/EmployeeAndManager/Profile";
+import EmployeeProfile from "@/components/EmployeeAndManager/EmployeeProfile";
 import { formatDate } from "@/helper/Util";
 
 type Params = {
@@ -35,11 +35,11 @@ export default async function EmployeePage({ params: { employeeId } }: Params) {
     throw new Error("Employee not found");
   }
 
-  const formattedDate = formatDate(employee.startDate);
+  const formattedDate = formatDate(employee?.startDate);
 
   return (
     <>
-      <Profile employee={employee} formattedDate={formattedDate} />
+      <EmployeeProfile employee={employee} formattedDate={formattedDate} />
     </>
   );
 }
