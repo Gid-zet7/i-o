@@ -195,7 +195,7 @@ export const getAllEmployees = async () => {
   return result.json();
 };
 
-export const getEmployee = async (employeeId: string) => {
+export const getEmployee = async (employeeId: string): Promise<Employee> => {
   const session: SessionInterface | null = await getServerSession(authOptions);
 
   if (!session?.user?.accessToken) {
@@ -204,19 +204,29 @@ export const getEmployee = async (employeeId: string) => {
 
   const endpoint = `${apiUrl}/employees/${employeeId}`;
 
-  let result = await fetch(endpoint, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${session?.user?.accessToken}`,
-    },
-  });
+  try {
+    // Fetch employee data from the API
+    const response = await fetch(endpoint, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${session.user.accessToken}`,
+      },
+    });
 
-  if (!result.ok) {
-    const errorMessage = `Failed to fetch employee. Status: ${result.status}, ${result.statusText}`;
-    throw new Error(errorMessage);
+    // Check if the response is successful
+    if (!response.ok) {
+      // If the response is not ok, throw an error with details
+      const errorMessage = `Failed to fetch employee. Status: ${response.status}, ${response.statusText}`;
+      throw new Error(errorMessage);
+    }
+
+    // Parse the JSON response and return the employee data
+    return await response.json();
+  } catch (error) {
+    // Catch and handle any errors that occur during the fetch operation
+    console.error("Error fetching employee data:", error);
+    throw new Error("Failed to fetch employee data");
   }
-
-  return result.json();
 };
 
 export const createEmployee = async (
@@ -436,7 +446,11 @@ export const getAllManagers = async () => {
 
   // console.log(res);
 
-  if (!result.ok) {
+  if (result.status === 400) {
+    return result.json;
+  }
+
+  if (!result?.ok) {
     const errorMessage = `Failed to fetch managers. Status: ${result.status}, ${result.statusText}`;
     throw new Error(errorMessage);
   }
