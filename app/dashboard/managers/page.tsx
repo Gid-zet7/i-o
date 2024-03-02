@@ -16,7 +16,7 @@ export default async function ManagersPage() {
     <>
       <SideMenu />
       <section className="mx-auto max-w-6xl p-3 md:ml-64">
-        <h1 className="text-5xl font-extrabold grid place-content-center mt-5 ">
+        <h1 className="text-4xl font-extrabold grid place-content-center mt-5 ">
           Managers
         </h1>
         <div className="flex flex-wrap gap-8 mt-10 max-w-5xl mx-auto p-3">
@@ -36,7 +36,9 @@ export default async function ManagersPage() {
               );
             })
           ) : (
-            <h1>No Managers found</h1>
+            <div className="flex justify-center">
+              <h1>No Managers found</h1>
+            </div>
           )}
         </div>
       </section>
