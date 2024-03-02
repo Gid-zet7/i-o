@@ -1,3 +1,4 @@
+// "use client";
 import type { Metadata } from "next";
 import { getAllEmployees } from "@/lib/actions";
 import Card from "@/components/EmployeeAndManager/Card";
@@ -20,7 +21,7 @@ export default async function EmployeesPage() {
           Employees
         </h1>
         <div className="flex flex-wrap gap-8 mt-10 max-w-5xl mx-auto p-3">
-          {employees.map((employee) => {
+          {employees?.map((employee) => {
             return (
               <Card
                 key={employee._id}
