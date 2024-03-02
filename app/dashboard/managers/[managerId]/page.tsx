@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getManager } from "@/lib/actions";
 // import { notFound } from "next/navigation";
-import Profile from "@/components/EmployeeAndManager/Profile";
+import ManagerProfile from "@/components/EmployeeAndManager/ManagerProfile";
 
 type Params = {
   params: {
@@ -38,7 +38,7 @@ export default async function ManagerPage({ params: { managerId } }: Params) {
       throw new Error("Manager not found");
     }
 
-    return <Profile manager={manager} />;
+    return <ManagerProfile manager={manager} />;
   } catch (error) {
     console.error("Error fetching manager data:", error);
   }
