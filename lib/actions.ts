@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "./session";
 
-const apiUrl = `${process.env.NEXTAUTH_URL}/api` || "http://localhost:3000/api";
+const apiUrl = process.env.API_URL || "http://localhost:3000/api";
 
 // ---------------Users----------------------
 export const getAllUsers = async () => {
