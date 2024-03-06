@@ -66,25 +66,25 @@ export default function RootLayout({
           mode === "dark" ? " text-slate-50" : "text-slate-800"
         } overflow-x-hidden `}
       >
-        <NextSSRPlugin
-          /**
-           * The `extractRouterConfig` will extract **only** the route configs
-           * from the router to prevent additional information from being
-           * leaked to the client. The data passed to the client is the same
-           * as if you were to fetch `/api/uploadthing` directly.
-           */
-          routerConfig={extractRouterConfig(ourFileRouter)}
-        />
-        <ColorModeContext.Provider value={colorMode}>
-          <ThemeProvider
-            theme={mode === "dark" ? darkThemeChosen : lightThemeChosen}
-          >
-            <Providers>
+        <Providers>
+          <NextSSRPlugin
+            /**
+             * The `extractRouterConfig` will extract **only** the route configs
+             * from the router to prevent additional information from being
+             * leaked to the client. The data passed to the client is the same
+             * as if you were to fetch `/api/uploadthing` directly.
+             */
+            routerConfig={extractRouterConfig(ourFileRouter)}
+          />
+          <ColorModeContext.Provider value={colorMode}>
+            <ThemeProvider
+              theme={mode === "dark" ? darkThemeChosen : lightThemeChosen}
+            >
               <Navbar ColorModeContext={ColorModeContext} />
               <main>{children}</main>
-            </Providers>
-          </ThemeProvider>
-        </ColorModeContext.Provider>
+            </ThemeProvider>
+          </ColorModeContext.Provider>
+        </Providers>
         <script src="https://unpkg.com/taos@1.0.5/dist/taos.js"></script>
       </body>
     </html>

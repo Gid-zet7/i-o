@@ -1,8 +1,10 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "./session";
 
-const apiUrl = process.env.API_URL || "http://localhost:3000/api";
-
+const apiUrl =
+  process.env.NODE_ENV === "production"
+    ? process.env.SERVER_URL
+    : "http://localhost:3000";
 // ---------------Users----------------------
 export const getAllUsers = async () => {
   const session: SessionInterface | null = await getServerSession(authOptions);
@@ -10,7 +12,7 @@ export const getAllUsers = async () => {
     throw new Error("User not authenticated or access token missing");
   }
 
-  const endpoint = `${apiUrl}/users`;
+  const endpoint = `${apiUrl}/api/users`;
   const result = await fetch(endpoint, {
     method: "GET",
     headers: {
@@ -33,7 +35,7 @@ export const getUser = async (userId: string) => {
     throw new Error("User not authenticated or access token missing");
   }
 
-  const endpoint = `${apiUrl}/users/${userId}`;
+  const endpoint = `${apiUrl}/api/users/${userId}`;
 
   const result = await fetch(endpoint, {
     method: "GET",
@@ -63,7 +65,7 @@ export const updateUser = async (
   if (!session?.user?.accessToken) {
     throw new Error("User not authenticated or access token missing");
   }
-  const endpoint = `${apiUrl}/users/update`;
+  const endpoint = `${apiUrl}/api/users/update`;
   let res = await fetch(endpoint, {
     method: "PATCH",
     headers: {
@@ -109,7 +111,7 @@ export const deleteUser = async (session: any, id: string) => {
   if (!session?.user?.accessToken) {
     throw new Error("User not authenticated or access token missing");
   }
-  const endpoint = `${apiUrl}/users/delete`;
+  const endpoint = `${apiUrl}/api/users/delete`;
 
   let res = await fetch(endpoint, {
     method: "DELETE",
@@ -153,7 +155,7 @@ export const getData = async (session: any) => {
     throw new Error("User not authenticated or access token missing");
   }
 
-  const endpoint = `${apiUrl}/employees`;
+  const endpoint = `${apiUrl}/api/employees`;
 
   const result = await fetch(endpoint, {
     method: "GET",
@@ -178,7 +180,7 @@ export const getAllEmployees = async () => {
     throw new Error("User not authenticated or access token missing");
   }
 
-  const endpoint = `${apiUrl}/employees`;
+  const endpoint = `${apiUrl}/api/employees`;
 
   const result = await fetch(endpoint, {
     method: "GET",
@@ -202,7 +204,7 @@ export const getEmployee = async (employeeId: string): Promise<Employee> => {
     throw new Error("User not authenticated or access token missing");
   }
 
-  const endpoint = `${apiUrl}/employees/${employeeId}`;
+  const endpoint = `${apiUrl}/api/employees/${employeeId}`;
 
   try {
     // Fetch employee data from the API
@@ -258,7 +260,7 @@ export const createEmployee = async (
     throw new Error("User not authenticated or access token missing");
   }
 
-  const endpoint = `${apiUrl}/employees/new`;
+  const endpoint = `${apiUrl}/api/employees/new`;
 
   let res = await fetch(endpoint, {
     method: "POST",
@@ -336,7 +338,7 @@ export const updateEmployee = async (
   if (!session?.user?.accessToken) {
     throw new Error("User not authenticated or access token missing");
   }
-  const endpoint = `${apiUrl}/employees/update`;
+  const endpoint = `${apiUrl}/api/employees/update`;
   let res = await fetch(endpoint, {
     method: "PATCH",
     headers: {
@@ -391,7 +393,7 @@ export const deleteEmployee = async (session: any, id: string) => {
   if (!session?.user?.accessToken) {
     throw new Error("User not authenticated or access token missing");
   }
-  const endpoint = `${apiUrl}/employees/delete`;
+  const endpoint = `${apiUrl}/api/employees/delete`;
 
   let res = await fetch(endpoint, {
     method: "DELETE",
@@ -435,7 +437,7 @@ export const getAllManagers = async () => {
     throw new Error("User not authenticated or access token missing");
   }
 
-  const endpoint = `${apiUrl}/managers`;
+  const endpoint = `${apiUrl}/api/managers`;
 
   let result = await fetch(endpoint, {
     method: "GET",
@@ -465,7 +467,7 @@ export const getManager = async (managerId: string) => {
     throw new Error("User not authenticated or access token missing");
   }
 
-  const endpoint = `${apiUrl}/managers/${managerId}`;
+  const endpoint = `${apiUrl}/api/managers/${managerId}`;
   let result = await fetch(endpoint, {
     method: "GET",
     headers: {
@@ -491,7 +493,7 @@ export const createManager = async (
     throw new Error("User not authenticated or access token missing");
   }
 
-  const endpoint = `${apiUrl}/managers/new`;
+  const endpoint = `${apiUrl}/api/managers/new`;
   let res = await fetch(endpoint, {
     method: "POST",
     headers: {
@@ -540,7 +542,7 @@ export const updateManager = async (
   if (!session?.user?.accessToken) {
     throw new Error("User not authenticated or access token missing");
   }
-  const endpoint = `${apiUrl}/managers/update`;
+  const endpoint = `${apiUrl}/api/managers/update`;
   let res = await fetch(endpoint, {
     method: "PATCH",
     headers: {
@@ -581,7 +583,7 @@ export const updateManager = async (
 };
 
 export const deleteManager = async (id: string) => {
-  const endpoint = `${apiUrl}/managers/demote`;
+  const endpoint = `${apiUrl}/api/managers/demote`;
 
   let res = await fetch(endpoint, {
     method: "DELETE",
@@ -624,7 +626,7 @@ export const getAllProjects = async () => {
     throw new Error("User not authenticated or access token missing");
   }
 
-  const endpoint = `${apiUrl}/projects`;
+  const endpoint = `${apiUrl}/api/projects`;
 
   let result = await fetch(endpoint, {
     method: "GET",
@@ -650,7 +652,7 @@ export const getProject = async (projectId: string) => {
     throw new Error("User not authenticated or access token missing");
   }
 
-  const endpoint = `${apiUrl}/projects/${projectId}`;
+  const endpoint = `${apiUrl}/api/projects/${projectId}`;
   let result = await fetch(endpoint, {
     method: "GET",
     headers: {
@@ -678,7 +680,7 @@ export const createProject = async (
     throw new Error("User not authenticated or access token missing");
   }
 
-  const endpoint = `${apiUrl}/projects/new`;
+  const endpoint = `${apiUrl}/api/projects/new`;
   let res = await fetch(endpoint, {
     method: "POST",
     headers: {
@@ -718,7 +720,7 @@ export const createProject = async (
 };
 
 export const deleteProject = async (id: string) => {
-  const endpoint = `${apiUrl}/projects/delete`;
+  const endpoint = `${apiUrl}/api/projects/delete`;
 
   let res = await fetch(endpoint, {
     method: "DELETE",
@@ -762,7 +764,7 @@ export const getAllDepartments = async () => {
     throw new Error("User not authenticated or access token missing");
   }
 
-  const endpoint = `${apiUrl}/departments`;
+  const endpoint = `${apiUrl}/api/departments`;
   let result = await fetch(endpoint, {
     method: "GET",
     headers: {
@@ -785,16 +787,13 @@ export const getDepartment = async (departmentId: string) => {
     throw new Error("User not authenticated or access token missing");
   }
 
-  const endpoint = `${apiUrl}/departments/${departmentId}`;
-  let result = await fetch(
-    `http://localhost:3000/api/departments/${departmentId}`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${session?.user?.accessToken}`,
-      },
-    }
-  );
+  const endpoint = `${apiUrl}/api/departments/${departmentId}`;
+  let result = await fetch(endpoint, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${session?.user?.accessToken}`,
+    },
+  });
 
   if (!result.ok) {
     const errorMessage = `Failed to fetch departments. Status: ${result.status}, ${result.statusText}`;
@@ -806,7 +805,7 @@ export const getDepartment = async (departmentId: string) => {
 
 // -----------------------------Forms----------------------
 export const getAllForms = async () => {
-  const endpoint = `${apiUrl}/appraisal-form`;
+  const endpoint = `${apiUrl}/api/appraisal-form`;
   let result = await fetch(endpoint, {
     method: "GET",
   });
@@ -826,7 +825,7 @@ export const getForm = async (formId: string) => {
   //   throw new Error("User not authenticated or access token missing");
   // }
 
-  const endpoint = `${apiUrl}/appraisal-form/${formId}`;
+  const endpoint = `${apiUrl}/api/appraisal-form/${formId}`;
 
   let result = await fetch(endpoint, {
     method: "GET",
@@ -859,7 +858,7 @@ export const createForm = async (
     throw new Error("User not authenticated or access token missing");
   }
 
-  const endpoint = `${apiUrl}/appraisal-form/new`;
+  const endpoint = `${apiUrl}/api/appraisal-form/new`;
 
   let res = await fetch(endpoint, {
     method: "POST",
@@ -910,7 +909,7 @@ export const getAllMeetings = async () => {
     throw new Error("User not authenticated or access token missing");
   }
 
-  const endpoint = `${apiUrl}/meetings`;
+  const endpoint = `${apiUrl}/api/meetings`;
 
   const result = await fetch(endpoint, {
     method: "GET",
@@ -934,7 +933,7 @@ export const getMeeting = async (meetingId: string) => {
     throw new Error("User not authenticated or access token missing");
   }
 
-  const endpoint = `${apiUrl}/meetings/${meetingId}`;
+  const endpoint = `${apiUrl}/api/meetings/${meetingId}`;
 
   let result = await fetch(endpoint, {
     method: "GET",
@@ -966,7 +965,7 @@ export const createMeeting = async (
     throw new Error("User not authenticated or access token missing");
   }
 
-  const endpoint = `${apiUrl}/meetings/new`;
+  const endpoint = `${apiUrl}/api/meetings/new`;
 
   let res = await fetch(endpoint, {
     method: "POST",
@@ -1021,7 +1020,7 @@ export const updateMeeting = async (
   if (!session?.user?.accessToken) {
     throw new Error("User not authenticated or access token missing");
   }
-  const endpoint = `${apiUrl}/meetings/update`;
+  const endpoint = `${apiUrl}/api/meetings/update`;
   let res = await fetch(endpoint, {
     method: "PATCH",
     headers: {
@@ -1067,7 +1066,7 @@ export const deleteMeeting = async (session: any, id: string) => {
   if (!session?.user?.accessToken) {
     throw new Error("User not authenticated or access token missing");
   }
-  const endpoint = `${apiUrl}/meetings/delete`;
+  const endpoint = `${apiUrl}/api/meetings/delete`;
 
   let res = await fetch(endpoint, {
     method: "DELETE",
@@ -1110,7 +1109,7 @@ export const getAllPerformances = async () => {
     throw new Error("User not authenticated or access token missing");
   }
 
-  const endpoint = `${apiUrl}/performance`;
+  const endpoint = `${apiUrl}/api/performance`;
 
   const result = await fetch(endpoint, {
     method: "GET",
@@ -1134,7 +1133,7 @@ export const getPerformance = async (performanceId: string) => {
     throw new Error("User not authenticated or access token missing");
   }
 
-  const endpoint = `${apiUrl}/performance/${performanceId}`;
+  const endpoint = `${apiUrl}/api/performance/${performanceId}`;
 
   let result = await fetch(endpoint, {
     method: "GET",
@@ -1166,7 +1165,7 @@ export const addPerformance = async (
     throw new Error("User not authenticated or access token missing");
   }
 
-  const endpoint = `${apiUrl}/performance/new`;
+  const endpoint = `${apiUrl}/api/performance/new`;
 
   let res = await fetch(endpoint, {
     method: "POST",
@@ -1220,7 +1219,7 @@ export const updatePerformance = async (
   if (!session?.user?.accessToken) {
     throw new Error("User not authenticated or access token missing");
   }
-  const endpoint = `${apiUrl}/performance/update`;
+  const endpoint = `${apiUrl}/api/performance/update`;
   let res = await fetch(endpoint, {
     method: "PATCH",
     headers: {
@@ -1265,7 +1264,7 @@ export const deletePerformance = async (session: any, id: string) => {
   if (!session?.user?.accessToken) {
     throw new Error("User not authenticated or access token missing");
   }
-  const endpoint = `${apiUrl}/performance/delete`;
+  const endpoint = `${apiUrl}/api/performance/delete`;
 
   let res = await fetch(endpoint, {
     method: "DELETE",
