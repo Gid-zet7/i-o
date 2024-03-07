@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import ProfileMenu from "./EmployeeAndManager/ProfileMenu";
-import AuthProvider from "./AuthProvider";
+import SignIn from "./SignIn";
 import { useSession } from "next-auth/react";
 import ThemeToggleButton from "@/components/themeToggleButton/themeToggleButton";
 
@@ -27,7 +27,7 @@ const Navbar = (props: NavbarProps) => {
               <ProfileMenu session={session} />
             </>
           ) : (
-            <AuthProvider />
+            <SignIn />
           )}
         </div>
       </div>

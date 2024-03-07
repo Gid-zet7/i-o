@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import Button from "./Button";
 
-const AuthProvider = () => {
+const SignIn = () => {
   return (
     <div className="flex flex-row gap-3">
       <Link href={`/login`}>
@@ -14,4 +14,4 @@ const AuthProvider = () => {
   );
 };
 
-export default AuthProvider;
+export default SignIn;
