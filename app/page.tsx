@@ -102,7 +102,7 @@ export default function Home() {
               >
                 HRIS (Human Resource Information System)
               </h1>
-              <p className="leading-8 font-serif ">
+              <p className="leading-8 font-serif text-slate-400">
                 As an HR personnel, we understand the frustration of drowning in
                 paperwork and tedious administrative tasks. Our solution is here
                 to revolutionize your workflow! Say goodbye to piles of paper
@@ -118,8 +118,8 @@ export default function Home() {
           <div className="max-w-6xl mx-auto grid gap-12 sm:grid-cols-3 sm:gap-16 p-4 mb-20">
             <article>
               <h2>
-                <span className="flex tabular-nums text-5xl font-extrabold mb-2 animate-[counter2_3s_ease-out_forwards] [counter-set:_num_var(--num)] before:content-[counter(num)] ">
-                  <span className="supports-[counter-set]:sr-only">40</span>K+
+                <span className="flex tabular-nums text-5xl font-extrabold mb-2 ">
+                  <span>40</span>K+
                 </span>
                 <span className="inline-flex font-semibold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-indigo-300 mb-2">
                   Employee Records
@@ -132,8 +132,8 @@ export default function Home() {
             </article>
             <article>
               <h2>
-                <span className="flex tabular-nums text-5xl font-extrabold mb-2 animate-[counter_3s_ease-out_forwards] [counter-set:_num_var(--num)] before:content-[counter(num)] ">
-                  <span className="supports-[counter-set]:sr-only">60</span>K+
+                <span className="flex tabular-nums text-5xl font-extrabold mb-2 ">
+                  <span>60</span>K+
                 </span>
                 <span className="inline-flex font-semibold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-indigo-300 mb-2">
                   Performance Appraisal
@@ -147,8 +147,8 @@ export default function Home() {
             </article>
             <article>
               <h2>
-                <span className="flex tabular-nums text-5xl font-extrabold mb-2 animate-[counter3_3s_ease-out_forwards] [counter-set:_num_var(--num)] before:content-[counter(num)] ">
-                  <span className="supports-[counter-set]:sr-only">10</span>K+
+                <span className="flex tabular-nums text-5xl font-extrabold mb-2">
+                  <span>10</span>K+
                 </span>
                 <span className="inline-flex font-semibold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-indigo-300 mb-2">
                   Trusted companies
@@ -185,7 +185,7 @@ export default function Home() {
               {/* <h1 className=" text-3xl font-extrabold sm:text-5xl blue_gradient mb-4">
                 Recruitment
               </h1> */}
-              <p className="mt-8 max-w-2xl flex flex-col gap-5 leading-8 font-serif">
+              <p className="mt-8 max-w-2xl flex flex-col gap-5 leading-8 font-serif text-slate-700">
                 <Image
                   src="/employee-skills-svgrepo-com.svg"
                   width={50}
@@ -198,7 +198,7 @@ export default function Home() {
               </p>
             </div>
             <div>
-              <p className="mt-8 max-w-2xl flex flex-col gap-1 leading-8 font-serif">
+              <p className="mt-8 max-w-2xl flex flex-col gap-1 leading-8 font-serif text-slate-700">
                 <Image
                   src="/dumbbell-svgrepo-com.svg"
                   width={50}
@@ -210,7 +210,7 @@ export default function Home() {
               </p>
             </div>
             <div>
-              <p className="mt-8 max-w-2xl flex flex-col gap-1 leading-8 font-serif">
+              <p className="mt-8 max-w-2xl flex flex-col gap-1 leading-8 font-serif text-slate-700">
                 <Image
                   src="/growth-svgrepo-com.svg"
                   width={50}
@@ -223,7 +223,7 @@ export default function Home() {
               </p>
             </div>
             <div>
-              <p className="mt-8 max-w-2xl flex flex-col gap-1 leading-8 font-serif">
+              <p className="mt-8 max-w-2xl flex flex-col gap-1 leading-8 font-serif text-slate-700">
                 <Image
                   src="/business-partnership-svgrepo-com.svg"
                   width={50}
@@ -255,7 +255,7 @@ export default function Home() {
         <section className="widescreen:section-min-height tallscreen:section-min-height scroll-mt-16 p-6 bg-black">
           <Contact />
         </section>
-        <section className="widescreen:section-min-height tallscreen:section-min-height scroll-mt-16 p-6 bg-blue-800">
+        <section className="widescreen:section-min-height tallscreen:section-min-height scroll-mt-16 p-6 bg-[#0b2c57]">
           <Footer />
         </section>
       </main>

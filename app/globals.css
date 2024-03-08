@@ -20,7 +20,7 @@
   }
 }
 
-@property --num {
+/* @property --num {
   syntax: "<integer>";
   initial-value: 0;
   inherits: false;
@@ -51,7 +51,7 @@
   to {
     --num: 10;
   }
-}
+} */
 
 .blue_gradient {
   @apply bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent;
