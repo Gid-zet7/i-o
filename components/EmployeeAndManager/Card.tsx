@@ -1,6 +1,7 @@
 "use client";
 
 import { Paper, Avatar, Box } from "@mui/material";
+import { useState } from "react";
 import Link from "next/link";
 
 type Props = {
@@ -24,26 +25,27 @@ const Card = ({
   department,
   projects,
 }: Props) => {
+  const [options, setOptions] = useState<boolean>(false);
+
+  const handleOpenOptions = () => {
+    setOptions((prevSatate) => !prevSatate);
+  };
+
   return (
     <section
       style={{ fontFamily: "Montserrat" }}
       className=" bg-[#071e34] flex font-medium items-center justify-center rounded-2xl"
     >
       <Paper className="w-64 mx-auto rounded-2xl px-8 py-6 shadow-lg">
-        <div className="flex items-center justify-between">
-          <Link href={`/dashboard/employees/${id}`}>
-            <span className="text-black text-sm bg-emerald-400 p-2 rounded-md">
-              View profile
-            </span>
-          </Link>
-
-          {/* <span className="text-emerald-400">
+        <div className="flex items-center justify-end">
+          <span className="text-emerald-400 relative cursor-pointer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
+              onClick={handleOpenOptions}
             >
               <path
                 stroke-linecap="round"
@@ -52,7 +54,14 @@ const Card = ({
                 d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
               />
             </svg>
-          </span> */}
+            {options && (
+              <Link href={`/dashboard/employees/${id}`}>
+                <Paper className="text-sm p-2 rounded-md absolute w-24 flex text-center">
+                  View profile
+                </Paper>
+              </Link>
+            )}
+          </span>
         </div>
         <div className="mt-6 w-fit mx-auto">
           <Box display="flex" flexDirection="column" alignItems="center">

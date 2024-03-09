@@ -55,9 +55,7 @@ const ProfileMenu = ({ session }: any) => {
           onClose={handleCloseProfileMenu}
         >
           <MenuItem>
-            <Link
-              href={`http://localhost:3000/dashboard/users/${session?.user?._doc?._id}/edit`}
-            >
+            <Link href={`/dashboard/users/${session?.user?._doc?._id}/edit`}>
               <Avatar
                 alt={session?.user?.username as string}
                 src={session?.user?._doc?.avatarUrl}
@@ -85,7 +83,7 @@ const ProfileMenu = ({ session }: any) => {
           <MenuItem>
             <div className="text-extrabold text-xl">Manage</div>
           </MenuItem>
-          <Link href="http://localhost:3000/dashboard/employees/new">
+          <Link href="/dashboard/employees/new">
             <MenuItem>
               <Typography textAlign="center" fontSize={13}>
                 Add employee
@@ -93,7 +91,7 @@ const ProfileMenu = ({ session }: any) => {
             </MenuItem>
           </Link>
 
-          <Link href="http://localhost:3000/dashboard/managers/new">
+          <Link href="/dashboard/managers/new">
             <MenuItem>
               <Typography textAlign="center" fontSize={13}>
                 Add manager
@@ -101,7 +99,7 @@ const ProfileMenu = ({ session }: any) => {
             </MenuItem>
           </Link>
 
-          <Link href="http://localhost:3000/dashboard/appraisal-form/new">
+          <Link href="/dashboard/appraisal-form/new">
             <MenuItem>
               <Typography textAlign="center" fontSize={13}>
                 Create new form
@@ -109,9 +107,7 @@ const ProfileMenu = ({ session }: any) => {
             </MenuItem>
           </Link>
 
-          <Link
-            href={`http://localhost:3000/dashboard/users/${session?.user?._doc?._id}/edit`}
-          >
+          <Link href={`/dashboard/users/${session?.user?._doc?._id}/edit`}>
             <MenuItem>
               <Typography textAlign="center" fontSize={13}>
                 View profile
