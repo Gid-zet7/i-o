@@ -3,6 +3,11 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import { getServerSession } from "next-auth";
 
+const apiUrl =
+  process.env.NODE_ENV === "production"
+    ? process.env.SERVER_URL
+    : "http://localhost:3000";
+
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
@@ -10,7 +15,7 @@ export const authOptions: NextAuthOptions = {
       credentials: {},
       async authorize(credentials: any) {
         const { username, password } = credentials;
-        const res = await fetch(`${process.env.SERVER_URL}/api/auth/login`, {
+        const res = await fetch(`${apiUrl}/api/auth/login`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
