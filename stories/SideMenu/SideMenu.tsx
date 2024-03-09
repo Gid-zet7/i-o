@@ -14,6 +14,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import { Dashboard, Dataset } from "@mui/icons-material";
+import { KeyboardDoubleArrowRight } from "@mui/icons-material";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 
@@ -185,9 +186,9 @@ export default function SideMenu() {
           edge="start"
           onClick={handleDrawerToggle}
           sx={{ mr: 2, display: { sm: "none" } }}
-          className="absolute top-0"
+          className="absolute top-4"
         >
-          <MenuIcon />
+          <KeyboardDoubleArrowRight />
         </IconButton>
       </Toolbar>
 
