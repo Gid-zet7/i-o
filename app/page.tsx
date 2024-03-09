@@ -170,7 +170,7 @@ export default function Home() {
         >
           <div className="flex justify-center items-center">
             <h1
-              className={`my-8 text-3xl font-extrabold sm:text-4xl blue_gradient pb-4 leading-tigh mt-40 ${syne.className}`}
+              className={`my-8 text-3xl font-extrabold sm:text-4xl blue_gradient pb-4 leading-tigh mt-20 ${syne.className}`}
             >
               I/O
             </h1>
@@ -244,7 +244,7 @@ export default function Home() {
           }`}
         >
           <h1
-            className={`text-center blue_gradient my-4 text-3xl font-extrabold sm:text-6xl blue_gradient mt-40 pb-4 leading-tigh ${syne.className}`}
+            className={`text-center blue_gradient my-4 text-3xl font-extrabold sm:text-6xl blue_gradient mt-20 pb-4 leading-tigh ${syne.className}`}
           >
             Our Services
           </h1>
