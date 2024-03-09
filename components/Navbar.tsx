@@ -17,10 +17,10 @@ const Navbar = (props: NavbarProps) => {
   return (
     <nav className="py-5 px-8 border-b gap-4 sticky top-0 z-10 backdrop-blur-sm">
       <div className="mx-auto flex max-w-7xl items-center justify-between">
-        <h1 className="text-3xl">
+        <h1 className="text-xl lg:text-3xl">
           <Link href="/">I/O</Link>
         </h1>
-        <div className="flex gap-4">
+        <div className="flex gap-2 lg:gap-4">
           <ThemeToggleButton ColorModeContext={ColorModeContext} />
           {session?.user ? (
             <>
