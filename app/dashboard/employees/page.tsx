@@ -17,10 +17,10 @@ export default async function EmployeesPage() {
     <>
       <SideMenu />
       <section className="mx-auto max-w-6xl p-3 md:ml-64">
-        <h1 className="text-5xl font-extrabold grid place-content-center mt-5 ">
+        <h1 className="text-3xl lg:text-5xl font-extrabold grid place-content-center mt-5 ">
           Employees
         </h1>
-        <div className="flex flex-wrap gap-8 mt-10 max-w-5xl mx-auto p-3">
+        <div className="flex flex-wrap justify-center gap-8 mt-10 max-w-5xl mx-auto p-3">
           {employees?.map((employee) => {
             return (
               <Card
