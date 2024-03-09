@@ -81,7 +81,7 @@ export default function Services() {
             >
               Job Analysis
             </Typography>
-            <Paper className="p-4 w-96 rounded-2xl bg-gradient-to-r from-violet-600 to-indigo-600">
+            <div className="p-4 w-96 rounded-2xl bg-gradient-to-r from-violet-600 to-indigo-600">
               {/* <div>
                 <Image
                   src={"/real-time-analysis.svg"}
@@ -93,7 +93,7 @@ export default function Services() {
               </div> */}
               <Typography
                 color={"lightslategrey"}
-                className="mb-4 text-base font-normal text-gray-200"
+                className="mb-4 text-base font-normal text-gray-100"
               >
                 Job analysis is a fundamental part of the practice of
                 industrial/organizational psychology. It involves the
@@ -106,7 +106,7 @@ export default function Services() {
                   Read more <span>→</span>
                 </Typography>
               </Link>
-            </Paper>
+            </div>
           </div>
         </div>
 
@@ -119,7 +119,7 @@ export default function Services() {
             >
               Training and Development
             </Typography>
-            <Paper className="p-4 w-96 rounded-2xl bg-gradient-to-r from-indigo-400 to-cyan-400">
+            <div className="p-4 w-96 rounded-2xl bg-gradient-to-r from-indigo-400 to-cyan-400">
               {/* <div>
                 <Image
                   src={"/training.svg"}
@@ -131,7 +131,7 @@ export default function Services() {
               </div> */}
               <Typography
                 color={"lightslategrey"}
-                className="mb-4 text-base font-normal text-gray-200"
+                className="mb-4 text-base font-normal text-gray-100"
               >
                 Training and Development is concerned with specialised
                 activities aimed at bettering the performance of individuals and
@@ -142,7 +142,7 @@ export default function Services() {
                   Read more <span>→</span>
                 </Typography>
               </Link>
-            </Paper>
+            </div>
           </div>
         </div>
 
@@ -155,7 +155,7 @@ export default function Services() {
             >
               Performance Appraisal
             </Typography>
-            <Paper className="p-4 w-96 rounded-2xl bg-gradient-to-r from-fuchsia-500 to-pink-500">
+            <div className="p-4 w-96 rounded-2xl bg-gradient-to-r from-fuchsia-500 to-pink-500">
               {/* <div>
                 <Image
                   src={"/stepping-up.svg"}
@@ -167,7 +167,7 @@ export default function Services() {
               </div> */}
               <Typography
                 color={"lightslategrey"}
-                className="mb-4 text-base font-normal text-gray-200"
+                className="mb-4 text-base font-normal text-gray-100"
               >
                 Some call it performance evaluation. It is the systematic review
                 and evaluation of job performance, as well as the provision of
@@ -179,7 +179,7 @@ export default function Services() {
                   Read more <span>→</span>
                 </Typography>
               </Link>
-            </Paper>
+            </div>
           </div>
         </div>
         <div className="child">
@@ -191,7 +191,7 @@ export default function Services() {
             >
               Performance Appraisal
             </Typography>
-            <Paper className="p-4 w-96 rounded-2xl bg-gradient-to-r from-emerald-400 to-cyan-400">
+            <div className="p-4 w-96 rounded-2xl bg-gradient-to-r from-emerald-400 to-cyan-400">
               {/* <div>
                 <Image
                   src={"/stepping-up.svg"}
@@ -203,7 +203,7 @@ export default function Services() {
               </div> */}
               <Typography
                 color={"lightslategrey"}
-                className="mb-4 text-base font-normal text-gray-200"
+                className="mb-4 text-base font-normal text-gray-100"
               >
                 Some call it performance evaluation. It is the systematic review
                 and evaluation of job performance, as well as the provision of
@@ -215,7 +215,7 @@ export default function Services() {
                   Read more <span>→</span>
                 </Typography>
               </Link>
-            </Paper>
+            </div>
           </div>
         </div>
 
@@ -228,7 +228,7 @@ export default function Services() {
             >
               Performance Appraisal
             </Typography>
-            <Paper className="p-4 w-96 rounded-2xl bg-gradient-to-r from-emerald-500 to-emerald-900">
+            <div className="p-4 w-96 rounded-2xl bg-gradient-to-r from-emerald-500 to-emerald-900">
               {/* <div>
                 <Image
                   src={"/stepping-up.svg"}
@@ -240,7 +240,7 @@ export default function Services() {
               </div> */}
               <Typography
                 color={"lightslategrey"}
-                className="mb-4 text-base font-normal text-gray-200"
+                className="mb-4 text-base font-normal text-gray-100"
               >
                 Some call it performance evaluation. It is the systematic review
                 and evaluation of job performance, as well as the provision of
@@ -252,7 +252,7 @@ export default function Services() {
                   Read more <span>→</span>
                 </Typography>
               </Link>
-            </Paper>
+            </div>
           </div>
         </div>
       </div>
