@@ -311,7 +311,7 @@ export default function EditManagerForm({
                         type="submit"
                         variant="contained"
                         color="primary"
-                        className="text-black bg-white"
+                        className="text-black bg-white mb-4 mr-3"
                         // onClick={handleSubmit}
                       >
                         Save Changes
@@ -320,7 +320,7 @@ export default function EditManagerForm({
                         type="button"
                         variant="contained"
                         color="primary"
-                        className="text-black bg-white ml-3"
+                        className="text-black bg-white mb-4"
                         onClick={handleDelete}
                       >
                         Demote Manager
