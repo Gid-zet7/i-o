@@ -42,7 +42,7 @@ export default function EmployeeProfile({ employee, formattedDate }: Props) {
             <div className="my-4"></div>
 
             {/* <!-- Experience and education --> */}
-            {employee?.experience ? (
+            {/* {employee?.experience ? (
               <ExperienceCard
                 experiences={employee?.experience}
                 education={employee?.education}
@@ -52,7 +52,7 @@ export default function EmployeeProfile({ employee, formattedDate }: Props) {
             <div className="my-4"></div>
             {employee?.performance ? (
               <PerformanceCard performance={employee?.performance} />
-            ) : null}
+            ) : null} */}
           </div>
         </div>
       </div>
