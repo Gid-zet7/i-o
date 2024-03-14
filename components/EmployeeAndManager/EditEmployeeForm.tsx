@@ -539,7 +539,10 @@ export default function EditEmployeeForm({
 
                       {experiences.map((experience: any, i) => (
                         <div>
-                          <div className="flex items-center gap-4" key={i}>
+                          <div
+                            className="flex flex-col lg:flex-row items-center gap-4"
+                            key={i}
+                          >
                             <div className="flex items-center mb-2">
                               <TextField
                                 type="text"
@@ -639,7 +642,10 @@ export default function EditEmployeeForm({
 
                       {education.map((edu, i) => (
                         <div>
-                          <div className="flex items-center gap-4" key={i}>
+                          <div
+                            className="flex flex-col lg:flex-row items-center gap-4"
+                            key={i}
+                          >
                             <div className="flex items-center mb-2">
                               <TextField
                                 type="text"

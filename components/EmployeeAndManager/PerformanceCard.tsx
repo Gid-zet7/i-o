@@ -8,6 +8,7 @@ type Props = {
 export default function PerformanceCard({ performance }: Props) {
   const Outstanding = getRandomNumber(90, 95);
   const VeryGood = getRandomNumber(80, 90);
+  console.log(performance);
 
   return (
     <Paper className=" p-3 shadow-sm rounded-sm">
