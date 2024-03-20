@@ -91,21 +91,24 @@ export default function Services() {
                   className="object-cover"
                 />
               </div> */}
-              <Typography
-                color={"lightslategrey"}
-                className="mb-4 text-base font-normal text-gray-100"
-              >
-                Job analysis is a fundamental part of the practice of
-                industrial/organizational psychology. It involves the
-                determination of the tasks that make up a job, the tasks&apos;
-                relative importance, and what knowledge, skills, and abilities
-                are necessary to successfully carry out those tasks
-              </Typography>
-              <Link href="/selection-and-placement">
-                <Typography className="hover:underline">
-                  Read more <span>→</span>
+              <a href="/selection-and-placement" className="group">
+                <Typography
+                  color={"lightslategrey"}
+                  className="mb-4 text-base font-normal text-gray-50"
+                >
+                  Job analysis is a fundamental part of the practice of
+                  industrial/organizational psychology. It involves the
+                  determination of the tasks that make up a job, the tasks&apos;
+                  relative importance, and what knowledge, skills, and abilities
+                  are necessary to successfully carry out those tasks
                 </Typography>
-              </Link>
+                <Typography className="">
+                  Read more{" "}
+                  <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+                    →
+                  </span>
+                </Typography>
+              </a>
             </div>
           </div>
         </div>
@@ -129,19 +132,22 @@ export default function Services() {
                   className="object-cover"
                 />
               </div> */}
-              <Typography
-                color={"lightslategrey"}
-                className="mb-4 text-base font-normal text-gray-100"
-              >
-                Training and Development is concerned with specialised
-                activities aimed at bettering the performance of individuals and
-                groups in organisational settings.
-              </Typography>
-              <Link href="/selection-and-placement">
-                <Typography className="hover:underline">
-                  Read more <span>→</span>
+              <a href="/selection-and-placement" className="group">
+                <Typography
+                  color={"lightslategrey"}
+                  className="mb-4 text-base font-normal text-gray-50"
+                >
+                  Training and Development is concerned with specialised
+                  activities aimed at bettering the performance of individuals
+                  and groups in organisational settings.
                 </Typography>
-              </Link>
+                <Typography className="">
+                  Read more{" "}
+                  <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+                    →
+                  </span>
+                </Typography>
+              </a>
             </div>
           </div>
         </div>
@@ -165,20 +171,23 @@ export default function Services() {
                   className="object-cover"
                 />
               </div> */}
-              <Typography
-                color={"lightslategrey"}
-                className="mb-4 text-base font-normal text-gray-100"
-              >
-                Some call it performance evaluation. It is the systematic review
-                and evaluation of job performance, as well as the provision of
-                feedback. It is done mostly once in a year Some do it at the end
-                of business year, others do it six months
-              </Typography>
-              <Link href="/selection-and-placement">
-                <Typography className="hover:underline">
-                  Read more <span>→</span>
+              <a href="/selection-and-placement" className="group">
+                <Typography
+                  color={"lightslategrey"}
+                  className="mb-4 text-base font-normal text-gray-50"
+                >
+                  Some call it performance evaluation. It is the systematic
+                  review and evaluation of job performance, as well as the
+                  provision of feedback. It is done mostly once in a year Some
+                  do it at the end of business year, others do it six months
                 </Typography>
-              </Link>
+                <Typography className="">
+                  Read more{" "}
+                  <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+                    →
+                  </span>
+                </Typography>
+              </a>
             </div>
           </div>
         </div>
@@ -201,20 +210,23 @@ export default function Services() {
                   className="object-cover"
                 />
               </div> */}
-              <Typography
-                color={"lightslategrey"}
-                className="mb-4 text-base font-normal text-gray-100"
-              >
-                Some call it performance evaluation. It is the systematic review
-                and evaluation of job performance, as well as the provision of
-                feedback. It is done mostly once in a year Some do it at the end
-                of business year, others do it six months
-              </Typography>
-              <Link href="/selection-and-placement">
-                <Typography className="hover:underline">
-                  Read more <span>→</span>
+              <a href="/selection-and-placement" className="group">
+                <Typography
+                  color={"lightslategrey"}
+                  className="mb-4 text-base font-normal text-gray-50"
+                >
+                  Some call it performance evaluation. It is the systematic
+                  review and evaluation of job performance, as well as the
+                  provision of feedback. It is done mostly once in a year Some
+                  do it at the end of business year, others do it six months
                 </Typography>
-              </Link>
+                <Typography className="">
+                  Read more{" "}
+                  <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+                    →
+                  </span>
+                </Typography>
+              </a>
             </div>
           </div>
         </div>
@@ -238,20 +250,24 @@ export default function Services() {
                   className="object-cover"
                 />
               </div> */}
-              <Typography
-                color={"lightslategrey"}
-                className="mb-4 text-base font-normal text-gray-100"
-              >
-                Some call it performance evaluation. It is the systematic review
-                and evaluation of job performance, as well as the provision of
-                feedback. It is done mostly once in a year Some do it at the end
-                of business year, others do it six months
-              </Typography>
-              <Link href="/selection-and-placement">
-                <Typography className="hover:underline">
-                  Read more <span>→</span>
+
+              <a href="/selection-and-placement" className="group">
+                <Typography
+                  color={"lightslategrey"}
+                  className="mb-4 text-base font-normal text-gray-50"
+                >
+                  Some call it performance evaluation. It is the systematic
+                  review and evaluation of job performance, as well as the
+                  provision of feedback. It is done mostly once in a year Some
+                  do it at the end of business year, others do it six months
                 </Typography>
-              </Link>
+                <Typography className="">
+                  Read more{" "}
+                  <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+                    →
+                  </span>
+                </Typography>
+              </a>
             </div>
           </div>
         </div>

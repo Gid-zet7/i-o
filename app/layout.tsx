@@ -10,6 +10,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Providers from "@/components/Providers";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
+import Script from "next/script";
 
 import { ourFileRouter } from "./api/uploadthing/core";
 
@@ -59,6 +60,21 @@ export default function RootLayout({
 
   return (
     <html lang="en">
+      <head>
+        {/* Google tag (gtag.js)  */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-QV7700QJ7X"
+        ></Script>
+        <Script id="google-analytics">
+          {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-QV7700QJ7X');`}
+        </Script>
+      </head>
       <body
         className={`${inter.className} min-h-screen ${
           mode === "dark" ? " bg-black" : "bg-slate-50"

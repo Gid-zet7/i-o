@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Subfields from "@/components/HomePage/Subfields";
-import Slides from "@/components/HomePage/Slides";
+import Slider from "@/components/HomePage/Slider";
 import Services from "@/components/HomePage/Services";
 import Contact from "@/components/HomePage/Contact";
 import Footer from "@/components/HomePage/Footer";
@@ -24,6 +24,7 @@ export default function Home() {
     const [isIntersecting, setIntersecting] = useState(false);
 
     useEffect(() => {
+      console.log("mounted");
       const observer = new IntersectionObserver(([entry]) => {
         setIntersecting(entry.isIntersecting);
       });
@@ -53,12 +54,12 @@ export default function Home() {
   return (
     <>
       <Subfields />
-      <main className="o overflow-x-hidden">
+      <main className="overflow-x-hidden">
         <section id="hero" className="mb-32 bg-emerald-500 rounded-b-3xl">
           <div className="widescreen:section-min-height tallscreen:section-min-height mb-3 flex scroll-mt-40 flex-col items-center justify-center gap-10 p-6 md:flex-row max-w-6xl mx-auto">
             <article className="text-white">
               <h1
-                className={`mt-5 text-5xl font-extrabold md:text-9xl mb-4  pb-4 leading-tigh ${syne.className}`}
+                className={`mt-5 text-6xl font-extrabold md:text-9xl mb-4  pb-4 leading-tigh ${syne.className}`}
               >
                 Applying <span className="blue_gradient">psychology</span> to
                 work
@@ -77,7 +78,7 @@ export default function Home() {
             />
           </div>
           <div className="max-w-5xl mx-auto">
-            <Slides />
+            <Slider />
           </div>
         </section>
         <section
