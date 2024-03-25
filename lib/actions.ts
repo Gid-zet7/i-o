@@ -155,7 +155,7 @@ export const getData = async (session: any) => {
     throw new Error("User not authenticated or access token missing");
   }
 
-  const endpoint = `${apiUrl}/api/employees`;
+  const endpoint = `https://i-o.vercel.app/api/employees`;
 
   const result = await fetch(endpoint, {
     method: "GET",
@@ -338,7 +338,7 @@ export const updateEmployee = async (
   if (!session?.user?.accessToken) {
     throw new Error("User not authenticated or access token missing");
   }
-  const endpoint = `${apiUrl}/api/employees/update`;
+  const endpoint = `https://i-o.vercel.app/api/employees/update`;
   let res = await fetch(endpoint, {
     method: "PATCH",
     headers: {
@@ -393,7 +393,7 @@ export const deleteEmployee = async (session: any, id: string) => {
   if (!session?.user?.accessToken) {
     throw new Error("User not authenticated or access token missing");
   }
-  const endpoint = `${apiUrl}/api/employees/delete`;
+  const endpoint = `https://i-o.vercel.app/api/employees/delete`;
 
   let res = await fetch(endpoint, {
     method: "DELETE",
@@ -493,7 +493,7 @@ export const createManager = async (
     throw new Error("User not authenticated or access token missing");
   }
 
-  const endpoint = `${apiUrl}/api/managers/new`;
+  const endpoint = `https://i-o.vercel.app/api/managers/new`;
   let res = await fetch(endpoint, {
     method: "POST",
     headers: {
@@ -542,7 +542,7 @@ export const updateManager = async (
   if (!session?.user?.accessToken) {
     throw new Error("User not authenticated or access token missing");
   }
-  const endpoint = `${apiUrl}/api/managers/update`;
+  const endpoint = `https://i-o.vercel.app/api/managers/update`;
   let res = await fetch(endpoint, {
     method: "PATCH",
     headers: {
@@ -583,7 +583,7 @@ export const updateManager = async (
 };
 
 export const deleteManager = async (id: string) => {
-  const endpoint = `${apiUrl}/api/managers/demote`;
+  const endpoint = `https://i-o.vercel.app/api/managers/demote`;
 
   let res = await fetch(endpoint, {
     method: "DELETE",
@@ -680,7 +680,7 @@ export const createProject = async (
     throw new Error("User not authenticated or access token missing");
   }
 
-  const endpoint = `${apiUrl}/api/projects/new`;
+  const endpoint = `https://i-o.vercel.app/api/projects/new`;
   let res = await fetch(endpoint, {
     method: "POST",
     headers: {
@@ -720,7 +720,7 @@ export const createProject = async (
 };
 
 export const deleteProject = async (id: string) => {
-  const endpoint = `${apiUrl}/api/projects/delete`;
+  const endpoint = `https://i-o.vercel.app/api/projects/delete`;
 
   let res = await fetch(endpoint, {
     method: "DELETE",
@@ -868,7 +868,7 @@ export const createForm = async (
     throw new Error("User not authenticated or access token missing");
   }
 
-  const endpoint = `${apiUrl}/api/appraisal-form/new`;
+  const endpoint = `https://i-o.vercel.app/api/appraisal-form/new`;
 
   let res = await fetch(endpoint, {
     method: "POST",
@@ -975,7 +975,7 @@ export const createMeeting = async (
     throw new Error("User not authenticated or access token missing");
   }
 
-  const endpoint = `${apiUrl}/api/meetings/new`;
+  const endpoint = `https://i-o.vercel.app/api/meetings/new`;
 
   let res = await fetch(endpoint, {
     method: "POST",
@@ -1030,7 +1030,7 @@ export const updateMeeting = async (
   if (!session?.user?.accessToken) {
     throw new Error("User not authenticated or access token missing");
   }
-  const endpoint = `${apiUrl}/api/meetings/update`;
+  const endpoint = `https://i-o.vercel.app/api/meetings/update`;
   let res = await fetch(endpoint, {
     method: "PATCH",
     headers: {
@@ -1076,7 +1076,7 @@ export const deleteMeeting = async (session: any, id: string) => {
   if (!session?.user?.accessToken) {
     throw new Error("User not authenticated or access token missing");
   }
-  const endpoint = `${apiUrl}/api/meetings/delete`;
+  const endpoint = `https://i-o.vercel.app/api/meetings/delete`;
 
   let res = await fetch(endpoint, {
     method: "DELETE",
@@ -1175,7 +1175,7 @@ export const addPerformance = async (
     throw new Error("User not authenticated or access token missing");
   }
 
-  const endpoint = `${apiUrl}/api/performance/new`;
+  const endpoint = `https://i-o.vercel.app/api/performance/new`;
 
   let res = await fetch(endpoint, {
     method: "POST",
@@ -1229,7 +1229,7 @@ export const updatePerformance = async (
   if (!session?.user?.accessToken) {
     throw new Error("User not authenticated or access token missing");
   }
-  const endpoint = `${apiUrl}/api/performance/update`;
+  const endpoint = `https://i-o.vercel.app/api/performance/update`;
   let res = await fetch(endpoint, {
     method: "PATCH",
     headers: {
@@ -1274,7 +1274,7 @@ export const deletePerformance = async (session: any, id: string) => {
   if (!session?.user?.accessToken) {
     throw new Error("User not authenticated or access token missing");
   }
-  const endpoint = `${apiUrl}/api/performance/delete`;
+  const endpoint = `https://i-o.vercel.app/api/performance/delete`;
 
   let res = await fetch(endpoint, {
     method: "DELETE",
