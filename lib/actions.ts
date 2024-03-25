@@ -260,7 +260,7 @@ export const createEmployee = async (
     throw new Error("User not authenticated or access token missing");
   }
 
-  const endpoint = `${apiUrl}/api/employees/new`;
+  const endpoint = `https://i-o.vercel.app/api/employees/new`;
 
   let res = await fetch(endpoint, {
     method: "POST",
