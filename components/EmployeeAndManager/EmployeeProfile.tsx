@@ -9,6 +9,7 @@ type Props = {
 };
 
 export default function EmployeeProfile({ employee, formattedDate }: Props) {
+  // console.log(employee.performance);
   return (
     <main>
       <div className="container mx-auto my-5 p-5">

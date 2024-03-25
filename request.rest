@@ -58,19 +58,19 @@ Content-Type: application/json
 
 # ------------------Employees routes---------------------
 ###
-GET http://localhost:3000/api/employees/65e39ea9f260df043a105bfe
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyIkX18iOnsiYWN0aXZlUGF0aHMiOnsicGF0aHMiOnsicGFzc3dvcmQiOiJpbml0IiwiZW1haWwiOiJpbml0IiwidXNlcm5hbWUiOiJpbml0Iiwicm9sZXMiOiJpbml0IiwiYWN0aXZlIjoiaW5pdCIsIl9pZCI6ImluaXQiLCJhdmF0YXJVcmwiOiJpbml0IiwiY3JlYXRlZEF0IjoiaW5pdCIsInVwZGF0ZWRBdCI6ImluaXQiLCJfX3YiOiJpbml0In0sInN0YXRlcyI6eyJyZXF1aXJlIjp7fSwiZGVmYXVsdCI6e30sImluaXQiOnsiX2lkIjp0cnVlLCJ1c2VybmFtZSI6dHJ1ZSwiZW1haWwiOnRydWUsInBhc3N3b3JkIjp0cnVlLCJhdmF0YXJVcmwiOnRydWUsInJvbGVzIjp0cnVlLCJhY3RpdmUiOnRydWUsImNyZWF0ZWRBdCI6dHJ1ZSwidXBkYXRlZEF0Ijp0cnVlLCJfX3YiOnRydWV9fX0sInNraXBJZCI6dHJ1ZX0sIiRpc05ldyI6ZmFsc2UsIl9kb2MiOnsiX2lkIjoiNjVhMDhkYmFkMDJkYjRlNDFiODczMGRjIiwidXNlcm5hbWUiOiJVc2VyX2RlbW82IiwiZW1haWwiOiJhZG9udGVuZ2dpZGVvbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCQybjV4TmlxOHQ1Ym5hZExFSFg2QmllVjlqTHhNblRxbkhuVTFJeUg0eFFOMkEyN1hmRFVqZSIsImF2YXRhclVybCI6Imh0dHBzOi8vdXRmcy5pby9mL2I5YTYyN2ZhLWQ4OWYtNDdiOS1hZDBjLTQyZGNiYTQwYjVkYy0xNXRmcjcuanBnIiwicm9sZXMiOlsiVXNlciIsIkVtcGxveWVlIiwiTWFuYWdlciIsIkFkbWluIl0sImFjdGl2ZSI6dHJ1ZSwiY3JlYXRlZEF0IjoiMjAyNC0wMS0xMlQwMDo1NDoxOC4xNTNaIiwidXBkYXRlZEF0IjoiMjAyNC0wMi0xNFQxNToyNDoxMy4yNjRaIiwiX192IjowfSwiaWF0IjoxNzEwMzQ0NTIwLCJleHAiOjE3MTAzNDgxMjB9.iheFhyXJEWRRei_QCtG_0n4ew4FSRL9QKjuDPw9C4I0
+GET https://i-o.vercel.app/api/employees/65fc56d398ff77aa3bb6db04
+Authorization: Bearer 
 
 ###
-GET http://localhost:3000/api/employees
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyIkX18iOnsiYWN0aXZlUGF0aHMiOnsicGF0aHMiOnsicGFzc3dvcmQiOiJpbml0IiwiZW1haWwiOiJpbml0IiwidXNlcm5hbWUiOiJpbml0Iiwicm9sZXMiOiJpbml0IiwiYWN0aXZlIjoiaW5pdCIsIl9pZCI6ImluaXQiLCJhdmF0YXJVcmwiOiJpbml0IiwiY3JlYXRlZEF0IjoiaW5pdCIsInVwZGF0ZWRBdCI6ImluaXQiLCJfX3YiOiJpbml0In0sInN0YXRlcyI6eyJyZXF1aXJlIjp7fSwiZGVmYXVsdCI6e30sImluaXQiOnsiX2lkIjp0cnVlLCJ1c2VybmFtZSI6dHJ1ZSwiZW1haWwiOnRydWUsInBhc3N3b3JkIjp0cnVlLCJhdmF0YXJVcmwiOnRydWUsInJvbGVzIjp0cnVlLCJhY3RpdmUiOnRydWUsImNyZWF0ZWRBdCI6dHJ1ZSwidXBkYXRlZEF0Ijp0cnVlLCJfX3YiOnRydWV9fX0sInNraXBJZCI6dHJ1ZX0sIiRpc05ldyI6ZmFsc2UsIl9kb2MiOnsiX2lkIjoiNjVhMDhkYmFkMDJkYjRlNDFiODczMGRjIiwidXNlcm5hbWUiOiJVc2VyX2RlbW82IiwiZW1haWwiOiJhZG9udGVuZ2dpZGVvbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCQybjV4TmlxOHQ1Ym5hZExFSFg2QmllVjlqTHhNblRxbkhuVTFJeUg0eFFOMkEyN1hmRFVqZSIsImF2YXRhclVybCI6Imh0dHBzOi8vdXRmcy5pby9mL2I5YTYyN2ZhLWQ4OWYtNDdiOS1hZDBjLTQyZGNiYTQwYjVkYy0xNXRmcjcuanBnIiwicm9sZXMiOlsiVXNlciIsIkVtcGxveWVlIiwiTWFuYWdlciIsIkFkbWluIl0sImFjdGl2ZSI6dHJ1ZSwiY3JlYXRlZEF0IjoiMjAyNC0wMS0xMlQwMDo1NDoxOC4xNTNaIiwidXBkYXRlZEF0IjoiMjAyNC0wMi0xNFQxNToyNDoxMy4yNjRaIiwiX192IjowfSwiaWF0IjoxNzEwMzQ0NTIwLCJleHAiOjE3MTAzNDgxMjB9.iheFhyXJEWRRei_QCtG_0n4ew4FSRL9QKjuDPw9C4I0
+GET https://i-o.vercel.app/api/employees
+Authorization: Bearer 
 
 
 
 
 ###
 POST http://localhost:3000/api/employees/new
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyIkX18iOnsiYWN0aXZlUGF0aHMiOnsicGF0aHMiOnsicGFzc3dvcmQiOiJpbml0IiwiZW1haWwiOiJpbml0IiwidXNlcm5hbWUiOiJpbml0Iiwicm9sZXMiOiJpbml0IiwiYWN0aXZlIjoiaW5pdCIsIl9pZCI6ImluaXQiLCJhdmF0YXJVcmwiOiJpbml0IiwiY3JlYXRlZEF0IjoiaW5pdCIsInVwZGF0ZWRBdCI6ImluaXQiLCJfX3YiOiJpbml0In0sInN0YXRlcyI6eyJyZXF1aXJlIjp7fSwiZGVmYXVsdCI6e30sImluaXQiOnsiX2lkIjp0cnVlLCJ1c2VybmFtZSI6dHJ1ZSwiZW1haWwiOnRydWUsInBhc3N3b3JkIjp0cnVlLCJhdmF0YXJVcmwiOnRydWUsInJvbGVzIjp0cnVlLCJhY3RpdmUiOnRydWUsImNyZWF0ZWRBdCI6dHJ1ZSwidXBkYXRlZEF0Ijp0cnVlLCJfX3YiOnRydWV9fX0sInNraXBJZCI6dHJ1ZX0sIiRpc05ldyI6ZmFsc2UsIl9kb2MiOnsiX2lkIjoiNjVhMDhkYmFkMDJkYjRlNDFiODczMGRjIiwidXNlcm5hbWUiOiJVc2VyX2RlbW82IiwiZW1haWwiOiJhZG9udGVuZ2dpZGVvbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCQybjV4TmlxOHQ1Ym5hZExFSFg2QmllVjlqTHhNblRxbkhuVTFJeUg0eFFOMkEyN1hmRFVqZSIsImF2YXRhclVybCI6Imh0dHBzOi8vdXRmcy5pby9mL2I5YTYyN2ZhLWQ4OWYtNDdiOS1hZDBjLTQyZGNiYTQwYjVkYy0xNXRmcjcuanBnIiwicm9sZXMiOlsiVXNlciIsIkVtcGxveWVlIiwiTWFuYWdlciIsIkFkbWluIl0sImFjdGl2ZSI6dHJ1ZSwiY3JlYXRlZEF0IjoiMjAyNC0wMS0xMlQwMDo1NDoxOC4xNTNaIiwidXBkYXRlZEF0IjoiMjAyNC0wMi0xNFQxNToyNDoxMy4yNjRaIiwiX192IjowfSwiaWF0IjoxNzEwMzQ0NTIwLCJleHAiOjE3MTAzNDgxMjB9.iheFhyXJEWRRei_QCtG_0n4ew4FSRL9QKjuDPw9C4I0
+Authorization: Bearer 
 Content-Type: application/json
 
 {
@@ -107,7 +107,7 @@ Authorization: Bearer
 Content-Type: application/json
 
 {
-    "id": "65c2e812fc98cb35f79da837"
+    "id": "65e39ea9f260df043a105bfe"
 }
 
 #--------------------Department routes-------------------------------
@@ -189,12 +189,12 @@ Authorization: Bearer
 Content-Type: application/json
 
 {
-    "id": "65df5e6925e69d13b80ec13d"
+    "id": "65e3a1fd742ae79fce2d7ce7"
 }
 
 ###
 GET http://localhost:3000/api/projects
-
+Authorization: Bearer 
 ###
 POST http://localhost:3000/api/projects/new
 Authorization: Bearer 
@@ -256,6 +256,16 @@ Content-Type: application/json
     "agenda": "Sales improvement"
 }
 
+###
+DELETE  http://localhost:3000/api/meetings/delete
+Authorization: Bearer 
+Content-Type: application/json
+
+{
+    "id": "65c47ffbdd8e1aca089a3f42"
+
+}
+
 
 # ----------------------Performance------------------
 ###
@@ -264,7 +274,7 @@ Authorization: Bearer
 
 ###
 POST http://localhost:3000/api/performance/new
-Authorization: Bearer
+Authorization: Bearer 
 Content-Type: application/json
 
 {
@@ -282,4 +292,13 @@ Content-Type: application/json
   { "question": "Creativity", "response": "Outstanding" }
 ]
     
+}
+
+###
+DELETE http://localhost:3000/api/performance/delete
+Authorization: Bearer 
+Content-Type: application/json
+
+{
+    "id": "65f2307b23b2aaed6483f42d"
 }

@@ -1,5 +1,4 @@
 import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import Button from "@mui/material/Button";
 import { addPerformance } from "@/lib/actions";

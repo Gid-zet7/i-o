@@ -804,10 +804,18 @@ export const getDepartment = async (departmentId: string) => {
 };
 
 // -----------------------------Forms----------------------
-export const getAllForms = async () => {
+export const getAllForms = async (session: any) => {
+  // const session: SessionInterface | null = await getServerSession(authOptions);
+  console.log(session);
+  if (!session?.user?.accessToken) {
+    throw new Error("User not authenticated or access token missing");
+  }
   const endpoint = `${apiUrl}/api/appraisal-form`;
   let result = await fetch(endpoint, {
     method: "GET",
+    headers: {
+      Authorization: `Bearer ${session.user.accessToken}`,
+    },
   });
 
   if (!result.ok) {
