@@ -1,4 +1,3 @@
-import { getRandomNumber } from "@/helper/Util";
 import { Paper } from "@mui/material";
 
 type Props = {
@@ -6,10 +5,6 @@ type Props = {
 };
 
 export default function PerformanceCard({ performance }: Props) {
-  // const Outstanding = getRandomNumber(90, 95);
-  // const VeryGood = getRandomNumber(80, 90);
-  // console.log(performance);
-
   return (
     <Paper className=" p-3 shadow-sm rounded-sm">
       <h4 className="text-xl font-semibold leading-8">Performance</h4>
@@ -42,11 +37,6 @@ export default function PerformanceCard({ performance }: Props) {
                           />
                         </svg>
                         <div className="text-center">
-                          {/* <h2 className="text-4xl font-bold pb-2">
-                            {item?.response === "Outstanding"
-                              ? Outstanding + "%"
-                              : VeryGood + "%"}
-                          </h2> */}
                           <h4 className="inline text-gray-500 text-md">
                             {item?.response}
                           </h4>
@@ -69,7 +59,6 @@ export default function PerformanceCard({ performance }: Props) {
                           />
                         </svg>
                         <div className="text-center">
-                          {/* <h2 className="text-4xl font-bold pb-2">50%</h2> */}
                           <h4 className="inline text-gray-500 text-md">
                             {item.response}
                           </h4>
@@ -93,7 +82,6 @@ export default function PerformanceCard({ performance }: Props) {
                           />
                         </svg>
                         <div className="text-center">
-                          {/* <h2 className="text-4xl font-bold pb-2">20%</h2> */}
                           <h4 className="inline text-gray-500 text-md">
                             {item?.response}
                           </h4>
