@@ -11,7 +11,6 @@ export default function PerformanceCard({ performance }: Props) {
       <div className="flex flex-wrap">
         {performance?.map((perf) => {
           return perf?.data?.map((item) => {
-            // console.log(item);
             return (
               <div>
                 <div className="gap-5 mt-5">
