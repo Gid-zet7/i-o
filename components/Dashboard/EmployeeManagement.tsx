@@ -27,6 +27,9 @@ import {
   GridValueGetterParams,
 } from "@mui/x-data-grid";
 import { getData } from "@/lib/actions";
+import Paper from "@mui/material/Paper";
+import { Avatar } from "@mui/material";
+import { CardTitle, CardSubtitle, Table } from "reactstrap";
 
 type RowEmployee = {
   isNew: boolean;
@@ -39,23 +42,22 @@ type RowEmployee = {
   salary: string;
 };
 
-export default function FullFeaturedCrudGrid() {
+export default function EmployeeManagement() {
   const { data: session } = useSession();
   const [rows, setRows] = React.useState<RowEmployee[]>([]);
   const [rowModesModel, setRowModesModel] = React.useState<GridRowModesModel>(
     {}
   );
 
-  console.log(rows);
-
   React.useEffect(() => {
     const fetchData = async () => {
       try {
         const employeesData = await getData(session);
-        console.log(employeesData);
+        // console.log(employeesData);
         setRows(
           employeesData.map((employee: Employee) => ({
             id: employee._id,
+            avatar: employee.user.avatarUrl,
             lastName: employee.lastname,
             firstName: employee.firstname,
             bio: employee.bio,
@@ -175,6 +177,12 @@ export default function FullFeaturedCrudGrid() {
   const columns: GridColDef[] = [
     { field: "id", headerName: "ID", width: 180 },
     {
+      field: "avatar",
+      headerName: "Avatar",
+      width: 80,
+      renderCell: (params) => <Avatar src={params.value} />,
+    },
+    {
       field: "firstName",
       headerName: "First name",
       width: 150,
@@ -288,35 +296,42 @@ export default function FullFeaturedCrudGrid() {
   return (
     <>
       <SideMenu />
-      <section className="mx-auto max-w-full p-3 md:ml-64">
-        <Box
-          sx={{
-            height: 500,
-            width: "100%",
-            "& .actions": {
-              color: "text.secondary",
-            },
-            "& .textPrimary": {
-              color: "text.primary",
-            },
-          }}
-        >
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            editMode="row"
-            rowModesModel={rowModesModel}
-            onRowModesModelChange={handleRowModesModelChange}
-            onRowEditStop={handleRowEditStop}
-            processRowUpdate={processRowUpdate}
-            slots={{
-              toolbar: GridToolbar,
+      <section className="">
+        <Paper className="p-5">
+          <CardTitle tag="h5">Employee Management</CardTitle>
+
+          <CardSubtitle className="mb-2 text-gray-300" tag="h6">
+            Overview of the projects
+          </CardSubtitle>
+          <Box
+            sx={{
+              height: 500,
+              width: "100%",
+              "& .actions": {
+                color: "text.secondary",
+              },
+              "& .textPrimary": {
+                color: "text.primary",
+              },
             }}
-            slotProps={{
-              toolbar: { setRows, setRowModesModel },
-            }}
-          />
-        </Box>
+          >
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              editMode="row"
+              rowModesModel={rowModesModel}
+              onRowModesModelChange={handleRowModesModelChange}
+              onRowEditStop={handleRowEditStop}
+              processRowUpdate={processRowUpdate}
+              slots={{
+                toolbar: GridToolbar,
+              }}
+              slotProps={{
+                toolbar: { setRows, setRowModesModel },
+              }}
+            />
+          </Box>
+        </Paper>
       </section>
     </>
   );

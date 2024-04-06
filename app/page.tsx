@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Subfields from "@/components/HomePage/Subfields";
 import Slider from "@/components/HomePage/Slider";
-import Services from "@/components/HomePage/Services";
+import Features from "@/components/HomePage/Features";
 import Contact from "@/components/HomePage/Contact";
 import Footer from "@/components/HomePage/Footer";
 import { Concert_One } from "next/font/google";
@@ -59,7 +59,7 @@ export default function Home() {
           <div className="widescreen:section-min-height tallscreen:section-min-height mb-3 flex scroll-mt-40 flex-col items-center justify-center gap-10 p-6 md:flex-row max-w-6xl mx-auto">
             <article className="text-white">
               <h1
-                className={`mt-5 text-6xl font-extrabold md:text-9xl mb-4  pb-4 leading-tigh ${syne.className}`}
+                className={`mt-5 text-6xl font-extrabold md:text-8xl mb-4  pb-4 leading-tigh ${syne.className}`}
               >
                 Applying <span className="blue_gradient">psychology</span> to
                 work
@@ -69,6 +69,14 @@ export default function Home() {
                 performance appraisals etc, streamlining processes, and
                 improving efficiency for HR officers.
               </p>
+              <div className="flex gap-3 mt-3">
+                <button className=" px-3 py-4 border-none outline-none rounded-md bg-blue-500">
+                  Get started today!
+                </button>
+                <button className="px-3 py-4 rounded-md bg-blue-50 text-blue-500">
+                  Get a demo
+                </button>
+              </div>
             </article>
             <Image
               src="/undraw_team_up.svg"
@@ -244,17 +252,22 @@ export default function Home() {
             isVisible3 ? "opacity-100" : "opacity-0"
           }`}
         >
-          <h1
-            className={`text-center blue_gradient my-4 text-3xl font-extrabold sm:text-6xl blue_gradient mt-20 pb-4 leading-tigh ${syne.className}`}
-          >
-            Our Services
-          </h1>
-          <div className="no-scrollbar overflow-x-scroll max-w-6xl mx-auto">
-            <Services />
+          <div className="widescreen:section-min-height tallscreen:section-min-height mb-3 flex flex-col scroll-mt-40">
+            <h1
+              className={`text-center blue_gradient my-4 text-3xl font-extrabold sm:text-6xl blue_gradient mt-20 pb-4 leading-tigh ${syne.className}`}
+            >
+              Key features
+            </h1>
+            <div className="no-scrollbar overflow-x-scroll max-w-6xl mx-auto">
+              <Features />
+            </div>
           </div>
         </section>
+
         <section className="widescreen:section-min-height tallscreen:section-min-height scroll-mt-16 p-6 bg-black">
-          <Contact />
+          <div className="widescreen:section-min-height tallscreen:section-min-height mb-3 flex flex-col scroll-mt-40">
+            <Contact />
+          </div>
         </section>
         <section className="widescreen:section-min-height tallscreen:section-min-height scroll-mt-16 p-6 bg-[#0b2c57]">
           <Footer />

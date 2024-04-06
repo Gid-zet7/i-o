@@ -4,8 +4,13 @@ import Link from "next/link";
 
 const Subfields = () => {
   return (
-    <div className="flexBetween w-full gap-5 flex-wrap bg-emerald-500">
-      <ul className="flex gap-2 overflow-auto ">
+    <div className="bg-red-300 p-5 flex justify-center items-center">
+      <p>
+        🚀 Elevate your HR with personalized workflows! Tailor checklists to
+        your process - customize beyond onboarding and offboarding. Click for a
+        seamless HR journey!👉
+      </p>
+      {/* <ul className="flex gap-2 overflow-auto ">
         {SubLinks.map((link, i) => (
           <button
             key={i}
@@ -17,7 +22,7 @@ const Subfields = () => {
             </span>
           </button>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 };
