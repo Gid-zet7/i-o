@@ -6,9 +6,8 @@ import { Box } from "@mui/material";
 import DataRibbon from "@/components/Dashboard/DataRibbon";
 import PerformanceBottomRow from "@/components/Dashboard/PerformanceBottom";
 import { Traffic } from "@/components/Dashboard/Traffic";
-import EmployeeManagement from "@/components/Dashboard/EmployeeManagement";
+import Table from "@/components/Dashboard/table";
 import Feeds from "@/components/Dashboard/Newsfeed";
-// import { Grid } from "@mui/material";
 
 export default async function DashBoard() {
   const session = await getCurrentUser();
@@ -18,25 +17,29 @@ export default async function DashBoard() {
     dash = (
       <>
         <SideMenu />
-        <div className="flex flex-col lg:grid lg:grid-cols-4">
-          <div className="mx-auto max-w-6xl p-3 md:ml-64 col-span-3">
-            {/* <Grid container spacing={3}> */}
-            <Box>
-              <DataRibbon />
-              <EmployeeManagement />
-              {/* <Table /> */}
-              {/* <PerformancesPerDay /> */}
-              <PerformanceBottomRow />
-            </Box>
-            {/* <Grid lg={4} md={6} xs={12}> */}
-          </div>
-          <div className="flex flex-col gap-20">
-            <Traffic
-              chartSeries={[37, 63]}
-              labels={["Offboarding", "Onboarding"]}
-              sx={{ height: "45%", mt: "1rem" }}
-            />
-            <Feeds />
+        <div className="dash">
+          <div className="">
+            <div className="responsive">
+              <Box>
+                <DataRibbon />
+                <div className="second-col-grid">
+                  <div className="col-span-3">
+                    <PerformancesPerDay />
+                    <Table />
+                  </div>
+                  <div className="flexbox mt-6 px-5">
+                    <Traffic
+                      chartSeries={[37, 63]}
+                      labels={["Offboarding", "Onboarding"]}
+                      sx={{ height: "65%" }}
+                    />
+                    <Feeds />
+                  </div>
+                </div>
+
+                {/* <PerformanceBottomRow /> */}
+              </Box>
+            </div>
           </div>
         </div>
       </>

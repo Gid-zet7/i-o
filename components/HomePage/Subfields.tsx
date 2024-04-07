@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Subfields = () => {
   return (
-    <div className="bg-red-300 p-5 flex justify-center items-center">
+    <div className="bg-red-300 p-2 md:p-3 text-sm flex justify-center items-center">
       <p>
         🚀 Elevate your HR with personalized workflows! Tailor checklists to
         your process - customize beyond onboarding and offboarding. Click for a

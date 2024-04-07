@@ -258,7 +258,7 @@ export default function Home() {
             >
               Key features
             </h1>
-            <div className="no-scrollbar overflow-x-scroll max-w-6xl mx-auto">
+            <div className="max-w-6xl mx-auto">
               <Features />
             </div>
           </div>

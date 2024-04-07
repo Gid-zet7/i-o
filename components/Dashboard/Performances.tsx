@@ -16,7 +16,7 @@ const PerformancesPerDay = () => {
   // const theme = useTheme();
 
   return (
-    <Grid container gap={2} className="flex mt-10">
+    <Grid container gap={2} className="flex mt-10 px-5 lg:p-0">
       <Paper className=" py-4 px-8 w-full block lg:flex ">
         <div className="max-w-full w-full lg:max-w-[80%]">
           <Typography>Increased Performances per day</Typography>

@@ -14,7 +14,7 @@ export type DataCardProps = {
 const DataCard = (props: DataCardProps) => {
   const { title, value, description } = props;
   return (
-    <Paper className="dataCard">
+    <Paper className=" dataCard">
       <div className="header">
         <Typography fontSize={"h6"} color={"lightslategrey"}>
           {title}

@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export default function Features() {
   return (
-    <div className="flex">
+    <div className="flex flex-col lg:flex-row">
       <div className="flex flex-col justify-center text-center">
         <div className="flex flex-col items-center justify-center">
           <Image

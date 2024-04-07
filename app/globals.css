@@ -79,7 +79,7 @@
 }
 
 .dataCard {
-  @apply p-4 border-t-4 border-red-500;
+  @apply p-2 border-t-4 border-red-500;
 }
 
 .bg-danger {
@@ -98,9 +98,23 @@
   position: relative;
   top: 1rem;
   height: 100%;
-  /* width: calc(100% - 0.1rem); */
   width: 100%;
   padding: 1rem 0.5rem;
+}
+
+.responsive {
+  max-width: 90rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 3;
+}
+
+.flexbox {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .dataCard > p {
@@ -184,28 +198,6 @@
   transform: translateY(-50%);
 }
 
-/* .scroll-images {
-  position: relative;
-  width: 100%;
-  padding: 40px 0px;
-  height: auto;
-  display: flex;
-  align-items: center;
-  flex-wrap: nowrap;
-  overflow-x: hidden;
-  overflow-y: hidden;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-} */
-
-/* .child {
-
-  justify-content: right;
-  align-items: center;
-  margin-right: 1rem;
-
-} */
-
 .child img,
 .child > svg {
   position: absolute;
@@ -241,4 +233,33 @@
 }
 .table-borderless > :not(:first-child) {
   border-top-width: 0;
+}
+
+.second-col-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media screen and (max-width: 1519px) {
+  .second-col-grid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .flexbox {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .responsive {
+    margin-left: 16rem;
+  }
+}
+
+@media screen and (max-width: 1022px) {
+  .dataCard {
+    width: 13rem;
+  }
 }
